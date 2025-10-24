@@ -27,18 +27,6 @@
         .metal-pattern {
             background: linear-gradient(135deg, #0d1117 0%, #151b23 50%, #0d1117 100%);
         }
-        .loading-spinner {
-            border: 4px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            border-top: 4px solid #06b6d4;
-            width: 24px;
-            height: 24px;
-            animation: spin 1s linear infinite;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
         /* Style dla placeholdera obrazu */
         .img-placeholder {
             display: flex;
@@ -53,6 +41,7 @@
             font-size: 1.5rem;
             font-weight: 600;
             text-align: center;
+            box-shadow: 0 0 40px rgba(6, 182, 212, 0.2); /* Lekka poświata cyjanowa */
         }
     </style>
 </head>
@@ -72,7 +61,7 @@
                     <a href="#o-nas" class="hover:text-cyan-400 transition duration-300">O Nas</a>
                     <a href="#uslugi" class="hover:text-cyan-400 transition duration-300">Usługi</a>
                     <a href="#technologia" class="hover:text-cyan-400 transition duration-300">Technologia</a>
-                    <a href="#parametry-cnc" class="hover:text-cyan-400 transition duration-300">Narzędzie CNC</a>
+                    <a href="#parametry-cnc" class="hover:text-cyan-400 transition duration-300">Kalkulator CNC</a>
                     <a href="#kontakt" class="px-3 py-1 rounded-full bg-cyan-600 text-gray-900 font-semibold hover:bg-cyan-500 transition duration-300 shadow-metal">Kontakt</a>
                 </nav>
 
@@ -109,7 +98,7 @@
                     </div>
                 </div>
 
-                <!-- Grafika/Wizualizacja detalu (ZASTĄPIONA PLACEHOLDEREM) -->
+                <!-- Grafika/Wizualizacja detalu (Placeholder dla stabilności na hostingu) -->
                 <div class="md:w-1/2 flex justify-center md:justify-end relative">
                     <div class="img-placeholder max-w-sm h-96">
                         DETAL: Toczenie Precyzyjne
@@ -190,7 +179,7 @@
                         </ul>
                     </div>
 
-                    <!-- Obraz/Wizualizacja Techniczna (ZASTĄPIONA PLACEHOLDEREM) -->
+                    <!-- Obraz/Wizualizacja Techniczna (Placeholder dla stabilności na hostingu) -->
                     <div class="hidden lg:block">
                         <div class="p-6 bg-gray-900 border-2 border-cyan-600/50 rounded-lg shadow-2xl shadow-cyan-900/30 flex justify-center items-center">
                             <div class="img-placeholder max-w-full h-96">
@@ -216,7 +205,7 @@
 
                 <div class="lg:flex lg:space-x-12">
                     <div class="lg:w-1/2 mb-10 lg:mb-0">
-                        <!-- ZASTĄPIONY LINK DO OBRAZU NIESTABILNEGO PRZEZ OBRAZ PRZESŁANY PRZEZ UŻYTKOWNIKA -->
+                        <!-- Użycie przesłanego pliku graficznego - MUSI BYĆ W REPOZYTORIUM -->
                         <img src="zawias-toczony-10-x-55-bez-logo.webp" alt="Przykładowy detal toczony" class="rounded-xl shadow-2xl shadow-cyan-900/30 w-full" loading="lazy" onerror="this.onerror=null;this.src='https://placehold.co/700x400/1e293b/06b6d4?text=Wizualizacja+Maszyny+CNC';">
 
                         <p class="mt-4 text-sm text-gray-500 italic text-center">
@@ -251,32 +240,55 @@
             </div>
         </section>
 
-        <!-- Sekcja Narzędzie CNC -->
+        <!-- Sekcja Narzędzie CNC - Kalkulator Inżynierski -->
         <section id="parametry-cnc" class="py-24 metal-pattern border-t border-gray-800">
             <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-12">
-                    <span class="text-lg font-medium uppercase accent-color mb-2 block">Wsparcie Inżynierskie AI</span>
-                    <h2 class="text-4xl font-extrabold text-gray-50">Kalkulator Parametrów Skrawania</h2>
+                    <span class="text-lg font-medium uppercase accent-color mb-2 block">Wsparcie Inżynierskie</span>
+                    <h2 class="text-4xl font-extrabold text-gray-50">Kalkulator Parametrów Toczenia</h2>
                 </div>
 
                 <div class="p-8 bg-gray-800 rounded-xl shadow-2xl border-t-4 border-cyan-600">
-                    <h3 class="text-2xl font-semibold accent-color mb-4 flex items-center">
-                        ⚙️ Oblicz Optymalne Parametry Toczenia
+                    <h3 class="text-2xl font-semibold accent-color mb-6 flex items-center">
+                        🧮 Obliczenia podstawowych parametrów
                     </h3>
-                    <p class="text-gray-400 mb-6">Wprowadź dane dotyczące materiału i narzędzia, a AI zasugeruje optymalną prędkość i posuw do obróbki na tokarce.</p>
                     
-                    <div class="space-y-4">
-                        <input type="text" id="cnc_material" placeholder="Materiał detalu (np. Stal nierdzewna 316, Tytan, Mosiądz)" class="block w-full p-3 border border-gray-600 bg-gray-900 rounded-md text-gray-50 focus:border-cyan-500 focus:ring-cyan-500">
-                        <input type="text" id="cnc_narzedzie" placeholder="Typ i średnica narzędzia (np. płytka WNMG, średnica 5 mm)" class="block w-full p-3 border border-gray-600 bg-gray-900 rounded-md text-gray-50 focus:border-cyan-500 focus:ring-cyan-500">
-                        <input type="text" id="cnc_typ_obrobki" placeholder="Typ obróbki (np. Toczenie zgrubne, Toczenie wykończeniowe)" class="block w-full p-3 border border-gray-600 bg-gray-900 rounded-md text-gray-50 focus:border-cyan-500 focus:ring-cyan-500">
-                        
-                        <button onclick="calculateCuttingParameters()" id="cnc-button" class="w-full px-4 py-3 bg-cyan-600 text-gray-900 font-bold rounded-lg hover:bg-cyan-500 transition duration-300 shadow-metal flex items-center justify-center">
-                            <span id="cnc-button-text">Zaproponuj Parametry Skrawania</span>
-                            <div id="cnc-spinner" class="loading-spinner ml-3 hidden"></div>
-                        </button>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Obliczenie obrotów (n) -->
+                        <div class="p-5 bg-gray-900 rounded-lg shadow-inner">
+                            <label for="Vc" class="block text-sm font-medium text-gray-400">Prędkość Skrawania (Vc) [m/min]</label>
+                            <input type="number" step="0.1" id="Vc" placeholder="np. 250" class="mt-1 block w-full p-3 border border-gray-600 bg-gray-700 rounded-md text-gray-50 focus:border-cyan-500 focus:ring-cyan-500">
+                            
+                            <label for="D" class="block text-sm font-medium text-gray-400 mt-4">Średnica Detalu (D) [mm]</label>
+                            <input type="number" step="0.1" id="D" placeholder="np. 12" class="mt-1 block w-full p-3 border border-gray-600 bg-gray-700 rounded-md text-gray-50 focus:border-cyan-500 focus:ring-cyan-500">
+                            
+                            <button onclick="calculateRPM()" class="w-full mt-6 px-4 py-2 bg-cyan-600 text-gray-900 font-bold rounded-lg hover:bg-cyan-500 transition duration-300">
+                                Oblicz Obroty (n) [obr/min]
+                            </button>
+                            
+                            <div class="mt-4 text-lg font-bold text-gray-50">
+                                n = <span id="n_result" class="accent-color">0</span> obr/min
+                            </div>
+                        </div>
 
-                        <textarea id="cnc-result" rows="6" readonly class="mt-4 block w-full p-3 border border-gray-600 bg-gray-900 rounded-md text-gray-300" placeholder="Wyniki obliczeń AI: Prędkość skrawania, posuw, głębokość skrawania..."></textarea>
+                        <!-- Obliczenie prędkości posuwu (Vf) -->
+                        <div class="p-5 bg-gray-900 rounded-lg shadow-inner">
+                            <label for="f" class="block text-sm font-medium text-gray-400">Posuw (f) [mm/obr]</label>
+                            <input type="number" step="0.001" id="f" placeholder="np. 0.08" class="mt-1 block w-full p-3 border border-gray-600 bg-gray-700 rounded-md text-gray-50 focus:border-cyan-500 focus:ring-cyan-500">
+
+                            <label for="n_input" class="block text-sm font-medium text-gray-400 mt-4">Obroty Wrzeciona (n) [obr/min]</label>
+                            <input type="number" step="1" id="n_input" placeholder="Wartość z lewej lub własna" class="mt-1 block w-full p-3 border border-gray-600 bg-gray-700 rounded-md text-gray-50 focus:border-cyan-500 focus:ring-cyan-500">
+                            
+                            <button onclick="calculateFeedRate()" class="w-full mt-6 px-4 py-2 bg-cyan-600 text-gray-900 font-bold rounded-lg hover:bg-cyan-500 transition duration-300">
+                                Oblicz Prędkość Posuwu (Vf) [mm/min]
+                            </button>
+                            
+                            <div class="mt-4 text-lg font-bold text-gray-50">
+                                Vf = <span id="Vf_result" class="accent-color">0</span> mm/min
+                            </div>
+                        </div>
                     </div>
+                    <div id="calculator-message" class="mt-6 p-3 bg-red-900/50 text-red-300 rounded-lg hidden"></div>
                 </div>
             </div>
         </section>
@@ -296,17 +308,18 @@
                     <div class="lg:col-span-2 p-10 bg-gray-800 rounded-xl shadow-2xl">
                         <form class="space-y-6">
                             <div>
-                                <label for="name" class="block text-sm font-medium text-gray-300">Imię i Nazwisko / Firma</label>
-                                <input type="text" id="name" name="name" class="mt-1 block w-full p-3 border border-gray-600 bg-gray-900 rounded-md text-gray-50 focus:border-cyan-500 focus:ring-cyan-500">
+                                <label for="form_name" class="block text-sm font-medium text-gray-300">Imię i Nazwisko / Firma</label>
+                                <input type="text" id="form_name" name="name" class="mt-1 block w-full p-3 border border-gray-600 bg-gray-900 rounded-md text-gray-50 focus:border-cyan-500 focus:ring-cyan-500">
                             </div>
                             <div>
-                                <label for="email" class="block text-sm font-medium text-gray-300">Adres E-mail</label>
-                                <input type="email" id="email" name="email" class="mt-1 block w-full p-3 border border-gray-600 bg-gray-900 rounded-md text-gray-50 focus:border-cyan-500 focus:ring-cyan-500">
+                                <label for="form_email" class="block text-sm font-medium text-gray-300">Adres E-mail</label>
+                                <input type="email" id="form_email" name="email" class="mt-1 block w-full p-3 border border-gray-600 bg-gray-900 rounded-md text-gray-50 focus:border-cyan-500 focus:ring-cyan-500">
                             </div>
                             <div>
-                                <label for="message" class="block text-sm font-medium text-gray-300">Wiadomość / Opis zapytania</label>
-                                <textarea id="message" name="message" rows="4" class="mt-1 block w-full p-3 border border-gray-600 bg-gray-900 rounded-md text-gray-50 focus:border-cyan-500 focus:ring-cyan-500"></textarea>
+                                <label for="form_message" class="block text-sm font-medium text-gray-300">Wiadomość / Opis zapytania</label>
+                                <textarea id="form_message" name="message" rows="4" class="mt-1 block w-full p-3 border border-gray-600 bg-gray-900 rounded-md text-gray-50 focus:border-cyan-500 focus:ring-cyan-500"></textarea>
                             </div>
+                            <!-- W HTML to jest tylko makieta, dlatego nie używamy action/method -->
                             <button type="submit" class="w-full px-4 py-3 bg-cyan-600 text-gray-900 font-bold rounded-lg hover:bg-cyan-500 transition duration-300 shadow-metal">
                                 Wyślij Zapytanie
                             </button>
@@ -321,8 +334,8 @@
                                 <svg class="w-6 h-6 mr-3 flex-shrink-0 accent-color mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
                                 <span>
                                     **BK CNC**<br>
-                                    ul. Gen. Bora-Komorowskiego 3c/12<br>
-                                    03-982 Warszawa (Przykładowa lokalizacja dla celów mockupu)
+                                    ul. Gen. Bora-Komorowskiego 3c<br>
+                                    83-110 Tczew
                                 </span>
                             </p>
                             <p class="flex items-center">
@@ -331,7 +344,7 @@
                             </p>
                             <p class="flex items-center">
                                 <svg class="w-6 h-6 mr-3 flex-shrink-0 accent-color" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-                                <a href="mailto:kontakt@bk-cnc.pl" class="hover:text-cyan-400 transition duration-300">kontakt@bk-cnc.pl (Mock)</a>
+                                <a href="mailto:blazejkaczmar@gmail.com" class="hover:text-cyan-400 transition duration-300">blazejkaczmar@gmail.com</a>
                             </p>
                         </div>
                     </div>
@@ -344,96 +357,78 @@
     <!-- Stopka -->
     <footer class="bg-gray-900 border-t border-gray-700/50 py-8">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-500 text-sm">
-            <p>&copy; 2024 BK CNC. Wszelkie prawa zastrzeżone. | Adres: ul. Gen. Bora-Komorowskiego 3c/12.</p>
+            <p>&copy; 2024 BK CNC. Wszelkie prawa zastrzeżone. Mietki w moim sercu | Adres: ul. Gen. Bora-Komorowskiego 3c.</p>
         </div>
     </footer>
 
     <script>
-        // UWAGA: KOD W JAVASCRIPT POZOSTAJE W JĘZYKU ANGIELSKIM, A WYJŚCIA I KOMENTARZE W JĘZYKU POLSKIM.
-        
-        // Stałe do API
-        const API_KEY = ""; 
-        const API_URL_FLASH = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent";
-
-        // --- Funkcja Pomocnicza do Wywoływania API z Backoff (LLM) ---
-        async function fetchGeminiWithRetry(systemPrompt, userQuery, maxRetries = 5, delay = 1000) {
-            const payload = {
-                contents: [{ parts: [{ text: userQuery }] }],
-                systemInstruction: { parts: [{ text: systemPrompt }] },
-            };
-
-            for (let i = 0; i < maxRetries; i++) {
-                try {
-                    const response = await fetch(`${API_URL_FLASH}?key=${API_KEY}`, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload)
-                    });
-
-                    if (response.status === 429) { // Too Many Requests
-                        if (i === maxRetries - 1) throw new Error("API rate limit exceeded.");
-                        await new Promise(resolve => setTimeout(resolve, delay * (2 ** i)));
-                        continue;
-                    }
-
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
-                    }
-
-                    const result = await response.json();
-                    const text = result.candidates?.[0]?.content?.parts?.[0]?.text;
-
-                    if (!text) {
-                        throw new Error("Invalid response structure from API.");
-                    }
-
-                    return text;
-
-                } catch (error) {
-                    console.error("Gemini API call failed:", error);
-                    if (i === maxRetries - 1) throw error;
-                    await new Promise(resolve => setTimeout(resolve, delay * (2 ** i)));
-                }
+        // Funkcja do wyświetlania wiadomości w kalkulatorze
+        function displayMessage(message, isError = false) {
+            const msgElement = document.getElementById('calculator-message');
+            msgElement.textContent = message;
+            msgElement.classList.remove('hidden');
+            if (isError) {
+                msgElement.classList.remove('bg-green-900/50', 'text-green-300');
+                msgElement.classList.add('bg-red-900/50', 'text-red-300');
+            } else {
+                msgElement.classList.remove('bg-red-900/50', 'text-red-300');
+                msgElement.classList.add('bg-green-900/50', 'text-green-300');
             }
         }
 
+        // --- FUNKCJE OBLICZENIOWE DLA KALKULATORA INŻYNIERSKIEGO ---
 
-        // --- LOGIKA DLA KALKULATORA PARAMETRÓW SKRAWANIA (LLM) ---
-        async function calculateCuttingParameters() {
-            const material = document.getElementById('cnc_material').value;
-            const narzedzie = document.getElementById('cnc_narzedzie').value;
-            const typObróbki = document.getElementById('cnc_typ_obrobki').value;
-            const resultElement = document.getElementById('cnc-result');
-            const button = document.getElementById('cnc-button');
-            const buttonText = document.getElementById('cnc-button-text');
-            const spinner = document.getElementById('cnc-spinner');
+        // Wzór na obroty (n): n = (Vc * 1000) / (π * D)
+        function calculateRPM() {
+            const vcInput = document.getElementById('Vc').value;
+            const dInput = document.getElementById('D').value;
+            const resultElement = document.getElementById('n_result');
+            const nInput = document.getElementById('n_input');
 
-            if (!material || !narzedzie || !typObróbki) {
-                resultElement.value = "Proszę podać wszystkie trzy parametry: materiał, narzędzie i typ obróbki.";
+            const Vc = parseFloat(vcInput);
+            const D = parseFloat(dInput);
+
+            if (isNaN(Vc) || isNaN(D) || Vc <= 0 || D <= 0) {
+                resultElement.textContent = '0';
+                nInput.value = '';
+                displayMessage("Błąd: Prędkość skrawania (Vc) i Średnica (D) muszą być liczbami większymi od zera.", true);
                 return;
             }
 
-            // Ustawienia stanu ładowania
-            buttonText.textContent = "Obliczam...";
-            spinner.classList.remove('hidden');
-            button.disabled = true;
-            resultElement.value = ""; // Wyczyść poprzedni wynik
+            // Obliczenie
+            const n = (Vc * 1000) / (Math.PI * D);
+            
+            // Wyświetlenie wyniku zaokrąglonego do całości
+            const roundedN = Math.round(n);
+            resultElement.textContent = roundedN;
+            
+            // Automatyczne wypełnienie pola 'n' w drugim kalkulatorze
+            nInput.value = roundedN;
+            
+            displayMessage(`Obroty wrzeciona (n) zostały obliczone poprawnie na podstawie Vc=${Vc} i D=${D}.`, false);
+        }
 
-            const systemPrompt = "Jesteś ekspertem inżynierem obróbki CNC na automatach tokarskich typu szwajcarskiego. Twoim zadaniem jest sugerowanie realistycznych i bezpiecznych, ale wydajnych parametrów skrawania dla podanych danych wejściowych. Wynik powinien być sformatowany w języku polskim jako lista z kluczowymi danymi: prędkość skrawania (Vc [m/min]), posuw (f [mm/obr]), głębokość skrawania (ap [mm]) oraz krótkim uzasadnieniem. Użyj formatu Markdown.";
+        // Wzór na prędkość posuwu (Vf): Vf = f * n
+        function calculateFeedRate() {
+            const fInput = document.getElementById('f').value;
+            const nInput = document.getElementById('n_input').value;
+            const resultElement = document.getElementById('Vf_result');
 
-            const userQuery = `Zaproponuj parametry skrawania dla: Materiał: ${material}. Narzędzie: ${narzedzie}. Typ obróbki: ${typObróbki}. Pamiętaj o charakterystyce obróbki na maszynie Swiss-Type.`;
+            const f = parseFloat(fInput);
+            const n = parseFloat(nInput);
 
-            try {
-                const responseText = await fetchGeminiWithRetry(systemPrompt, userQuery);
-                resultElement.value = responseText;
-            } catch (error) {
-                resultElement.value = "Wystąpił błąd podczas komunikacji z AI. Spróbuj ponownie później.";
-            } finally {
-                // Przywracanie stanu przycisku
-                buttonText.textContent = "Zaproponuj Parametry Skrawania";
-                spinner.classList.add('hidden');
-                button.disabled = false;
+            if (isNaN(f) || isNaN(n) || f <= 0 || n <= 0) {
+                resultElement.textContent = '0';
+                displayMessage("Błąd: Posuw (f) i Obroty (n) muszą być liczbami większymi od zera.", true);
+                return;
             }
+
+            // Obliczenie
+            const Vf = f * n;
+
+            // Wyświetlenie wyniku zaokrąglonego do 2 miejsc po przecinku
+            resultElement.textContent = Vf.toFixed(2);
+            displayMessage(`Prędkość posuwu (Vf) została obliczona poprawnie na podstawie f=${f} i n=${n}.`, false);
         }
     </script>
 </body>
