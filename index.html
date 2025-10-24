@@ -304,22 +304,27 @@
 
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
                     
-                    <!-- Formularz Kontaktowy (Mockup) -->
+                    <!-- Formularz Kontaktowy -->
                     <div class="lg:col-span-2 p-10 bg-gray-800 rounded-xl shadow-2xl">
-                        <form class="space-y-6">
+                        <!-- Zmiana: Użycie mailto: do otwierania programu pocztowego z wypełnionymi danymi -->
+                        <form class="space-y-6" action="mailto:blazejkaczmar@gmail.com" method="GET" enctype="text/plain">
                             <div>
                                 <label for="form_name" class="block text-sm font-medium text-gray-300">Imię i Nazwisko / Firma</label>
-                                <input type="text" id="form_name" name="name" class="mt-1 block w-full p-3 border border-gray-600 bg-gray-900 rounded-md text-gray-50 focus:border-cyan-500 focus:ring-cyan-500">
+                                <!-- Użycie atrybutu 'name' do wysłania danych przez mailto -->
+                                <input type="text" id="form_name" name="Imię_lub_Firma" class="mt-1 block w-full p-3 border border-gray-600 bg-gray-900 rounded-md text-gray-50 focus:border-cyan-500 focus:ring-cyan-500">
                             </div>
                             <div>
                                 <label for="form_email" class="block text-sm font-medium text-gray-300">Adres E-mail</label>
-                                <input type="email" id="form_email" name="email" class="mt-1 block w-full p-3 border border-gray-600 bg-gray-900 rounded-md text-gray-50 focus:border-cyan-500 focus:ring-cyan-500">
+                                <!-- Użycie atrybutu 'name' do wysłania danych przez mailto -->
+                                <input type="email" id="form_email" name="Adres_Email" class="mt-1 block w-full p-3 border border-gray-600 bg-gray-900 rounded-md text-gray-50 focus:border-cyan-500 focus:ring-cyan-500">
                             </div>
                             <div>
                                 <label for="form_message" class="block text-sm font-medium text-gray-300">Wiadomość / Opis zapytania</label>
-                                <textarea id="form_message" name="message" rows="4" class="mt-1 block w-full p-3 border border-gray-600 bg-gray-900 rounded-md text-gray-50 focus:border-cyan-500 focus:ring-cyan-500"></textarea>
+                                <!-- Użycie atrybutu 'name' do wysłania danych przez mailto -->
+                                <textarea id="form_message" name="Treść_Wiadomości" rows="4" class="mt-1 block w-full p-3 border border-gray-600 bg-gray-900 rounded-md text-gray-50 focus:border-cyan-500 focus:ring-cyan-500"></textarea>
                             </div>
-                            <!-- W HTML to jest tylko makieta, dlatego nie używamy action/method -->
+                            
+                            <!-- Zmiana: Przycisk jest teraz typu submit, aby aktywować mailto -->
                             <button type="submit" class="w-full px-4 py-3 bg-cyan-600 text-gray-900 font-bold rounded-lg hover:bg-cyan-500 transition duration-300 shadow-metal">
                                 Wyślij Zapytanie
                             </button>
@@ -334,8 +339,8 @@
                                 <svg class="w-6 h-6 mr-3 flex-shrink-0 accent-color mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
                                 <span>
                                     **BK CNC**<br>
-                                    ul. Gen. Bora-Komorowskiego 3c<br>
-                                    83-110 Tczew
+                                    ul. Gen. Bora-Komorowskiego 3c/12<br>
+                                    03-982 Warszawa
                                 </span>
                             </p>
                             <p class="flex items-center">
@@ -357,7 +362,7 @@
     <!-- Stopka -->
     <footer class="bg-gray-900 border-t border-gray-700/50 py-8">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-500 text-sm">
-            <p>&copy; 2024 BK CNC. Wszelkie prawa zastrzeżone. Mietki w moim sercu | Adres: ul. Gen. Bora-Komorowskiego 3c.</p>
+            <p>&copy; 2024 BK CNC. Wszelkie prawa zastrzeżone. | Adres: ul. Gen. Bora-Komorowskiego 3c/12.</p>
         </div>
     </footer>
 
