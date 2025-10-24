@@ -43,6 +43,10 @@
             text-align: center;
             box-shadow: 0 0 40px rgba(6, 182, 212, 0.2); /* Lekka poświata cyjanowa */
         }
+        /* Styl dla Canvas, zapobiega przewijaniu na urządzeniach dotykowych */
+        #gameCanvas {
+            touch-action: none;
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -62,6 +66,7 @@
                     <a href="#uslugi" class="hover:text-cyan-400 transition duration-300">Usługi</a>
                     <a href="#technologia" class="hover:text-cyan-400 transition duration-300">Technologia</a>
                     <a href="#parametry-cnc" class="hover:text-cyan-400 transition duration-300">Kalkulator CNC</a>
+                    <a href="#gra-cnc" class="hover:text-cyan-400 transition duration-300">Gra CNC</a>
                     <a href="#kontakt" class="px-3 py-1 rounded-full bg-cyan-600 text-gray-900 font-semibold hover:bg-cyan-500 transition duration-300 shadow-metal">Kontakt</a>
                 </nav>
 
@@ -293,9 +298,40 @@
             </div>
         </section>
 
+        <!-- Sekcja Mini-Gra CNC -->
+        <section id="gra-cnc" class="py-24 bg-gray-900 border-t border-gray-800">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <span class="text-lg font-medium uppercase accent-color mb-2 block">Rozrywka Techniczna</span>
+                    <h2 class="text-4xl font-extrabold text-gray-50">Gra Operator CNC</h2>
+                    <p class="text-gray-400 mt-2">Użyj myszy lub dotyku, aby sterować operatorem i odbijać pocisk w celu trafienia w usterki na maszynie. Uważaj na czas!</p>
+                </div>
+
+                <div class="p-8 bg-gray-800 rounded-xl shadow-2xl border-t-4 border-cyan-600">
+                    <canvas id="gameCanvas" width="700" height="400" class="w-full h-auto bg-gray-900 border border-gray-700 rounded-md cursor-none"></canvas>
+                    
+                    <div class="mt-6 flex justify-between items-center text-lg font-bold">
+                        <p>Czas: <span id="timeDisplay" class="accent-color">30</span>s</p>
+                        <p>Usterki: <span id="targetCountDisplay" class="accent-color">0</span></p>
+                        <p>Trafienia: <span id="hitsDisplay" class="accent-color">0</span></p>
+                    </div>
+                    
+                    <div class="mt-6 text-center">
+                        <button id="startButton" onclick="startGame()" class="px-6 py-3 bg-cyan-600 text-gray-900 font-bold rounded-lg hover:bg-cyan-500 transition duration-300 shadow-metal">
+                            Start/Restart Gry
+                        </button>
+                        <button id="shootButton" onclick="shoot()" class="px-6 py-3 bg-gray-600 text-gray-200 font-bold rounded-lg hover:bg-gray-500 transition duration-300 ml-4">
+                            Strzał (Spacja)
+                        </button>
+                    </div>
+                    <div id="gameMessage" class="mt-6 p-4 bg-red-900/50 text-red-300 rounded-lg hidden text-center font-semibold"></div>
+                </div>
+            </div>
+        </section>
+
 
         <!-- Sekcja Kontakt -->
-        <section id="kontakt" class="py-24 bg-gray-900 border-t border-gray-800">
+        <section id="kontakt" class="py-24 metal-pattern border-t border-gray-800">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-16">
                     <h2 class="text-4xl font-extrabold text-gray-50 mb-4">Skontaktuj się z Nami</h2>
@@ -306,25 +342,25 @@
                     
                     <!-- Formularz Kontaktowy -->
                     <div class="lg:col-span-2 p-10 bg-gray-800 rounded-xl shadow-2xl">
-                        <!-- Zmiana: Użycie mailto: do otwierania programu pocztowego z wypełnionymi danymi -->
-                        <form class="space-y-6" action="mailto:blazejkaczmar@gmail.com" method="POST" enctype="text/plain">
+                        <!-- Użycie mailto: do otwierania programu pocztowego z wypełnionymi danymi -->
+                        <form class="space-y-6" action="mailto:blazejkaczmar@gmail.com?subject=Zapytanie Ofertowe - BK CNC" method="POST" enctype="text/plain">
                             <div>
                                 <label for="form_name" class="block text-sm font-medium text-gray-300">Imię i Nazwisko / Firma</label>
                                 <!-- Użycie atrybutu 'name' do wysłania danych przez mailto -->
-                                <input type="text" id="form_name" name="Imię_lub_Firma" class="mt-1 block w-full p-3 border border-gray-600 bg-gray-900 rounded-md text-gray-50 focus:border-cyan-500 focus:ring-cyan-500">
+                                <input type="text" id="form_name" name="Imię lub Firma" class="mt-1 block w-full p-3 border border-gray-600 bg-gray-900 rounded-md text-gray-50 focus:border-cyan-500 focus:ring-cyan-500" required>
                             </div>
                             <div>
                                 <label for="form_email" class="block text-sm font-medium text-gray-300">Adres E-mail</label>
                                 <!-- Użycie atrybutu 'name' do wysłania danych przez mailto -->
-                                <input type="email" id="form_email" name="Adres_Email" class="mt-1 block w-full p-3 border border-gray-600 bg-gray-900 rounded-md text-gray-50 focus:border-cyan-500 focus:ring-cyan-500">
+                                <input type="email" id="form_email" name="Adres Email" class="mt-1 block w-full p-3 border border-gray-600 bg-gray-900 rounded-md text-gray-50 focus:border-cyan-500 focus:ring-cyan-500" required>
                             </div>
                             <div>
                                 <label for="form_message" class="block text-sm font-medium text-gray-300">Wiadomość / Opis zapytania</label>
                                 <!-- Użycie atrybutu 'name' do wysłania danych przez mailto -->
-                                <textarea id="form_message" name="Treść_Wiadomości" rows="4" class="mt-1 block w-full p-3 border border-gray-600 bg-gray-900 rounded-md text-gray-50 focus:border-cyan-500 focus:ring-cyan-500"></textarea>
+                                <textarea id="form_message" name="Treść Wiadomości" rows="4" class="mt-1 block w-full p-3 border border-gray-600 bg-gray-900 rounded-md text-gray-50 focus:border-cyan-500 focus:ring-cyan-500" required></textarea>
                             </div>
                             
-                            <!-- Zmiana: Przycisk jest teraz typu submit, aby aktywować mailto -->
+                            <!-- Przycisk jest teraz typu submit, aby aktywować mailto -->
                             <button type="submit" class="w-full px-4 py-3 bg-cyan-600 text-gray-900 font-bold rounded-lg hover:bg-cyan-500 transition duration-300 shadow-metal">
                                 Wyślij Zapytanie
                             </button>
@@ -340,7 +376,7 @@
                                 <span>
                                     **BK CNC**<br>
                                     ul. Gen. Bora-Komorowskiego 3c<br>
-                                    83-110
+                                    83-110 (Przykładowa lokalizacja)
                                 </span>
                             </p>
                             <p class="flex items-center">
@@ -367,6 +403,8 @@
     </footer>
 
     <script>
+        // --- FUNKCJE OBLICZENIOWE DLA KALKULATORA INŻYNIERSKIEGO ---
+        
         // Funkcja do wyświetlania wiadomości w kalkulatorze
         function displayMessage(message, isError = false) {
             const msgElement = document.getElementById('calculator-message');
@@ -380,8 +418,6 @@
                 msgElement.classList.add('bg-green-900/50', 'text-green-300');
             }
         }
-
-        // --- FUNKCJE OBLICZENIOWE DLA KALKULATORA INŻYNIERSKIEGO ---
 
         // Wzór na obroty (n): n = (Vc * 1000) / (π * D)
         function calculateRPM() {
@@ -435,6 +471,259 @@
             resultElement.textContent = Vf.toFixed(2);
             displayMessage(`Prędkość posuwu (Vf) została obliczona poprawnie na podstawie f=${f} i n=${n}.`, false);
         }
+
+        // --- FUNKCJE GRY CNC ---
+
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const GAME_DURATION = 30; // Czas gry w sekundach
+
+        let gameLoopInterval;
+        let gameTime;
+        let isGameOver = true;
+
+        // Obiekty gry
+        let player = {};
+        let bullet = {};
+        let targets = [];
+
+        // Elementy DOM
+        const timeDisplay = document.getElementById('timeDisplay');
+        const targetCountDisplay = document.getElementById('targetCountDisplay');
+        const hitsDisplay = document.getElementById('hitsDisplay');
+        const gameMessage = document.getElementById('gameMessage');
+        const shootButton = document.getElementById('shootButton');
+        const startButton = document.getElementById('startButton');
+
+        let hitCount = 0;
+        let mousePosition = { y: canvas.height / 2 };
+
+        // Inicjalizacja stanu gry
+        function initGame() {
+            canvas.width = canvas.offsetWidth;
+            canvas.height = 400; // Stała wysokość
+
+            player = {
+                width: 15,
+                height: 80,
+                x: 10,
+                y: canvas.height / 2 - 40,
+                speed: 5, // Szybkość podążania za myszą
+                color: '#06b6d4'
+            };
+
+            bullet = {
+                radius: 5,
+                x: -10, // poza ekranem
+                y: 0,
+                speedX: 0,
+                speedY: 0,
+                active: false,
+                color: '#fef3c7'
+            };
+            
+            targets = [];
+            hitCount = 0;
+            gameTime = GAME_DURATION;
+            isGameOver = false;
+
+            // Ustawienia początkowe wyświetlaczy
+            timeDisplay.textContent = GAME_DURATION;
+            hitsDisplay.textContent = hitCount;
+            gameMessage.classList.add('hidden');
+            startButton.textContent = "Restart Gry";
+            generateTargets(5);
+            targetCountDisplay.textContent = targets.length;
+        }
+
+        // Generowanie losowych celów
+        function generateTargets(count) {
+            for (let i = 0; i < count; i++) {
+                targets.push({
+                    x: Math.random() * (canvas.width - 50) + 200, // Z dala od gracza
+                    y: Math.random() * (canvas.height - 40) + 20,
+                    radius: 10,
+                    active: true,
+                    color: '#dc2626' // Czerwony kolor usterki
+                });
+            }
+        }
+
+        // Obsługa sterowania myszą/dotykiem
+        canvas.addEventListener('mousemove', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            mousePosition.y = e.clientY - rect.top;
+        });
+
+        canvas.addEventListener('touchmove', (e) => {
+            e.preventDefault(); // Zapobiega przewijaniu strony
+            const rect = canvas.getBoundingClientRect();
+            mousePosition.y = e.touches[0].clientY - rect.top;
+        }, { passive: false });
+
+        // Rysowanie wszystkich elementów gry
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height); // Czyść ekran
+
+            // Rysuj Operatora (Paletkę)
+            ctx.fillStyle = player.color;
+            ctx.fillRect(player.x, player.y, player.width, player.height);
+
+            // Rysuj Pocisk
+            if (bullet.active) {
+                ctx.fillStyle = bullet.color;
+                ctx.beginPath();
+                ctx.arc(bullet.x, bullet.y, bullet.radius, 0, Math.PI * 2);
+                ctx.fill();
+            }
+
+            // Rysuj cele (usterki)
+            targets.forEach(target => {
+                if (target.active) {
+                    ctx.fillStyle = target.color;
+                    ctx.fillRect(target.x - target.radius, target.y - target.radius, target.radius * 2, target.radius * 2);
+                }
+            });
+        }
+
+        // Logika strzału (aktywacja pocisku)
+        function shoot() {
+            if (isGameOver || bullet.active) return;
+            
+            bullet.active = true;
+            bullet.x = player.x + player.width;
+            bullet.y = player.y + player.height / 2;
+            bullet.speedX = 10;
+            bullet.speedY = 0;
+        }
+
+        // Dodanie obsługi klawisza Spacja dla wygody
+        document.addEventListener('keydown', (e) => {
+            if (!isGameOver && (e.code === 'Space' || e.code === 'Enter')) {
+                e.preventDefault();
+                shoot();
+            }
+        });
+
+        // Logika gry (ruch, kolizje, update)
+        function updateGame() {
+            if (isGameOver) return;
+
+            // 1. Ruch Operatora (podążanie za myszą/dotykiem)
+            const targetY = mousePosition.y - player.height / 2;
+            const deltaY = targetY - player.y;
+            
+            // Płynny ruch
+            player.y += deltaY * 0.15; 
+
+            // Ograniczenie ruchu do krawędzi canvas
+            if (player.y < 0) player.y = 0;
+            if (player.y + player.height > canvas.height) player.y = canvas.height - player.height;
+
+            // 2. Ruch Pocisku
+            if (bullet.active) {
+                bullet.x += bullet.speedX;
+                bullet.y += bullet.speedY;
+
+                // 2a. Kolizja z górną/dolną krawędzią (odbicie pionowe)
+                if (bullet.y - bullet.radius < 0 || bullet.y + bullet.radius > canvas.height) {
+                    bullet.speedY *= -1;
+                }
+
+                // 2b. Kolizja z operatorem (odbicie w prawo)
+                if (bullet.x - bullet.radius < player.x + player.width &&
+                    bullet.x + bullet.radius > player.x &&
+                    bullet.y > player.y &&
+                    bullet.y < player.y + player.height &&
+                    bullet.speedX < 0) // Pocisk musi lecieć w lewo, aby móc się odbić
+                {
+                    bullet.speedX *= -1; // Odbicie w prawo
+                    
+                    // Lekki efekt kąta odbicia (Paddle logic)
+                    const relativeIntersectY = (player.y + (player.height / 2)) - bullet.y;
+                    const normalizedRelativeIntersectionY = (relativeIntersectY / (player.height / 2));
+                    bullet.speedY = normalizedRelativeIntersectionY * 5; // Im dalej od środka, tym większy kąt
+                }
+
+                // 2c. Pocisk wyleciał z lewej krawędzi (koniec strzału, operator nie odbił)
+                if (bullet.x + bullet.radius < 0) {
+                    bullet.active = false;
+                }
+
+                // 2d. Pocisk wyleciał z prawej krawędzi (operator nie trafił, reset i nowy strzał)
+                if (bullet.x - bullet.radius > canvas.width) {
+                    bullet.active = false;
+                }
+
+                // 2e. Kolizja z celami
+                targets.forEach(target => {
+                    if (target.active) {
+                        const dist = Math.sqrt(
+                            (bullet.x - target.x) ** 2 + (bullet.y - target.y) ** 2
+                        );
+
+                        if (dist < bullet.radius + target.radius) {
+                            // Trafienie!
+                            target.active = false;
+                            bullet.active = false;
+                            hitCount++;
+                            hitsDisplay.textContent = hitCount;
+                            targetCountDisplay.textContent = targets.filter(t => t.active).length;
+
+                            // Sprawdzenie wygranej
+                            if (targets.every(t => !t.active)) {
+                                endGame("Gratulacje! Usunąłeś wszystkie usterki. Maszyna gotowa!");
+                            }
+                        }
+                    }
+                });
+            }
+
+            draw();
+            requestAnimationFrame(updateGame);
+        }
+
+        // Logika timera
+        function startTimer() {
+            gameLoopInterval = setInterval(() => {
+                gameTime--;
+                timeDisplay.textContent = gameTime;
+
+                if (gameTime <= 0) {
+                    clearInterval(gameLoopInterval);
+                    endGame("Czas minął! Następnym razem musisz być szybszy.");
+                }
+            }, 1000);
+        }
+
+        function startGame() {
+            // Zakończenie poprzedniej pętli
+            if (gameLoopInterval) clearInterval(gameLoopInterval);
+            
+            initGame();
+            startTimer();
+            // Start pętli rysowania
+            requestAnimationFrame(updateGame);
+        }
+
+        function endGame(message) {
+            isGameOver = true;
+            gameMessage.textContent = message;
+            gameMessage.classList.remove('hidden', 'bg-red-900/50', 'text-red-300');
+            gameMessage.classList.add('bg-green-900/50', 'text-green-300');
+            startButton.textContent = "Zagraj Ponownie";
+            // Zakończenie pętli timera, jeśli jeszcze działa
+            if (gameLoopInterval) clearInterval(gameLoopInterval); 
+        }
+
+        // Uruchomienie inicjalizacji przy ładowaniu strony
+        window.onload = function() {
+            // Ustawienie początkowe przycisku i wiadomości
+            startButton.textContent = "Start Gry";
+            gameMessage.textContent = "Kliknij START, aby rozpocząć usuwanie usterek CNC!";
+            gameMessage.classList.remove('hidden');
+        };
+
     </script>
 </body>
 </html>
