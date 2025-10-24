@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BK CNC - Precyzyjna Obróbka CNC Typu Szwajcarskiego</title>
+    <!-- Ładowanie Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <style>
+        /* Użycie fontu Inter i ciemne tło dla całej strony */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0d1117; /* Bardzo ciemny grafit */
+            color: #e5e7eb;
+        }
+        .accent-color {
+            color: #06b6d4; /* Cyjan/Turkus jako kolor akcentowy */
+        }
+        .accent-bg {
+            background-color: #06b6d4;
+        }
+        .shadow-metal {
+            box-shadow: 0 4px 6px -1px rgba(6, 182, 212, 0.4), 0 2px 4px -2px rgba(6, 182, 212, 0.4);
+        }
+        /* Custom pattern for the dark background, simulating brushed metal texture */
+        .metal-pattern {
+            background: linear-gradient(135deg, #0d1117 0%, #151b23 50%, #0d1117 100%);
+        }
+        .loading-spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top: 4px solid #06b6d4;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        /* Style dla placeholdera obrazu */
+        .img-placeholder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 400px;
+            width: 100%;
+            background-color: #1f2937; /* Ciemny szary, pasujący do tła */
+            color: #06b6d4; /* Kolor akcentu */
+            border: 2px solid #06b6d4;
+            border-radius: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: 600;
+            text-align: center;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Nagłówek i Nawigacja -->
+    <header class="sticky top-0 z-50 bg-gray-900/90 backdrop-blur-sm shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <a href="#hero" class="text-3xl font-extrabold tracking-tight accent-color">
+                    BK <span class="text-gray-200">CNC</span>
+                </a>
+
+                <!-- Nawigacja Desktop -->
+                <nav class="hidden md:flex space-x-8 text-sm font-medium">
+                    <a href="#o-nas" class="hover:text-cyan-400 transition duration-300">O Nas</a>
+                    <a href="#uslugi" class="hover:text-cyan-400 transition duration-300">Usługi</a>
+                    <a href="#technologia" class="hover:text-cyan-400 transition duration-300">Technologia</a>
+                    <a href="#parametry-cnc" class="hover:text-cyan-400 transition duration-300">Narzędzie CNC</a>
+                    <a href="#kontakt" class="px-3 py-1 rounded-full bg-cyan-600 text-gray-900 font-semibold hover:bg-cyan-500 transition duration-300 shadow-metal">Kontakt</a>
+                </nav>
+
+                <!-- Przycisk Menu Mobilne (dla prostoty, bez JS, ale widoczny) -->
+                <button class="md:hidden p-2 rounded-md hover:bg-gray-700 transition duration-300">
+                    <svg class="w-6 h-6 accent-color" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        
+        <!-- Sekcja Hero - Precyzja i Moc -->
+        <section id="hero" class="metal-pattern pt-20 pb-32 relative overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between">
+                
+                <!-- Tekst Hero -->
+                <div class="md:w-1/2 mb-10 md:mb-0 text-center md:text-left">
+                    <span class="text-xl font-medium uppercase accent-color mb-3 block">Precyzja, której Możesz Ufać</span>
+                    <h1 class="text-5xl sm:text-6xl lg:text-7xl font-extrabold leading-tight tracking-tighter text-gray-50">
+                        Toczenie CNC <span class="accent-color">Typu Szwajcarskiego</span>
+                    </h1>
+                    <p class="mt-6 text-lg text-gray-400 max-w-lg mx-auto md:mx-0">
+                        Specjalizujemy się w produkcji złożonych, małych i bardzo małych detali z zachowaniem mikronowej dokładności. Osiągnij niezrównaną jakość i powtarzalność.
+                    </p>
+                    <div class="mt-10 flex justify-center md:justify-start space-x-4">
+                        <a href="#kontakt" class="px-8 py-3 bg-cyan-600 text-gray-900 font-bold rounded-lg hover:bg-cyan-500 transition duration-300 shadow-xl shadow-cyan-800/50">
+                            Wycena Projektu
+                        </a>
+                        <a href="#uslugi" class="px-8 py-3 border border-gray-600 text-gray-200 font-medium rounded-lg hover:border-cyan-500 hover:text-cyan-400 transition duration-300">
+                            Nasze Możliwości
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Grafika/Wizualizacja detalu (ZASTĄPIONA PLACEHOLDEREM) -->
+                <div class="md:w-1/2 flex justify-center md:justify-end relative">
+                    <div class="img-placeholder max-w-sm h-96">
+                        DETAL: Toczenie Precyzyjne
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sekcja O Nas -->
+        <section id="o-nas" class="py-24 bg-gray-900 border-t border-gray-800">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-extrabold text-gray-50 mb-4">BK CNC: Fundament Precyzji</h2>
+                    <p class="text-lg text-gray-400">Ponad 10 lat doświadczenia w obróbce metali w najnowszych technologiach.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                    
+                    <!-- Karta 1: Technologia -->
+                    <div class="p-8 rounded-xl bg-gray-800 border-t-4 border-cyan-600 shadow-2xl hover:shadow-cyan-900/50 transition duration-500 transform hover:-translate-y-1">
+                        <svg class="w-10 h-10 accent-color mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37a1.724 1.724 0 002.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                        <h3 class="text-2xl font-semibold mb-3 text-gray-50">Automaty Szwajcarskie</h3>
+                        <p class="text-gray-400">Wykorzystujemy najnowszej generacji automaty tokarskie typu szwajcarskiego, co gwarantuje możliwość obróbki z osi Y i Z, redukując czas cyklu i zwiększając złożoność detali.</p>
+                    </div>
+
+                    <!-- Karta 2: Jakość -->
+                    <div class="p-8 rounded-xl bg-gray-800 border-t-4 border-cyan-600 shadow-2xl hover:shadow-cyan-900/50 transition duration-500 transform hover:-translate-y-1">
+                        <svg class="w-10 h-10 accent-color mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.001 12.001 0 0012 21a12.001 12.001 0 008.618-3.04z"></path></svg>
+                        <h3 class="text-2xl font-semibold mb-3 text-gray-50">Kontrola i Certyfikacja</h3>
+                        <p class="text-gray-400">Każdy wyprodukowany detal podlega rygorystycznej kontroli. Gwarantujemy zgodność z dostarczoną specyfikacją techniczną, mierzoną z precyzją co do mikrona.</p>
+                    </div>
+
+                    <!-- Karta 3: Złożoność -->
+                    <div class="p-8 rounded-xl bg-gray-800 border-t-4 border-cyan-600 shadow-2xl hover:shadow-cyan-900/50 transition duration-500 transform hover:-translate-y-1">
+                        <svg class="w-10 h-10 accent-color mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        <h3 class="text-2xl font-semibold mb-3 text-gray-50">Złożone Detale i Serie</h3>
+                        <p class="text-gray-400">Obsługujemy zarówno długie serie produkcyjne, jak i skomplikowane detale prototypowe. Nasza elastyczność pozwala na realizację najbardziej wymagających projektów.</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Sekcja Usługi / Możliwości Technologiczne -->
+        <section id="uslugi" class="py-24 metal-pattern border-t border-gray-800">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <span class="text-lg font-medium uppercase accent-color mb-2 block">Czym się zajmujemy</span>
+                    <h2 class="text-4xl font-extrabold text-gray-50">Kluczowe Obszary Działalności</h2>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    
+                    <!-- Lista Usług -->
+                    <div>
+                        <ul class="space-y-6">
+                            <li class="flex items-start">
+                                <span class="flex-shrink-0 w-6 h-6 mr-3 mt-1 accent-bg rounded-full flex items-center justify-center text-gray-900 font-bold text-sm">✓</span>
+                                <div>
+                                    <h4 class="text-xl font-semibold text-gray-50">Toczenie Długich Elementów</h4>
+                                    <p class="text-gray-400">Specjalizacja w obróbce detali o wydłużonym kształcie, co jest kluczowe dla automatyki i medycyny.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="flex-shrink-0 w-6 h-6 mr-3 mt-1 accent-bg rounded-full flex items-center justify-center text-gray-900 font-bold text-sm">✓</span>
+                                <div>
+                                    <h4 class="text-xl font-semibold text-gray-50">Obróbka Złożona (Oś Y i Opcje Frezowania)</h4>
+                                    <p class="text-gray-400">Pełne możliwości frezowania, wiercenia i gwintowania bezpośrednio na tokarce – detal gotowy po jednym cyklu.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="flex-shrink-0 w-6 h-6 mr-3 mt-1 accent-bg rounded-full flex items-center justify-center text-gray-900 font-bold text-sm">✓</span>
+                                <div>
+                                    <h4 class="text-xl font-semibold text-gray-50">Szeroki Zakres Materiałów</h4>
+                                    <p class="text-gray-400">Obróbka stali nierdzewnej, mosiądzu, aluminium, tytanu oraz tworzyw sztucznych technicznych.</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Obraz/Wizualizacja Techniczna (ZASTĄPIONA PLACEHOLDEREM) -->
+                    <div class="hidden lg:block">
+                        <div class="p-6 bg-gray-900 border-2 border-cyan-600/50 rounded-lg shadow-2xl shadow-cyan-900/30 flex justify-center items-center">
+                            <div class="img-placeholder max-w-full h-96">
+                                DETAL: Toczenie Złożone z Rysunkiem
+                            </div>
+                        </div>
+                        <p class="text-center mt-4 text-sm text-gray-500 italic">
+                            Wizualizacja detalu z uwzględnieniem tolerancji.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Sekcja Technologia (Swiss-Type Focus) -->
+        <section id="technologia" class="py-24 bg-gray-900 border-t border-gray-800">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <span class="text-lg font-medium uppercase accent-color mb-2 block">Dlaczego Automaty Tokarskie Szwajcarskie?</span>
+                    <h2 class="text-4xl font-extrabold text-gray-50">Niezrównana Metoda Obróbki</h2>
+                </div>
+
+                <div class="lg:flex lg:space-x-12">
+                    <div class="lg:w-1/2 mb-10 lg:mb-0">
+                        <!-- ZASTĄPIONY LINK DO OBRAZU NIESTABILNEGO PRZEZ OBRAZ PRZESŁANY PRZEZ UŻYTKOWNIKA -->
+                        <img src="zawias-toczony-10-x-55-bez-logo.webp" alt="Przykładowy detal toczony" class="rounded-xl shadow-2xl shadow-cyan-900/30 w-full" loading="lazy" onerror="this.onerror=null;this.src='https://placehold.co/700x400/1e293b/06b6d4?text=Wizualizacja+Maszyny+CNC';">
+
+                        <p class="mt-4 text-sm text-gray-500 italic text-center">
+                             Przykładowy detal z naszej produkcji.
+                        </p>
+                    </div>
+
+                    <div class="lg:w-1/2 space-y-8">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 w-12 h-12 accent-bg rounded-full flex items-center justify-center mr-4 text-gray-900 font-bold text-xl">1</div>
+                            <div>
+                                <h3 class="text-2xl font-semibold mb-2 text-gray-50">Precyzja Lidera Branży</h3>
+                                <p class="text-gray-400">W tokarce szwajcarskiej narzędzie pracuje bardzo blisko tulei prowadzącej, minimalizując ugięcie obrabianego materiału. To klucz do osiągnięcia najciaśniejszych tolerancji.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 w-12 h-12 accent-bg rounded-full flex items-center justify-center mr-4 text-gray-900 font-bold text-xl">2</div>
+                            <div>
+                                <h3 class="text-2xl font-semibold mb-2 text-gray-50">Wykończenie Powierzchni</h3>
+                                <p class="text-gray-400">Stałe podparcie materiału blisko strefy skrawania pozwala uzyskać znacznie lepszą jakość powierzchni niż w tradycyjnych tokarkach, co często eliminuje potrzebę dodatkowej obróbki.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 w-12 h-12 accent-bg rounded-full flex items-center justify-center mr-4 text-gray-900 font-bold text-xl">3</div>
+                            <div>
+                                <h3 class="text-2xl font-semibold mb-2 text-gray-50">Obróbka Długich i Cienkich Detali</h3>
+                                <p class="text-gray-400">Automaty typu szwajcarskiego są niezastąpione przy produkcji długich, cienkich i skomplikowanych elementów, które są niemożliwe do wykonania na standardowych tokarkach.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sekcja Narzędzie CNC -->
+        <section id="parametry-cnc" class="py-24 metal-pattern border-t border-gray-800">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <span class="text-lg font-medium uppercase accent-color mb-2 block">Wsparcie Inżynierskie AI</span>
+                    <h2 class="text-4xl font-extrabold text-gray-50">Kalkulator Parametrów Skrawania</h2>
+                </div>
+
+                <div class="p-8 bg-gray-800 rounded-xl shadow-2xl border-t-4 border-cyan-600">
+                    <h3 class="text-2xl font-semibold accent-color mb-4 flex items-center">
+                        ⚙️ Oblicz Optymalne Parametry Toczenia
+                    </h3>
+                    <p class="text-gray-400 mb-6">Wprowadź dane dotyczące materiału i narzędzia, a AI zasugeruje optymalną prędkość i posuw do obróbki na tokarce.</p>
+                    
+                    <div class="space-y-4">
+                        <input type="text" id="cnc_material" placeholder="Materiał detalu (np. Stal nierdzewna 316, Tytan, Mosiądz)" class="block w-full p-3 border border-gray-600 bg-gray-900 rounded-md text-gray-50 focus:border-cyan-500 focus:ring-cyan-500">
+                        <input type="text" id="cnc_narzedzie" placeholder="Typ i średnica narzędzia (np. płytka WNMG, średnica 5 mm)" class="block w-full p-3 border border-gray-600 bg-gray-900 rounded-md text-gray-50 focus:border-cyan-500 focus:ring-cyan-500">
+                        <input type="text" id="cnc_typ_obrobki" placeholder="Typ obróbki (np. Toczenie zgrubne, Toczenie wykończeniowe)" class="block w-full p-3 border border-gray-600 bg-gray-900 rounded-md text-gray-50 focus:border-cyan-500 focus:ring-cyan-500">
+                        
+                        <button onclick="calculateCuttingParameters()" id="cnc-button" class="w-full px-4 py-3 bg-cyan-600 text-gray-900 font-bold rounded-lg hover:bg-cyan-500 transition duration-300 shadow-metal flex items-center justify-center">
+                            <span id="cnc-button-text">Zaproponuj Parametry Skrawania</span>
+                            <div id="cnc-spinner" class="loading-spinner ml-3 hidden"></div>
+                        </button>
+
+                        <textarea id="cnc-result" rows="6" readonly class="mt-4 block w-full p-3 border border-gray-600 bg-gray-900 rounded-md text-gray-300" placeholder="Wyniki obliczeń AI: Prędkość skrawania, posuw, głębokość skrawania..."></textarea>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Sekcja Kontakt -->
+        <section id="kontakt" class="py-24 bg-gray-900 border-t border-gray-800">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-extrabold text-gray-50 mb-4">Skontaktuj się z Nami</h2>
+                    <p class="text-lg text-gray-400">Prześlij zapytanie, rysunki techniczne lub skontaktuj się, aby omówić szczegóły projektu.</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                    
+                    <!-- Formularz Kontaktowy (Mockup) -->
+                    <div class="lg:col-span-2 p-10 bg-gray-800 rounded-xl shadow-2xl">
+                        <form class="space-y-6">
+                            <div>
+                                <label for="name" class="block text-sm font-medium text-gray-300">Imię i Nazwisko / Firma</label>
+                                <input type="text" id="name" name="name" class="mt-1 block w-full p-3 border border-gray-600 bg-gray-900 rounded-md text-gray-50 focus:border-cyan-500 focus:ring-cyan-500">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-gray-300">Adres E-mail</label>
+                                <input type="email" id="email" name="email" class="mt-1 block w-full p-3 border border-gray-600 bg-gray-900 rounded-md text-gray-50 focus:border-cyan-500 focus:ring-cyan-500">
+                            </div>
+                            <div>
+                                <label for="message" class="block text-sm font-medium text-gray-300">Wiadomość / Opis zapytania</label>
+                                <textarea id="message" name="message" rows="4" class="mt-1 block w-full p-3 border border-gray-600 bg-gray-900 rounded-md text-gray-50 focus:border-cyan-500 focus:ring-cyan-500"></textarea>
+                            </div>
+                            <button type="submit" class="w-full px-4 py-3 bg-cyan-600 text-gray-900 font-bold rounded-lg hover:bg-cyan-500 transition duration-300 shadow-metal">
+                                Wyślij Zapytanie
+                            </button>
+                        </form>
+                    </div>
+                    
+                    <!-- Dane Adresowe -->
+                    <div class="p-10 bg-gray-800 rounded-xl shadow-2xl">
+                        <h3 class="text-2xl font-semibold accent-color mb-4">Dane Kontaktowe</h3>
+                        <div class="space-y-4 text-gray-400">
+                            <p class="flex items-start">
+                                <svg class="w-6 h-6 mr-3 flex-shrink-0 accent-color mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                                <span>
+                                    **BK CNC**<br>
+                                    ul. Gen. Bora-Komorowskiego 3c/12<br>
+                                    03-982 Warszawa (Przykładowa lokalizacja dla celów mockupu)
+                                </span>
+                            </p>
+                            <p class="flex items-center">
+                                <svg class="w-6 h-6 mr-3 flex-shrink-0 accent-color" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                                <a href="tel:+48123456789" class="hover:text-cyan-400 transition duration-300">+48 123 456 789 (Mock)</a>
+                            </p>
+                            <p class="flex items-center">
+                                <svg class="w-6 h-6 mr-3 flex-shrink-0 accent-color" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                                <a href="mailto:kontakt@bk-cnc.pl" class="hover:text-cyan-400 transition duration-300">kontakt@bk-cnc.pl (Mock)</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Stopka -->
+    <footer class="bg-gray-900 border-t border-gray-700/50 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-500 text-sm">
+            <p>&copy; 2024 BK CNC. Wszelkie prawa zastrzeżone. | Adres: ul. Gen. Bora-Komorowskiego 3c/12.</p>
+        </div>
+    </footer>
+
+    <script>
+        // UWAGA: KOD W JAVASCRIPT POZOSTAJE W JĘZYKU ANGIELSKIM, A WYJŚCIA I KOMENTARZE W JĘZYKU POLSKIM.
+        
+        // Stałe do API
+        const API_KEY = ""; 
+        const API_URL_FLASH = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent";
+
+        // --- Funkcja Pomocnicza do Wywoływania API z Backoff (LLM) ---
+        async function fetchGeminiWithRetry(systemPrompt, userQuery, maxRetries = 5, delay = 1000) {
+            const payload = {
+                contents: [{ parts: [{ text: userQuery }] }],
+                systemInstruction: { parts: [{ text: systemPrompt }] },
+            };
+
+            for (let i = 0; i < maxRetries; i++) {
+                try {
+                    const response = await fetch(`${API_URL_FLASH}?key=${API_KEY}`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (response.status === 429) { // Too Many Requests
+                        if (i === maxRetries - 1) throw new Error("API rate limit exceeded.");
+                        await new Promise(resolve => setTimeout(resolve, delay * (2 ** i)));
+                        continue;
+                    }
+
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+
+                    const result = await response.json();
+                    const text = result.candidates?.[0]?.content?.parts?.[0]?.text;
+
+                    if (!text) {
+                        throw new Error("Invalid response structure from API.");
+                    }
+
+                    return text;
+
+                } catch (error) {
+                    console.error("Gemini API call failed:", error);
+                    if (i === maxRetries - 1) throw error;
+                    await new Promise(resolve => setTimeout(resolve, delay * (2 ** i)));
+                }
+            }
+        }
+
+
+        // --- LOGIKA DLA KALKULATORA PARAMETRÓW SKRAWANIA (LLM) ---
+        async function calculateCuttingParameters() {
+            const material = document.getElementById('cnc_material').value;
+            const narzedzie = document.getElementById('cnc_narzedzie').value;
+            const typObróbki = document.getElementById('cnc_typ_obrobki').value;
+            const resultElement = document.getElementById('cnc-result');
+            const button = document.getElementById('cnc-button');
+            const buttonText = document.getElementById('cnc-button-text');
+            const spinner = document.getElementById('cnc-spinner');
+
+            if (!material || !narzedzie || !typObróbki) {
+                resultElement.value = "Proszę podać wszystkie trzy parametry: materiał, narzędzie i typ obróbki.";
+                return;
+            }
+
+            // Ustawienia stanu ładowania
+            buttonText.textContent = "Obliczam...";
+            spinner.classList.remove('hidden');
+            button.disabled = true;
+            resultElement.value = ""; // Wyczyść poprzedni wynik
+
+            const systemPrompt = "Jesteś ekspertem inżynierem obróbki CNC na automatach tokarskich typu szwajcarskiego. Twoim zadaniem jest sugerowanie realistycznych i bezpiecznych, ale wydajnych parametrów skrawania dla podanych danych wejściowych. Wynik powinien być sformatowany w języku polskim jako lista z kluczowymi danymi: prędkość skrawania (Vc [m/min]), posuw (f [mm/obr]), głębokość skrawania (ap [mm]) oraz krótkim uzasadnieniem. Użyj formatu Markdown.";
+
+            const userQuery = `Zaproponuj parametry skrawania dla: Materiał: ${material}. Narzędzie: ${narzedzie}. Typ obróbki: ${typObróbki}. Pamiętaj o charakterystyce obróbki na maszynie Swiss-Type.`;
+
+            try {
+                const responseText = await fetchGeminiWithRetry(systemPrompt, userQuery);
+                resultElement.value = responseText;
+            } catch (error) {
+                resultElement.value = "Wystąpił błąd podczas komunikacji z AI. Spróbuj ponownie później.";
+            } finally {
+                // Przywracanie stanu przycisku
+                buttonText.textContent = "Zaproponuj Parametry Skrawania";
+                spinner.classList.add('hidden');
+                button.disabled = false;
+            }
+        }
+    </script>
+</body>
+</html>
