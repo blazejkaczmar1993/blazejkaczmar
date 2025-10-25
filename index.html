@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BK CNC - Precyzyjna Obróbka CNC Typu Szwajcarskiego</title>
-    <!-- Ładowanie Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Ładowanie Tailwind CSS --><script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     <style>
         /* Użycie fontu Inter i ciemne tło dla całej strony */
@@ -46,22 +45,25 @@
         /* Styl dla Canvas, zapobiega przewijaniu na urządzeniach dotykowych */
         #gameCanvas {
             touch-action: none;
+            /* Responsywna szerokość, wysokość ustawiona w JS */
+            width: 100%; 
+            max-width: 700px; /* Maksymalna szerokość jak poprzednio */
+            height: auto;
+            aspect-ratio: 700 / 400; /* Utrzymanie proporcji 700x400 */
+            cursor: none; /* Ukryj kursor systemowy nad canvas */
         }
     </style>
 </head>
 <body class="antialiased">
 
-    <!-- Nagłówek i Nawigacja -->
-    <header class="sticky top-0 z-50 bg-gray-900/90 backdrop-blur-sm shadow-lg">
+    <!-- Nagłówek i Nawigacja --><header class="sticky top-0 z-50 bg-gray-900/90 backdrop-blur-sm shadow-lg">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
-                <!-- Logo -->
-                <a href="#hero" class="text-3xl font-extrabold tracking-tight accent-color">
+                <!-- Logo --><a href="#hero" class="text-3xl font-extrabold tracking-tight accent-color">
                     BK <span class="text-gray-200">CNC</span>
                 </a>
 
-                <!-- Nawigacja Desktop -->
-                <nav class="hidden md:flex space-x-8 text-sm font-medium">
+                <!-- Nawigacja Desktop --><nav class="hidden md:flex space-x-8 text-sm font-medium">
                     <a href="#o-nas" class="hover:text-cyan-400 transition duration-300">O Nas</a>
                     <a href="#uslugi" class="hover:text-cyan-400 transition duration-300">Usługi</a>
                     <a href="#technologia" class="hover:text-cyan-400 transition duration-300">Technologia</a>
@@ -70,8 +72,7 @@
                     <a href="#kontakt" class="px-3 py-1 rounded-full bg-cyan-600 text-gray-900 font-semibold hover:bg-cyan-500 transition duration-300 shadow-metal">Kontakt</a>
                 </nav>
 
-                <!-- Przycisk Menu Mobilne (dla prostoty, bez JS, ale widoczny) -->
-                <button class="md:hidden p-2 rounded-md hover:bg-gray-700 transition duration-300">
+                <!-- Przycisk Menu Mobilne (dla prostoty, bez JS, ale widoczny) --><button class="md:hidden p-2 rounded-md hover:bg-gray-700 transition duration-300">
                     <svg class="w-6 h-6 accent-color" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
                 </button>
             </div>
@@ -80,12 +81,10 @@
 
     <main>
         
-        <!-- Sekcja Hero - Precyzja i Moc -->
-        <section id="hero" class="metal-pattern pt-20 pb-32 relative overflow-hidden">
+        <!-- Sekcja Hero - Precyzja i Moc --><section id="hero" class="metal-pattern pt-20 pb-32 relative overflow-hidden">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between">
                 
-                <!-- Tekst Hero -->
-                <div class="md:w-1/2 mb-10 md:mb-0 text-center md:text-left">
+                <!-- Tekst Hero --><div class="md:w-1/2 mb-10 md:mb-0 text-center md:text-left">
                     <span class="text-xl font-medium uppercase accent-color mb-3 block">Precyzja, której Możesz Ufać</span>
                     <h1 class="text-5xl sm:text-6xl lg:text-7xl font-extrabold leading-tight tracking-tighter text-gray-50">
                         Toczenie CNC <span class="accent-color">Typu Szwajcarskiego</span>
@@ -103,8 +102,7 @@
                     </div>
                 </div>
 
-                <!-- Grafika/Wizualizacja detalu (Placeholder dla stabilności na hostingu) -->
-                <div class="md:w-1/2 flex justify-center md:justify-end relative">
+                <!-- Grafika/Wizualizacja detalu (Placeholder dla stabilności na hostingu) --><div class="md:w-1/2 flex justify-center md:justify-end relative">
                     <div class="img-placeholder max-w-sm h-96">
                         DETAL: Toczenie Precyzyjne
                     </div>
@@ -112,8 +110,7 @@
             </div>
         </section>
 
-        <!-- Sekcja O Nas -->
-        <section id="o-nas" class="py-24 bg-gray-900 border-t border-gray-800">
+        <!-- Sekcja O Nas --><section id="o-nas" class="py-24 bg-gray-900 border-t border-gray-800">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-16">
                     <h2 class="text-4xl font-extrabold text-gray-50 mb-4">BK CNC: Fundament Precyzji</h2>
@@ -122,22 +119,19 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
                     
-                    <!-- Karta 1: Technologia -->
-                    <div class="p-8 rounded-xl bg-gray-800 border-t-4 border-cyan-600 shadow-2xl hover:shadow-cyan-900/50 transition duration-500 transform hover:-translate-y-1">
+                    <!-- Karta 1: Technologia --><div class="p-8 rounded-xl bg-gray-800 border-t-4 border-cyan-600 shadow-2xl hover:shadow-cyan-900/50 transition duration-500 transform hover:-translate-y-1">
                         <svg class="w-10 h-10 accent-color mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37a1.724 1.724 0 002.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
                         <h3 class="text-2xl font-semibold mb-3 text-gray-50">Automaty Szwajcarskie</h3>
                         <p class="text-gray-400">Wykorzystujemy najnowszej generacji automaty tokarskie typu szwajcarskiego, co gwarantuje możliwość obróbki z osi Y i Z, redukując czas cyklu i zwiększając złożoność detali.</p>
                     </div>
 
-                    <!-- Karta 2: Jakość -->
-                    <div class="p-8 rounded-xl bg-gray-800 border-t-4 border-cyan-600 shadow-2xl hover:shadow-cyan-900/50 transition duration-500 transform hover:-translate-y-1">
+                    <!-- Karta 2: Jakość --><div class="p-8 rounded-xl bg-gray-800 border-t-4 border-cyan-600 shadow-2xl hover:shadow-cyan-900/50 transition duration-500 transform hover:-translate-y-1">
                         <svg class="w-10 h-10 accent-color mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.001 12.001 0 0012 21a12.001 12.001 0 008.618-3.04z"></path></svg>
                         <h3 class="text-2xl font-semibold mb-3 text-gray-50">Kontrola i Certyfikacja</h3>
                         <p class="text-gray-400">Każdy wyprodukowany detal podlega rygorystycznej kontroli. Gwarantujemy zgodność z dostarczoną specyfikacją techniczną, mierzoną z precyzją co do mikrona.</p>
                     </div>
 
-                    <!-- Karta 3: Złożoność -->
-                    <div class="p-8 rounded-xl bg-gray-800 border-t-4 border-cyan-600 shadow-2xl hover:shadow-cyan-900/50 transition duration-500 transform hover:-translate-y-1">
+                    <!-- Karta 3: Złożoność --><div class="p-8 rounded-xl bg-gray-800 border-t-4 border-cyan-600 shadow-2xl hover:shadow-cyan-900/50 transition duration-500 transform hover:-translate-y-1">
                         <svg class="w-10 h-10 accent-color mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
                         <h3 class="text-2xl font-semibold mb-3 text-gray-50">Złożone Detale i Serie</h3>
                         <p class="text-gray-400">Obsługujemy zarówno długie serie produkcyjne, jak i skomplikowane detale prototypowe. Nasza elastyczność pozwala na realizację najbardziej wymagających projektów.</p>
@@ -147,8 +141,7 @@
             </div>
         </section>
 
-        <!-- Sekcja Usługi / Możliwości Technologiczne -->
-        <section id="uslugi" class="py-24 metal-pattern border-t border-gray-800">
+        <!-- Sekcja Usługi / Możliwości Technologiczne --><section id="uslugi" class="py-24 metal-pattern border-t border-gray-800">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-16">
                     <span class="text-lg font-medium uppercase accent-color mb-2 block">Czym się zajmujemy</span>
@@ -157,8 +150,7 @@
 
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                     
-                    <!-- Lista Usług -->
-                    <div>
+                    <!-- Lista Usług --><div>
                         <ul class="space-y-6">
                             <li class="flex items-start">
                                 <span class="flex-shrink-0 w-6 h-6 mr-3 mt-1 accent-bg rounded-full flex items-center justify-center text-gray-900 font-bold text-sm">✓</span>
@@ -184,8 +176,7 @@
                         </ul>
                     </div>
 
-                    <!-- Obraz/Wizualizacja Techniczna (Placeholder dla stabilności na hostingu) -->
-                    <div class="hidden lg:block">
+                    <!-- Obraz/Wizualizacja Techniczna (Placeholder dla stabilności na hostingu) --><div class="hidden lg:block">
                         <div class="p-6 bg-gray-900 border-2 border-cyan-600/50 rounded-lg shadow-2xl shadow-cyan-900/30 flex justify-center items-center">
                             <div class="img-placeholder max-w-full h-96">
                                 DETAL: Toczenie Złożone z Rysunkiem
@@ -200,8 +191,7 @@
             </div>
         </section>
 
-        <!-- Sekcja Technologia (Swiss-Type Focus) -->
-        <section id="technologia" class="py-24 bg-gray-900 border-t border-gray-800">
+        <!-- Sekcja Technologia (Swiss-Type Focus) --><section id="technologia" class="py-24 bg-gray-900 border-t border-gray-800">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-16">
                     <span class="text-lg font-medium uppercase accent-color mb-2 block">Dlaczego Automaty Tokarskie Szwajcarskie?</span>
@@ -210,8 +200,7 @@
 
                 <div class="lg:flex lg:space-x-12">
                     <div class="lg:w-1/2 mb-10 lg:mb-0">
-                        <!-- Użycie przesłanego pliku graficznego - MUSI BYĆ W REPOZYTORIUM -->
-                        <img src="zawias-toczony-10-x-55-bez-logo.webp" alt="Przykładowy detal toczony" class="rounded-xl shadow-2xl shadow-cyan-900/30 w-full" loading="lazy" onerror="this.onerror=null;this.src='https://placehold.co/700x400/1e293b/06b6d4?text=Wizualizacja+Maszyny+CNC';">
+                        <!-- Użycie przesłanego pliku graficznego - MUSI BYĆ W REPOZYTORIUM --><img src="zawias-toczony-10-x-55-bez-logo.webp" alt="Przykładowy detal toczony" class="rounded-xl shadow-2xl shadow-cyan-900/30 w-full" loading="lazy" onerror="this.onerror=null;this.src='https://placehold.co/700x400/1e293b/06b6d4?text=Wizualizacja+Maszyny+CNC';">
 
                         <p class="mt-4 text-sm text-gray-500 italic text-center">
                              Przykładowy detal z naszej produkcji.
@@ -245,8 +234,7 @@
             </div>
         </section>
 
-        <!-- Sekcja Narzędzie CNC - Kalkulator Inżynierski -->
-        <section id="parametry-cnc" class="py-24 metal-pattern border-t border-gray-800">
+        <!-- Sekcja Narzędzie CNC - Kalkulator Inżynierski --><section id="parametry-cnc" class="py-24 metal-pattern border-t border-gray-800">
             <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-12">
                     <span class="text-lg font-medium uppercase accent-color mb-2 block">Wsparcie Inżynierskie</span>
@@ -259,8 +247,7 @@
                     </h3>
                     
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <!-- Obliczenie obrotów (n) -->
-                        <div class="p-5 bg-gray-900 rounded-lg shadow-inner">
+                        <!-- Obliczenie obrotów (n) --><div class="p-5 bg-gray-900 rounded-lg shadow-inner">
                             <label for="Vc" class="block text-sm font-medium text-gray-400">Prędkość Skrawania (Vc) [m/min]</label>
                             <input type="number" step="0.1" id="Vc" placeholder="np. 250" class="mt-1 block w-full p-3 border border-gray-600 bg-gray-700 rounded-md text-gray-50 focus:border-cyan-500 focus:ring-cyan-500">
                             
@@ -276,8 +263,7 @@
                             </div>
                         </div>
 
-                        <!-- Obliczenie prędkości posuwu (Vf) -->
-                        <div class="p-5 bg-gray-900 rounded-lg shadow-inner">
+                        <!-- Obliczenie prędkości posuwu (Vf) --><div class="p-5 bg-gray-900 rounded-lg shadow-inner">
                             <label for="f" class="block text-sm font-medium text-gray-400">Posuw (f) [mm/obr]</label>
                             <input type="number" step="0.001" id="f" placeholder="np. 0.08" class="mt-1 block w-full p-3 border border-gray-600 bg-gray-700 rounded-md text-gray-50 focus:border-cyan-500 focus:ring-cyan-500">
 
@@ -298,8 +284,7 @@
             </div>
         </section>
 
-        <!-- Sekcja Mini-Gra CNC -->
-        <section id="gra-cnc" class="py-24 bg-gray-900 border-t border-gray-800">
+        <!-- Sekcja Mini-Gra CNC --><section id="gra-cnc" class="py-24 bg-gray-900 border-t border-gray-800">
             <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-12">
                     <span class="text-lg font-medium uppercase accent-color mb-2 block">Rozrywka Techniczna</span>
@@ -307,10 +292,11 @@
                     <p class="text-gray-400 mt-2">Użyj myszy lub dotyku, aby sterować operatorem i odbijać pocisk w celu trafienia w usterki na maszynie. Uważaj na czas!</p>
                 </div>
 
-                <div class="p-8 bg-gray-800 rounded-xl shadow-2xl border-t-4 border-cyan-600">
-                    <canvas id="gameCanvas" width="700" height="400" class="w-full h-auto bg-gray-900 border border-gray-700 rounded-md cursor-none"></canvas>
+                <div class="p-8 bg-gray-800 rounded-xl shadow-2xl border-t-4 border-cyan-600 flex flex-col items-center">
+                    <canvas id="gameCanvas" width="700" height="400" class="bg-gray-900 border border-gray-700 rounded-md cursor-none"></canvas>
                     
-                    <div class="mt-6 flex justify-between items-center text-lg font-bold">
+                    <div class="mt-6 flex flex-col sm:flex-row justify-between w-full max-w-md text-lg font-bold space-y-2 sm:space-y-0">
+                        <p>Poziom: <span id="levelDisplay" class="accent-color">1</span></p> 
                         <p>Czas: <span id="timeDisplay" class="accent-color">30</span>s</p>
                         <p>Usterki: <span id="targetCountDisplay" class="accent-color">0</span></p>
                         <p>Trafienia: <span id="hitsDisplay" class="accent-color">0</span></p>
@@ -318,20 +304,19 @@
                     
                     <div class="mt-6 text-center">
                         <button id="startButton" onclick="startGame()" class="px-6 py-3 bg-cyan-600 text-gray-900 font-bold rounded-lg hover:bg-cyan-500 transition duration-300 shadow-metal">
-                            Start/Restart Gry
+                            Start Gry
                         </button>
                         <button id="shootButton" onclick="shoot()" class="px-6 py-3 bg-gray-600 text-gray-200 font-bold rounded-lg hover:bg-gray-500 transition duration-300 ml-4">
                             Strzał (Spacja)
                         </button>
                     </div>
-                    <div id="gameMessage" class="mt-6 p-4 bg-red-900/50 text-red-300 rounded-lg hidden text-center font-semibold"></div>
+                    <div id="gameMessage" class="mt-6 p-4 bg-gray-700 text-gray-300 rounded-lg hidden text-center font-semibold"></div>
                 </div>
             </div>
         </section>
 
 
-        <!-- Sekcja Kontakt -->
-        <section id="kontakt" class="py-24 metal-pattern border-t border-gray-800">
+        <!-- Sekcja Kontakt --><section id="kontakt" class="py-24 metal-pattern border-t border-gray-800">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-16">
                     <h2 class="text-4xl font-extrabold text-gray-50 mb-4">Skontaktuj się z Nami</h2>
@@ -340,35 +325,28 @@
 
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
                     
-                    <!-- Formularz Kontaktowy -->
-                    <div class="lg:col-span-2 p-10 bg-gray-800 rounded-xl shadow-2xl">
-                        <!-- Użycie mailto: do otwierania programu pocztowego z wypełnionymi danymi -->
-                        <form class="space-y-6" action="mailto:blazejkaczmar@gmail.com?subject=Zapytanie Ofertowe - BK CNC" method="POST" enctype="text/plain">
+                    <!-- Formularz Kontaktowy --><div class="lg:col-span-2 p-10 bg-gray-800 rounded-xl shadow-2xl">
+                        <!-- Użycie mailto: do otwierania programu pocztowego z wypełnionymi danymi --><form class="space-y-6" action="mailto:blazejkaczmar@gmail.com?subject=Zapytanie Ofertowe - BK CNC" method="POST" enctype="text/plain">
                             <div>
                                 <label for="form_name" class="block text-sm font-medium text-gray-300">Imię i Nazwisko / Firma</label>
-                                <!-- Użycie atrybutu 'name' do wysłania danych przez mailto -->
-                                <input type="text" id="form_name" name="Imię lub Firma" class="mt-1 block w-full p-3 border border-gray-600 bg-gray-900 rounded-md text-gray-50 focus:border-cyan-500 focus:ring-cyan-500" required>
+                                <!-- Użycie atrybutu 'name' do wysłania danych przez mailto --><input type="text" id="form_name" name="Imię lub Firma" class="mt-1 block w-full p-3 border border-gray-600 bg-gray-900 rounded-md text-gray-50 focus:border-cyan-500 focus:ring-cyan-500" required>
                             </div>
                             <div>
                                 <label for="form_email" class="block text-sm font-medium text-gray-300">Adres E-mail</label>
-                                <!-- Użycie atrybutu 'name' do wysłania danych przez mailto -->
-                                <input type="email" id="form_email" name="Adres Email" class="mt-1 block w-full p-3 border border-gray-600 bg-gray-900 rounded-md text-gray-50 focus:border-cyan-500 focus:ring-cyan-500" required>
+                                <!-- Użycie atrybutu 'name' do wysłania danych przez mailto --><input type="email" id="form_email" name="Adres Email" class="mt-1 block w-full p-3 border border-gray-600 bg-gray-900 rounded-md text-gray-50 focus:border-cyan-500 focus:ring-cyan-500" required>
                             </div>
                             <div>
                                 <label for="form_message" class="block text-sm font-medium text-gray-300">Wiadomość / Opis zapytania</label>
-                                <!-- Użycie atrybutu 'name' do wysłania danych przez mailto -->
-                                <textarea id="form_message" name="Treść Wiadomości" rows="4" class="mt-1 block w-full p-3 border border-gray-600 bg-gray-900 rounded-md text-gray-50 focus:border-cyan-500 focus:ring-cyan-500" required></textarea>
+                                <!-- Użycie atrybutu 'name' do wysłania danych przez mailto --><textarea id="form_message" name="Treść Wiadomości" rows="4" class="mt-1 block w-full p-3 border border-gray-600 bg-gray-900 rounded-md text-gray-50 focus:border-cyan-500 focus:ring-cyan-500" required></textarea>
                             </div>
                             
-                            <!-- Przycisk jest teraz typu submit, aby aktywować mailto -->
-                            <button type="submit" class="w-full px-4 py-3 bg-cyan-600 text-gray-900 font-bold rounded-lg hover:bg-cyan-500 transition duration-300 shadow-metal">
+                            <!-- Przycisk jest teraz typu submit, aby aktywować mailto --><button type="submit" class="w-full px-4 py-3 bg-cyan-600 text-gray-900 font-bold rounded-lg hover:bg-cyan-500 transition duration-300 shadow-metal">
                                 Wyślij Zapytanie
                             </button>
                         </form>
                     </div>
                     
-                    <!-- Dane Adresowe -->
-                    <div class="p-10 bg-gray-800 rounded-xl shadow-2xl">
+                    <!-- Dane Adresowe --><div class="p-10 bg-gray-800 rounded-xl shadow-2xl">
                         <h3 class="text-2xl font-semibold accent-color mb-4">Dane Kontaktowe</h3>
                         <div class="space-y-4 text-gray-400">
                             <p class="flex items-start">
@@ -395,8 +373,7 @@
 
     </main>
 
-    <!-- Stopka -->
-    <footer class="bg-gray-900 border-t border-gray-700/50 py-8">
+    <!-- Stopka --><footer class="bg-gray-900 border-t border-gray-700/50 py-8">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-500 text-sm">
             <p>&copy; 2024 BK CNC. Wszelkie prawa zastrzeżone. Mietki w moim sercu | Adres: ul. Gen. Bora-Komorowskiego 3c</p>
         </div>
@@ -476,16 +453,24 @@
 
         const canvas = document.getElementById('gameCanvas');
         const ctx = canvas.getContext('2d');
-        const GAME_DURATION = 30; // Czas gry w sekundach
+        let CANVAS_WIDTH = 700; // Domyślna szerokość
+        let CANVAS_HEIGHT = 400; // Domyślna wysokość
+        let GAME_DURATION = 45; // Czas gry w sekundach
+        let BASE_TARGETS = 5; // Początkowa liczba celów
+        const MAX_LEVEL = 10; // Maksymalny poziom
 
         let gameLoopInterval;
         let gameTime;
         let isGameOver = true;
+        let animationFrameId; // Id do zarządzania requestAnimationFrame
+        let currentLevel = 1; // Aktualny poziom gry
 
         // Obiekty gry
         let player = {};
         let bullet = {};
         let targets = [];
+        let bonuses = []; // Tablica na bonusy
+        let obstacles = []; // Tablica na przeszkody (różne typy)
 
         // Elementy DOM
         const timeDisplay = document.getElementById('timeDisplay');
@@ -494,76 +479,266 @@
         const gameMessage = document.getElementById('gameMessage');
         const shootButton = document.getElementById('shootButton');
         const startButton = document.getElementById('startButton');
+        const levelDisplay = document.getElementById('levelDisplay'); // NOWY ELEMENT DOM
 
         let hitCount = 0;
-        let mousePosition = { y: canvas.height / 2 };
+        let mousePosition = { y: CANVAS_HEIGHT / 2 };
+        const BONUS_CHANCE = 0.3; // 30% szansy na wypadnięcie bonusu
+
+        // Funkcja do aktualizacji rozmiarów canvas
+        function resizeCanvas() {
+            const parentWidth = canvas.parentElement.clientWidth;
+            // Użyj 100% szerokości rodzica, ale nie więcej niż 700px
+            CANVAS_WIDTH = Math.min(parentWidth, 700);
+            
+            // Zachowaj proporcje 700/400
+            CANVAS_HEIGHT = (CANVAS_WIDTH / 700) * 400;
+
+            canvas.width = CANVAS_WIDTH;
+            canvas.height = CANVAS_HEIGHT;
+
+            // Skalowanie obiektów gry proporcjonalnie do nowej szerokości
+            // Ważne: to resetuje pozycje, więc najlepiej robić to tylko przy starcie lub resecie gry
+            if (isGameOver && player.height) { // Sprawdź czy player istnieje przed odwołaniem
+                player.x = CANVAS_WIDTH * 0.02;
+                player.width = CANVAS_WIDTH * 0.02;
+                player.height = CANVAS_HEIGHT * 0.2;
+                player.y = CANVAS_HEIGHT / 2 - player.height / 2;
+                mousePosition.y = CANVAS_HEIGHT / 2;
+            } 
+            // Jeśli gra jest w trakcie, obiekty zostaną przeskalowane przy następnym 'initGame'
+        }
+        window.addEventListener('resize', resizeCanvas);
+        
+        // Obsługa sterowania myszą/dotykiem
+        canvas.addEventListener('mousemove', (e) => {
+            if (isGameOver) return; 
+            const rect = canvas.getBoundingClientRect();
+            // Skalowanie pozycji myszy, aby dopasować ją do wewnętrznej rozdzielczości canvas
+            const scaleY = CANVAS_HEIGHT / rect.height;
+            mousePosition.y = (e.clientY - rect.top) * scaleY;
+        });
+
+        canvas.addEventListener('touchmove', (e) => {
+            if (isGameOver) return; 
+            e.preventDefault(); // Zapobiega przewijaniu strony
+            const rect = canvas.getBoundingClientRect();
+            const scaleY = CANVAS_HEIGHT / rect.height;
+            mousePosition.y = (e.touches[0].clientY - rect.top) * scaleY;
+        }, { passive: false });
 
         // Inicjalizacja stanu gry
-        function initGame() {
-            canvas.width = canvas.offsetWidth;
-            canvas.height = 400; // Stała wysokość
+        function initGame(resetLevel = true) {
+            resizeCanvas(); // Ustaw rozmiar PRZED inicjalizacją obiektów
+
+            if (resetLevel) {
+                currentLevel = 1;
+                hitCount = 0;
+            }
+
+            // Skalowanie statystyk
+            const targetsToGenerate = BASE_TARGETS + (currentLevel - 1); // +1 cel na poziom (wolniejszy wzrost)
+            GAME_DURATION = 45 - (currentLevel - 1) * 3; // 3 sekundy mniej na poziom (min 10s)
+            if (GAME_DURATION < 10) GAME_DURATION = 10;
 
             player = {
-                width: 15,
-                height: 80,
-                x: 10,
-                y: canvas.height / 2 - 40,
-                speed: 5, // Szybkość podążania za myszą
+                width: CANVAS_WIDTH * 0.02, 
+                height: CANVAS_HEIGHT * 0.2, 
+                x: CANVAS_WIDTH * 0.02, 
+                y: CANVAS_HEIGHT / 2 - (CANVAS_HEIGHT * 0.2) / 2, 
+                speed: 0.15, // Płynność podążania
                 color: '#06b6d4'
             };
 
             bullet = {
-                radius: 5,
+                radius: CANVAS_WIDTH * 0.007, // Promień pocisku
                 x: -10, // poza ekranem
                 y: 0,
-                speedX: 0,
+                speedX: CANVAS_WIDTH * 0.012 * (1 + currentLevel * 0.05), // Pociski szybsze (wolniejszy wzrost)
                 speedY: 0,
                 active: false,
                 color: '#fef3c7'
             };
             
             targets = [];
-            hitCount = 0;
+            bonuses = [];
+            obstacles = []; // Zresetuj przeszkody
             gameTime = GAME_DURATION;
             isGameOver = false;
 
             // Ustawienia początkowe wyświetlaczy
+            levelDisplay.textContent = currentLevel;
             timeDisplay.textContent = GAME_DURATION;
             hitsDisplay.textContent = hitCount;
             gameMessage.classList.add('hidden');
             startButton.textContent = "Restart Gry";
-            generateTargets(5);
-            targetCountDisplay.textContent = targets.length;
+            
+            generateTargets(targetsToGenerate); 
+            
+            // Generuj przeszkody stopniowo
+            if (currentLevel >= 2) {
+                // Generuj prostokątne przeszkody, ich liczba rośnie z poziomem
+                generateObstacles(Math.min(currentLevel - 1, 4)); // Max 4 prostokątne
+            }
+            // Generuj odbijacze kątowe od poziomu 3
+            if (currentLevel >= 3) {
+                 // Generuj odbijacze, ich liczba rośnie wolniej
+                 generateAngledObstacles(Math.min(Math.floor((currentLevel - 1) / 2), 3)); // Max 3 kątowe
+            }
+
+
+            targetCountDisplay.textContent = targets.filter(t => t.active).length;
+            
+            // Ustaw pozycję myszy na środku gracza na start
+            mousePosition.y = player.y + player.height / 2; 
         }
 
         // Generowanie losowych celów
         function generateTargets(count) {
+            const minPlayerCenterY = player.height / 2;
+            const maxPlayerCenterY = CANVAS_HEIGHT - player.height / 2;
+            const marginY = player.height * 0.1; 
+            const minTargetY = minPlayerCenterY + marginY;
+            const maxTargetY = maxPlayerCenterY - marginY;
+
             for (let i = 0; i < count; i++) {
                 targets.push({
-                    x: Math.random() * (canvas.width - 50) + 200, // Z dala od gracza
-                    y: Math.random() * (canvas.height - 40) + 20,
-                    radius: 10,
+                    x: Math.random() * (CANVAS_WIDTH * 0.8 - CANVAS_WIDTH * 0.4) + CANVAS_WIDTH * 0.4, 
+                    y: Math.random() * (maxTargetY - minTargetY) + minTargetY, 
+                    radius: CANVAS_WIDTH * 0.015, 
                     active: true,
-                    color: '#dc2626' // Czerwony kolor usterki
+                    color: '#dc2626' 
                 });
             }
         }
 
-        // Obsługa sterowania myszą/dotykiem
-        canvas.addEventListener('mousemove', (e) => {
-            const rect = canvas.getBoundingClientRect();
-            mousePosition.y = e.clientY - rect.top;
-        });
+        // Generowanie prostych przeszkód
+        function generateObstacles(count) {
+            const obsWidth = CANVAS_WIDTH * 0.02;
+            // POPRAWKA: Zmniejszona wysokość przeszkód
+            const obsHeight = CANVAS_HEIGHT * 0.20; 
+            // Marginesy, aby nie generować w narożnikach
+            const marginX = CANVAS_WIDTH * 0.1; 
+            // POPRAWKA: Zwiększony margines pionowy
+            const marginY = obsHeight * 0.4; 
 
-        canvas.addEventListener('touchmove', (e) => {
-            e.preventDefault(); // Zapobiega przewijaniu strony
-            const rect = canvas.getBoundingClientRect();
-            mousePosition.y = e.touches[0].clientY - rect.top;
-        }, { passive: false });
+            for (let i = 0; i < count; i++) {
+                 // Sprawdź kolizje z istniejącymi i celami (prosta wersja - można ulepszyć)
+                let newX, newY, collision;
+                let attempts = 0; // Licznik prób
+                do {
+                    collision = false;
+                    newX = Math.random() * (CANVAS_WIDTH * 0.6 - CANVAS_WIDTH * 0.3 - 2 * marginX) + CANVAS_WIDTH * 0.3 + marginX;
+                    newY = Math.random() * (CANVAS_HEIGHT - obsHeight - 2 * marginY) + marginY;
+                    
+                    // Sprawdzenie kolizji z innymi przeszkodami
+                    for (const obs of obstacles) {
+                        if (newX < obs.x + obs.width + marginX && // Dodatkowy margines między przeszkodami
+                            newX + obsWidth > obs.x - marginX &&
+                            newY < obs.y + obs.height + marginY &&
+                            newY + obsHeight > obs.y - marginY) {
+                            collision = true;
+                            break;
+                        }
+                    }
+                    attempts++;
+                } while (collision && attempts < 20); // Ogranicz próby do 20
 
+                if (!collision) {
+                    obstacles.push({
+                        type: 'rect', // Typ przeszkody
+                        x: newX,
+                        y: newY,
+                        width: obsWidth,
+                        height: obsHeight,
+                        color: '#6b7280' 
+                    });
+                }
+            }
+        }
+
+        // Generowanie odbijaczy kątowych
+        function generateAngledObstacles(count) {
+            const size = CANVAS_WIDTH * 0.05; // Rozmiar odbijacza
+            const margin = size * 1.5; // Odstęp od krawędzi
+
+            for (let i = 0; i < count; i++) {
+                const angle = Math.random() > 0.5 ? 45 : -45; // Losowo 45 lub -45 stopni
+                let posX, posY;
+                
+                // Losowo góra lub dół prawej krawędzi
+                 // Upewnij się, że nie koliduje z innymi
+                 let collision;
+                 let attempts = 0;
+                 do {
+                     collision = false;
+                     if (Math.random() > 0.5) { // Górna prawa
+                         posX = CANVAS_WIDTH - margin - size;
+                         posY = margin + Math.random() * (CANVAS_HEIGHT * 0.3); // Wyżej
+                     } else { // Dolna prawa
+                         posX = CANVAS_WIDTH - margin - size;
+                         posY = CANVAS_HEIGHT - margin - size - Math.random() * (CANVAS_HEIGHT * 0.3); // Niżej
+                     }
+
+                     // Proste sprawdzenie kolizji
+                     for (const obs of obstacles) {
+                         if (posX < obs.x + obs.width + margin && posX + size > obs.x - margin &&
+                             posY < obs.y + obs.height + margin && posY + size > obs.y - margin) {
+                             collision = true;
+                             break;
+                         }
+                     }
+                    attempts++;
+                 } while (collision && attempts < 10);
+
+                 if (!collision) {
+                    obstacles.push({
+                        type: 'angled',
+                        x: posX,
+                        y: posY,
+                        width: size, 
+                        height: size, // Kwadrat dla prostoty rysowania i kolizji
+                        angle: angle, // Kąt w stopniach
+                        color: '#9ca3af' // Jaśniejszy szary
+                    });
+                 }
+            }
+        }
+
+
+        // Dodanie bonusu w miejscu zniszczonego celu
+        function dropBonus(x, y) {
+            if (Math.random() < BONUS_CHANCE) {
+                const bonusSize = CANVAS_WIDTH * 0.024; 
+                bonuses.push({
+                    x: x - bonusSize / 2,
+                    y: y - bonusSize / 2,
+                    width: bonusSize,
+                    height: bonusSize,
+                    speedY: (0.5 + Math.random() * 0.5) * (CANVAS_HEIGHT / 400), 
+                    type: 'time', 
+                    active: true,
+                    color: '#facc15' // Złoty kolor jest poprawny
+                });
+            }
+        }
+
+        // Rysowanie bonusu
+        function drawBonus(bonus) {
+            ctx.fillStyle = bonus.color;
+            ctx.fillRect(bonus.x, bonus.y, bonus.width, bonus.height); 
+            
+            // Rysowanie symbolu (np. "+5")
+            ctx.fillStyle = '#1f2937';
+            ctx.font = `${bonus.width * 0.6}px Inter`; 
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('+5', bonus.x + bonus.width / 2, bonus.y + bonus.height / 2);
+        }
+        
         // Rysowanie wszystkich elementów gry
         function draw() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height); // Czyść ekran
+            ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT); 
 
             // Rysuj Operatora (Paletkę)
             ctx.fillStyle = player.color;
@@ -581,44 +756,73 @@
             targets.forEach(target => {
                 if (target.active) {
                     ctx.fillStyle = target.color;
+                    ctx.strokeStyle = '#fef3c7'; // Białe obramowanie dla lepszej widoczności
+                    ctx.lineWidth = 2;
                     ctx.fillRect(target.x - target.radius, target.y - target.radius, target.radius * 2, target.radius * 2);
+                    ctx.strokeRect(target.x - target.radius, target.y - target.radius, target.radius * 2, target.radius * 2);
                 }
+            });
+
+            // Rysuj bonusy
+            bonuses.forEach(bonus => {
+                if (bonus.active) {
+                    drawBonus(bonus);
+                }
+            });
+
+            // Rysuj przeszkody
+            obstacles.forEach(obs => {
+                 ctx.fillStyle = obs.color;
+                 ctx.strokeStyle = '#e5e7eb';
+                 ctx.lineWidth = 2;
+
+                 if (obs.type === 'rect') {
+                    ctx.fillRect(obs.x, obs.y, obs.width, obs.height);
+                    ctx.strokeRect(obs.x, obs.y, obs.width, obs.height);
+                 } else if (obs.type === 'angled') {
+                     // Rysowanie obróconego kwadratu jako odbijacza
+                     ctx.save(); // Zapisz stan kontekstu
+                     ctx.translate(obs.x + obs.width / 2, obs.y + obs.height / 2); // Przesuń do środka
+                     ctx.rotate(obs.angle * Math.PI / 180); // Obróć
+                     ctx.fillRect(-obs.width / 2, -obs.height / 2, obs.width, obs.height);
+                     ctx.strokeRect(-obs.width / 2, -obs.height / 2, obs.width, obs.height);
+                     ctx.restore(); // Przywróć stan kontekstu
+                 }
             });
         }
 
         // Logika strzału (aktywacja pocisku)
         function shoot() {
-            if (isGameOver || bullet.active) return;
+            if (isGameOver || bullet.active) return; 
             
             bullet.active = true;
-            bullet.x = player.x + player.width;
-            bullet.y = player.y + player.height / 2;
-            bullet.speedX = 10;
+            bullet.x = player.x + player.width + bullet.radius; 
+            bullet.y = player.y + player.height / 2; 
+            bullet.speedX = CANVAS_WIDTH * 0.015 * (1 + currentLevel * 0.05); // Skalowanie prędkości pocisku
             bullet.speedY = 0;
         }
 
-        // Dodanie obsługi klawisza Spacja dla wygody
+        // Obsługa klawisza Spacja dla wygody
         document.addEventListener('keydown', (e) => {
             if (!isGameOver && (e.code === 'Space' || e.code === 'Enter')) {
-                e.preventDefault();
+                e.preventDefault(); 
                 shoot();
             }
         });
 
-        // Logika gry (ruch, kolizje, update)
+        // Główna pętla gry
         function updateGame() {
-            if (isGameOver) return;
+            if (isGameOver) {
+                cancelAnimationFrame(animationFrameId); 
+                return;
+            }
 
             // 1. Ruch Operatora (podążanie za myszą/dotykiem)
             const targetY = mousePosition.y - player.height / 2;
             const deltaY = targetY - player.y;
-            
-            // Płynny ruch
-            player.y += deltaY * 0.15; 
-
-            // Ograniczenie ruchu do krawędzi canvas
+            player.y += deltaY * player.speed; 
             if (player.y < 0) player.y = 0;
-            if (player.y + player.height > canvas.height) player.y = canvas.height - player.height;
+            if (player.y + player.height > CANVAS_HEIGHT) player.y = CANVAS_HEIGHT - player.height;
 
             // 2. Ruch Pocisku
             if (bullet.active) {
@@ -626,7 +830,11 @@
                 bullet.y += bullet.speedY;
 
                 // 2a. Kolizja z górną/dolną krawędzią (odbicie pionowe)
-                if (bullet.y - bullet.radius < 0 || bullet.y + bullet.radius > canvas.height) {
+                if (bullet.y - bullet.radius < 0) {
+                    bullet.y = bullet.radius; 
+                    bullet.speedY *= -1;
+                } else if (bullet.y + bullet.radius > CANVAS_HEIGHT) {
+                    bullet.y = CANVAS_HEIGHT - bullet.radius;
                     bullet.speedY *= -1;
                 }
 
@@ -635,52 +843,158 @@
                     bullet.x + bullet.radius > player.x &&
                     bullet.y > player.y &&
                     bullet.y < player.y + player.height &&
-                    bullet.speedX < 0) // Pocisk musi lecieć w lewo, aby móc się odbić
+                    bullet.speedX < 0) 
                 {
-                    bullet.speedX *= -1; // Odbicie w prawo
-                    
-                    // Lekki efekt kąta odbicia (Paddle logic)
+                    bullet.speedX *= -1; 
                     const relativeIntersectY = (player.y + (player.height / 2)) - bullet.y;
                     const normalizedRelativeIntersectionY = (relativeIntersectY / (player.height / 2));
-                    bullet.speedY = normalizedRelativeIntersectionY * 5; // Im dalej od środka, tym większy kąt
+                    bullet.speedY = normalizedRelativeIntersectionY * (CANVAS_WIDTH * 0.015); 
                 }
 
-                // 2c. Pocisk wyleciał z lewej krawędzi (koniec strzału, operator nie odbił)
-                if (bullet.x + bullet.radius < 0) {
+                // 2c. Pocisk wyleciał z lewej krawędzi lub prawej (reset)
+                if (bullet.x + bullet.radius < 0 || bullet.x - bullet.radius > CANVAS_WIDTH) {
                     bullet.active = false;
                 }
 
-                // 2d. Pocisk wyleciał z prawej krawędzi (operator nie trafił, reset i nowy strzał)
-                if (bullet.x - bullet.radius > canvas.width) {
-                    bullet.active = false;
-                }
-
-                // 2e. Kolizja z celami
+                // 2d. Kolizja z celami
                 targets.forEach(target => {
                     if (target.active) {
-                        const dist = Math.sqrt(
-                            (bullet.x - target.x) ** 2 + (bullet.y - target.y) ** 2
-                        );
+                        // Kolizja koło vs kwadrat (uproszczona)
+                        const distX = Math.abs(bullet.x - target.x);
+                        const distY = Math.abs(bullet.y - target.y);
 
-                        if (dist < bullet.radius + target.radius) {
-                            // Trafienie!
-                            target.active = false;
-                            bullet.active = false;
-                            hitCount++;
-                            hitsDisplay.textContent = hitCount;
-                            targetCountDisplay.textContent = targets.filter(t => t.active).length;
+                        if (distX < target.radius + bullet.radius && distY < target.radius + bullet.radius) {
+                             // Sprawdzenie dokładniejsze (koło w rogach kwadratu)
+                             const dx = bullet.x - target.x;
+                             const dy = bullet.y - target.y;
+                             if (Math.sqrt(dx*dx + dy*dy) < target.radius + bullet.radius) {
+                                target.active = false;
+                                bullet.active = false; 
+                                hitCount++;
+                                hitsDisplay.textContent = hitCount;
+                                
+                                dropBonus(target.x, target.y); 
+                                
+                                targetCountDisplay.textContent = targets.filter(t => t.active).length;
 
-                            // Sprawdzenie wygranej
-                            if (targets.every(t => !t.active)) {
-                                endGame("Gratulacje! Usunąłeś wszystkie usterki. Maszyna gotowa!");
-                            }
+                                // Sprawdzenie zakończenia poziomu
+                                if (targets.every(t => !t.active)) {
+                                    startNextLevel();
+                                    return; 
+                                }
+                             }
                         }
                     }
                 });
+
+                // 2e. Kolizja z przeszkodami (różne typy)
+                obstacles.forEach(obs => {
+                    // Wykrywanie kolizji Pocisk (koło) vs Przeszkoda (prostokąt)
+                     let closestX = Math.max(obs.x, Math.min(bullet.x, obs.x + obs.width));
+                     let closestY = Math.max(obs.y, Math.min(bullet.y, obs.y + obs.height));
+                     let distanceX = bullet.x - closestX;
+                     let distanceY = bullet.y - closestY;
+                     let distanceSquared = (distanceX * distanceX) + (distanceY * distanceY);
+
+                     if (distanceSquared < (bullet.radius * bullet.radius)) {
+                         // Kolizja wykryta!
+
+                         if (obs.type === 'rect') {
+                            // Odbicie od prostokąta - proste odwrócenie X lub Y
+                             const overlapX = (bullet.radius + obs.width / 2) - Math.abs(bullet.x - (obs.x + obs.width / 2));
+                             const overlapY = (bullet.radius + obs.height / 2) - Math.abs(bullet.y - (obs.y + obs.height / 2));
+
+                             if (overlapX < overlapY) { // Kolizja pozioma
+                                bullet.speedX *= -1;
+                                bullet.x += bullet.speedX > 0 ? 1 : -1; // Lekkie wypchnięcie
+                             } else { // Kolizja pionowa
+                                 bullet.speedY *= -1;
+                                 bullet.y += bullet.speedY > 0 ? 1 : -1; // Lekkie wypchnięcie
+                             }
+                         } else if (obs.type === 'angled') {
+                            // Odbicie od odbijacza kątowego - zamiana X i Y
+                            const tempSpeedX = bullet.speedX;
+                            const tempSpeedY = bullet.speedY;
+
+                            if (obs.angle === 45) { // Odbicie typu '/'
+                                bullet.speedX = -tempSpeedY;
+                                bullet.speedY = -tempSpeedX;
+                            } else { // Odbicie typu '\' (angle === -45)
+                                bullet.speedX = tempSpeedY;
+                                bullet.speedY = tempSpeedX;
+                            }
+                            // Lekkie wypchnięcie, aby uniknąć utknięcia
+                             bullet.x += Math.sign(bullet.speedX) * 1; 
+                             bullet.y += Math.sign(bullet.speedY) * 1; 
+                         }
+                     }
+                });
             }
 
+            // 3. Ruch i kolizje bonusów
+            bonuses = bonuses.filter(bonus => bonus.active); // Usuń nieaktywne bonusy
+
+            bonuses.forEach(bonus => {
+                bonus.y += bonus.speedY;
+
+                // POPRAWKA: Kolizja AABB (Gracz vs Bonus)
+                if (player.x < bonus.x + bonus.width &&
+                    player.x + player.width > bonus.x &&
+                    player.y < bonus.y + bonus.height &&
+                    player.y + player.height > bonus.y) 
+                {
+                    if (bonus.type === 'time') {
+                        gameTime += 5; // Dodaj 5 sekund
+                        timeDisplay.textContent = gameTime;
+                        gameMessage.textContent = "BONUS: +5 sekund!";
+                        gameMessage.classList.remove('hidden', 'bg-red-900/50', 'text-red-300', 'bg-gray-700');
+                        gameMessage.classList.add('bg-blue-900/50', 'text-blue-300'); // Styl dla bonusu
+                        setTimeout(() => { 
+                            if (!isGameOver) gameMessage.classList.add('hidden'); 
+                        }, 1500); // Ukryj po 1.5s
+                    }
+                    bonus.active = false; // Bonus zebrany
+                }
+                
+                // Usuń bonus, który wypadł poza dół ekranu
+                if (bonus.y > CANVAS_HEIGHT) {
+                    bonus.active = false;
+                }
+            });
+
             draw();
-            requestAnimationFrame(updateGame);
+            animationFrameId = requestAnimationFrame(updateGame);
+        }
+        
+        // Funkcja rozpoczynająca kolejny poziom
+        function startNextLevel() {
+            // Sprawdzenie maksymalnego poziomu
+            if (currentLevel >= MAX_LEVEL) { 
+                endGame(`Gratulacje! Ukończyłeś wszystkie ${currentLevel} poziomy! Jesteś mistrzem CNC.`);
+                // Zmieniamy styl wiadomości na wygraną
+                gameMessage.classList.remove('bg-red-900/50', 'text-red-300', 'bg-gray-700', 'bg-blue-900/50', 'text-blue-300');
+                gameMessage.classList.add('bg-green-900/50', 'text-green-300');
+                currentLevel = 1; // Zresetuj na następną grę
+                return;
+            }
+
+            currentLevel++;
+            gameMessage.textContent = `POZIOM ${currentLevel - 1} UKOŃCZONY! Przygotuj się na poziom ${currentLevel}.`;
+            gameMessage.classList.remove('hidden', 'bg-red-900/50', 'text-red-300', 'bg-gray-700', 'bg-blue-900/50', 'text-blue-300');
+            gameMessage.classList.add('bg-green-900/50', 'text-green-300');
+            
+            // Wstrzymaj animację na krótko
+            cancelAnimationFrame(animationFrameId);
+            
+            // Zakończ interwał czasowy (bo zaraz wystartuje nowy)
+            if (gameLoopInterval) clearInterval(gameLoopInterval);
+            
+            // Daj graczowi 3 sekundy na przygotowanie
+            setTimeout(() => {
+                initGame(false); // Resetuj tylko stan gry, nie poziom/wynik
+                startTimer();
+                animationFrameId = requestAnimationFrame(updateGame);
+            }, 3000); // 3 sekundy przerwy
         }
 
         // Logika timera
@@ -691,26 +1005,32 @@
 
                 if (gameTime <= 0) {
                     clearInterval(gameLoopInterval);
-                    endGame("Czas minął! Następnym razem musisz być szybszy.");
+                    endGame(`Czas minął! Osiągnięty poziom: ${currentLevel}.`);
                 }
             }, 1000);
         }
 
         function startGame() {
-            // Zakończenie poprzedniej pętli
+            // Zakończenie poprzednich pętli, jeśli istnieją
             if (gameLoopInterval) clearInterval(gameLoopInterval);
+            if (animationFrameId) cancelAnimationFrame(animationFrameId);
             
-            initGame();
+            initGame(true); // Pełny reset gry (z poziomem 1)
             startTimer();
-            // Start pętli rysowania
-            requestAnimationFrame(updateGame);
+            animationFrameId = requestAnimationFrame(updateGame); // Start pętli animacji
         }
 
         function endGame(message) {
             isGameOver = true;
             gameMessage.textContent = message;
-            gameMessage.classList.remove('hidden', 'bg-red-900/50', 'text-red-300');
-            gameMessage.classList.add('bg-green-900/50', 'text-green-300');
+            gameMessage.classList.remove('hidden');
+            
+            // Zastosuj styl przegranej (czas) - chyba że to wiadomość o wygranej (sprawdzane w startNextLevel)
+            if (!message.includes("Gratulacje")) {
+                gameMessage.classList.remove('bg-green-900/50', 'text-green-300', 'bg-gray-700', 'bg-blue-900/50', 'text-blue-300');
+                gameMessage.classList.add('bg-red-900/50', 'text-red-300');
+            }
+            
             startButton.textContent = "Zagraj Ponownie";
             // Zakończenie pętli timera, jeśli jeszcze działa
             if (gameLoopInterval) clearInterval(gameLoopInterval); 
@@ -718,10 +1038,21 @@
 
         // Uruchomienie inicjalizacji przy ładowaniu strony
         window.onload = function() {
+            // Inicjalizacja pustego gracza, aby resizeCanvas działał
+            player = {}; 
+            resizeCanvas(); // Pierwsza inicjalizacja rozmiaru canvas
+            
             // Ustawienie początkowe przycisku i wiadomości
             startButton.textContent = "Start Gry";
             gameMessage.textContent = "Kliknij START, aby rozpocząć usuwanie usterek CNC!";
             gameMessage.classList.remove('hidden');
+            gameMessage.classList.add('bg-gray-700', 'text-gray-300'); // Domyślny styl wiadomości początkowej
+            targetCountDisplay.textContent = 0; // Początkowo brak celów
+            hitsDisplay.textContent = 0; // Brak trafień
+            levelDisplay.textContent = 1;
+
+            // Inicjalizacja pozycji myszy na środku przy starcie strony
+            mousePosition.y = CANVAS_HEIGHT / 2;
         };
 
     </script>
