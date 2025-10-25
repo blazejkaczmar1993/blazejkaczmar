@@ -11,16 +11,16 @@
     <meta name="author" content="BK CNC">
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://TWOJA_DOMENA.pl/"> <!-- Zmień na prawdziwy URL po wdrożeniu -->
+    <meta property="og:url" content="https://www.blazejkaczmar.pl/"> <!-- POPRAWKA: Domena -->
     <meta property="og:title" content="BK CNC - Precyzyjna Obróbka CNC Typu Szwajcarskiego">
     <meta property="og:description" content="Specjalizacja w produkcji małych, złożonych detali na automatach szwajcarskich.">
-    <meta property="og:image" content="https://TWOJA_DOMENA.pl/zawias-toczony-10-x-55-bez-logo.webp"> <!-- Zmień na pełny URL obrazu -->
+    <meta property="og:image" content="https://www.blazejkaczmar.pl/zawias-toczony-10-x-55-bez-logo.webp"> <!-- POPRAWKA: Domena -->
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://TWOJA_DOMENA.pl/"> <!-- Zmień na prawdziwy URL po wdrożeniu -->
+    <meta property="twitter:url" content="https://www.blazejkaczmar.pl/"> <!-- POPRAWKA: Domena -->
     <meta property="twitter:title" content="BK CNC - Precyzyjna Obróbka CNC Typu Szwajcarskiego">
     <meta property="twitter:description" content="Specjalizacja w produkcji małych, złożonych detali na automatach szwajcarskich.">
-    <meta property="twitter:image" content="https://TWOJA_DOMENA.pl/zawias-toczony-10-x-55-bez-logo.webp"> <!-- Zmień na pełny URL obrazu -->
+    <meta property="twitter:image" content="https://www.blazejkaczmar.pl/zawias-toczony-10-x-55-bez-logo.webp"> <!-- POPRAWKA: Domena -->
 
     <!-- Ładowanie Tailwind CSS --><script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts (Inter + Exo 2) -->
@@ -64,13 +64,15 @@
 
         .list-icon { @apply w-7 h-7 mr-4 mt-1 flex-shrink-0 text-cyan-400 transition-transform duration-300 group-hover:scale-125; }
 
-        /* POPRAWKA: Styl przycisku Kontakt zgodny ze zrzutem (ciemne tło, jasna ramka) */
+        /* Styl przycisku Kontakt (Ciemny tekst, cyjanowe tło) */
         .nav-contact-button { 
-             @apply group inline-flex items-center px-5 py-2 rounded-full bg-gray-800 border-2 border-cyan-500 text-cyan-400 font-semibold hover:bg-cyan-500 hover:text-gray-900 transition duration-300 shadow-metal transform hover:scale-105 active:scale-95;
-             /* Użyto bg-gray-800, border-2, text-cyan-400 */
+             @apply group inline-flex items-center px-5 py-2 rounded-full bg-cyan-600 text-gray-900 font-semibold hover:bg-cyan-500 transition duration-300 shadow-metal transform hover:scale-105 active:scale-95;
         } 
         
-        /* Usunięto .nav-link, wyrównanie przez items-baseline w HTML */
+        /* Klasa dla linków tekstowych w nawigacji, aby wyrównać je z przyciskiem */
+        .nav-link { 
+            @apply py-2 hover:text-cyan-400 transition duration-300; 
+        }
 
     </style>
 </head>
@@ -81,15 +83,14 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
                 <a href="#hero" class="text-3xl font-extrabold tracking-tight accent-color">BK <span class="text-gray-100">CNC</span></a>
-                <!-- POPRAWKA: Zmieniono 'items-center' na 'items-baseline' dla idealnego wyrównania tekstu -->
-                <!-- POPRAWKA: Usunięto klasę 'nav-link' z linków <a> -->
-                <nav id="desktop-menu" class="hidden md:flex items-baseline space-x-8 text-sm font-medium text-gray-300"> 
-                    <a href="#o-nas" class="hover:text-cyan-400 transition duration-300">O Nas</a> 
-                    <a href="#uslugi" class="hover:text-cyan-400 transition duration-300">Usługi</a> 
-                    <a href="#technologia" class="hover:text-cyan-400 transition duration-300">Technologia</a> 
-                    <a href="#parametry-cnc" class="hover:text-cyan-400 transition duration-300">Kalkulator CNC</a> 
-                    <a href="#gra-cnc" class="hover:text-cyan-400 transition duration-300">Gra CNC</a> 
-                    <a href="#kontakt" class="nav-contact-button"> <!-- Zastosowano nowy styl -->
+                <!-- Użyto items-center i dodano klasę .nav-link do linków <a> -->
+                <nav id="desktop-menu" class="hidden md:flex items-center space-x-8 text-sm font-medium text-gray-300"> 
+                    <a href="#o-nas" class="nav-link">O Nas</a> 
+                    <a href="#uslugi" class="nav-link">Usługi</a> 
+                    <a href="#technologia" class="nav-link">Technologia</a> 
+                    <a href="#parametry-cnc" class="nav-link">Kalkulator CNC</a> 
+                    <a href="#gra-cnc" class="nav-link">Gra CNC</a> 
+                    <a href="#kontakt" class="nav-contact-button"> <!-- Przycisk ma już py-2 w swojej klasie -->
                         Kontakt 
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1.5 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -108,7 +109,9 @@
         <!-- Sekcja Usługi --><section id="uslugi" class="py-28 metal-pattern border-t border-gray-800"> <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"> <div class="text-center mb-20" data-aos="fade-up"> <span class="text-lg font-medium uppercase accent-color mb-2 block">Czym się zajmujemy</span> <h2 class="text-4xl font-extrabold">Kluczowe Obszary Działalności</h2> </div> <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center"> <div data-aos="fade-right"> <ul class="space-y-8"> <li class="flex items-start group"> <svg xmlns="http://www.w3.org/2000/svg" class="list-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6-6l-6.5 6.5" /></svg> <div><h4 class="text-xl font-semibold text-gray-100">Toczenie Długich Elementów</h4> <p class="text-gray-400 mt-1 leading-relaxed">Specjalizacja w obróbce detali o wydłużonym kształcie...</p></div> </li> <li class="flex items-start group"> <svg xmlns="http://www.w3.org/2000/svg" class="list-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37a1.724 1.724 0 002.572-1.065z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg> <div><h4 class="text-xl font-semibold text-gray-100">Obróbka Złożona</h4> <p class="text-gray-400 mt-1 leading-relaxed">Pełne możliwości frezowania, wiercenia i gwintowania...</p></div> </li> <li class="flex items-start group"> <svg xmlns="http://www.w3.org/2000/svg" class="list-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" /></svg> <div><h4 class="text-xl font-semibold text-gray-100">Szeroki Zakres Materiałów</h4> <p class="text-gray-400 mt-1 leading-relaxed">Obróbka stali nierdzewnej, mosiądzu, aluminium, tytanu...</p></div> </li> </ul> </div> <div class="hidden lg:block" data-aos="fade-left" data-aos-delay="200"> <div class="p-6 bg-gray-900 border-2 border-cyan-600/50 rounded-lg shadow-2xl shadow-cyan-900/30 flex justify-center items-center"> <div class="img-placeholder max-w-full h-96">DETAL: Toczenie Złożone</div> </div> <p class="text-center mt-4 text-sm text-gray-500 italic">Wizualizacja detalu z uwzględnieniem tolerancji.</p> </div> </div> </div> </section>
         <!-- Sekcja Technologia --><section id="technologia" class="py-28 bg-gray-900 border-t border-gray-800"> <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"> <div class="text-center mb-20" data-aos="fade-up"> <span class="text-lg font-medium uppercase accent-color mb-2 block">Dlaczego Automaty Szwajcarskie?</span> <h2 class="text-4xl font-extrabold">Niezrównana Metoda Obróbki</h2> </div> <div class="lg:flex lg:space-x-16 items-center"> <div class="lg:w-1/2 mb-12 lg:mb-0" data-aos="fade-right"> <img src="zawias-toczony-10-x-55-bez-logo.webp" alt="Precyzyjnie toczony metalowy zawias - przykład realizacji BK CNC" class="rounded-xl shadow-2xl shadow-cyan-900/30 w-full" loading="lazy" onerror="this.onerror=null;this.src='https://placehold.co/700x400/1e293b/06b6d4?text=Wizualizacja+Maszyny+CNC';"> <p class="mt-4 text-sm text-gray-500 italic text-center">Przykładowy detal z naszej produkcji.</p> </div> <div class="lg:w-1/2 space-y-10" data-aos="fade-left" data-aos-delay="200"> <div class="flex items-start"> <div class="flex-shrink-0 w-12 h-12 accent-bg rounded-full flex items-center justify-center mr-5 text-gray-900 font-bold text-xl shadow-metal">1</div> <div> <h3 class="text-2xl font-semibold mb-2">Precyzja Lidera Branży</h3> <p class="text-gray-400 leading-relaxed">W tokarce szwajcarskiej narzędzie pracuje bardzo blisko tulei prowadzącej...</p> </div> </div> <div class="flex items-start"> <div class="flex-shrink-0 w-12 h-12 accent-bg rounded-full flex items-center justify-center mr-5 text-gray-900 font-bold text-xl shadow-metal">2</div> <div> <h3 class="text-2xl font-semibold mb-2">Wykończenie Powierzchni</h3> <p class="text-gray-400 leading-relaxed">Stałe podparcie materiału blisko strefy skrawania pozwala uzyskać lepszą jakość...</p> </div> </div> <div class="flex items-start"> <div class="flex-shrink-0 w-12 h-12 accent-bg rounded-full flex items-center justify-center mr-5 text-gray-900 font-bold text-xl shadow-metal">3</div> <div> <h3 class="text-2xl font-semibold mb-2">Obróbka Długich i Cienkich Detali</h3> <p class="text-gray-400 leading-relaxed">Automaty typu szwajcarskiego są niezastąpione przy produkcji długich, cienkich elementów...</p> </div> </div> </div> </div> </div> </section>
         <!-- Sekcja Kalkulator CNC --><section id="parametry-cnc" class="py-28 metal-pattern border-t border-gray-800"> <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8" data-aos="fade-up"> <div class="text-center mb-16"> <span class="text-lg font-medium uppercase accent-color mb-2 block">Wsparcie Inżynierskie</span> <h2 class="text-4xl font-extrabold">Kalkulator Parametrów Toczenia</h2> </div> <div class="p-10 bg-gray-800 rounded-xl shadow-2xl border-t-4 border-cyan-600"> <h3 class="text-2xl font-semibold accent-color mb-8 flex items-center"> <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg> Obliczenia podstawowych parametrów </h3> <div class="grid grid-cols-1 md:grid-cols-2 gap-8"> <div class="p-6 bg-gray-900 rounded-lg shadow-inner"> <label for="Vc" class="block text-sm font-medium text-gray-400">Prędkość Skrawania (Vc) [m/min]</label> <input type="number" step="0.1" id="Vc" placeholder="np. 250" class="mt-1 block w-full p-3 border border-gray-600 bg-gray-700 rounded-md text-gray-100 focus:border-cyan-500 focus:ring-cyan-500"> <label for="D" class="block text-sm font-medium text-gray-400 mt-4">Średnica Detalu (D) [mm]</label> <input type="number" step="0.1" id="D" placeholder="np. 12" class="mt-1 block w-full p-3 border border-gray-600 bg-gray-700 rounded-md text-gray-100 focus:border-cyan-500 focus:ring-cyan-500"> <button onclick="calculateRPM()" class="w-full mt-6 px-4 py-3 bg-gradient-to-r from-cyan-500 to-cyan-700 text-gray-900 font-bold rounded-lg hover:from-cyan-400 hover:to-cyan-600 transition duration-300 transform hover:scale-105 active:scale-95 group flex items-center justify-center"> Oblicz Obroty (n) <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 transition-transform duration-300 group-hover:rotate-90" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg> </button> <div class="mt-5 text-lg font-bold text-gray-100"> n = <span id="n_result" class="accent-color text-xl">0</span> obr/min </div> </div> <div class="p-6 bg-gray-900 rounded-lg shadow-inner"> <label for="f" class="block text-sm font-medium text-gray-400">Posuw (f) [mm/obr]</label> <input type="number" step="0.001" id="f" placeholder="np. 0.08" class="mt-1 block w-full p-3 border border-gray-600 bg-gray-700 rounded-md text-gray-100 focus:border-cyan-500 focus:ring-cyan-500"> <label for="n_input" class="block text-sm font-medium text-gray-400 mt-4">Obroty Wrzeciona (n) [obr/min]</label> <input type="number" step="1" id="n_input" placeholder="Wartość z lewej lub własna" class="mt-1 block w-full p-3 border border-gray-600 bg-gray-700 rounded-md text-gray-100 focus:border-cyan-500 focus:ring-cyan-500"> <button onclick="calculateFeedRate()" class="w-full mt-6 px-4 py-3 bg-gradient-to-r from-cyan-500 to-cyan-700 text-gray-900 font-bold rounded-lg hover:from-cyan-400 hover:to-cyan-600 transition duration-300 transform hover:scale-105 active:scale-95 group flex items-center justify-center"> Oblicz Posuw (Vf) <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg> </button> <div class="mt-5 text-lg font-bold text-gray-100"> Vf = <span id="Vf_result" class="accent-color text-xl">0</span> mm/min </div> </div> </div> <div id="calculator-message" class="mt-8 p-3 bg-red-900/50 text-red-300 rounded-lg hidden"></div> </div> </div> </section>
-        <!-- Sekcja Mini-Gra CNC --><section id="gra-cnc" class="py-28 bg-gray-900 border-t border-gray-800"> <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8" data-aos="fade-up"> <div class="text-center mb-16"> <span class="text-lg font-medium uppercase accent-color mb-2 block">Rozrywka Techniczna</span> <h2 class="text-4xl font-extrabold">Gra Operator CNC</h2> <p class="text-gray-400 mt-3 leading-relaxed">Użyj myszy lub dotyku, aby sterować operatorem i odbijać pocisk...</p> </div> <div class="p-8 bg-gray-800 rounded-xl shadow-2xl border-t-4 border-cyan-600 flex flex-col items-center"> <canvas id="gameCanvas" width="700" height="400" class="bg-gray-900 border border-gray-700 rounded-md"></canvas> 
+        <!-- Sekcja Mini-Gra CNC --><section id="gra-cnc" class="py-28 bg-gray-900 border-t border-gray-800"> <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8" data-aos="fade-up"> <div class="text-center mb-16"> <span class="text-lg font-medium uppercase accent-color mb-2 block">Rozrywka Techniczna</span> <h2 class="text-4xl font-extrabold">Gra Operator CNC (Arkanoid)</h2> <!-- Zmiana nazwy gry -->
+                    <p class="text-gray-400 mt-3 leading-relaxed">Użyj myszy lub dotyku, aby sterować operatorem i odbijać piłkę. Zbijaj "usterki" i nie pozwól piłce uciec!</p> <!-- Zmiana opisu -->
+                </div> <div class="p-8 bg-gray-800 rounded-xl shadow-2xl border-t-4 border-cyan-600 flex flex-col items-center"> <canvas id="gameCanvas" width="700" height="400" class="bg-gray-900 border border-gray-700 rounded-md"></canvas> 
             <div class="mt-8 flex flex-col sm:flex-row justify-between w-full max-w-2xl text-lg font-bold space-y-2 sm:space-y-0"> 
                  <p>Poziom: <span id="levelDisplay" class="accent-color">1</span></p> 
                  <p>Czas: <span id="timeDisplay" class="accent-color">45</span>s</p>
@@ -171,7 +174,19 @@
 
              const targetsToGenerate = BASE_TARGETS + (currentLevel - 1); GAME_DURATION = 45 - (currentLevel - 1) * 3; if (GAME_DURATION < 10) GAME_DURATION = 10; 
              player = { width: CANVAS_WIDTH * 0.02, height: CANVAS_HEIGHT * 0.2, x: CANVAS_WIDTH * 0.02, y: CANVAS_HEIGHT / 2 - (CANVAS_HEIGHT * 0.2) / 2, speed: 0.15, color: '#06b6d4', effectTimer: 0, baseHeight: CANVAS_HEIGHT * 0.2, velocityY: 0, lastY: CANVAS_HEIGHT / 2 - (CANVAS_HEIGHT * 0.2) / 2 }; 
-             bullet = { radius: CANVAS_WIDTH * 0.007, x: -10, y: 0, speedX: CANVAS_WIDTH * 0.012 * (1 + currentLevel * 0.05), speedY: 0, active: false, color: '#fef3c7', speedMultiplier: 1 }; 
+             
+             // ZMIANA: Piłka startuje z paletki
+             bullet = { 
+                 radius: CANVAS_WIDTH * 0.007, 
+                 x: player.x + player.width + (CANVAS_WIDTH * 0.007) + 5, 
+                 y: player.y + player.height / 2, 
+                 speedX: CANVAS_WIDTH * 0.008, // POPRAWKA: Stała prędkość bazowa X
+                 speedY: -(CANVAS_HEIGHT * 0.005), 
+                 active: true, 
+                 color: '#fef3c7', 
+                 speedMultiplier: 1 
+             }; 
+             
              targets = []; bonuses = []; obstacles = []; particles = []; gameTime = GAME_DURATION; isGameOver = false; 
              if(levelDisplay) levelDisplay.textContent = currentLevel; 
              if(timeDisplay) { timeDisplay.textContent = GAME_DURATION; timeDisplay.classList.remove('timer-warning'); }
@@ -226,17 +241,18 @@
         function updateParticles() { /* ... (bez zmian - z filter) ... */ particles.forEach(p => { p.x += p.speedX; p.y += p.speedY; p.alpha -= p.decay; }); particles = particles.filter(p => p.alpha > 0); }
         function draw() { /* ... (bez zmian) ... */ if (!ctx) return; ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT); ctx.strokeStyle = 'rgba(100, 116, 139, 0.2)'; ctx.lineWidth = 1; const gridSize = CANVAS_WIDTH * 0.05; for (let x = 0; x < CANVAS_WIDTH; x += gridSize) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, CANVAS_HEIGHT); ctx.stroke(); } for (let y = 0; y < CANVAS_HEIGHT; y += gridSize) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(CANVAS_WIDTH, y); ctx.stroke(); } ctx.fillStyle = player.color; ctx.fillRect(player.x, player.y, player.width, player.height); if (bullet.active) { ctx.fillStyle = bullet.color; ctx.beginPath(); ctx.arc(bullet.x, bullet.y, bullet.radius, 0, Math.PI * 2); ctx.fill(); } targets.forEach(target => { if (target.active) { ctx.fillStyle = target.color; ctx.strokeStyle = '#fef3c7'; ctx.lineWidth = 2; ctx.fillRect(target.x - target.radius, target.y - target.radius, target.radius * 2, target.radius * 2); ctx.strokeRect(target.x - target.radius, target.y - target.radius, target.radius * 2, target.radius * 2); } }); bonuses.forEach(bonus => { if (bonus.active) { drawBonus(bonus); } }); obstacles.forEach(obs => { ctx.fillStyle = obs.color; ctx.strokeStyle = '#e5e7eb'; ctx.lineWidth = 2; if (obs.type === 'rect') { ctx.fillRect(obs.x, obs.y, obs.width, obs.height); ctx.strokeRect(obs.x, obs.y, obs.width, obs.height); } else if (obs.type === 'angled') { ctx.save(); ctx.translate(obs.x + obs.width / 2, obs.y + obs.height / 2); ctx.rotate(obs.angle * Math.PI / 180); ctx.fillRect(-obs.width / 2, -obs.height / 2, obs.width, obs.height); ctx.strokeRect(-obs.width / 2, -obs.height / 2, obs.width, obs.height); ctx.restore(); } }); drawParticles(); }
         
-        // Zaktualizowano funkcję shoot
+        // ZMIANA: Funkcja 'shoot' służy teraz tylko do ponownego wystrzelenia piłki
         function shoot() { 
-            if (isGameOver || bullet.active) return; 
+            if (isGameOver || bullet.active) return; // Wystrzel tylko, jeśli piłka nie jest aktywna
+            
             bullet.active = true; 
-            bullet.x = player.x + player.width + bullet.radius; 
+            bullet.x = player.x + player.width + bullet.radius + 5; 
             bullet.y = player.y + player.height / 2; 
             
             const maxBulletSpeedY = CANVAS_WIDTH * 0.008; 
-            bullet.speedY = Math.max(-maxBulletSpeedY, Math.min(maxBulletSpeedY, player.velocityY * 0.5)); 
+            bullet.speedY = Math.max(-maxBulletSpeedY, Math.min(maxBulletSpeedY, player.velocityY * 0.5)); // Użyj prędkości gracza
 
-            const baseSpeedX = CANVAS_WIDTH * 0.015 * (1 + currentLevel * 0.05);
+            const baseSpeedX = CANVAS_WIDTH * 0.008; // Stała prędkość bazowa X
             const speedXSquared = baseSpeedX**2 - bullet.speedY**2;
             bullet.speedX = speedXSquared > 0 ? Math.sqrt(speedXSquared) : baseSpeedX * 0.7; 
             
@@ -256,7 +272,56 @@
              player.velocityY = player.y - player.lastY; 
              player.lastY = player.y; 
 
-             if (bullet.active) { const currentSpeedX = bullet.speedX * bullet.speedMultiplier; const currentSpeedY = bullet.speedY * bullet.speedMultiplier; bullet.x += currentSpeedX; bullet.y += currentSpeedY; if (bullet.y - bullet.radius < 0 || bullet.y + bullet.radius > CANVAS_HEIGHT) { bullet.y = bullet.y - bullet.radius < 0 ? bullet.radius : CANVAS_HEIGHT - bullet.radius; bullet.speedY *= -1; playSound(bounceSynth, "G4", "16n", 'bounce'); } if (bullet.x - bullet.radius < player.x + player.width && bullet.x + bullet.radius > player.x && bullet.y > player.y && bullet.y < player.y + player.height && bullet.speedX < 0) { bullet.speedX *= -1; const relativeIntersectY = (player.y + player.height / 2) - bullet.y; const normalizedRelativeIntersectionY = relativeIntersectY / (player.height / 2); bullet.speedY = normalizedRelativeIntersectionY * (CANVAS_WIDTH * 0.015) * 0.8; bullet.x = player.x + player.width + bullet.radius; playSound(bounceSynth, "C5", "16n", 'bounce'); } if (bullet.x + bullet.radius < 0 || bullet.x - bullet.radius > CANVAS_WIDTH) { bullet.active = false; } targets.forEach(target => { if (target.active) { const distX = Math.abs(bullet.x - target.x); const distY = Math.abs(bullet.y - target.y); if (distX < target.radius + bullet.radius && distY < target.radius + bullet.radius) { const dx = bullet.x - target.x; const dy = bullet.y - target.y; if (Math.sqrt(dx*dx + dy*dy) < target.radius + bullet.radius) { target.active = false; bullet.active = false; hitCount++; if(hitsDisplay) hitsDisplay.textContent = hitCount; score += 10 * currentLevel; if(scoreDisplay) scoreDisplay.textContent = score; createParticles(target.x, target.y, 15, target.color); dropBonus(target.x, target.y); if(targetCountDisplay) targetCountDisplay.textContent = targets.filter(t => t.active).length; playSound(hitSynth, "A3", "8n", 'hit'); if (targets.every(t => !t.active)) { startNextLevel(); return; } } } } }); obstacles.forEach(obs => { if (bullet.x + bullet.radius > obs.x && bullet.x - bullet.radius < obs.x + obs.width && bullet.y + bullet.radius > obs.y && bullet.y - bullet.radius < obs.y + obs.height) { playSound(bounceSynth, "E4", "16n", 'bounce'); if (obs.type === 'rect') { const overlapXLeft = (bullet.x + bullet.radius) - obs.x; const overlapXRight = (obs.x + obs.width) - (bullet.x - bullet.radius); const overlapYTop = (bullet.y + bullet.radius) - obs.y; const overlapYBottom = (obs.y + obs.height) - (bullet.y - bullet.radius); const minOverlapX = Math.min(overlapXLeft, overlapXRight); const minOverlapY = Math.min(overlapYTop, overlapYBottom); if (minOverlapX < minOverlapY) { bullet.speedX *= -1; bullet.x += (bullet.speedX > 0 ? 1 : -1) * minOverlapX * 0.5 + Math.sign(bullet.speedX); } else { bullet.speedY *= -1; bullet.y += (bullet.speedY > 0 ? 1 : -1) * minOverlapY * 0.5 + Math.sign(bullet.speedY); } } else if (obs.type === 'angled') { const tempSpeedX = bullet.speedX; const tempSpeedY = bullet.speedY; if (obs.angle === 45) { bullet.speedX = -tempSpeedY; bullet.speedY = -tempSpeedX; } else { bullet.speedX = tempSpeedY; bullet.speedY = tempSpeedX; } bullet.x += Math.sign(bullet.speedX) * 2; bullet.y += Math.sign(bullet.speedY) * 2; } } }); } 
+             if (bullet.active) { 
+                 const currentSpeedX = bullet.speedX * bullet.speedMultiplier; const currentSpeedY = bullet.speedY * bullet.speedMultiplier;
+                 bullet.x += currentSpeedX; bullet.y += currentSpeedY; 
+                 
+                 if (bullet.y - bullet.radius < 0 || bullet.y + bullet.radius > CANVAS_HEIGHT) { bullet.y = bullet.y - bullet.radius < 0 ? bullet.radius : CANVAS_HEIGHT - bullet.radius; bullet.speedY *= -1; playSound(bounceSynth, "G4", "16n", 'bounce'); } 
+                 
+                 if (bullet.x + bullet.radius > CANVAS_WIDTH) { // Odbicie od prawej ściany
+                    bullet.x = CANVAS_WIDTH - bullet.radius;
+                    bullet.speedX *= -1;
+                    playSound(bounceSynth, "G4", "16n", 'bounce');
+                 }
+
+                 if (bullet.x - bullet.radius < player.x + player.width && bullet.x + bullet.radius > player.x && bullet.y > player.y && bullet.y < player.y + player.height && bullet.speedX < 0) { 
+                     bullet.speedX *= -1; 
+                     const relativeIntersectY = (player.y + player.height / 2) - bullet.y; 
+                     const normalizedRelativeIntersectionY = relativeIntersectY / (player.height / 2); 
+                     const playerInfluence = player.velocityY * 0.2;
+                     const angleFactor = normalizedRelativeIntersectionY * (CANVAS_WIDTH * 0.015) * 0.8;
+                     bullet.speedY = angleFactor + playerInfluence;
+                     bullet.speedY = Math.max(-CANVAS_WIDTH * 0.01, Math.min(CANVAS_WIDTH * 0.01, bullet.speedY));
+                     
+                     bullet.x = player.x + player.width + bullet.radius; 
+                     playSound(bounceSynth, "C5", "16n", 'bounce'); 
+                 } 
+                 
+                 // ZMIANA: Logika przegranej / utraty punktów
+                 if (bullet.x + bullet.radius < 0) { 
+                     bullet.active = false; 
+                     score = Math.max(0, score - 20); // Odejmij 20 punktów (min 0)
+                     if(scoreDisplay) scoreDisplay.textContent = score;
+                     playSound(endSynth, "C3", "8n"); // Dźwięk utraty
+                     showGameMessage("-20 Punktów! Kliknij, aby rzucić ponownie.", 'red');
+                     // Gra nie kończy się, czekamy na kolejny strzał (shoot())
+                 } 
+                 
+                 // Kolizja z celami
+                 targets.forEach(target => { if (target.active) { const distX = Math.abs(bullet.x - target.x); const distY = Math.abs(bullet.y - target.y); if (distX < target.radius + bullet.radius && distY < target.radius + bullet.radius) { const dx = bullet.x - target.x; const dy = bullet.y - target.y; if (Math.sqrt(dx*dx + dy*dy) < target.radius + bullet.radius) { target.active = false; /* Piłka nie znika */ hitCount++; if(hitsDisplay) hitsDisplay.textContent = hitCount; score += 10 * currentLevel; if(scoreDisplay) scoreDisplay.textContent = score; createParticles(target.x, target.y, 15, target.color); dropBonus(target.x, target.y); if(targetCountDisplay) targetCountDisplay.textContent = targets.filter(t => t.active).length; playSound(hitSynth, "A3", "8n", 'hit'); 
+                    
+                    // Odbicie od celu
+                    // Proste odbicie (jak od ściany)
+                    const overlapX = (bullet.radius + target.radius) - distX;
+                    const overlapY = (bullet.radius + target.radius) - distY;
+                    if (overlapX < overlapY) { bullet.speedX *= -1; } else { bullet.speedY *= -1; }
+                 
+                 if (targets.every(t => !t.active)) { startNextLevel(); return; } } } } }); 
+                 
+                 // Kolizja z przeszkodami
+                 obstacles.forEach(obs => { if (bullet.x + bullet.radius > obs.x && bullet.x - bullet.radius < obs.x + obs.width && bullet.y + bullet.radius > obs.y && bullet.y - bullet.radius < obs.y + obs.height) { playSound(bounceSynth, "E4", "16n", 'bounce'); if (obs.type === 'rect') { const overlapXLeft = (bullet.x + bullet.radius) - obs.x; const overlapXRight = (obs.x + obs.width) - (bullet.x - bullet.radius); const overlapYTop = (bullet.y + bullet.radius) - obs.y; const overlapYBottom = (obs.y + obs.height) - (bullet.y - bullet.radius); const minOverlapX = Math.min(overlapXLeft, overlapXRight); const minOverlapY = Math.min(overlapYTop, overlapYBottom); if (minOverlapX < minOverlapY) { bullet.speedX *= -1; bullet.x += (bullet.speedX > 0 ? 1 : -1) * minOverlapX * 0.5 + Math.sign(bullet.speedX); } else { bullet.speedY *= -1; bullet.y += (bullet.speedY > 0 ? 1 : -1) * minOverlapY * 0.5 + Math.sign(bullet.speedY); } } else if (obs.type === 'angled') { const tempSpeedX = bullet.speedX; const tempSpeedY = bullet.speedY; if (obs.angle === 45) { bullet.speedX = -tempSpeedY; bullet.speedY = -tempSpeedX; } else { bullet.speedX = tempSpeedY; bullet.speedY = tempSpeedX; } bullet.x += Math.sign(bullet.speedX) * 2; bullet.y += Math.sign(bullet.speedY) * 2; } } }); 
+             } 
+             
              bonuses = bonuses.filter(bonus => bonus.active); 
              bonuses.forEach(bonus => { bonus.y += bonus.speedY; if (player.x < bonus.x + bonus.width && player.x + player.width > bonus.x && player.y < bonus.y + bonus.height && player.y + player.height > bonus.y) { 
                  playSound(bonusSynth, "E5");
@@ -270,7 +335,7 @@
              draw(); 
              animationFrameId = requestAnimationFrame(updateGame); 
         }
-        function showGameMessage(text, type = 'gray') { /* ... (bez zmian) ... */ if (!gameMessage) return; gameMessage.textContent = text; gameMessage.className = gameMessage.className.replace(/bg-(red|green|blue|gray)-900\/50 text-(red|green|blue|gray)-300/g, ''); let colorClass = 'bg-gray-700 text-gray-300'; if(type === 'green') colorClass = 'bg-green-900/50 text-green-300'; else if(type === 'red') colorClass = 'bg-red-900/50 text-red-300'; else if(type === 'blue') colorClass = 'bg-blue-900/50 text-blue-300'; gameMessage.classList.add(...colorClass.split(' ')); gameMessage.classList.remove('hidden'); if (type === 'blue' || type === 'red') { setTimeout(() => { if (!isGameOver && gameMessage && (gameMessage.textContent.includes("EFEKT") || gameMessage.textContent.includes("MALUS"))) { gameMessage.classList.add('hidden'); } }, 2000); } }
+        function showGameMessage(text, type = 'gray') { /* ... (bez zmian) ... */ if (!gameMessage) return; gameMessage.textContent = text; gameMessage.className = gameMessage.className.replace(/bg-(red|green|blue|gray)-900\/50 text-(red|green|blue|gray)-300/g, ''); let colorClass = 'bg-gray-700 text-gray-300'; if(type === 'green') colorClass = 'bg-green-900/50 text-green-300'; else if(type === 'red') colorClass = 'bg-red-900/50 text-red-300'; else if(type === 'blue') colorClass = 'bg-blue-900/50 text-blue-300'; gameMessage.classList.add(...colorClass.split(' ')); gameMessage.classList.remove('hidden'); if (type === 'blue' || type === 'red') { setTimeout(() => { if (!isGameOver && gameMessage && (gameMessage.textContent.includes("EFEKT") || gameMessage.textContent.includes("MALUS") || gameMessage.textContent.includes("Punktów"))) { gameMessage.classList.add('hidden'); } }, 2000); } }
         function startNextLevel() { /* ... (bez zmian) ... */ if (currentLevel >= MAX_LEVEL) { endGame(`Gratulacje! Ukończyłeś wszystkie ${currentLevel} poziomy! Wynik: ${score}`); return; } currentLevel++; showGameMessage(`POZIOM ${currentLevel - 1} UKOŃCZONY! Przygotuj się na poziom ${currentLevel}.`, 'green'); cancelAnimationFrame(animationFrameId); if (gameLoopInterval) clearInterval(gameLoopInterval); setTimeout(() => { initGame(false); startTimer(); animationFrameId = requestAnimationFrame(updateGame); }, 3000); }
         function startTimer() { /* ... (bez zmian) ... */ if (!timeDisplay) return; gameLoopInterval = setInterval(() => { gameTime--; timeDisplay.textContent = gameTime; if (gameTime <= 10 && !isGameOver) { timeDisplay.classList.add('timer-warning'); } else { timeDisplay.classList.remove('timer-warning'); } if (gameTime <= 0) { clearInterval(gameLoopInterval); endGame(`Czas minął! Osiągnięty poziom: ${currentLevel}. Wynik: ${score}`); } }, 1000); }
         
@@ -309,6 +374,8 @@
                 if(!ctx) { console.error("Nie udało się uzyskać kontekstu 2D canvas!"); return; } 
                 canvas.addEventListener('mousemove', (e) => { if (isGameOver) return; const rect = canvas.getBoundingClientRect(); const scaleY = CANVAS_HEIGHT / rect.height; mousePosition.y = (e.clientY - rect.top) * scaleY; });
                 canvas.addEventListener('touchmove', (e) => { if (isGameOver) return; e.preventDefault(); const rect = canvas.getBoundingClientRect(); const scaleY = CANVAS_HEIGHT / rect.height; mousePosition.y = (e.touches[0].clientY - rect.top) * scaleY; }, { passive: false });
+                
+                // ZMIANA: Kliknięcie/dotknięcie teraz służy do wystrzelenia nowej piłki
                 canvas.addEventListener('click', shoot); 
                 canvas.addEventListener('touchstart', (e) => { if (!isGameOver && e.target === canvas) { shoot(); } }); 
             } else { console.error("Nie znaleziono elementu canvas!"); return; }
@@ -336,6 +403,7 @@
 
              AOS.init({ duration: 800, once: true });
 
+             // ZMIANA: Spacja teraz też służy do wystrzelenia nowej piłki
              document.addEventListener('keydown', (e) => { if (!isGameOver && (e.code === 'Space' || e.code === 'Enter')) { e.preventDefault(); shoot(); } });
              if (startButton) startButton.addEventListener('click', startGame);
         });
@@ -343,9 +411,4 @@
     </script>
 </body>
 </html>
-
-
-
-
-
 
