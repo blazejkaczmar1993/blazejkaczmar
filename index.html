@@ -170,7 +170,7 @@
         /* Floating Labels dla formularza */
         .form-group { @apply relative; }
         .form-input {
-            /* POPRAWKA: Użycie var(--color-bg) zamiast bg-secondary */
+            /* POPRAWKA: Tło inne niż karta */
             @apply block w-full p-3 pt-5 border border-primary rounded-md text-form focus:border-accent focus:ring-accent transition-colors;
             background-color: var(--color-bg); /* Tło takie jak strona, dla kontrastu z kartą */
         }
@@ -181,7 +181,7 @@
             pointer-events: none; 
         }
          .form-input-textarea {
-             /* POPRAWKA: Użycie var(--color-bg) zamiast bg-secondary */
+             /* POPRAWKA: Tło inne niż karta */
              @apply block w-full p-3 pt-6 border border-primary rounded-md text-form focus:border-accent focus:ring-accent transition-colors;
              background-color: var(--color-bg); /* Tło takie jak strona, dla kontrastu z kartą */
              min-height: 140px; 
@@ -193,9 +193,10 @@
             pointer-events: none;
          }
 
-        /* Przełącznik Light/Dark Mode */
-        .theme-toggle-button { /* Użycie wspólnej klasy */
-            @apply w-10 h-10 p-2 rounded-full text-muted hover:text-primary hover:bg-card transition-all duration-300;
+        /* POPRAWKA: Lepszy kontrast dla przycisku motywu */
+        .theme-toggle-button { 
+            @apply w-10 h-10 p-2 rounded-full text-secondary hover:text-primary hover:bg-card transition-all duration-300;
+            /* Zmieniono z text-muted na text-secondary */
         }
         .theme-toggle-button svg { @apply w-full h-full; }
         html.light .theme-toggle-button .sun-icon { display: none; }
@@ -234,7 +235,17 @@
                 </div>
             </div>
         </div>
-        <nav id="mobile-menu" class="hidden md:hidden absolute top-16 left-0 right-0 bg-bg-secondary p-4 border-t border-primary shadow-lg"> <div class="flex flex-col space-y-3 text-center text-muted"> <a href="#o-nas" class="block py-2 hover:text-primary transition duration-300 mobile-menu-link">O Nas</a> <a href="#uslugi" class="block py-2 hover:text-primary transition duration-300 mobile-menu-link">Usługi</a> <a href="#technologia" class="block py-2 hover:text-primary transition duration-300 mobile-menu-link">Technologia</a> <a href="#parametry-cnc" class="block py-2 hover:text-primary transition duration-300 mobile-menu-link">Kalkulator CNC</a> <a href="#gra-cnc" class="block py-2 hover:text-primary transition duration-300 mobile-menu-link">Gra CNC</a> <a href="#kontakt" class="block py-2 px-4 mt-2 rounded-full bg-cyan-600 text-gray-900 font-semibold hover:bg-cyan-500 transition duration-300 shadow-metal mobile-menu-link">Kontakt</a> </div> </nav>
+        <!-- POPRAWKA: Usunięcie 'backdrop-blur-sm' z menu mobilnego -->
+        <nav id="mobile-menu" class="hidden md:hidden absolute top-16 left-0 right-0 bg-bg-secondary p-4 border-t border-primary shadow-lg"> 
+            <div class="flex flex-col space-y-3 text-center text-muted"> 
+                <a href="#o-nas" class="block py-2 hover:text-primary transition duration-300 mobile-menu-link">O Nas</a> 
+                <a href="#uslugi" class="block py-2 hover:text-primary transition duration-300 mobile-menu-link">Usługi</a> 
+                <a href="#technologia" class="block py-2 hover:text-primary transition duration-300 mobile-menu-link">Technologia</a> 
+                <a href="#parametry-cnc" class="block py-2 hover:text-primary transition duration-300 mobile-menu-link">Kalkulator CNC</a> 
+                <a href="#gra-cnc" class="block py-2 hover:text-primary transition duration-300 mobile-menu-link">Gra CNC</a> 
+                <a href="#kontakt" class="block py-2 px-4 mt-2 rounded-full bg-cyan-600 text-gray-900 font-semibold hover:bg-cyan-500 transition duration-300 shadow-metal mobile-menu-link">Kontakt</a> 
+            </div> 
+        </nav>
     </header>
 
     <main>
@@ -622,7 +633,7 @@
 
             // Ustawienia początkowe interfejsu (zabezpieczone ifami)
             player = {}; 
-            resizeCanvas(); // Wywołaj resize, aby ustawić wymiary
+            resizeCanvas(); 
             highScore = localStorage.getItem('cncHighScore') || 0; 
             if(highScoreDisplay) highScoreDisplay.textContent = highScore; 
             if(startButton) startButton.textContent = "Start Gry"; 
@@ -647,7 +658,7 @@
                      document.documentElement.classList.remove('light');
                  }
                  // Przerysuj grę, aby zaktualizować kolory zmiennych CSS
-                 if(!isGameOver) draw(); 
+                 if(!isGameOver && ctx) draw(); // Dodano sprawdzenie ctx
              }
 
              function toggleTheme() {
