@@ -1,39 +1,39 @@
 <!DOCTYPE html>
-<html lang="pl"> <!-- Domyślny motyw ciemny -->
+<html lang="pl"> 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BK CNC - Precyzyjna Obróbka CNC Typu Szwajcarskiego</title>
 
-    <!-- SEO Meta Tagi -->
+    
     <meta name="description" content="BK CNC specjalizuje się w precyzyjnej obróbce skrawaniem CNC na automatach tokarskich typu szwajcarskiego. Oferujemy produkcję małych i złożonych detali z najwyższą dokładnością.">
     <meta name="keywords" content="toczenie CNC, obróbka skrawaniem, automaty tokarskie, typ szwajcarski, precyzyjne detale, obróbka metali, CNC Warszawa, BK CNC">
     <meta name="author" content="BK CNC">
-    <!-- Open Graph / Facebook -->
+    
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.blazejkaczmar.pl/">
     <meta property="og:title" content="BK CNC - Precyzyjna Obróbka CNC Typu Szwajcarskiego">
     <meta property="og:description" content="Specjalizacja w produkcji małych, złożonych detali na automatach szwajcarskich.">
     <meta property="og:image" content="https://www.blazejkaczmar.pl/zawias-toczony-10-x-55-bez-logo.webp">
-    <!-- Twitter -->
+    
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://www.blazejkaczmar.pl/">
     <meta property="twitter:title" content="BK CNC - Precyzyjna Obróbka CNC Typu Szwajcarskiego">
     <meta property="twitter:description" content="Specjalizacja w produkcji małych, złożonych detali na automatach szwajcarskich.">
     <meta property="twitter:image" content="https://www.blazejkaczmar.pl/zawias-toczony-10-x-55-bez-logo.webp">
 
-    <!-- Ładowanie Tailwind CSS --><script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts (Inter + Exo 2) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@700;800&family=Inter:wght@100..900&display=swap" rel="stylesheet">
-    <!-- AOS CSS (Animate On Scroll) -->
+    
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <!-- Tone.js (dla dźwięków) -->
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
 
     <style>
-        /* Zmienne kolorów dla Trybu Ciemnego (domyślny) i Jasnego */
+        
         :root {
             --color-bg: #0d1117;
             --color-bg-secondary: #161b22;
@@ -82,7 +82,7 @@
             --color-form-card-bg: var(--color-bg-secondary);
         }
 
-        /* Zastosowanie zmiennych */
+        
         html { scroll-behavior: smooth; }
         body {
             font-family: 'Inter', sans-serif;
@@ -132,7 +132,7 @@
         @keyframes pulseWarning { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.8; transform: scale(1.1); } }
         .timer-warning { animation: pulseWarning 1s infinite; }
 
-        /* Efekt Paralaksa */
+        
         #parallax-image {
             background-image: url('zawias-toczony-10-x-55-bez-logo.webp');
             background-attachment: fixed;
@@ -147,7 +147,7 @@
              #parallax-image { background-attachment: scroll; }
         }
 
-        /* Tło G-Code w Hero */
+        
         #heroCanvas {
             position: absolute; top: 0; left: 0;
             width: 100%; height: 100%;
@@ -156,13 +156,13 @@
         }
         .hero-content { position: relative; z-index: 1; }
         
-        /* Przełącznik Light/Dark Mode */
+        
         html.light #theme-toggle .sun-icon, 
         html.light #mobile-theme-toggle .sun-icon { display: none; }
         html:not(.light) #theme-toggle .moon-icon,
         html:not(.light) #mobile-theme-toggle .moon-icon { display: none; }
         
-        /* Formularz */
+        
         .form-label {
             @apply block text-sm font-medium text-muted mb-2;
         }
@@ -186,7 +186,7 @@
 </head>
 <body class="antialiased bg-bg text-secondary">
 
-    <!-- Nagłówek i Nawigacja -->
+    
     <header class="sticky top-0 z-50 bg-bg-secondary/90 backdrop-blur-sm shadow-lg border-b border-primary">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
@@ -299,8 +299,6 @@
         
         let mobileMenuButton, mobileMenu, mobileMenuLinks;
         let themeToggle, mobileThemeToggle; 
-        
-        let currentLang = 'pl'; 
 
         
         function displayMessage(message, isError = false) { const msgElement = document.getElementById('calculator-message'); if (!msgElement) return; msgElement.textContent = message; msgElement.classList.remove('hidden'); msgElement.className = msgElement.className.replace(/bg-(red|green)-900\/50 text-(red|green)-300/g, ''); msgElement.classList.add(isError ? 'bg-red-900/50 text-red-300' : 'bg-green-900/50 text-green-300'); }
