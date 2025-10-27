@@ -140,8 +140,8 @@
             background-repeat: no-repeat;
             background-size: cover;
             min-height: 400px; 
-            border-radius: 0.75rem; /* rounded-xl */
-            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1); /* shadow-2xl */
+            border-radius: 0.75rem; 
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1); 
         }
         @media (max-width: 768px) {
              #parallax-image {
@@ -154,7 +154,7 @@
             position: absolute; top: 0; left: 0;
             width: 100%; height: 100%;
             z-index: 0; 
-            opacity: 0.2; /* POPRAWKA: Zwiększona widoczność */
+            opacity: 0.2; 
         }
         .hero-content { position: relative; z-index: 1; }
         
@@ -173,19 +173,19 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
                 <a href="#hero" class="text-3xl font-extrabold tracking-tight accent-color">BK <span class="text-primary">CNC</span></a>
-                <!-- POPRAWKA: Przywrócono 'items-center' i usunięto 'nav-link' z <a> -->
+                
                 <nav id="desktop-menu" class="hidden md:flex items-center space-x-8 text-sm font-medium text-muted"> 
                     <a href="#o-nas" class="hover:text-primary transition duration-300 py-2">O Nas</a> 
                     <a href="#uslugi" class="hover:text-primary transition duration-300 py-2">Usługi</a> 
                     <a href="#technologia" class="hover:text-primary transition duration-300 py-2">Technologia</a> 
                     <a href="#parametry-cnc" class="hover:text-primary transition duration-300 py-2">Kalkulator CNC</a> 
                     <a href="#gra-cnc" class="hover:text-primary transition duration-300 py-2">Gra CNC</a> 
-                    <!-- POPRAWKA: Pełne klasy Tailwind w HTML, zgodne ze zrzutem ekranu */ -->
+                    
                     <a href="#kontakt" class="group inline-flex items-center px-5 py-2 rounded-full bg-cyan-600 text-gray-900 font-semibold hover:bg-cyan-500 transition duration-300 shadow-metal transform hover:scale-105 active:scale-95"> 
                         Kontakt 
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1.5 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
                     </a>
-                    <!-- POPRAWKA: Pełne klasy Tailwind w HTML dla przycisku motywu */ -->
+                    
                     <button id="theme-toggle" title="Zmień motyw" class="w-10 h-10 p-2 rounded-full text-muted hover:text-primary hover:bg-card transition-all duration-300">
                         <svg class="sun-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m8.66-15.66l-.707.707M4.04 19.96l-.707.707M21 12h-1M4 12H3m15.66 8.66l-.707-.707M6.04 6.04l-.707-.707M12 18a6 6 0 100-12 6 6 0 000 12z" /></svg>
                         <svg class="moon-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9 9 0 008.354-5.646z" /></svg>
@@ -204,14 +204,14 @@
     </header>
 
     <main>
-        <!-- Sekcja Hero --><section id="hero" class="metal-pattern pt-24 pb-36 relative overflow-hidden"> 
+        <section id="hero" class="metal-pattern pt-24 pb-36 relative overflow-hidden"> 
             <canvas id="heroCanvas"></canvas> 
             <div class="hero-content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between"> 
                 <div class="md:w-1/2 mb-12 md:mb-0 text-center md:text-left" data-aos="fade-right"> <span class="text-xl font-medium uppercase accent-color mb-3 block">Precyzja, której Możesz Ufać</span> <h1 class="text-5xl sm:text-6xl lg:text-7xl font-extrabold leading-tight tracking-tighter">Toczenie CNC <span class="accent-color">Typu Szwajcarskiego</span></h1> <p class="mt-8 text-lg text-secondary max-w-lg mx-auto md:mx-0 leading-relaxed">Specjalizujemy się w produkcji złożonych, małych i bardzo małych detali z zachowaniem mikronowej dokładności. Osiągnij niezrównaną jakość i powtarzalność.</p> <div class="mt-12 flex justify-center md:justify-start space-x-4"> <a href="#kontakt" class="cta-button group flex items-center px-8 py-3 bg-gradient-to-r from-cyan-500 to-cyan-700 text-accent-dark font-bold rounded-lg hover-accent transition duration-300 shadow-xl shadow-cyan-800/50 transform hover:scale-105 active:scale-95">Wycena Projektu <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg></a> <a href="#uslugi" class="px-8 py-3 border border-primary text-primary font-medium rounded-lg hover:border-accent hover:text-accent transition duration-300 transform hover:scale-105 active:scale-95">Nasze Możliwości</a> </div> </div> 
                 <div class="md:w-1/2 flex justify-center md:justify-end relative" data-aos="fade-left" data-aos-delay="200"> <svg class="w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 accent-color opacity-80" viewBox="0 0 100 100"><defs><filter id="glow"><feGaussianBlur stdDeviation="3.5" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><g transform="translate(50 50)" filter="url(#glow)"><circle cx="0" cy="0" r="40" fill="none" stroke="currentColor" stroke-width="3" opacity="0.5"/><path d="M 0 -35 A 35 35 0 1 1 0 35 A 35 35 0 1 1 0 -35 Z" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="5 5"><animateTransform attributeName="transform" type="rotate" from="0 0 0" to="360 0 0" dur="15s" repeatCount="indefinite"/></path><path d="M 0 -20 A 20 20 0 1 0 0 20 A 20 20 0 1 0 0 -20 Z" fill="none" stroke="currentColor" stroke-width="2"><animateTransform attributeName="transform" type="rotate" from="360 0 0" to="0 0 0" dur="10s" repeatCount="indefinite"/></path><circle cx="0" cy="0" r="5" fill="currentColor"/></g></svg> </div> 
             </div> </section>
-        <!-- Sekcja O Nas --><section id="o-nas" class="py-28 bg-secondary border-t border-primary"> <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"> <div class="text-center mb-20" data-aos="fade-up"> <h2 class="text-4xl font-extrabold mb-4">BK CNC: Fundament Precyzji</h2> <p class="text-lg text-muted leading-relaxed">Ponad 10 lat doświadczenia w obróbce metali w najnowszych technologiach.</p> </div> <div class="grid grid-cols-1 md:grid-cols-3 gap-12"> 
-                <!-- POPRAWKA: Pełne klasy Tailwind dla karty -->
+        <section id="o-nas" class="py-28 bg-secondary border-t border-primary"> <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"> <div class="text-center mb-20" data-aos="fade-up"> <h2 class="text-4xl font-extrabold mb-4">BK CNC: Fundament Precyzji</h2> <p class="text-lg text-muted leading-relaxed">Ponad 10 lat doświadczenia w obróbce metali w najnowszych technologiach.</p> </div> <div class="grid grid-cols-1 md:grid-cols-3 gap-12"> 
+                
                 <div class="p-8 rounded-xl bg-card shadow-2xl transition duration-500 transform hover:-translate-y-2 hover:shadow-cyan-800/60 border-t-4 border-accent hover:border-b-2 hover:border-l-2 hover:border-r-2" data-aos="fade-up" data-aos-delay="100"> 
                     <svg class="w-12 h-12 accent-color mb-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37a1.724 1.724 0 002.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg> 
                     <h3 class="text-2xl font-semibold mb-3">Automaty Szwajcarskie</h3> 
@@ -226,15 +226,15 @@
                     <h3 class="text-2xl font-semibold mb-3">Złożone Detale i Serie</h3> <p class="text-muted leading-relaxed">Obsługujemy zarówno długie serie produkcyjne, jak i skomplikowane detale prototypowe...</p> 
                 </div> 
             </div> </div> </section>
-        <!-- Sekcja Usługi --><section id="uslugi" class="py-28 metal-pattern border-t border-primary"> <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"> <div class="text-center mb-20" data-aos="fade-up"> <span class="text-lg font-medium uppercase accent-color mb-2 block">Czym się zajmujemy</span> <h2 class="text-4xl font-extrabold">Kluczowe Obszary Działalności</h2> </div> <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center"> <div data-aos="fade-right"> <ul class="space-y-8"> <li class="flex items-start group"> <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 mr-4 mt-1 flex-shrink-0 text-accent transition-transform duration-300 group-hover:scale-125" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6-6l-6.5 6.5" /></svg> <div><h4 class="text-xl font-semibold text-primary">Toczenie Długich Elementów</h4> <p class="text-muted mt-1 leading-relaxed">Specjalizacja w obróbce detali o wydłużonym kształcie...</p></div> </li> <li class="flex items-start group"> <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 mr-4 mt-1 flex-shrink-0 text-accent transition-transform duration-300 group-hover:scale-125" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37a1.724 1.724 0 002.572-1.065z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg> <div><h4 class="text-xl font-semibold text-primary">Obróbka Złożona</h4> <p class="text-muted mt-1 leading-relaxed">Pełne możliwości frezowania, wiercenia i gwintowania...</p></div> </li> <li class="flex items-start group"> <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 mr-4 mt-1 flex-shrink-0 text-accent transition-transform duration-300 group-hover:scale-125" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" /></svg> <div><h4 class="text-xl font-semibold text-primary">Szeroki Zakres Materiałów</h4> <p class="text-muted mt-1 leading-relaxed">Obróbka stali nierdzewnej, mosiądzu, aluminium, tytanu...</p></div> </li> </ul> </div> <div class="hidden lg:block" data-aos="fade-left" data-aos-delay="200"> <div class="p-6 bg-secondary border-2 border-accent/50 rounded-lg shadow-2xl shadow-cyan-900/30 flex justify-center items-center"> <div class="img-placeholder max-w-full h-96">DETAL: Toczenie Złożone</div> </div> <p class="text-center mt-4 text-sm text-muted italic">Wizualizacja detalu z uwzględnieniem tolerancji.</p> </div> </div> </div> </section>
-        <!-- Sekcja Technologia --><section id="technologia" class="py-28 bg-secondary border-t border-primary"> <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"> <div class="text-center mb-20" data-aos="fade-up"> <span class="text-lg font-medium uppercase accent-color mb-2 block">Dlaczego Automaty Szwajcarskie?</span> <h2 class="text-4xl font-extrabold">Niezrównana Metoda Obróbki</h2> </div> <div class="lg:flex lg:space-x-16 items-center"> 
+        <section id="uslugi" class="py-28 metal-pattern border-t border-primary"> <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"> <div class="text-center mb-20" data-aos="fade-up"> <span class="text-lg font-medium uppercase accent-color mb-2 block">Czym się zajmujemy</span> <h2 class="text-4xl font-extrabold">Kluczowe Obszary Działalności</h2> </div> <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center"> <div data-aos="fade-right"> <ul class="space-y-8"> <li class="flex items-start group"> <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 mr-4 mt-1 flex-shrink-0 text-accent transition-transform duration-300 group-hover:scale-125" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6-6l-6.5 6.5" /></svg> <div><h4 class="text-xl font-semibold text-primary">Toczenie Długich Elementów</h4> <p class="text-muted mt-1 leading-relaxed">Specjalizacja w obróbce detali o wydłużonym kształcie...</p></div> </li> <li class="flex items-start group"> <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 mr-4 mt-1 flex-shrink-0 text-accent transition-transform duration-300 group-hover:scale-125" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37a1.724 1.724 0 002.572-1.065z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg> <div><h4 class="text-xl font-semibold text-primary">Obróbka Złożona</h4> <p class="text-muted mt-1 leading-relaxed">Pełne możliwości frezowania, wiercenia i gwintowania...</p></div> </li> <li class="flex items-start group"> <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 mr-4 mt-1 flex-shrink-0 text-accent transition-transform duration-300 group-hover:scale-125" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" /></svg> <div><h4 class="text-xl font-semibold text-primary">Szeroki Zakres Materiałów</h4> <p class="text-muted mt-1 leading-relaxed">Obróbka stali nierdzewnej, mosiądzu, aluminium, tytanu...</p></div> </li> </ul> </div> <div class="hidden lg:block" data-aos="fade-left" data-aos-delay="200"> <div class="p-6 bg-secondary border-2 border-accent/50 rounded-lg shadow-2xl shadow-cyan-900/30 flex justify-center items-center"> <div class="img-placeholder max-w-full h-96">DETAL: Toczenie Złożone</div> </div> <p class="text-center mt-4 text-sm text-muted italic">Wizualizacja detalu z uwzględnieniem tolerancji.</p> </div> </div> </div> </section>
+        <section id="technologia" class="py-28 bg-secondary border-t border-primary"> <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"> <div class="text-center mb-20" data-aos="fade-up"> <span class="text-lg font-medium uppercase accent-color mb-2 block">Dlaczego Automaty Szwajcarskie?</span> <h2 class="text-4xl font-extrabold">Niezrównana Metoda Obróbki</h2> </div> <div class="lg:flex lg:space-x-16 items-center"> 
             <div class="lg:w-1/2 mb-12 lg:mb-0" data-aos="fade-right"> 
                 <div id="parallax-image" class="rounded-xl shadow-2xl"></div> 
                 <p class="mt-4 text-sm text-muted italic text-center">Przykładowy detal z naszej produkcji.</p> 
             </div> 
             <div class="lg:w-1/2 space-y-10" data-aos="fade-left" data-aos-delay="200"> <div class="flex items-start"> <div class="flex-shrink-0 w-12 h-12 accent-bg rounded-full flex items-center justify-center mr-5 text-accent-dark font-bold text-xl shadow-metal">1</div> <div> <h3 class="text-2xl font-semibold mb-2">Precyzja Lidera Branży</h3> <p class="text-muted leading-relaxed">W tokarce szwajcarskiej narzędzie pracuje bardzo blisko tulei prowadzącej...</p> </div> </div> <div class="flex items-start"> <div class="flex-shrink-0 w-12 h-12 accent-bg rounded-full flex items-center justify-center mr-5 text-accent-dark font-bold text-xl shadow-metal">2</div> <div> <h3 class="text-2xl font-semibold mb-2">Wykończenie Powierzchni</h3> <p class="text-muted leading-relaxed">Stałe podparcie materiału blisko strefy skrawania pozwala uzyskać lepszą jakość...</p> </div> </div> <div class="flex items-start"> <div class="flex-shrink-0 w-12 h-12 accent-bg rounded-full flex items-center justify-center mr-5 text-accent-dark font-bold text-xl shadow-metal">3</div> <div> <h3 class="text-2xl font-semibold mb-2">Obróbka Długich i Cienkich Detali</h3> <p class="text-muted leading-relaxed">Automaty typu szwajcarskiego są niezastąpione przy produkcji długich, cienkich elementów...</p> </div> </div> </div> </div> </div> </section>
-        <!-- Sekcja Kalkulator CNC --><section id="parametry-cnc" class="py-28 metal-pattern border-t border-primary"> <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8" data-aos="fade-up"> <div class="text-center mb-16"> <span class="text-lg font-medium uppercase accent-color mb-2 block">Wsparcie Inżynierskie</span> <h2 class="text-4xl font-extrabold">Kalkulator Parametrów Toczenia</h2> </div> <div class="p-10 bg-card rounded-xl shadow-2xl border-t-4 border-accent"> <h3 class="text-2xl font-semibold accent-color mb-8 flex items-center"> <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg> Obliczenia podstawowych parametrów </h3> <div class="grid grid-cols-1 md:grid-cols-2 gap-8"> <div class="p-6 bg-secondary rounded-lg shadow-inner"> <label for="Vc" class="block text-sm font-medium text-muted">Prędkość Skrawania (Vc) [m/min]</label> <input type="number" step="0.1" id="Vc" placeholder="np. 250" class="mt-1 block w-full p-3 border border-primary bg-bg rounded-md text-form focus:border-accent focus:ring-accent"> <label for="D" class="block text-sm font-medium text-muted mt-4">Średnica Detalu (D) [mm]</label> <input type="number" step="0.1" id="D" placeholder="np. 12" class="mt-1 block w-full p-3 border border-primary bg-bg rounded-md text-form focus:border-accent focus:ring-accent"> <button onclick="calculateRPM()" class="w-full mt-6 px-4 py-3 bg-gradient-to-r from-cyan-500 to-cyan-700 text-accent-dark font-bold rounded-lg hover-accent transition duration-300 transform hover:scale-105 active:scale-95 group flex items-center justify-center cta-button"> Oblicz Obroty (n) <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 transition-transform duration-300 group-hover:rotate-90" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg> </button> <div class="mt-5 text-lg font-bold text-primary"> n = <span id="n_result" class="accent-color text-xl">0</span> obr/min </div> </div> <div class="p-6 bg-secondary rounded-lg shadow-inner"> <label for="f" class="block text-sm font-medium text-muted">Posuw (f) [mm/obr]</label> <input type="number" step="0.001" id="f" placeholder="np. 0.08" class="mt-1 block w-full p-3 border border-primary bg-bg rounded-md text-form focus:border-accent focus:ring-accent"> <label for="n_input" class="block text-sm font-medium text-muted mt-4">Obroty Wrzeciona (n) [obr/min]</label> <input type="number" step="1" id="n_input" placeholder="Wartość z lewej lub własna" class="mt-1 block w-full p-3 border border-primary bg-bg rounded-md text-form focus:border-accent focus:ring-accent"> <button onclick="calculateFeedRate()" class="w-full mt-6 px-4 py-3 bg-gradient-to-r from-cyan-500 to-cyan-700 text-accent-dark font-bold rounded-lg hover-accent transition duration-300 transform hover:scale-105 active:scale-95 group flex items-center justify-center cta-button"> Oblicz Posuw (Vf) <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg> </button> <div class="mt-5 text-lg font-bold text-primary"> Vf = <span id="Vf_result" class="accent-color text-xl">0</span> mm/min </div> </div> </div> <div id="calculator-message" class="mt-8 p-3 bg-red-900/50 text-red-300 rounded-lg hidden"></div> </div> </div> </section>
-        <!-- Sekcja Mini-Gra CNC --><section id="gra-cnc" class="py-28 bg-secondary border-t border-primary"> <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8" data-aos="fade-up"> <div class="text-center mb-16"> <span class="text-lg font-medium uppercase accent-color mb-2 block">Rozrywka Techniczna</span> <h2 class="text-4xl font-extrabold">Gra Operator CNC (Arkanoid)</h2> <p class="text-muted mt-3 leading-relaxed">Użyj myszy lub dotyku, aby sterować operatorem i odbijać piłkę. Zbijaj "usterki" i nie pozwól piłce uciec!</p> </div> <div class="p-8 bg-card rounded-xl shadow-2xl border-t-4 border-accent flex flex-col items-center"> <canvas id="gameCanvas" width="700" height="400" class="border border-primary rounded-md"></canvas> 
+        <section id="parametry-cnc" class="py-28 metal-pattern border-t border-primary"> <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8" data-aos="fade-up"> <div class="text-center mb-16"> <span class="text-lg font-medium uppercase accent-color mb-2 block">Wsparcie Inżynierskie</span> <h2 class="text-4xl font-extrabold">Kalkulator Parametrów Toczenia</h2> </div> <div class="p-10 bg-card rounded-xl shadow-2xl border-t-4 border-accent"> <h3 class="text-2xl font-semibold accent-color mb-8 flex items-center"> <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg> Obliczenia podstawowych parametrów </h3> <div class="grid grid-cols-1 md:grid-cols-2 gap-8"> <div class="p-6 bg-secondary rounded-lg shadow-inner"> <label for="Vc" class="block text-sm font-medium text-muted">Prędkość Skrawania (Vc) [m/min]</label> <input type="number" step="0.1" id="Vc" placeholder="np. 250" class="mt-1 block w-full p-3 border border-primary bg-bg rounded-md text-form focus:border-accent focus:ring-accent"> <label for="D" class="block text-sm font-medium text-muted mt-4">Średnica Detalu (D) [mm]</label> <input type="number" step="0.1" id="D" placeholder="np. 12" class="mt-1 block w-full p-3 border border-primary bg-bg rounded-md text-form focus:border-accent focus:ring-accent"> <button onclick="calculateRPM()" class="w-full mt-6 px-4 py-3 bg-gradient-to-r from-cyan-500 to-cyan-700 text-accent-dark font-bold rounded-lg hover-accent transition duration-300 transform hover:scale-105 active:scale-95 group flex items-center justify-center cta-button"> Oblicz Obroty (n) <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 transition-transform duration-300 group-hover:rotate-90" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg> </button> <div class="mt-5 text-lg font-bold text-primary"> n = <span id="n_result" class="accent-color text-xl">0</span> obr/min </div> </div> <div class="p-6 bg-secondary rounded-lg shadow-inner"> <label for="f" class="block text-sm font-medium text-muted">Posuw (f) [mm/obr]</label> <input type="number" step="0.001" id="f" placeholder="np. 0.08" class="mt-1 block w-full p-3 border border-primary bg-bg rounded-md text-form focus:border-accent focus:ring-accent"> <label for="n_input" class="block text-sm font-medium text-muted mt-4">Obroty Wrzeciona (n) [obr/min]</label> <input type="number" step="1" id="n_input" placeholder="Wartość z lewej lub własna" class="mt-1 block w-full p-3 border border-primary bg-bg rounded-md text-form focus:border-accent focus:ring-accent"> <button onclick="calculateFeedRate()" class="w-full mt-6 px-4 py-3 bg-gradient-to-r from-cyan-500 to-cyan-700 text-accent-dark font-bold rounded-lg hover-accent transition duration-300 transform hover:scale-105 active:scale-95 group flex items-center justify-center cta-button"> Oblicz Posuw (Vf) <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg> </button> <div class="mt-5 text-lg font-bold text-primary"> Vf = <span id="Vf_result" class="accent-color text-xl">0</span> mm/min </div> </div> </div> <div id="calculator-message" class="mt-8 p-3 bg-red-900/50 text-red-300 rounded-lg hidden"></div> </div> </div> </section>
+        <section id="gra-cnc" class="py-28 bg-secondary border-t border-primary"> <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8" data-aos="fade-up"> <div class="text-center mb-16"> <span class="text-lg font-medium uppercase accent-color mb-2 block">Rozrywka Techniczna</span> <h2 class="text-4xl font-extrabold">Gra Operator CNC (Arkanoid)</h2> <p class="text-muted mt-3 leading-relaxed">Użyj myszy lub dotyku, aby sterować operatorem i odbijać piłkę. Zbijaj "usterki" i nie pozwól piłce uciec!</p> </div> <div class="p-8 bg-card rounded-xl shadow-2xl border-t-4 border-accent flex flex-col items-center"> <canvas id="gameCanvas" width="700" height="400" class="border border-primary rounded-md"></canvas> 
             <div class="mt-8 flex flex-col sm:flex-row justify-between w-full max-w-2xl text-lg font-bold space-y-2 sm:space-y-0 text-primary"> 
                  <p>Poziom: <span id="levelDisplay" class="accent-color">1</span></p> 
                  <p>Czas: <span id="timeDisplay" class="accent-color">45</span>s</p>
@@ -247,9 +247,10 @@
                     Start Gry <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg> 
                 </button> 
              </div> <div id="gameMessage" class="mt-8 p-4 bg-secondary text-primary rounded-lg hidden text-center font-semibold text-lg"></div> </div> </div> </section>
-        <!-- Sekcja Kontakt --><section id="kontakt" class="py-28 metal-pattern border-t border-primary"> <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"> <div class="text-center mb-16" data-aos="fade-up"> <h2 class="text-4xl font-extrabold mb-4">Skontaktuj się z Nami</h2> <p class="text-lg text-muted leading-relaxed">Prześlij zapytanie, rysunki techniczne lub skontaktuj się...</p> </div> <div class="grid grid-cols-1 lg:grid-cols-3 gap-12"> 
-            <!-- POPRAWKA: Przywrócony formularz zgodny ze zrzutem ekranu -->
+        <section id="kontakt" class="py-28 metal-pattern border-t border-primary"> <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"> <div class="text-center mb-16" data-aos="fade-up"> <h2 class="text-4xl font-extrabold mb-4">Skontaktuj się z Nami</h2> <p class="text-lg text-muted leading-relaxed">Prześlij zapytanie, rysunki techniczne lub skontaktuj się...</p> </div> <div class="grid grid-cols-1 lg:grid-cols-3 gap-12"> 
+            
             <div class="lg:col-span-2 p-10 rounded-xl shadow-2xl" data-aos="fade-right" style="background-color: var(--color-form-card-bg);"> 
+                
                 <form class="space-y-6" action="mailto:blazejkaczmar@gmail.com?subject=Zapytanie Ofertowe - BK CNC" method="POST" enctype="text/plain"> 
                     <div> 
                         <label for="form_name_simple" class="block text-sm font-medium text-muted mb-2">Imię i Nazwisko / Firma</label> 
@@ -271,21 +272,21 @@
                     </p> <p class="flex items-center"> <svg class="w-6 h-6 mr-4 flex-shrink-0 accent-color" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg> <a href="tel:+48123456789" class="hover:text-accent transition duration-300">+48 123 456 789 (Mock)</a> </p> <p class="flex items-center"> <svg class="w-6 h-6 mr-4 flex-shrink-0 accent-color" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg> <a href="mailto:blazejkaczmar@gmail.com" class="hover:text-accent transition duration-300">blazejkaczmar@gmail.com</a> </p> </div> </div> </div> </div> </section>
     </main>
 
-    <!-- Stopka --><footer class="bg-footer border-t border-primary py-10"> <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-muted text-sm"> <p>&copy; 2024 BK CNC. Wszelkie prawa zastrzeżone. Mietki w moim sercu | Adres: ul. Gen. Bora-Komorowskiego 3c</p> </div> </footer>
+    <footer class="bg-footer border-t border-primary py-10"> <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-muted text-sm"> <p>&copy; 2024 BK CNC. Wszelkie prawa zastrzeżone. Mietki w moim sercu | Adres: ul. Gen. Bora-Komorowskiego 3c</p> </div> </footer>
 
-    <!-- AOS JS --><script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script> 
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script> 
 
     <script>
-        // --- ZMIENNE GLOBALNE I OBSŁUGA MENU ---
+        
         let mobileMenuButton, mobileMenu, mobileMenuLinks;
         let themeToggle, mobileThemeToggle; 
 
-        // --- FUNKCJE KALKULATORA ---
+        
         function displayMessage(message, isError = false) { const msgElement = document.getElementById('calculator-message'); if (!msgElement) return; msgElement.textContent = message; msgElement.classList.remove('hidden'); msgElement.className = msgElement.className.replace(/bg-(red|green)-900\/50 text-(red|green)-300/g, ''); msgElement.classList.add(isError ? 'bg-red-900/50 text-red-300' : 'bg-green-900/50 text-green-300'); }
         function calculateRPM() { const vcInput = document.getElementById('Vc'); const dInput = document.getElementById('D'); const resultElement = document.getElementById('n_result'); const nInput = document.getElementById('n_input'); if (!vcInput || !dInput || !resultElement || !nInput) return; const Vc = parseFloat(vcInput.value); const D = parseFloat(dInput.value); if (isNaN(Vc) || isNaN(D) || Vc <= 0 || D <= 0) { resultElement.textContent = '0'; nInput.value = ''; displayMessage("Błąd: Vc i D muszą być > 0.", true); return; } const n = (Vc * 1000) / (Math.PI * D); const roundedN = Math.round(n); resultElement.textContent = roundedN; nInput.value = roundedN; displayMessage(`Obroty (n) obliczone dla Vc=${Vc}, D=${D}.`, false); }
         function calculateFeedRate() { const fInput = document.getElementById('f'); const nInput = document.getElementById('n_input'); const resultElement = document.getElementById('Vf_result'); if (!fInput || !nInput || !resultElement) return; const f = parseFloat(fInput.value); const n = parseFloat(nInput.value); if (isNaN(f) || isNaN(n) || f <= 0 || n <= 0) { resultElement.textContent = '0'; displayMessage("Błąd: f i n muszą być > 0.", true); return; } const Vf = f * n; resultElement.textContent = Vf.toFixed(2); displayMessage(`Posuw (Vf) obliczony dla f=${f}, n=${n}.`, false); }
 
-        // --- ZMIENNE GLOBALNE GRY ---
+        
         let canvas, ctx; 
         let CANVAS_WIDTH = 700, CANVAS_HEIGHT = 400, GAME_DURATION = 45, BASE_TARGETS = 5, MAX_LEVEL = 10;
         let gameLoopInterval, gameTime, isGameOver = true, animationFrameId, currentLevel = 1;
@@ -300,11 +301,11 @@
         let lastBounceSoundTime = 0, lastHitSoundTime = 0;
         const soundThrottleTime = 50; 
 
-        // --- FUNKCJE DŹWIĘKOWE GRY ---
+        
         async function setupSounds() { try { await Tone.start(); shootSynth = new Tone.Synth({ oscillator: { type: "square" }, envelope: { attack: 0.01, decay: 0.1, sustain: 0.05, release: 0.1 } }).toDestination(); hitSynth = new Tone.MembraneSynth({ pitchDecay: 0.01, octaves: 6, envelope: { attack: 0.001, decay: 0.2, sustain: 0 } }).toDestination(); bounceSynth = new Tone.PluckSynth({ attackNoise: 0.5, dampening: 4000, resonance: 0.7 }).toDestination(); bonusSynth = new Tone.FMSynth({ harmonicity: 3, modulationIndex: 10, envelope: { attack: 0.01, decay: 0.2 }, modulationEnvelope: { attack: 0.01, decay: 0.2 } }).toDestination(); endSynth = new Tone.NoiseSynth({ noise: { type: "white" }, envelope: { attack: 0.005, decay: 0.1, sustain: 0 } }).toDestination(); multiBallSynth = new Tone.PolySynth(Tone.Synth, { oscillator: { type: "fmsquare" }, envelope: { attack: 0.01, decay: 0.1, release: 0.2 } }).toDestination(); soundsReady = true; console.log("Audio ready."); } catch (e) { console.error("Failed to initialize audio:", e); soundsReady = false; } }
         function playSound(synth, note, duration = "8n", type = null) { const now = performance.now(); if (soundsReady && synth && Tone.context.state === 'running') { if (type === 'bounce' && now - lastBounceSoundTime < soundThrottleTime) return; if (type === 'hit' && now - lastHitSoundTime < soundThrottleTime) return; try { const startTime = Tone.now() + (Tone.context.lookAhead || 0.01); synth.triggerAttackRelease(note, duration, startTime); if (type === 'bounce') lastBounceSoundTime = now; if (type === 'hit') lastHitSoundTime = now; } catch (e) { /* Ignoruj błąd czasu startu */ } } }
 
-        // --- FUNKCJE INICJALIZACYJNE GRY ---
+        
         function resizeCanvas() { if (!canvas) return; const parentWidth = canvas.parentElement.clientWidth; CANVAS_WIDTH = Math.min(parentWidth - 16, 700); CANVAS_HEIGHT = (CANVAS_WIDTH / 700) * 400; canvas.width = CANVAS_WIDTH; canvas.height = CANVAS_HEIGHT; if (isGameOver && player.height) { player.x = CANVAS_WIDTH * 0.02; player.width = CANVAS_WIDTH * 0.02; player.height = CANVAS_HEIGHT * 0.2; player.y = CANVAS_HEIGHT / 2 - player.height / 2; mousePosition.y = CANVAS_HEIGHT / 2; player.lastY = player.y; player.velocityY = 0;} if (!isGameOver && ctx) { draw(); } } 
         
         function initGame(resetLevel = true) { 
@@ -320,7 +321,7 @@
              player = { width: CANVAS_WIDTH * 0.02, height: CANVAS_HEIGHT * 0.2, x: CANVAS_WIDTH * 0.02, y: CANVAS_HEIGHT / 2 - (CANVAS_HEIGHT * 0.2) / 2, speed: 0.15, color: 'var(--color-accent)', effectTimer: 0, baseHeight: CANVAS_HEIGHT * 0.2, velocityY: 0, lastY: CANVAS_HEIGHT / 2 - (CANVAS_HEIGHT * 0.2) / 2 }; 
              
              balls = []; 
-             createBall(); // Stwórz pierwszą piłkę
+             createBall(); 
              
              targets = []; bonuses = []; obstacles = []; particles = []; gameTime = GAME_DURATION; isGameOver = false; 
              if(levelDisplay) levelDisplay.textContent = currentLevel; 
@@ -339,7 +340,7 @@
              mousePosition.y = player.y + player.height / 2; 
         }
         
-        // --- FUNKCJE GENERUJĄCE ELEMENTY GRY ---
+        
         function generateTargets(count) { 
              const targetRadius = CANVAS_WIDTH * 0.015; 
              const safeMarginX = targetRadius * 4; const safeMarginY = targetRadius * 1.5;
@@ -372,16 +373,16 @@
         function generateAngledObstacles(count) { const size = CANVAS_WIDTH * 0.05; const margin = size * 1.5; for (let i = 0; i < count; i++) { const angle = Math.random() > 0.5 ? 45 : -45; let posX, posY, collision, attempts = 0; do { collision = false; posX = CANVAS_WIDTH - margin - size - (Math.random() * CANVAS_WIDTH * 0.2); posY = margin * 1.5 + Math.random() * (CANVAS_HEIGHT - 3 * margin - size); for (const obs of obstacles) { const checkMargin = margin * 0.8; if (posX < obs.x + obs.width + checkMargin && posX + size > obs.x - checkMargin && posY < obs.y + obs.height + checkMargin && posY + size > obs.y - checkMargin) { collision = true; break; } } attempts++; } while (collision && attempts < 25); if (!collision) { obstacles.push({ type: 'angled', x: posX, y: newY, width: size, height: size, angle: angle, color: '#9ca3af' }); } } }
         function dropBonus(x, y) { if (Math.random() < BONUS_CHANCE) { const bonusSize = CANVAS_WIDTH * 0.024; let bonusType = 'time'; const rand = Math.random(); if (currentLevel >= 2 && rand < 0.2) bonusType = 'slow'; else if (currentLevel >= 4 && rand < 0.4) bonusType = 'enlarge'; else if (currentLevel >= 5 && rand < 0.6) bonusType = 'multi-ball'; else if (currentLevel >= 6 && rand < 0.7) bonusType = 'piercing'; else if (currentLevel >= 7 && rand < 0.8) bonusType = 'shrink'; bonuses.push({ x: x - bonusSize / 2, y: y - bonusSize / 2, width: bonusSize, height: bonusSize, speedY: (0.5 + Math.random() * 0.5) * (CANVAS_HEIGHT / 400), type: bonusType, active: true, color: (bonusType === 'speedup' || bonusType === 'shrink') ? '#f87171' : '#facc15' }); } }
         
-        // --- FUNKCJE RYSUJĄCE GRY ---
-        function drawBonus(bonus) { /* ... (bez zmian) ... */ ctx.fillStyle = bonus.color; ctx.fillRect(bonus.x, bonus.y, bonus.width, bonus.height); ctx.fillStyle = '#1f2937'; ctx.font = `bold ${bonus.width * 0.5}px Inter`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; let symbol = '+5s'; if(bonus.type === 'slow') symbol = '🐢'; else if(bonus.type === 'enlarge') symbol = '↕'; else if(bonus.type === 'speedup') symbol = '⚡'; else if(bonus.type === 'multi-ball') symbol = '•••'; else if(bonus.type === 'piercing') symbol = '🔥'; else if(bonus.type === 'shrink') symbol = '↔'; ctx.fillText(symbol, bonus.x + bonus.width / 2, bonus.y + bonus.height / 2); }
-        function createParticles(x, y, count = 10, color = '#fef3c7') { /* ... (bez zmian) ... */ for (let i = 0; i < count; i++) { particles.push({ x: x, y: y, radius: Math.random() * (CANVAS_WIDTH * 0.004) + 1, speedX: (Math.random() - 0.5) * (CANVAS_WIDTH * 0.01), speedY: (Math.random() - 0.5) * (CANVAS_WIDTH * 0.01), alpha: 1, decay: Math.random() * 0.05 + 0.01, color: color }); } }
-        function drawParticles() { /* ... (bez zmian) ... */ particles.forEach((p) => { ctx.save(); ctx.globalAlpha = p.alpha; ctx.fillStyle = p.color; ctx.beginPath(); ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2); ctx.fill(); ctx.restore(); }); }
-        function updateParticles() { /* ... (bez zmian - z filter) ... */ particles.forEach(p => { p.x += p.speedX; p.y += p.speedY; p.alpha -= p.decay; }); particles = particles.filter(p => p.alpha > 0); }
+        
+        function drawBonus(bonus) { ctx.fillStyle = bonus.color; ctx.fillRect(bonus.x, bonus.y, bonus.width, bonus.height); ctx.fillStyle = '#1f2937'; ctx.font = `bold ${bonus.width * 0.5}px Inter`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; let symbol = '+5s'; if(bonus.type === 'slow') symbol = '🐢'; else if(bonus.type === 'enlarge') symbol = '↕'; else if(bonus.type === 'speedup') symbol = '⚡'; else if(bonus.type === 'multi-ball') symbol = '•••'; else if(bonus.type === 'piercing') symbol = '🔥'; else if(bonus.type === 'shrink') symbol = '↔'; ctx.fillText(symbol, bonus.x + bonus.width / 2, bonus.y + bonus.height / 2); }
+        function createParticles(x, y, count = 10, color = '#fef3c7') { for (let i = 0; i < count; i++) { particles.push({ x: x, y: y, radius: Math.random() * (CANVAS_WIDTH * 0.004) + 1, speedX: (Math.random() - 0.5) * (CANVAS_WIDTH * 0.01), speedY: (Math.random() - 0.5) * (CANVAS_WIDTH * 0.01), alpha: 1, decay: Math.random() * 0.05 + 0.01, color: color }); } }
+        function drawParticles() { particles.forEach((p) => { ctx.save(); ctx.globalAlpha = p.alpha; ctx.fillStyle = p.color; ctx.beginPath(); ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2); ctx.fill(); ctx.restore(); }); }
+        function updateParticles() { particles.forEach(p => { p.x += p.speedX; p.y += p.speedY; p.alpha -= p.decay; }); particles = particles.filter(p => p.alpha > 0); }
         function draw() { if (!ctx) return; ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT); ctx.strokeStyle = 'var(--color-game-grid)'; ctx.lineWidth = 1; const gridSize = CANVAS_WIDTH * 0.05; for (let x = 0; x < CANVAS_WIDTH; x += gridSize) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, CANVAS_HEIGHT); ctx.stroke(); } for (let y = 0; y < CANVAS_HEIGHT; y += gridSize) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(CANVAS_WIDTH, y); ctx.stroke(); } ctx.fillStyle = player.color; ctx.fillRect(player.x, player.y, player.width, player.height); 
             balls.forEach(ball => { if (ball.active) { ctx.fillStyle = ball.isPiercing ? '#f97316' : ball.color; ctx.beginPath(); ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2); ctx.fill(); } });
             targets.forEach(target => { if (target.active) { 
-                if (target.hitsRequired === 3) ctx.fillStyle = '#f59e0b'; // Pomarańczowy
-                else if (target.hitsRequired === 2) ctx.fillStyle = '#fde047'; // Żółty
+                if (target.hitsRequired === 3) ctx.fillStyle = '#f59e0b'; 
+                else if (target.hitsRequired === 2) ctx.fillStyle = '#fde047'; 
                 else ctx.fillStyle = target.color; 
                 ctx.strokeStyle = '#fef3c7'; ctx.lineWidth = target.hitsRequired > 1 ? 3 : 2; 
                 ctx.fillRect(target.x - target.radius, target.y - target.radius, target.radius * 2, target.radius * 2); 
@@ -392,13 +393,13 @@
             drawParticles(); 
         }
         
-        // --- FUNKCJE LOGIKI GRY (UPDATE) ---
+        
         function createBall(x = player.x + player.width + 5, y = player.y + player.height / 2, speedX = CANVAS_WIDTH * 0.008, speedY = (Math.random() - 0.5) * (CANVAS_HEIGHT * 0.005)) {
              balls.push({ radius: CANVAS_WIDTH * 0.007, x: x, y: y, speedX: speedX, speedY: speedY, active: true, color: '#fef3c7', speedMultiplier: 1, isPiercing: false, effectTimer: 0 });
         }
 
         function shoot() { 
-            // Wystrzel tylko, jeśli nie ma aktywnych piłek
+            
             if (isGameOver || balls.some(b => b.active)) return; 
             
             const newBallX = player.x + player.width + (CANVAS_WIDTH * 0.007) + 5;
@@ -463,15 +464,15 @@
                              dropBonus(target.x, target.y); 
                              if(targetCountDisplay) targetCountDisplay.textContent = targets.filter(t => t.active).length;
                          } else if (target.hitsRequired === 2) {
-                             target.color = '#f59e0b'; // Pomarańczowy
+                             target.color = '#f59e0b'; 
                          } else if (target.hitsRequired === 1) {
-                             target.color = '#fde047'; // Żółty
+                             target.color = '#fde047'; 
                          }
                          
                          if (targets.every(t => !t.active)) { startNextLevel(); return; } } } } }); 
                      
                      obstacles.forEach(obs => { if (bullet.x + bullet.radius > obs.x && bullet.x - bullet.radius < obs.x + obs.width && bullet.y + bullet.radius > obs.y && bullet.y - bullet.radius < obs.y + obs.height) { 
-                         if(obs.isInvisible && obs.fadeTimer > 0) return; // Przelatuj
+                         if(obs.isInvisible && obs.fadeTimer > 0) return; 
                          playSound(bounceSynth, "E4", "16n", 'bounce'); 
                          if (obs.type === 'rect') { const overlapXLeft = (bullet.x + bullet.radius) - obs.x; const overlapXRight = (obs.x + obs.width) - (bullet.x - bullet.radius); const overlapYTop = (bullet.y + bullet.radius) - obs.y; const overlapYBottom = (obs.y + obs.height) - (bullet.y - bullet.radius); const minOverlapX = Math.min(overlapXLeft, overlapXRight); const minOverlapY = Math.min(overlapYTop, overlapYBottom); if (minOverlapX < minOverlapY) { bullet.speedX *= -1; bullet.x += (bullet.speedX > 0 ? 1 : -1) * minOverlapX * 0.5 + Math.sign(bullet.speedX); } else { bullet.speedY *= -1; bullet.y += (bullet.speedY > 0 ? 1 : -1) * minOverlapY * 0.5 + Math.sign(bullet.speedY); } } 
                          else if (obs.type === 'angled') { const tempSpeedX = bullet.speedX; const tempSpeedY = bullet.speedY; if (obs.angle === 45) { bullet.speedX = -tempSpeedY; bullet.speedY = -tempSpeedX; } else { bullet.speedX = tempSpeedY; bullet.speedY = tempSpeedX; } bullet.x += Math.sign(bullet.speedX) * 2; bullet.y += Math.sign(bullet.speedY) * 2; } 
@@ -547,17 +548,16 @@
 
         function endGame(message) { isGameOver = true; if (score > highScore) { highScore = score; localStorage.setItem('cncHighScore', highScore); if(highScoreDisplay) highScoreDisplay.textContent = highScore; message += " NOWY REKORD!"; } showGameMessage(message, message.includes("Gratulacje") ? 'green' : 'red'); playSound(endSynth, "C4"); if(startButton) startButton.textContent = "Zagraj Ponownie"; if (gameLoopInterval) clearInterval(gameLoopInterval); }
         
-        // Inicjalizacja po załadowaniu DOM
+        
         document.addEventListener('DOMContentLoaded', () => {
             
-            // Inicjalizacja AOS
             AOS.init({ duration: 800, once: true });
 
-            // Inicjalizacja Menu
+            
             mobileMenuButton = document.getElementById('mobile-menu-button'); 
             mobileMenu = document.getElementById('mobile-menu'); 
             
-            // POPRAWKA: Definicja funkcji toggleMobileMenu w zasięgu
+            
             function toggleMobileMenu() { 
                 if (mobileMenu) mobileMenu.classList.toggle('hidden'); 
                 if (mobileMenuButton) mobileMenuButton.classList.toggle('active'); 
@@ -575,7 +575,7 @@
             }
             if (mobileMenuButton) mobileMenuButton.addEventListener('click', toggleMobileMenu); 
             
-            // Inicjalizacja Gry
+            
             canvas = document.getElementById('gameCanvas'); 
             if (canvas) {
                 ctx = canvas.getContext('2d');
@@ -599,7 +599,7 @@
             scoreDisplay = document.getElementById('scoreDisplay');
             highScoreDisplay = document.getElementById('highScoreDisplay');
 
-            // Ustawienia początkowe interfejsu (zabezpieczone ifami)
+            
             player = {}; 
             resizeCanvas(); 
             highScore = localStorage.getItem('cncHighScore') || 0; 
@@ -615,7 +615,7 @@
              document.addEventListener('keydown', (e) => { if (!isGameOver && (e.code === 'Space' || e.code === 'Enter')) { e.preventDefault(); shoot(); } });
              if (startButton) startButton.addEventListener('click', startGame);
 
-             // Inicjalizacja przełącznika motywu
+             
              themeToggle = document.getElementById('theme-toggle');
              mobileThemeToggle = document.getElementById('mobile-theme-toggle');
              
@@ -644,7 +644,7 @@
              if (mobileThemeToggle) mobileThemeToggle.addEventListener('click', toggleTheme);
 
 
-             // Inicjalizacja tła Hero
+             
              const heroCanvas = document.getElementById('heroCanvas');
              if (heroCanvas) {
                 const heroCtx = heroCanvas.getContext('2d');
@@ -661,9 +661,9 @@
                     function drawHeroCanvas() {
                         if(!heroCtx) return;
                         
-                        // POPRAWKA: Użyj zmiennych CSS do zanikania tła
+                        
                         const isLight = document.documentElement.classList.contains('light');
-                        heroCtx.fillStyle = isLight ? "rgba(249, 250, 251, 0.05)" : "rgba(13, 17, 23, 0.05)"; // Fade to light bg or dark bg
+                        heroCtx.fillStyle = isLight ? "rgba(249, 250, 251, 0.05)" : "rgba(13, 17, 23, 0.05)"; 
                         
                         heroCtx.fillRect(0, 0, heroWidth, heroHeight);
                         const accentColor = getComputedStyle(document.documentElement).getPropertyValue('--color-accent').trim();
@@ -679,25 +679,27 @@
                     setInterval(drawHeroCanvas, 100); 
 
                     window.addEventListener('resize', () => {
+                        if (!heroCanvas) return; // Zabezpieczenie
                         heroWidth = heroCanvas.clientWidth;
                         heroHeight = heroCanvas.clientHeight;
-                        if(heroCanvas) {
-                            heroCanvas.width = heroWidth;
-                            heroCanvas.height = heroHeight;
-                        }
+                        heroCanvas.width = heroWidth;
+                        heroCanvas.height = heroHeight;
                         for(let i=0; i < columns; i++) drops[i] = 1; 
                     });
                 }
              }
 
-             // Inicjalizacja Paralaksa
+             
              const parallaxImage = document.getElementById('parallax-image');
              if (parallaxImage && window.matchMedia('(min-width: 769px)').matches) { 
                 window.addEventListener('scroll', () => {
                     const scrollPosition = window.pageYOffset;
-                    const imagePosition = parallaxImage.getBoundingClientRect().top + scrollPosition;
+                    // Sprawdź czy element istnieje przed pobraniem BoundingClientRect
+                    if (!parallaxImage) return; 
+                    const imageRect = parallaxImage.getBoundingClientRect();
+                    const imagePosition = imageRect.top + scrollPosition;
                     const offset = scrollPosition - imagePosition;
-                    if (scrollPosition > imagePosition - window.innerHeight && scrollPosition < imagePosition + parallaxImage.offsetHeight) {
+                    if (scrollPosition > imagePosition - window.innerHeight && scrollPosition < imagePosition + imageRect.height) {
                          parallaxImage.style.backgroundPositionY = offset * 0.3 + 'px'; 
                     }
                 });
