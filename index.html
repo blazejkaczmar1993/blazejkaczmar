@@ -183,18 +183,15 @@
              color: var(--color-accent-text-dark);
         }
         
-        /* POPRAWKA: Reguła dla otwartego menu mobilnego */
-        header.menu-open {
-            background-color: var(--color-bg-secondary);
-            backdrop-filter: none;
-        }
+        /* POPRAWKA: Usunięto regułę header.menu-open */
 
     </style>
 </head>
 <body class="antialiased bg-bg text-secondary">
 
     
-    <header class="sticky top-0 z-50 bg-bg-secondary/90 backdrop-blur-sm shadow-lg border-b border-primary">
+    <!-- POPRAWKA: Zmieniono z-50 na z-40 -->
+    <header class="sticky top-0 z-40 bg-bg-secondary/90 backdrop-blur-sm shadow-lg border-b border-primary">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
                 <a href="#hero" class="text-3xl font-extrabold tracking-tight accent-color">BK <span class="text-primary">CNC</span></a>
@@ -227,7 +224,8 @@
         </div>
     </header>
     
-    <nav id="mobile-menu" class="hidden md:hidden fixed top-16 left-0 right-0 z-60 bg-bg-secondary p-4 border-t border-primary shadow-lg"> 
+    <!-- POPRAWKA: Menu mobilne przeniesione POZA header, z-index 50 -->
+    <nav id="mobile-menu" class="hidden md:hidden fixed top-16 left-0 right-0 z-50 bg-bg-secondary p-4 border-t border-primary shadow-lg"> 
         <div class="flex flex-col space-y-3 text-center text-muted"> 
             <a href="#o-nas" class="block py-2 hover:text-primary transition duration-300 mobile-menu-link">O Nas</a> 
             <a href="#uslugi" class="block py-2 hover:text-primary transition duration-300 mobile-menu-link">Usługi</a> 
@@ -678,7 +676,7 @@
                  }
                  if(!isGameOver && ctx) draw(); 
 
-                 // POPRAWKA: Natychmiastowe czyszczenie canvasa Hero
+                 
                 const heroCanvas = document.getElementById('heroCanvas');
                 if (heroCanvas) {
                     const heroCtx = heroCanvas.getContext('2d');
