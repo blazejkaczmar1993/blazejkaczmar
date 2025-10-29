@@ -184,20 +184,15 @@
              color: var(--color-accent-text-dark);
         }
         
-        
-        /* POPRAWKA: Reguła dla otwartego menu mobilnego */
-        header.menu-open {
-            background-color: var(--color-bg-secondary);
-            backdrop-filter: none;
-            @apply bg-opacity-100; /* Zapewnia 100% krycia */
-        }
+        /* POPRAWKA: Usunięto regułę header.menu-open */
 
     </style>
 </head>
 <body class="antialiased bg-bg text-secondary">
 
     
-    <header class="sticky top-0 z-50 bg-bg-secondary/90 backdrop-blur-sm shadow-lg border-b border-primary transition-colors duration-300">
+    <!-- POPRAWKA: Usunięto 'transition-colors' i 'duration-300' -->
+    <header class="sticky top-0 z-50 bg-bg-secondary/90 backdrop-blur-sm shadow-lg border-b border-primary">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
                 <a href="#hero" class="text-3xl font-extrabold tracking-tight accent-color">BK <span class="text-primary">CNC</span></a>
@@ -228,18 +223,18 @@
                 </div>
             </div>
         </div>
-        <!-- POPRAWKA: z-60 (nad headerem z-50), usunięto 'sticky', dodano 'fixed' -->
-        <nav id="mobile-menu" class="hidden md:hidden fixed top-16 left-0 right-0 z-60 bg-bg-secondary p-4 border-t border-primary shadow-lg"> 
-            <div class="flex flex-col space-y-3 text-center text-muted"> 
-                <a href="#o-nas" class="block py-2 hover:text-primary transition duration-300 mobile-menu-link">O Nas</a> 
-                <a href="#uslugi" class="block py-2 hover:text-primary transition duration-300 mobile-menu-link">Usługi</a> 
-                <a href="#technologia" class="block py-2 hover:text-primary transition duration-300 mobile-menu-link">Technologia</a> 
-                <a href="#parametry-cnc" class="block py-2 hover:text-primary transition duration-300 mobile-menu-link">Kalkulator CNC</a> 
-                <a href="#gra-cnc" class="block py-2 hover:text-primary transition duration-300 mobile-menu-link">Gra CNC</a> 
-                <a href="#kontakt" class="block py-2 px-4 mt-2 rounded-full bg-cyan-600 text-gray-900 font-semibold hover:bg-cyan-500 transition duration-300 shadow-metal mobile-menu-link">Kontakt</a> 
-            </div> 
-        </nav>
+        <!-- POPRAWKA: Menu mobilne przeniesione POZA header, z-index 60 -->
     </header>
+    <nav id="mobile-menu" class="hidden md:hidden fixed top-16 left-0 right-0 z-60 bg-bg-secondary p-4 border-t border-primary shadow-lg"> 
+        <div class="flex flex-col space-y-3 text-center text-muted"> 
+            <a href="#o-nas" class="block py-2 hover:text-primary transition duration-300 mobile-menu-link">O Nas</a> 
+            <a href="#uslugi" class="block py-2 hover:text-primary transition duration-300 mobile-menu-link">Usługi</a> 
+            <a href="#technologia" class="block py-2 hover:text-primary transition duration-300 mobile-menu-link">Technologia</a> 
+            <a href="#parametry-cnc" class="block py-2 hover:text-primary transition duration-300 mobile-menu-link">Kalkulator CNC</a> 
+            <a href="#gra-cnc" class="block py-2 hover:text-primary transition duration-300 mobile-menu-link">Gra CNC</a> 
+            <a href="#kontakt" class="block py-2 px-4 mt-2 rounded-full bg-cyan-600 text-gray-900 font-semibold hover:bg-cyan-500 transition duration-300 shadow-metal mobile-menu-link">Kontakt</a> 
+        </div> 
+    </nav>
 
     <main>
         
