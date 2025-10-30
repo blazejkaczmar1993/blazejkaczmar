@@ -37,6 +37,7 @@
         :root {
             /* Nowe kolory tła z pełnym kryciem */
             --color-bg-secondary-rgb: 22, 27, 34; /* #161b22 */
+            --color-bg-mobile: #0d1117; /* Użyj pełnego krycia BG */
             --color-bg: #0d1117;
             --color-bg-secondary: #161b22;
             --color-bg-card: #1f2937;
@@ -63,6 +64,7 @@
         html.light {
             /* Nowe kolory tła z pełnym kryciem */
             --color-bg-secondary-rgb: 243, 244, 246; /* #f3f4f6 */
+            --color-bg-mobile: #f9fafb; /* Użyj pełnego krycia BG */
             --color-bg: #f9fafb;
             --color-bg-secondary: #f3f4f6;
             --color-bg-card: #ffffff;
@@ -190,13 +192,13 @@
         /* NOWE STYLE DLA UKRYWANIA NAGŁÓWKA */
         .sticky-header {
             transition: transform 0.3s ease-out, background-color 0.3s ease-out;
-            /* ZAPEWNIENIE PEŁNEGO KRYCIA W WERSJI DOMYŚLNEJ (dla menu) */
+            /* Nagłówek (pasek) jest zawsze kryjący na pełnym kryciu (1.0) */
             background-color: rgba(var(--color-bg-secondary-rgb), 1.0) !important;
             backdrop-filter: none !important;
         }
 
         .sticky-header.scrolled {
-            /* Użycie przezroczystego tła (95%) + blur dla efektu po przewinięciu */
+            /* Gdy przewinięty, stosujemy lekki blur i 95% krycie */
             background-color: rgba(var(--color-bg-secondary-rgb), 0.95) !important;
             backdrop-filter: blur(4px) !important;
         }
@@ -204,12 +206,20 @@
         .sticky-header.hidden-header {
             transform: translateY(-100%);
         }
+
+        /* POPRAWKA NAJWAŻNIEJSZA: Wymuszenie kryjącego tła dla menu mobilnego */
+        #mobile-menu {
+            background-color: var(--color-bg-mobile) !important;
+            min-height: calc(100vh - 64px); /* 100% wysokości widoku minus wysokość nagłówka */
+            height: auto;
+            border-top: 1px solid var(--color-border-primary); /* Dodanie linii odcinającej */
+        }
     </style>
 </head>
 <body class="antialiased bg-bg text-secondary">
 
     
-    <!-- POPRAWKA: Dodanie klas dla obsługi ukrywania przy przewijaniu. Nagłówek jest kryjący. -->
+    <!-- POPRAWKA: Nagłówek jest kryjący -->
     <header id="main-header" class="sticky top-0 z-40 bg-bg-secondary shadow-lg border-b border-primary sticky-header">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
@@ -231,20 +241,13 @@
                         <svg class="sun-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m8.66-15.66l-.707.707M4.04 19.96l-.707.707M21 12h-1M4 12H3m15.66 8.66l-.707-.707M6.04 6.04l-.707-.707M12 18a6 6 0 100-12 6 6 0 000 12z" /></svg>
                         <svg class="moon-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9 9 0 008.354-5.646z" /></svg>
                     </button>
-                </nav>
-                <div class="flex items-center md:hidden">
-                    <button id="mobile-theme-toggle" title="Zmień motyw" class="w-10 h-10 p-2 rounded-full text-muted hover:text-primary hover:bg-card transition-all duration-300 mr-2">
-                        <svg class="sun-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m8.66-15.66l-.707.707M4.04 19.96l-.707.707M21 12h-1M4 12H3m15.66 8.66l-.707-.707M6.04 6.04l-.707-.707M12 18a6 6 0 100-12 6 6 0 000 12z" /></svg>
-                        <svg class="moon-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9 9 0 008.354-5.646z" /></svg>
-                    </button>
-                    <button id="mobile-menu-button" class="p-2 rounded-md hover:bg-card transition duration-300" aria-label="Toggle menu"> <svg class="w-6 h-6 accent-color" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg> <svg class="w-6 h-6 accent-color" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg> </button>
                 </div>
             </div>
         </div>
     </header>
     
-    <!-- Menu mobilne: ma już bg-bg-secondary, więc jest nieprzezroczyste (Fix 1) -->
-    <nav id="mobile-menu" class="hidden md:hidden fixed top-16 left-0 right-0 z-50 bg-bg-secondary p-4 border-t border-primary shadow-lg"> 
+    <!-- Menu mobilne: używa teraz zmiennej --color-bg-mobile w CSS, aby wymusić krycie -->
+    <nav id="mobile-menu" class="hidden md:hidden fixed top-16 left-0 right-0 z-50 bg-bg-secondary p-4 shadow-lg"> 
         <div class="flex flex-col space-y-3 text-center text-muted"> 
             <a href="#o-nas" class="block py-2 hover:text-primary transition duration-300 mobile-menu-link">O Nas</a> 
             <a href="#uslugi" class="block py-2 hover:text-primary transition duration-300 mobile-menu-link">Usługi</a> 
