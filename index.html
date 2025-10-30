@@ -207,11 +207,11 @@
             transform: translateY(-100%);
         }
 
-        /* POPRAWKA NAJWAŻNIEJSZA: Wymuszenie kryjącego tła dla menu mobilnego */
+        /* POPRAWKA 3: Ustawienie wysokości menu mobilnego na AUTO */
         #mobile-menu {
             background-color: var(--color-bg-mobile) !important;
-            min-height: calc(100vh - 64px); /* 100% wysokości widoku minus wysokość nagłówka */
-            height: auto;
+            height: auto; /* Zmiana z min-height: calc(100vh - 64px) na auto */
+            min-height: 0; /* Zapewnienie, że nie ma narzuconego minimum */
             border-top: 1px solid var(--color-border-primary); /* Dodanie linii odcinającej */
         }
     </style>
@@ -253,7 +253,7 @@
         </div>
     </header>
     
-    <!-- Menu mobilne: używa teraz zmiennej --color-bg-mobile w CSS, aby wymusić krycie -->
+    <!-- Menu mobilne: rozmiar dostosowuje się do zawartości, a nie do całego widoku -->
     <nav id="mobile-menu" class="hidden md:hidden fixed top-16 left-0 right-0 z-50 bg-bg-secondary p-4 shadow-lg"> 
         <div class="flex flex-col space-y-3 text-center text-muted"> 
             <a href="#o-nas" class="block py-2 hover:text-primary transition duration-300 mobile-menu-link">O Nas</a> 
