@@ -88,7 +88,6 @@
             font-family: 'Inter', sans-serif;
             background-color: var(--color-bg); 
             color: var(--color-text-secondary); 
-            /* POPRAWKA: Usunięto overflow-x: hidden; */
             transition: color 0.3s ease;
         }
         h1, h2 { font-family: 'Exo 2', sans-serif; color: var(--color-text-primary); }
@@ -122,8 +121,9 @@
 
         .img-placeholder { display: flex; align-items: center; justify-content: center; height: 400px; width: 100%; background-color: var(--color-bg-card); color: var(--color-accent); border: 2px solid var(--color-accent); border-radius: 0.5rem; font-size: 1.5rem; font-weight: 600; text-align: center; box-shadow: 0 0 40px var(--color-shadow-card); }
         
+        /* POPRAWKA: Usunięto odniesienie do linii siatki */
         #gameCanvas { touch-action: none; width: 100%; max-width: 700px; height: auto; aspect-ratio: 700 / 400; cursor: none; background-color: var(--color-bg-secondary); border-color: var(--color-border-primary); }
-        .game-grid-line { stroke: var(--color-game-grid); }
+        /* Usunięto .game-grid-line */
 
         #mobile-menu-button.active svg:first-child { display: none; } #mobile-menu-button.active svg:last-child { display: block; } #mobile-menu-button svg:last-child { display: none; }
 
@@ -175,7 +175,7 @@
              @apply block w-full p-3 border border-primary rounded-md text-form focus:border-accent focus:ring-accent transition-colors;
              background-color: var(--color-bg); 
              min-height: 140px; 
-         }
+           }
         .form-button {
             @apply w-full px-4 py-3 bg-gradient-to-r from-cyan-500 to-cyan-700 text-accent-dark font-bold rounded-lg hover-accent transition duration-300 shadow-metal transform hover:scale-105 active:scale-95 group flex items-center justify-center;
         }
@@ -183,18 +183,14 @@
              color: var(--color-accent-text-dark);
         }
         
-        /* POPRAWKA: Przywrócono regułę dla otwartego menu mobilnego */
-        header.menu-open {
-            background-color: var(--color-bg-secondary);
-            backdrop-filter: none;
-        }
-
+        /* USUNIĘTO: Nadpisująca reguła header.menu-open. Nagłówek jest teraz zawsze nieprzezroczysty */
     </style>
 </head>
 <body class="antialiased bg-bg text-secondary">
 
     
-    <header class="sticky top-0 z-40 bg-bg-secondary/90 backdrop-blur-sm shadow-lg border-b border-primary">
+    <!-- POPRAWKA: Usunięto /90 backdrop-blur-sm, aby nagłówek był zawsze nieprzezroczysty (Fix 1) -->
+    <header class="sticky top-0 z-40 bg-bg-secondary shadow-lg border-b border-primary">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
                 <a href="#hero" class="text-3xl font-extrabold tracking-tight accent-color">BK <span class="text-primary">CNC</span></a>
@@ -227,7 +223,7 @@
         </div>
     </header>
     
-    <!-- POPRAWKA: z-50 (nad headerem z-40) i użycie zmiennych CSS -->
+    <!-- Menu mobilne: ma już bg-bg-secondary, więc jest nieprzezroczyste (Fix 1) -->
     <nav id="mobile-menu" class="hidden md:hidden fixed top-16 left-0 right-0 z-50 bg-bg-secondary p-4 border-t border-primary shadow-lg"> 
         <div class="flex flex-col space-y-3 text-center text-muted"> 
             <a href="#o-nas" class="block py-2 hover:text-primary transition duration-300 mobile-menu-link">O Nas</a> 
@@ -280,11 +276,11 @@
         <section id="parametry-cnc" class="py-28 bg-secondary border-t border-primary"> <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8" data-aos="fade-up"> <div class="text-center mb-16"> <span class="text-lg font-medium uppercase accent-color mb-2 block">Wsparcie Inżynierskie</span> <h2 class="text-4xl font-extrabold">Kalkulator Parametrów Toczenia</h2> </div> <div class="p-10 bg-card rounded-xl shadow-2xl border-t-4 border-accent"> <h3 class="text-2xl font-semibold accent-color mb-8 flex items-center"> <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg> Obliczenia podstawowych parametrów </h3> <div class="grid grid-cols-1 md:grid-cols-2 gap-8"> <div class="p-6 bg-secondary rounded-lg shadow-inner"> <label for="Vc" class="block text-sm font-medium text-muted">Prędkość Skrawania (Vc) [m/min]</label> <input type="number" step="0.1" id="Vc" placeholder="np. 250" class="mt-1 block w-full p-3 border border-primary bg-bg rounded-md text-form focus:border-accent focus:ring-accent"> <label for="D" class="block text-sm font-medium text-muted mt-4">Średnica Detalu (D) [mm]</label> <input type="number" step="0.1" id="D" placeholder="np. 12" class="mt-1 block w-full p-3 border border-primary bg-bg rounded-md text-form focus:border-accent focus:ring-accent"> <button onclick="calculateRPM()" class="w-full mt-6 px-4 py-3 bg-gradient-to-r from-cyan-500 to-cyan-700 text-accent-dark font-bold rounded-lg hover-accent transition duration-300 transform hover:scale-105 active:scale-95 group flex items-center justify-center cta-button"> Oblicz Obroty (n) <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 transition-transform duration-300 group-hover:rotate-90" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg> </button> <div class="mt-5 text-lg font-bold text-primary"> n = <span id="n_result" class="accent-color text-xl">0</span> obr/min </div> </div> <div class="p-6 bg-secondary rounded-lg shadow-inner"> <label for="f" class="block text-sm font-medium text-muted">Posuw (f) [mm/obr]</label> <input type="number" step="0.001" id="f" placeholder="np. 0.08" class="mt-1 block w-full p-3 border border-primary bg-bg rounded-md text-form focus:border-accent focus:ring-accent"> <label for="n_input" class="block text-sm font-medium text-muted mt-4">Obroty Wrzeciona (n) [obr/min]</label> <input type="number" step="1" id="n_input" placeholder="Wartość z lewej lub własna" class="mt-1 block w-full p-3 border border-primary bg-bg rounded-md text-form focus:border-accent focus:ring-accent"> <button onclick="calculateFeedRate()" class="w-full mt-6 px-4 py-3 bg-gradient-to-r from-cyan-500 to-cyan-700 text-accent-dark font-bold rounded-lg hover-accent transition duration-300 transform hover:scale-105 active:scale-95 group flex items-center justify-center cta-button"> Oblicz Posuw (Vf) <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg> </button> <div class="mt-5 text-lg font-bold text-primary"> Vf = <span id="Vf_result" class="accent-color text-xl">0</span> mm/min </div> </div> </div> <div id="calculator-message" class="mt-8 p-3 bg-red-900/50 text-red-300 rounded-lg hidden"></div> </div> </div> </section>
         <section id="gra-cnc" class="py-28 bg-secondary border-t border-primary"> <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8" data-aos="fade-up"> <div class="text-center mb-16"> <span class="text-lg font-medium uppercase accent-color mb-2 block">Rozrywka Techniczna</span> <h2 class="text-4xl font-extrabold">Gra Operator CNC (Arkanoid)</h2> <p class="text-muted mt-3 leading-relaxed">Użyj myszy lub dotyku, aby sterować operatorem i odbijać piłkę. Zbijaj "usterki" i nie pozwól piłce uciec!</p> </div> <div class="p-8 bg-card rounded-xl shadow-2xl border-t-4 border-accent flex flex-col items-center"> <canvas id="gameCanvas" width="700" height="400" class="border border-primary rounded-md"></canvas> 
             <div class="mt-8 flex flex-col sm:flex-row justify-between w-full max-w-2xl text-lg font-bold space-y-2 sm:space-y-0 text-primary"> 
-                 <p>Poziom: <span id="levelDisplay" class="accent-color">1</span></p> 
-                 <p>Czas: <span id="timeDisplay" class="accent-color">45</span>s</p>
-                 <p>Wynik: <span id="scoreDisplay" class="accent-color">0</span></p> 
-                 <p>Usterki: <span id="targetCountDisplay" class="accent-color">0</span></p>
-                 <p>Rekord: <span id="highScoreDisplay" class="text-yellow-400">0</span></p> 
+                <p>Poziom: <span id="levelDisplay" class="accent-color">1</span></p> 
+                <p>Czas: <span id="timeDisplay" class="accent-color">45</span>s</p>
+                <p>Wynik: <span id="scoreDisplay" class="accent-color">0</span></p> 
+                <p>Usterki: <span id="targetCountDisplay" class="accent-color">0</span></p>
+                <p>Rekord: <span id="highScoreDisplay" class="text-yellow-400">0</span></p> 
             </div> 
             <div class="mt-8 text-center"> 
                 <button id="startButton" class="cta-button px-8 py-3 bg-gradient-to-r from-cyan-500 to-cyan-700 text-accent-dark font-bold rounded-lg hover-accent transition duration-300 shadow-metal transform hover:scale-105 active:scale-95 group flex items-center justify-center"> 
@@ -339,7 +335,13 @@
         let canvas, ctx; 
         let CANVAS_WIDTH = 700, CANVAS_HEIGHT = 400, GAME_DURATION = 45, BASE_TARGETS = 5, MAX_LEVEL = 10;
         let gameLoopInterval, gameTime, isGameOver = true, animationFrameId, currentLevel = 1;
-        let player = { velocityY: 0, lastY: 0 }; 
+        
+        // NOWE ZMIENNE GRY DLA POPRAWIONEJ FIZYKI
+        let BASE_BALL_VELOCITY; 
+        const BASE_BALL_VELOCITY_FACTOR = 0.008; // 0.8% szerokości canvasa na klatkę (ok. 5.6px dla 700px)
+        const PLAYER_INFLUENCE_FACTOR = 0.5; // Jak bardzo ruch paletki (velocityY) wpływa na kąt kulki
+        
+        let player = { velocityY: 0, lastY: 0, currentBaseSpeed: 0 }; 
         let balls = []; 
         let targets = [], bonuses = [], obstacles = [], particles = [];
         let timeDisplay, targetCountDisplay, hitsDisplay, gameMessage, startButton, levelDisplay, scoreDisplay, highScoreDisplay; 
@@ -355,7 +357,16 @@
         function playSound(synth, note, duration = "8n", type = null) { const now = performance.now(); if (soundsReady && synth && Tone.context.state === 'running') { if (type === 'bounce' && now - lastBounceSoundTime < soundThrottleTime) return; if (type === 'hit' && now - lastHitSoundTime < soundThrottleTime) return; try { const startTime = Tone.now() + (Tone.context.lookAhead || 0.01); synth.triggerAttackRelease(note, duration, startTime); if (type === 'bounce') lastBounceSoundTime = now; if (type === 'hit') lastHitSoundTime = now; } catch (e) { /* Ignoruj błąd czasu startu */ } } }
 
         
-        function resizeCanvas() { if (!canvas) return; const parentWidth = canvas.parentElement.clientWidth; CANVAS_WIDTH = Math.min(parentWidth - 16, 700); CANVAS_HEIGHT = (CANVAS_WIDTH / 700) * 400; canvas.width = CANVAS_WIDTH; canvas.height = CANVAS_HEIGHT; if (isGameOver && player.height) { player.x = CANVAS_WIDTH * 0.02; player.width = CANVAS_WIDTH * 0.02; player.height = CANVAS_HEIGHT * 0.2; player.y = CANVAS_HEIGHT / 2 - player.height / 2; mousePosition.y = CANVAS_HEIGHT / 2; player.lastY = player.y; player.velocityY = 0;} if (!isGameOver && ctx) { draw(); } } 
+        function resizeCanvas() { if (!canvas) return; const parentWidth = canvas.parentElement.clientWidth; CANVAS_WIDTH = Math.min(parentWidth - 16, 700); CANVAS_HEIGHT = (CANVAS_WIDTH / 700) * 400; canvas.width = CANVAS_WIDTH; canvas.height = CANVAS_HEIGHT; if (isGameOver || player.width === undefined) { 
+            player.width = CANVAS_WIDTH * 0.02; 
+            player.height = CANVAS_HEIGHT * 0.2; 
+            player.x = CANVAS_WIDTH * 0.02; 
+            player.y = CANVAS_HEIGHT / 2 - player.height / 2;
+            player.baseHeight = CANVAS_HEIGHT * 0.2; // Ustawienie baseHeight
+            mousePosition.y = player.y + player.height / 2; 
+            player.lastY = player.y; 
+            player.velocityY = 0;
+        } if (!isGameOver && ctx) { draw(); } } 
         
         function initGame(resetLevel = true) { 
              if (!ctx) { console.error("Canvas context not ready for initGame"); return; } 
@@ -367,15 +378,23 @@
              const targetsToGenerate = BASE_TARGETS + (currentLevel - 1); 
              GAME_DURATION = 50 - (currentLevel - 1) * 3; if (GAME_DURATION < 15) GAME_DURATION = 15; 
              
-             player = { width: CANVAS_WIDTH * 0.02, height: CANVAS_HEIGHT * 0.2, x: CANVAS_WIDTH * 0.02, y: CANVAS_HEIGHT / 2 - (CANVAS_HEIGHT * 0.2) / 2, speed: 0.15, color: 'var(--color-accent)', effectTimer: 0, baseHeight: CANVAS_HEIGHT * 0.2, velocityY: 0, lastY: CANVAS_HEIGHT / 2 - (CANVAS_HEIGHT * 0.2) / 2 }; 
+             // Ustawienie bazowej prędkości kulki z przyspieszeniem na poziom
+             BASE_BALL_VELOCITY = CANVAS_WIDTH * BASE_BALL_VELOCITY_FACTOR;
+             const speedMultiplier = 1.0 + Math.min(currentLevel - 1, MAX_LEVEL) * 0.12; // Zwiększenie prędkości o 12% na poziom
+             player = { 
+                width: CANVAS_WIDTH * 0.02, height: CANVAS_HEIGHT * 0.2, x: CANVAS_WIDTH * 0.02, 
+                y: CANVAS_HEIGHT / 2 - (CANVAS_HEIGHT * 0.2) / 2, speed: 0.15, 
+                color: 'var(--color-accent)', effectTimer: 0, 
+                baseHeight: CANVAS_HEIGHT * 0.2, velocityY: 0, 
+                lastY: CANVAS_HEIGHT / 2 - (CANVAS_HEIGHT * 0.2) / 2,
+                currentBaseSpeed: BASE_BALL_VELOCITY * speedMultiplier // Aktualna prędkość bazowa dla poziomu
+             }; 
              
              balls = []; 
-             createBall(); 
              
              targets = []; bonuses = []; obstacles = []; particles = []; gameTime = GAME_DURATION; isGameOver = false; 
              if(levelDisplay) levelDisplay.textContent = currentLevel; 
              if(timeDisplay) { timeDisplay.textContent = GAME_DURATION; timeDisplay.classList.remove('timer-warning'); }
-             if(hitsDisplay) hitsDisplay.textContent = hitCount; 
              if(scoreDisplay) scoreDisplay.textContent = score; 
              if(gameMessage) gameMessage.classList.add('hidden'); 
              if(startButton) startButton.textContent = "Restart Gry"; 
@@ -419,68 +438,209 @@
         }
         function generateBoss() { targets.push({ x: CANVAS_WIDTH * 0.7, y: CANVAS_HEIGHT / 2, radius: CANVAS_WIDTH * 0.08, active: true, color: '#b91c1c', hitsRequired: 20, maxHits: 20, isMoving: true, moveSpeed: 0.5 * (CANVAS_HEIGHT / 400) }); }
         function generateObstacles(count, invisible = false) { const obsWidth = CANVAS_WIDTH * 0.02; const obsHeight = CANVAS_HEIGHT * 0.18; const marginX = CANVAS_WIDTH * 0.1; const marginY = obsHeight * 0.7; for (let i = 0; i < count; i++) { let newX, newY, collision, attempts = 0; do { collision = false; newX = Math.random() * (CANVAS_WIDTH * 0.6 - CANVAS_WIDTH * 0.3 - 2 * marginX) + CANVAS_WIDTH * 0.3 + marginX; newY = Math.random() * (CANVAS_HEIGHT - obsHeight - 2 * marginY) + marginY; for (const obs of obstacles) { if (newX < obs.x + obs.width + marginX && newX + obsWidth > obs.x - marginX && newY < obs.y + obs.height + marginY * 1.5 && newY + obsHeight > obs.y - marginY * 1.5) { collision = true; break; } } attempts++; } while (collision && attempts < 30); if (!collision) { obstacles.push({ type: 'rect', x: newX, y: newY, width: obsWidth, height: obsHeight, color: invisible ? 'rgba(107, 114, 128, 0.5)' : '#6b7280', isInvisible: invisible, fadeTimer: 2.0 }); } } }
-        function generateAngledObstacles(count) { const size = CANVAS_WIDTH * 0.05; const margin = size * 1.5; for (let i = 0; i < count; i++) { const angle = Math.random() > 0.5 ? 45 : -45; let posX, posY, collision, attempts = 0; do { collision = false; posX = CANVAS_WIDTH - margin - size - (Math.random() * CANVAS_WIDTH * 0.2); posY = margin * 1.5 + Math.random() * (CANVAS_HEIGHT - 3 * margin - size); for (const obs of obstacles) { const checkMargin = margin * 0.8; if (posX < obs.x + obs.width + checkMargin && posX + size > obs.x - checkMargin && posY < obs.y + obs.height + checkMargin && posY + size > obs.y - checkMargin) { collision = true; break; } } attempts++; } while (collision && attempts < 25); if (!collision) { obstacles.push({ type: 'angled', x: posX, y: newY, width: size, height: size, angle: angle, color: '#9ca3af' }); } } }
-        function dropBonus(x, y) { if (Math.random() < BONUS_CHANCE) { const bonusSize = CANVAS_WIDTH * 0.024; let bonusType = 'time'; const rand = Math.random(); if (currentLevel >= 2 && rand < 0.2) bonusType = 'slow'; else if (currentLevel >= 4 && rand < 0.4) bonusType = 'enlarge'; else if (currentLevel >= 5 && rand < 0.6) bonusType = 'multi-ball'; else if (currentLevel >= 6 && rand < 0.7) bonusType = 'piercing'; else if (currentLevel >= 7 && rand < 0.8) bonusType = 'shrink'; bonuses.push({ x: x - bonusSize / 2, y: y - bonusSize / 2, width: bonusSize, height: bonusSize, speedY: (0.5 + Math.random() * 0.5) * (CANVAS_HEIGHT / 400), type: bonusType, active: true, color: (bonusType === 'speedup' || bonusType === 'shrink') ? '#f87171' : '#facc15' }); } }
+        function generateAngledObstacles(count) { const size = CANVAS_WIDTH * 0.05; const margin = size * 1.5; for (let i = 0; i < count; i++) { const angle = Math.random() > 0.5 ? 45 : -45; let posX, posY, collision, attempts = 0; do { collision = false; posX = CANVAS_WIDTH - margin - size - (Math.random() * CANVAS_WIDTH * 0.2); posY = margin * 1.5 + Math.random() * (CANVAS_HEIGHT - 3 * margin - size); for (const obs of obstacles) { const checkMargin = margin * 0.8; if (posX < obs.x + obs.width + checkMargin && posX + size > obs.x - checkMargin && posY < obs.y + obs.height + checkMargin && posY + size > obs.y - checkMargin) { collision = true; break; } } attempts++; } while (collision && attempts < 25); if (!collision) { obstacles.push({ type: 'angled', x: posX, y: posY, width: size, height: size, angle: angle, color: '#9ca3af' }); } } }
+        function dropBonus(x, y) { if (Math.random() < BONUS_CHANCE) { const bonusSize = CANVAS_WIDTH * 0.024; let bonusType = 'time'; const rand = Math.random(); if (currentLevel >= 2 && rand < 0.2) bonusType = 'slow'; else if (currentLevel >= 4 && rand < 0.4) bonusType = 'enlarge'; else if (currentLevel >= 5 && rand < 0.6) bonusType = 'multi-ball'; else if (currentLevel >= 6 && rand < 0.7) bonusType = 'piercing'; else if (currentLevel >= 7 && rand < 0.8) bonusType = 'shrink'; bonuses.push({ x: x - bonusSize / 2, y: y - bonusSize / 2, width: bonusSize, height: bonusSize, speedY: (0.5 + Math.random() * 0.5) * (CANVAS_HEIGHT / 400), type: bonusType, active: true, color: (bonusType === 'speedup' || bonusType === 'shrink') ? '#f87171' : '#facc15', effectTimer: bonusType === 'slow' ? 5 : 0 }); } }
         
         
-        function drawBonus(bonus) { ctx.fillStyle = bonus.color; ctx.fillRect(bonus.x, bonus.y, bonus.width, bonus.height); ctx.fillStyle = '#1f2937'; ctx.font = `bold ${bonus.width * 0.5}px Inter`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; let symbol = '+5s'; if(bonus.type === 'slow') symbol = '🐢'; else if(bonus.type === 'enlarge') symbol = '↕'; else if(bonus.type === 'speedup') symbol = '⚡'; else if(bonus.type === 'multi-ball') symbol = '•••'; else if(bonus.type === 'piercing') symbol = '🔥'; else if(bonus.type === 'shrink') symbol = '↔'; ctx.fillText(symbol, bonus.x + bonus.width / 2, bonus.y + bonus.height / 2); }
+        function drawBonus(bonus) { ctx.fillStyle = bonus.color; ctx.fillRect(bonus.x, bonus.y, bonus.width, bonus.height); ctx.fillStyle = 'var(--color-accent-text-dark)'; ctx.font = `bold ${bonus.width * 0.5}px Inter`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; let symbol = '+5s'; if(bonus.type === 'slow') symbol = '🐢'; else if(bonus.type === 'enlarge') symbol = '↕'; else if(bonus.type === 'speedup') symbol = '⚡'; else if(bonus.type === 'multi-ball') symbol = '•••'; else if(bonus.type === 'piercing') symbol = '🔥'; else if(bonus.type === 'shrink') symbol = '↔'; ctx.fillText(symbol, bonus.x + bonus.width / 2, bonus.y + bonus.height / 2); }
         function createParticles(x, y, count = 10, color = 'var(--color-text-primary)') { for (let i = 0; i < count; i++) { particles.push({ x: x, y: y, radius: Math.random() * (CANVAS_WIDTH * 0.004) + 1, speedX: (Math.random() - 0.5) * (CANVAS_WIDTH * 0.01), speedY: (Math.random() - 0.5) * (CANVAS_WIDTH * 0.01), alpha: 1, decay: Math.random() * 0.05 + 0.01, color: color }); } }
         function drawParticles() { particles.forEach((p) => { ctx.save(); ctx.globalAlpha = p.alpha; ctx.fillStyle = p.color; ctx.beginPath(); ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2); ctx.fill(); ctx.restore(); }); }
         function updateParticles() { particles.forEach(p => { p.x += p.speedX; p.y += p.speedY; p.alpha -= p.decay; }); particles = particles.filter(p => p.alpha > 0); }
-        function draw() { if (!ctx) return; ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT); ctx.strokeStyle = 'var(--color-game-grid)'; ctx.lineWidth = 1; const gridSize = CANVAS_WIDTH * 0.05; for (let x = 0; x < CANVAS_WIDTH; x += gridSize) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, CANVAS_HEIGHT); ctx.stroke(); } for (let y = 0; y < CANVAS_HEIGHT; y += gridSize) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(CANVAS_WIDTH, y); ctx.stroke(); } ctx.fillStyle = player.color; ctx.fillRect(player.x, player.y, player.width, player.height); 
-            balls.forEach(ball => { if (ball.active) { ctx.fillStyle = ball.isPiercing ? '#f97316' : ball.color; ctx.beginPath(); ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2); ctx.fill(); } });
-            targets.forEach(target => { if (target.active) { 
-                if (target.hitsRequired === 3) ctx.fillStyle = '#f59e0b'; 
-                else if (target.hitsRequired === 2) ctx.fillStyle = '#fde047'; 
-                else ctx.fillStyle = target.color; 
-                ctx.strokeStyle = 'var(--color-text-primary)'; ctx.lineWidth = target.hitsRequired > 1 ? 3 : 2; 
-                ctx.fillRect(target.x - target.radius, target.y - target.radius, target.radius * 2, target.radius * 2); 
-                ctx.strokeRect(target.x - target.radius, target.y - target.radius, target.radius * 2, target.radius * 2); 
-            } }); 
+
+        // POPRAWIONY RYSUNEK CELÓW (detali) i usunięcie siatki
+        function draw() { 
+            if (!ctx) return; 
+            ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT); 
+
+            // Rysowanie Paletki (Operatora)
+            ctx.fillStyle = player.color; 
+            ctx.fillRect(player.x, player.y, player.width, player.height); 
+            
+            // Rysowanie Kul
+            balls.forEach(ball => { 
+                if (ball.active) { 
+                    ctx.fillStyle = ball.isPiercing ? 'var(--color-accent)' : ball.color; 
+                    ctx.beginPath(); 
+                    ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2); 
+                    ctx.fill(); 
+                } 
+            });
+            
+            // Rysowanie Celów (Detali)
+            targets.forEach(target => { 
+                if (target.active) { 
+                    // Kolory detali w zależności od 'wytrzymałości' (hitsRequired)
+                    if (target.hitsRequired >= 3) ctx.fillStyle = '#ef4444'; // Twardszy materiał (czerwony)
+                    else if (target.hitsRequired === 2) ctx.fillStyle = '#f97316'; // Średni materiał (pomarańczowy)
+                    else ctx.fillStyle = '#facc15'; // Miękki materiał (żółty)
+                    
+                    const size = target.radius * 2;
+                    
+                    // Rysowanie detalu (zaokrąglony prostokąt - dla czytelności Arkanoida)
+                    ctx.beginPath();
+                    ctx.roundRect(target.x - target.radius, target.y - target.radius, size, size, target.radius * 0.25);
+                    ctx.fill();
+
+                    ctx.strokeStyle = 'var(--color-text-primary)'; 
+                    ctx.lineWidth = target.hitsRequired > 1 ? 2 : 1; 
+                    ctx.stroke();
+
+                    // Wyświetlenie "życia" detalu dla detali o podwyższonej wytrzymałości
+                    if (target.hitsRequired > 1) {
+                        ctx.fillStyle = 'var(--color-accent-text-dark)';
+                        ctx.font = `bold ${target.radius * 0.9}px Exo 2`;
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'middle';
+                        ctx.fillText(target.hitsRequired, target.x, target.y);
+                    }
+                } 
+            }); 
+            
+            // Rysowanie Bonusów
             bonuses.forEach(bonus => { if (bonus.active) { drawBonus(bonus); } }); 
-            obstacles.forEach(obs => { ctx.save(); if (obs.isInvisible) ctx.globalAlpha = obs.fadeTimer > 0 ? (obs.fadeTimer / 2.0) : 0; ctx.fillStyle = obs.color; ctx.strokeStyle = '#e5e7eb'; ctx.lineWidth = 2; if (obs.type === 'rect') { ctx.fillRect(obs.x, obs.y, obs.width, obs.height); ctx.strokeRect(obs.x, obs.y, obs.width, obs.height); } else if (obs.type === 'angled') { ctx.translate(obs.x + obs.width / 2, obs.y + obs.height / 2); ctx.rotate(obs.angle * Math.PI / 180); ctx.fillRect(-obs.width / 2, -obs.height / 2, obs.width, obs.height); ctx.strokeRect(-obs.width / 2, -obs.height / 2, obs.width, obs.height); } ctx.restore(); }); 
+            
+            // Rysowanie Przeszkód
+            obstacles.forEach(obs => { 
+                ctx.save(); 
+                if (obs.isInvisible) ctx.globalAlpha = obs.fadeTimer > 0 ? (obs.fadeTimer / 2.0) : 0; 
+                ctx.fillStyle = obs.color; 
+                ctx.strokeStyle = 'var(--color-text-primary)'; 
+                ctx.lineWidth = 2; 
+                if (obs.type === 'rect') { 
+                    ctx.fillRect(obs.x, obs.y, obs.width, obs.height); 
+                    ctx.strokeRect(obs.x, obs.y, obs.width, obs.height); 
+                } else if (obs.type === 'angled') { 
+                    ctx.translate(obs.x + obs.width / 2, obs.y + obs.height / 2); 
+                    ctx.rotate(obs.angle * Math.PI / 180); 
+                    ctx.fillRect(-obs.width / 2, -obs.height / 2, obs.width, obs.height); 
+                    ctx.strokeRect(-obs.width / 2, -obs.height / 2, obs.width, obs.height); 
+                } 
+                ctx.restore(); 
+            }); 
+            
             drawParticles(); 
         }
         
         
-        function createBall(x = player.x + player.width + 5, y = player.y + player.height / 2, speedX = CANVAS_WIDTH * 0.008, speedY = (Math.random() - 0.5) * (CANVAS_HEIGHT * 0.005)) {
-             balls.push({ radius: CANVAS_WIDTH * 0.007, x: x, y: y, speedX: speedX, speedY: speedY, active: true, color: 'var(--color-text-primary)', speedMultiplier: 1, isPiercing: false, effectTimer: 0 });
+        // NOWA FUNKCJA TWORZENIA KULKI
+        function createBall(isInitial = false, x = player.x + player.width + 5, y = player.y + player.height / 2, initialSpeedX = null, initialSpeedY = null) {
+             const baseSpeed = player.currentBaseSpeed || CANVAS_WIDTH * BASE_BALL_VELOCITY_FACTOR;
+
+             let speedX = initialSpeedX !== null ? initialSpeedX : baseSpeed;
+             let speedY = initialSpeedY !== null ? initialSpeedY : (Math.random() - 0.5) * (baseSpeed * 0.6); // Kąt początkowy
+            
+             // Normalizacja prędkości, aby była stała (eliminacja przypadkowego przyspieszania)
+             const speedMagnitude = Math.sqrt(speedX * speedX + speedY * speedY);
+             if (speedMagnitude !== baseSpeed && speedMagnitude !== 0) {
+                 const factor = baseSpeed / speedMagnitude;
+                 speedX *= factor;
+                 speedY *= factor;
+             }
+
+             balls.push({ 
+                radius: CANVAS_WIDTH * 0.007, 
+                x: x, y: y, 
+                speedX: speedX, speedY: speedY, 
+                active: true, 
+                color: 'var(--color-text-primary)', 
+                speedMultiplier: 1, 
+                isPiercing: false, 
+                effectTimer: 0 
+            });
         }
 
+        // POPRAWIONA FUNKCJA WYSTRZAŁU (shoot)
         function shoot() { 
-            
-            if (isGameOver || balls.some(b => b.active)) return; 
-            
-            const newBallX = player.x + player.width + (CANVAS_WIDTH * 0.007) + 5;
-            const newBallY = player.y + player.height / 2;
-            const maxBulletSpeedY = CANVAS_WIDTH * 0.008; 
-            const newSpeedY = Math.max(-maxBulletSpeedY, Math.min(maxBulletSpeedY, player.velocityY * 0.5)); 
-            const baseSpeedX = CANVAS_WIDTH * 0.008; 
-            const speedXSquared = baseSpeedX**2 - newSpeedY**2;
-            const newSpeedX = speedXSquared > 0 ? Math.sqrt(speedXSquared) : baseSpeedX * 0.7; 
-            
-            createBall(newBallX, newBallY, newSpeedX, newSpeedY);
-            playSound(shootSynth, "C4", "16n"); 
+             
+             if (isGameOver || balls.some(b => b.active)) return; 
+             
+             const newBallY = player.y + player.height / 2;
+             const baseSpeed = player.currentBaseSpeed || CANVAS_WIDTH * BASE_BALL_VELOCITY_FACTOR;
+             const maxSpeedY = baseSpeed * 0.6; // Ograniczenie początkowego kąta
+             
+             // Wpływ ruchu paletki na kąt początkowy (dla strzału)
+             const initialSpeedY = Math.max(-maxSpeedY, Math.min(maxSpeedY, player.velocityY * PLAYER_INFLUENCE_FACTOR)); 
+             
+             // Obliczenie SpeedX, aby całkowita prędkość była stała (normalizacja)
+             const initialSpeedX = Math.sqrt(baseSpeed * baseSpeed - initialSpeedY * initialSpeedY); 
+             
+             createBall(false, player.x + player.width + CANVAS_WIDTH * 0.007 + 5, newBallY, initialSpeedX, initialSpeedY);
+             playSound(shootSynth, "C4", "16n"); 
         } 
         
         function updateGame() { 
              if (isGameOver || !ctx) return; 
 
+             // Aktualizacja efektów paletki i piłek
              if (player.effectTimer > 0) { player.effectTimer -= 1 / 60; if (player.effectTimer <= 0) { player.height = player.baseHeight; player.y = Math.min(player.y, CANVAS_HEIGHT - player.height); if(gameMessage) gameMessage.classList.add('hidden'); } } 
-             balls.forEach(ball => { if (ball.effectTimer > 0) { ball.effectTimer -= 1 / 60; if (ball.effectTimer <= 0) { ball.isPiercing = false; } } });
+             balls.forEach(ball => { 
+                if (ball.effectTimer > 0) { ball.effectTimer -= 1 / 60; } 
+                if (ball.effectTimer <= 0) { ball.isPiercing = false; ball.speedMultiplier = 1; } // Zakończenie efektów na kulce
+            });
              obstacles.forEach(obs => { if (obs.isInvisible && obs.fadeTimer > 0) { obs.fadeTimer -= 1 / 60; } });
 
+             // Ruch paletki (Operatora)
              const targetY = mousePosition.y - player.height / 2; const deltaY = targetY - player.y; player.y += deltaY * player.speed; if (player.y < 0) player.y = 0; if (player.y + player.height > CANVAS_HEIGHT) player.y = CANVAS_HEIGHT - player.height; player.velocityY = player.y - player.lastY; player.lastY = player.y; 
 
              balls.forEach((bullet) => {
                  if (bullet.active) { 
-                     const currentSpeedX = bullet.speedX * bullet.speedMultiplier; const currentSpeedY = bullet.speedY * bullet.speedMultiplier;
+                     
+                     // ZAWSZE UŻYWAJ AKTUALNEJ PRĘDKOŚCI BAZOWEJ
+                     const currentTotalSpeed = player.currentBaseSpeed * bullet.speedMultiplier; 
+                     
+                     const currentSpeedX = bullet.speedX * bullet.speedMultiplier; 
+                     const currentSpeedY = bullet.speedY * bullet.speedMultiplier;
+                     
                      bullet.x += currentSpeedX; bullet.y += currentSpeedY; 
                      
-                     if (bullet.y - bullet.radius < 0 || bullet.y + bullet.radius > CANVAS_HEIGHT) { bullet.y = bullet.y - bullet.radius < 0 ? bullet.radius : CANVAS_HEIGHT - bullet.radius; bullet.speedY *= -1; playSound(bounceSynth, "G4", "16n", 'bounce'); } 
-                     if (bullet.x + bullet.radius > CANVAS_WIDTH) { bullet.x = CANVAS_WIDTH - bullet.radius; bullet.speedX *= -1; playSound(bounceSynth, "G4", "16n", 'bounce'); }
-                     if (bullet.x - bullet.radius < player.x + player.width && bullet.x + bullet.radius > player.x && bullet.y > player.y && bullet.y < player.y + player.height && bullet.speedX < 0) { bullet.speedX *= -1; const relativeIntersectY = (player.y + player.height / 2) - bullet.y; const normalizedRelativeIntersectionY = relativeIntersectY / (player.height / 2); const playerInfluence = player.velocityY * 0.2; const angleFactor = normalizedRelativeIntersectionY * (CANVAS_WIDTH * 0.015) * 0.8; bullet.speedY = angleFactor + playerInfluence; bullet.speedY = Math.max(-CANVAS_WIDTH * 0.01, Math.min(CANVAS_WIDTH * 0.01, bullet.speedY)); bullet.x = player.x + player.width + bullet.radius; playSound(bounceSynth, "C5", "16n", 'bounce'); } 
+                     // Kolizja z górną/dolną ścianą
+                     if (bullet.y - bullet.radius < 0 || bullet.y + bullet.radius > CANVAS_HEIGHT) { 
+                        bullet.y = bullet.y - bullet.radius < 0 ? bullet.radius : CANVAS_HEIGHT - bullet.radius; 
+                        bullet.speedY *= -1; 
+                        playSound(bounceSynth, "G4", "16n", 'bounce'); 
+                     } 
                      
+                     // Kolizja z prawą ścianą
+                     if (bullet.x + bullet.radius > CANVAS_WIDTH) { 
+                        bullet.x = CANVAS_WIDTH - bullet.radius; 
+                        bullet.speedX *= -1; 
+                        playSound(bounceSynth, "G4", "16n", 'bounce'); 
+                     }
+                     
+                     // POPRAWIONA LOGIKA ODBICIA OD PALETKI (Fix 2)
+                     if (bullet.x - bullet.radius < player.x + player.width && 
+                         bullet.x + bullet.radius > player.x && 
+                         bullet.y > player.y && 
+                         bullet.y < player.y + player.height && 
+                         bullet.speedX < 0) 
+                     { 
+                         // 1. Pozycja względna na paletce: [-1 (góra) do 1 (dół)]
+                         const relativeIntersectY = (player.y + player.height / 2) - bullet.y;
+                         const normalizedRelativeIntersectionY = relativeIntersectY / (player.height / 2);
+                         
+                         // 2. Wpływ prędkości paletki na kąt
+                         const playerInfluence = player.velocityY * PLAYER_INFLUENCE_FACTOR; 
+                         
+                         // 3. Nowa docelowa prędkość Y (kąt)
+                         // Użyj negatywnej normalizacji, by góra paletki (ujemna względna Y) odbijała w górę (ujemna SpeedY)
+                         let newSpeedY = (-normalizedRelativeIntersectionY * currentTotalSpeed * 0.8) + playerInfluence;
+                         
+                         // 4. Ograniczenie prędkości Y (maksymalny kąt)
+                         const maxSpeedY = currentTotalSpeed * 0.9;
+                         newSpeedY = Math.max(-maxSpeedY, Math.min(maxSpeedY, newSpeedY));
+
+                         // 5. Obliczenie SpeedX, aby całkowita prędkość (currentTotalSpeed) była stała (NORMALIZACJA)
+                         const newSpeedX = Math.sqrt(currentTotalSpeed * currentTotalSpeed - newSpeedY * newSpeedY);
+                         
+                         // 6. Zastosowanie nowych prędkości (speedX musi być dodatnie po odbiciu)
+                         bullet.speedX = newSpeedX;
+                         bullet.speedY = newSpeedY;
+                         
+                         bullet.x = player.x + player.width + bullet.radius; // Repozycjonowanie
+                         playSound(bounceSynth, "C5", "16n", 'bounce'); 
+                     } 
+                     
+                     // Piłka poza planszą
                      if (bullet.x + bullet.radius < 0) { 
                          bullet.active = false; 
                          if (balls.filter(b => b.active).length === 0) { 
@@ -491,74 +651,128 @@
                          }
                      } 
                      
-                     targets.forEach(target => { if (target.active) { const distX = Math.abs(bullet.x - target.x); const distY = Math.abs(bullet.y - target.y); if (distX < target.radius + bullet.radius && distY < target.radius + bullet.radius) { const dx = bullet.x - target.x; const dy = bullet.y - target.y; if (Math.sqrt(dx*dx + dy*dy) < target.radius + bullet.radius) { 
-                         
-                         target.hitsRequired--; 
-                         score += 10 * currentLevel; 
-                         if(scoreDisplay) scoreDisplay.textContent = score; 
-                         playSound(hitSynth, "A3", "8n", 'hit');
-                         createParticles(target.x, target.y, 10, target.color);
-                         
-                         if (!bullet.isPiercing) { 
-                             const overlapX = (bullet.radius + target.radius) - distX;
-                             const overlapY = (bullet.radius + target.radius) - distY;
-                             if (overlapX < overlapY) { bullet.speedX *= -1; } else { bullet.speedY *= -1; }
-                         }
+                     // Kolizja z Celami (Detalami)
+                     targets.forEach(target => { 
+                         if (target.active) { 
+                             const distX = Math.abs(bullet.x - target.x); 
+                             const distY = Math.abs(bullet.y - target.y); 
+                             if (distX < target.radius + bullet.radius && distY < target.radius + bullet.radius) { 
+                                 const dx = bullet.x - target.x; 
+                                 const dy = bullet.y - target.y; 
+                                 if (Math.sqrt(dx*dx + dy*dy) < target.radius + bullet.radius * 1.5) { // Korekcja kolizji dla kwadratowych celów
+                                     
+                                     target.hitsRequired--; 
+                                     score += 10 * currentLevel; 
+                                     if(scoreDisplay) scoreDisplay.textContent = score; 
+                                     playSound(hitSynth, "A3", "8n", 'hit');
+                                     createParticles(target.x, target.y, 10, target.color);
+                                     
+                                     if (!bullet.isPiercing) { 
+                                         // Zmiana kierunku (odbicie)
+                                         const overlapX = (bullet.radius + target.radius) - distX;
+                                         const overlapY = (bullet.radius + target.radius) - distY;
+                                         if (overlapX < overlapY) { bullet.speedX *= -1; } else { bullet.speedY *= -1; }
+                                     }
 
-                         if (target.hitsRequired <= 0) { 
-                             target.active = false; 
-                             hitCount++; 
-                             if(hitsDisplay) hitsDisplay.textContent = hitCount; 
-                             createParticles(target.x, target.y, 20, target.color); 
-                             dropBonus(target.x, target.y); 
-                             if(targetCountDisplay) targetCountDisplay.textContent = targets.filter(t => t.active).length;
-                         } else if (target.hitsRequired === 2) {
-                             target.color = '#f59e0b'; 
-                         } else if (target.hitsRequired === 1) {
-                             target.color = '#fde047'; 
-                         }
-                         
-                         if (targets.every(t => !t.active)) { startNextLevel(); return; } } } } }); 
+                                     if (target.hitsRequired <= 0) { 
+                                         target.active = false; 
+                                         hitCount++; 
+                                         if(hitsDisplay) hitsDisplay.textContent = hitCount; 
+                                         createParticles(target.x, target.y, 20, target.color); 
+                                         dropBonus(target.x, target.y); 
+                                         if(targetCountDisplay) targetCountDisplay.textContent = targets.filter(t => t.active).length;
+                                     } 
+                                     
+                                     if (targets.every(t => !t.active)) { startNextLevel(); return; } 
+                                 } 
+                             } 
+                         } 
+                     }); 
                      
-                     obstacles.forEach(obs => { if (bullet.x + bullet.radius > obs.x && bullet.x - bullet.radius < obs.x + obs.width && bullet.y + bullet.radius > obs.y && bullet.y - bullet.radius < obs.y + obs.height) { 
-                         if(obs.isInvisible && obs.fadeTimer > 0) return; 
-                         playSound(bounceSynth, "E4", "16n", 'bounce'); 
-                         if (obs.type === 'rect') { const overlapXLeft = (bullet.x + bullet.radius) - obs.x; const overlapXRight = (obs.x + obs.width) - (bullet.x - bullet.radius); const overlapYTop = (bullet.y + bullet.radius) - obs.y; const overlapYBottom = (obs.y + obs.height) - (bullet.y - bullet.radius); const minOverlapX = Math.min(overlapXLeft, overlapXRight); const minOverlapY = Math.min(overlapYTop, overlapYBottom); if (minOverlapX < minOverlapY) { bullet.speedX *= -1; bullet.x += (bullet.speedX > 0 ? 1 : -1) * minOverlapX * 0.5 + Math.sign(bullet.speedX); } else { bullet.speedY *= -1; bullet.y += (bullet.speedY > 0 ? 1 : -1) * minOverlapY * 0.5 + Math.sign(bullet.speedY); } } 
-                         else if (obs.type === 'angled') { const tempSpeedX = bullet.speedX; const tempSpeedY = bullet.speedY; if (obs.angle === 45) { bullet.speedX = -tempSpeedY; bullet.speedY = -tempSpeedX; } else { bullet.speedX = tempSpeedY; bullet.speedY = tempSpeedX; } bullet.x += Math.sign(bullet.speedX) * 2; bullet.y += Math.sign(bullet.speedY) * 2; } 
-                     } }); 
+                     // Kolizja z Przeszkodami
+                     obstacles.forEach(obs => { 
+                        if (bullet.x + bullet.radius > obs.x && bullet.x - bullet.radius < obs.x + obs.width && bullet.y + bullet.radius > obs.y && bullet.y - bullet.radius < obs.y + obs.height) { 
+                             if(obs.isInvisible && obs.fadeTimer > 0) return; 
+                             playSound(bounceSynth, "E4", "16n", 'bounce'); 
+                             
+                             if (obs.type === 'rect') { 
+                                // Uproszczona obsługa kolizji prostokątnej przeszkody
+                                const closestX = Math.max(obs.x, Math.min(bullet.x, obs.x + obs.width));
+                                const closestY = Math.max(obs.y, Math.min(bullet.y, obs.y + obs.height));
+                                const dx = bullet.x - closestX;
+                                const dy = bullet.y - closestY;
+
+                                if (Math.abs(dx) > Math.abs(dy)) {
+                                    bullet.speedX *= -1;
+                                    bullet.x += bullet.speedX > 0 ? 1 : -1;
+                                } else {
+                                    bullet.speedY *= -1;
+                                    bullet.y += bullet.speedY > 0 ? 1 : -1;
+                                }
+
+                             } 
+                             else if (obs.type === 'angled') { 
+                                 // Odbicie od kątowej przeszkody (wymaga bardziej złożonej fizyki, ale użyjemy prostej transformacji)
+                                 const tempSpeedX = bullet.speedX; 
+                                 const tempSpeedY = bullet.speedY; 
+                                 if (obs.angle === 45) { 
+                                    bullet.speedX = -tempSpeedY; 
+                                    bullet.speedY = -tempSpeedX; 
+                                 } else { 
+                                    bullet.speedX = tempSpeedY; 
+                                    bullet.speedY = tempSpeedX; 
+                                 } 
+                                 bullet.x += Math.sign(bullet.speedX) * 2; 
+                                 bullet.y += Math.sign(bullet.speedY) * 2; 
+                             } 
+                             // Zawsze normalizuj prędkość po kolizji z przeszkodą, aby utrzymać stałą prędkość (ważne!)
+                             const speedMagnitude = Math.sqrt(bullet.speedX * bullet.speedX + bullet.speedY * bullet.speedY);
+                             if (speedMagnitude !== 0 && Math.abs(speedMagnitude - currentTotalSpeed) > 0.01) {
+                                 const factor = currentTotalSpeed / speedMagnitude;
+                                 bullet.speedX *= factor;
+                                 bullet.speedY *= factor;
+                             }
+                        } 
+                    }); 
                  } 
              });
              
              balls = balls.filter(b => b.active); 
 
              bonuses = bonuses.filter(bonus => bonus.active); 
-             bonuses.forEach(bonus => { bonus.y += bonus.speedY; if (player.x < bonus.x + bonus.width && player.x + player.width > bonus.x && player.y < bonus.y + bonus.height && player.y + player.height > bonus.y) { 
-                 playSound(bonusSynth, "E5");
-                 if (bonus.type === 'time') { gameTime += 5; if(timeDisplay) timeDisplay.textContent = gameTime; if (gameTime > 10 && timeDisplay) timeDisplay.classList.remove('timer-warning'); showGameMessage("BONUS: +5 sekund!", 'blue'); } 
-                 else if (bonus.type === 'slow') { balls.forEach(b => {b.speedMultiplier = 0.5; b.effectTimer = 5; }); showGameMessage("EFEKT: Spowolnienie!", 'blue'); } 
-                 else if (bonus.type === 'enlarge') { player.height = player.baseHeight * 1.5; player.y = Math.max(0, player.y - player.baseHeight * 0.25); player.effectTimer = 8; showGameMessage("EFEKT: Większa paletka!", 'blue'); } 
-                 else if (bonus.type === 'shrink') { player.height = player.baseHeight * 0.6; player.y = Math.min(CANVAS_HEIGHT - player.height, player.y + player.baseHeight * 0.2); player.effectTimer = 8; showGameMessage("MALUS: Mniejsza paletka!", 'red'); } 
-                 else if (bonus.type === 'piercing') { balls.forEach(b => { b.isPiercing = true; b.effectTimer = 6; }); showGameMessage("BONUS: Piłka przenikająca!", 'blue'); }
-                 else if (bonus.type === 'multi-ball') {
-                    if (balls.length < 5) { 
-                         const ballY = player.y + player.height / 2;
-                         const baseSpeedX = CANVAS_WIDTH * 0.008;
-                         createBall(player.x + player.width + 5, ballY, baseSpeedX, -CANVAS_HEIGHT * 0.006);
-                         createBall(player.x + player.width + 5, ballY, baseSpeedX, CANVAS_HEIGHT * 0.006);
-                         playSound(multiBallSynth, ["C4", "E4", "G4"], "4n");
-                         showGameMessage("BONUS: Multi-piłka!", 'blue');
-                    }
-                 }
-                 bonus.active = false; 
-             } if (bonus.y > CANVAS_HEIGHT) { bonus.active = false; } }); 
+             bonuses.forEach(bonus => { 
+                bonus.y += bonus.speedY; 
+                if (player.x < bonus.x + bonus.width && player.x + player.width > bonus.x && player.y < bonus.y + bonus.height && player.y + player.height > bonus.y) { 
+                     playSound(bonusSynth, "E5");
+                     if (bonus.type === 'time') { gameTime += 5; if(timeDisplay) timeDisplay.textContent = gameTime; if (gameTime > 10 && timeDisplay) timeDisplay.classList.remove('timer-warning'); showGameMessage("BONUS: +5 sekund!", 'blue'); } 
+                     else if (bonus.type === 'slow') { balls.forEach(b => {b.speedMultiplier = 0.5; b.effectTimer = 5; }); showGameMessage("EFEKT: Spowolnienie na 5s!", 'blue'); } // Dodanie timera efektu
+                     else if (bonus.type === 'enlarge') { player.height = player.baseHeight * 1.5; player.y = Math.max(0, player.y - player.baseHeight * 0.25); player.effectTimer = 8; showGameMessage("EFEKT: Większa paletka na 8s!", 'blue'); } 
+                     else if (bonus.type === 'shrink') { player.height = player.baseHeight * 0.6; player.y = Math.min(CANVAS_HEIGHT - player.height, player.y + player.baseHeight * 0.2); player.effectTimer = 8; showGameMessage("MALUS: Mniejsza paletka na 8s!", 'red'); } 
+                     else if (bonus.type === 'piercing') { balls.forEach(b => { b.isPiercing = true; b.effectTimer = 6; }); showGameMessage("BONUS: Piłka przenikająca na 6s!", 'blue'); }
+                     else if (bonus.type === 'multi-ball') {
+                         if (balls.length < 5) { 
+                             const ballY = player.y + player.height / 2;
+                             const baseSpeed = player.currentBaseSpeed;
+                             const speedY_new = baseSpeed * 0.5;
+                             const speedX_new = Math.sqrt(baseSpeed * baseSpeed - speedY_new * speedY_new);
+                             createBall(false, player.x + player.width + 5, ballY, speedX_new, -speedY_new);
+                             createBall(false, player.x + player.width + 5, ballY, speedX_new, speedY_new);
+                             playSound(multiBallSynth, ["C4", "E4", "G4"], "4n");
+                             showGameMessage("BONUS: Multi-piłka!", 'blue');
+                         }
+                     }
+                     bonus.active = false; 
+                } 
+                if (bonus.y > CANVAS_HEIGHT) { bonus.active = false; } 
+             }); 
              
              targets.forEach(target => {
-                if (target.isMoving) {
-                    target.y += target.moveSpeed;
-                    if ((target.y - target.radius < 0 && target.moveSpeed < 0) || (target.y + target.radius > CANVAS_HEIGHT && target.moveSpeed > 0)) {
-                        target.moveSpeed *= -1; 
-                    }
-                }
+                 if (target.isMoving) {
+                     target.y += target.moveSpeed;
+                     if ((target.y - target.radius < 0 && target.moveSpeed < 0) || (target.y + target.radius > CANVAS_HEIGHT && target.moveSpeed > 0)) {
+                         target.moveSpeed *= -1; 
+                     }
+                 }
              });
 
              updateParticles(); 
@@ -574,25 +788,25 @@
              if (!soundsReady && !soundInitialized) { 
                  soundInitialized = true; 
                  setupSounds().then(() => {
-                     _continueStartGame();
+                      _continueStartGame();
                  }).catch(err => { 
                       console.error("Audio setup failed, continuing without sound:", err);
                       _continueStartGame();
                  });
              } else {
                  if (soundsReady && Tone.context.state !== 'running') {
-                     Tone.start().catch(err => console.error("Tone.start failed:", err)); 
+                      Tone.start().catch(err => console.error("Tone.start failed:", err)); 
                  }
                  _continueStartGame();
              }
         }
         
         function _continueStartGame() {
-            if (gameLoopInterval) clearInterval(gameLoopInterval); 
-            if (animationFrameId) cancelAnimationFrame(animationFrameId); 
-            initGame(true); 
-            startTimer(); 
-            animationFrameId = requestAnimationFrame(updateGame); 
+             if (gameLoopInterval) clearInterval(gameLoopInterval); 
+             if (animationFrameId) cancelAnimationFrame(animationFrameId); 
+             initGame(true); 
+             startTimer(); 
+             animationFrameId = requestAnimationFrame(updateGame); 
         }
 
         function endGame(message) { isGameOver = true; if (score > highScore) { highScore = score; localStorage.setItem('cncHighScore', highScore); if(highScoreDisplay) highScoreDisplay.textContent = highScore; message += " NOWY REKORD!"; } showGameMessage(message, message.includes("Gratulacje") ? 'green' : 'red'); playSound(endSynth, "C4"); if(startButton) startButton.textContent = "Zagraj Ponownie"; if (gameLoopInterval) clearInterval(gameLoopInterval); }
@@ -602,7 +816,7 @@
             
             AOS.init({ duration: 800, once: true });
             
-            // POPRAWKA: Natychmiastowe nadpisanie stylu AOS
+            // Poprawka dla AOS i overflow
             document.body.style.overflowX = 'visible'; 
 
             
@@ -612,20 +826,19 @@
             
             
             function toggleMobileMenu() { 
-                if (mobileMenu) mobileMenu.classList.toggle('hidden'); 
-                if (mobileMenuButton) mobileMenuButton.classList.toggle('active'); 
-                if (header) header.classList.toggle('menu-open'); 
+                 if (mobileMenu) mobileMenu.classList.toggle('hidden'); 
+                 if (mobileMenuButton) mobileMenuButton.classList.toggle('active'); 
             }
 
             if (mobileMenu) { 
-                mobileMenuLinks = mobileMenu.querySelectorAll('.mobile-menu-link');
-                mobileMenuLinks.forEach(link => { 
-                    link.addEventListener('click', () => { 
-                        if (mobileMenu && !mobileMenu.classList.contains('hidden')) { 
-                            toggleMobileMenu(); 
-                        } 
-                    }); 
-                }); 
+                 mobileMenuLinks = mobileMenu.querySelectorAll('.mobile-menu-link');
+                 mobileMenuLinks.forEach(link => { 
+                     link.addEventListener('click', () => { 
+                         if (mobileMenu && !mobileMenu.classList.contains('hidden')) { 
+                             toggleMobileMenu(); 
+                         } 
+                     }); 
+                 }); 
             }
             if (mobileMenuButton) mobileMenuButton.addEventListener('click', toggleMobileMenu); 
             
@@ -654,7 +867,6 @@
             highScoreDisplay = document.getElementById('highScoreDisplay');
 
             
-            player = {}; 
             resizeCanvas(); 
             highScore = localStorage.getItem('cncHighScore') || 0; 
             if(highScoreDisplay) highScoreDisplay.textContent = highScore; 
@@ -683,13 +895,13 @@
                  if(!isGameOver && ctx) draw(); 
 
                  
-                const heroCanvas = document.getElementById('heroCanvas');
-                if (heroCanvas) {
-                    const heroCtx = heroCanvas.getContext('2d');
-                    if (heroCtx) {
-                        heroCtx.clearRect(0, 0, heroCanvas.width, heroCanvas.height); 
-                    }
-                }
+                 const heroCanvas = document.getElementById('heroCanvas');
+                 if (heroCanvas) {
+                     const heroCtx = heroCanvas.getContext('2d');
+                     if (heroCtx) {
+                         heroCtx.clearRect(0, 0, heroCanvas.width, heroCanvas.height); 
+                     }
+                 }
              }
 
              function toggleTheme() {
@@ -711,46 +923,46 @@
              
              const heroCanvas = document.getElementById('heroCanvas');
              if (heroCanvas) {
-                const heroCtx = heroCanvas.getContext('2d');
-                if (heroCtx) { 
-                    let heroWidth = heroCanvas.clientWidth;
-                    let heroHeight = heroCanvas.clientHeight;
-                    heroCanvas.width = heroWidth;
-                    heroCanvas.height = heroHeight;
-                    const gcodeChars = "G0 G1 X Y Z F S T M".split(" ");
-                    const columns = Math.floor(heroWidth / 20);
-                    const drops = [];
-                    for(let i=0; i < columns; i++) drops[i] = 1;
+                 const heroCtx = heroCanvas.getContext('2d');
+                 if (heroCtx) { 
+                     let heroWidth = heroCanvas.clientWidth;
+                     let heroHeight = heroCanvas.clientHeight;
+                     heroCanvas.width = heroWidth;
+                     heroCanvas.height = heroHeight;
+                     const gcodeChars = "G0 G1 X Y Z F S T M".split(" ");
+                     const columns = Math.floor(heroWidth / 20);
+                     const drops = [];
+                     for(let i=0; i < columns; i++) drops[i] = 1;
 
-                    function drawHeroCanvas() {
-                        if(!heroCtx) return;
-                        
-                        
-                        const isLight = document.documentElement.classList.contains('light');
-                        heroCtx.fillStyle = isLight ? "rgba(249, 250, 251, 0.05)" : "rgba(13, 17, 23, 0.05)"; 
-                        
-                        heroCtx.fillRect(0, 0, heroWidth, heroHeight);
-                        const accentColor = getComputedStyle(document.documentElement).getPropertyValue('--color-accent').trim();
-                        heroCtx.fillStyle = accentColor || '#06b6d4'; 
-                        heroCtx.font = "14px monospace";
-                        for(let i = 0; i < drops.length; i++) {
-                            const text = gcodeChars[Math.floor(Math.random() * gcodeChars.length)];
-                            heroCtx.fillText(text, i * 20, drops[i] * 20);
-                            if(drops[i] * 20 > heroHeight && Math.random() > 0.975) drops[i] = 0;
-                            drops[i]++;
-                        }
-                    }
-                    setInterval(drawHeroCanvas, 100); 
+                     function drawHeroCanvas() {
+                         if(!heroCtx) return;
+                         
+                         
+                         const isLight = document.documentElement.classList.contains('light');
+                         heroCtx.fillStyle = isLight ? "rgba(249, 250, 251, 0.05)" : "rgba(13, 17, 23, 0.05)"; 
+                         
+                         heroCtx.fillRect(0, 0, heroWidth, heroHeight);
+                         const accentColor = getComputedStyle(document.documentElement).getPropertyValue('--color-accent').trim();
+                         heroCtx.fillStyle = accentColor || '#06b6d4'; 
+                         heroCtx.font = "14px monospace";
+                         for(let i = 0; i < drops.length; i++) {
+                             const text = gcodeChars[Math.floor(Math.random() * gcodeChars.length)];
+                             heroCtx.fillText(text, i * 20, drops[i] * 20);
+                             if(drops[i] * 20 > heroHeight && Math.random() > 0.975) drops[i] = 0;
+                             drops[i]++;
+                         }
+                     }
+                     setInterval(drawHeroCanvas, 100); 
 
-                    window.addEventListener('resize', () => {
-                        if (!heroCanvas) return; 
-                        heroWidth = heroCanvas.clientWidth;
-                        heroHeight = heroCanvas.clientHeight;
-                        heroCanvas.width = heroWidth;
-                        heroCanvas.height = heroHeight;
-                        for(let i=0; i < columns; i++) drops[i] = 1; 
-                    });
-                }
+                     window.addEventListener('resize', () => {
+                         if (!heroCanvas) return; 
+                         heroWidth = heroCanvas.clientWidth;
+                         heroHeight = heroCanvas.clientHeight;
+                         heroCanvas.width = heroWidth;
+                         heroCanvas.height = heroHeight;
+                         for(let i=0; i < columns; i++) drops[i] = 1; 
+                     });
+                 }
              }
 
              
@@ -760,4 +972,3 @@
     </script>
 </body>
 </html>
-
