@@ -35,6 +35,8 @@
     <style>
         
         :root {
+            /* Nowe kolory tła z pełnym kryciem */
+            --color-bg-secondary-rgb: 22, 27, 34; /* #161b22 */
             --color-bg: #0d1117;
             --color-bg-secondary: #161b22;
             --color-bg-card: #1f2937;
@@ -59,6 +61,8 @@
         }
 
         html.light {
+            /* Nowe kolory tła z pełnym kryciem */
+            --color-bg-secondary-rgb: 243, 244, 246; /* #f3f4f6 */
             --color-bg: #f9fafb;
             --color-bg-secondary: #f3f4f6;
             --color-bg-card: #ffffff;
@@ -186,15 +190,15 @@
         /* NOWE STYLE DLA UKRYWANIA NAGŁÓWKA */
         .sticky-header {
             transition: transform 0.3s ease-out, background-color 0.3s ease-out;
-            /* Zapewnienie pełnego krycia w wersji mobilnej/otwartym menu */
-            background-color: var(--color-bg-secondary) !important;
+            /* ZAPEWNIENIE PEŁNEGO KRYCIA W WERSJI DOMYŚLNEJ (dla menu) */
+            background-color: rgba(var(--color-bg-secondary-rgb), 1.0) !important;
             backdrop-filter: none !important;
         }
 
         .sticky-header.scrolled {
-            /* Dodanie lekkiej przezroczystości po przewinięciu */
-            background-color: var(--color-bg-secondary)/95;
-            backdrop-filter: blur(4px);
+            /* Użycie przezroczystego tła (95%) + blur dla efektu po przewinięciu */
+            background-color: rgba(var(--color-bg-secondary-rgb), 0.95) !important;
+            backdrop-filter: blur(4px) !important;
         }
 
         .sticky-header.hidden-header {
