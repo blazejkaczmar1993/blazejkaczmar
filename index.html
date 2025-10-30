@@ -88,6 +88,7 @@
             font-family: 'Inter', sans-serif;
             background-color: var(--color-bg); 
             color: var(--color-text-secondary); 
+            /* POPRAWKA: Usunięto overflow-x: hidden; */
             transition: color 0.3s ease;
         }
         h1, h2 { font-family: 'Exo 2', sans-serif; color: var(--color-text-primary); }
@@ -182,7 +183,7 @@
              color: var(--color-accent-text-dark);
         }
         
-        
+        /* POPRAWKA: Przywrócono regułę dla otwartego menu mobilnego */
         header.menu-open {
             background-color: var(--color-bg-secondary);
             backdrop-filter: none;
@@ -226,7 +227,7 @@
         </div>
     </header>
     
-    <!-- POPRAWKA: Menu mobilne używa teraz zmiennych CSS dla tła i tekstu -->
+    <!-- POPRAWKA: z-50 (nad headerem z-40) i użycie zmiennych CSS -->
     <nav id="mobile-menu" class="hidden md:hidden fixed top-16 left-0 right-0 z-50 bg-bg-secondary p-4 border-t border-primary shadow-lg"> 
         <div class="flex flex-col space-y-3 text-center text-muted"> 
             <a href="#o-nas" class="block py-2 hover:text-primary transition duration-300 mobile-menu-link">O Nas</a> 
@@ -751,6 +752,9 @@
                     });
                 }
              }
+
+             
+             
         });
 
     </script>
