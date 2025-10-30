@@ -183,14 +183,30 @@
              color: var(--color-accent-text-dark);
         }
         
-        /* USUNIĘTO: Nadpisująca reguła header.menu-open. Nagłówek jest teraz zawsze nieprzezroczysty */
+        /* NOWE STYLE DLA UKRYWANIA NAGŁÓWKA */
+        .sticky-header {
+            transition: transform 0.3s ease-out, background-color 0.3s ease-out;
+            /* Zapewnienie pełnego krycia w wersji mobilnej/otwartym menu */
+            background-color: var(--color-bg-secondary) !important;
+            backdrop-filter: none !important;
+        }
+
+        .sticky-header.scrolled {
+            /* Dodanie lekkiej przezroczystości po przewinięciu */
+            background-color: var(--color-bg-secondary)/95;
+            backdrop-filter: blur(4px);
+        }
+
+        .sticky-header.hidden-header {
+            transform: translateY(-100%);
+        }
     </style>
 </head>
 <body class="antialiased bg-bg text-secondary">
 
     
-    <!-- POPRAWKA: Usunięto /90 backdrop-blur-sm, aby nagłówek był zawsze nieprzezroczysty (Fix 1) -->
-    <header class="sticky top-0 z-40 bg-bg-secondary shadow-lg border-b border-primary">
+    <!-- POPRAWKA: Dodanie klas dla obsługi ukrywania przy przewijaniu. Nagłówek jest kryjący. -->
+    <header id="main-header" class="sticky top-0 z-40 bg-bg-secondary shadow-lg border-b border-primary sticky-header">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
                 <a href="#hero" class="text-3xl font-extrabold tracking-tight accent-color">BK <span class="text-primary">CNC</span></a>
@@ -812,6 +828,40 @@
         function endGame(message) { isGameOver = true; if (score > highScore) { highScore = score; localStorage.setItem('cncHighScore', highScore); if(highScoreDisplay) highScoreDisplay.textContent = highScore; message += " NOWY REKORD!"; } showGameMessage(message, message.includes("Gratulacje") ? 'green' : 'red'); playSound(endSynth, "C4"); if(startButton) startButton.textContent = "Zagraj Ponownie"; if (gameLoopInterval) clearInterval(gameLoopInterval); }
         
         
+        // NOWA LOGIKA DLA UKRYWANIA NAGŁÓWKA PRZY PRZEWIJANIU
+        let lastScrollY = 0;
+        const headerElement = document.getElementById('main-header');
+        
+        function handleScroll() {
+            if (!headerElement || mobileMenu && !mobileMenu.classList.contains('hidden')) return; 
+
+            const currentScrollY = window.scrollY;
+
+            // Dodaje klasę 'scrolled' po lekkim przewinięciu w dół (dla lekkiego efektu blur/ciemnienia)
+            if (currentScrollY > 50) {
+                 headerElement.classList.add('scrolled');
+            } else {
+                 headerElement.classList.remove('scrolled');
+            }
+
+            // Logika ukrywania/pokazywania
+            if (currentScrollY > 200) { // Tylko jeśli scrollujemy wystarczająco daleko
+                if (currentScrollY > lastScrollY) {
+                    // Przewijanie w dół -> Ukryj
+                    headerElement.classList.add('hidden-header');
+                } else if (currentScrollY < lastScrollY) {
+                    // Przewijanie w górę -> Pokaż
+                    headerElement.classList.remove('hidden-header');
+                }
+            } else {
+                // Na górze strony zawsze pokazuj
+                headerElement.classList.remove('hidden-header');
+            }
+
+            lastScrollY = currentScrollY <= 0 ? 0 : currentScrollY; // Zapobiega błędom Chrome
+        }
+
+
         document.addEventListener('DOMContentLoaded', () => {
             
             AOS.init({ duration: 800, once: true });
@@ -822,12 +872,17 @@
             
             mobileMenuButton = document.getElementById('mobile-menu-button'); 
             mobileMenu = document.getElementById('mobile-menu'); 
-            header = document.querySelector('header'); 
+            // Zmieniono na odniesienie do zaktualizowanego ID
+            header = document.getElementById('main-header'); 
             
             
             function toggleMobileMenu() { 
                  if (mobileMenu) mobileMenu.classList.toggle('hidden'); 
                  if (mobileMenuButton) mobileMenuButton.classList.toggle('active'); 
+                 // Upewnienie się, że nagłówek jest zawsze widoczny, gdy menu mobilne jest otwarte
+                 if (header && !mobileMenu.classList.contains('hidden')) {
+                    header.classList.remove('hidden-header');
+                 }
             }
 
             if (mobileMenu) { 
@@ -842,6 +897,9 @@
             }
             if (mobileMenuButton) mobileMenuButton.addEventListener('click', toggleMobileMenu); 
             
+            // Dodanie listenera scrolla dla ukrywania nagłówka
+            window.addEventListener('scroll', handleScroll);
+
             
             canvas = document.getElementById('gameCanvas'); 
             if (canvas) {
