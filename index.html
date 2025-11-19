@@ -3,59 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Strona 1 - Błażej Kaczmar</title>
+    <title>Wybierz wersję - Błażej Kaczmar</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-50 text-gray-800 font-sans antialiased">
+<body class="bg-gray-100 min-h-screen flex flex-col items-center justify-center p-4">
 
-    <!-- Nawigacja (Indeksy do wszystkich stron) -->
-    <nav class="absolute top-0 left-0 w-full p-6 flex justify-between items-center z-10">
-        <div class="flex gap-6 text-lg font-medium bg-white/80 backdrop-blur-sm px-6 py-2 rounded-full shadow-sm">
-             <a href="index.html" class="text-gray-500 hover:text-blue-600 transition">Start</a>
-             <span class="text-blue-600 cursor-default">Strona 1</span>
-             <a href="strona2.html" class="text-gray-500 hover:text-green-600 transition">Strona 2</a>
-        </div>
-    </nav>
+    <div class="text-center mb-12">
+        <h1 class="text-3xl md:text-4xl font-bold text-gray-800">Wybierz wersję Portfolio</h1>
+    </div>
 
-    <!-- Sekcja Główna (Hero) -->
-    <header class="min-h-screen flex flex-col justify-center items-center px-4 text-center max-w-4xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl w-full">
         
-        <!-- Opcjonalne miejsce na zdjęcie (Avatar) -->
-        <div class="w-32 h-32 bg-blue-100 rounded-full flex items-center justify-center mb-8 shadow-inner text-blue-500 text-4xl font-bold">
-            BK
-        </div>
+        <!-- Opcja 1: Jasna -->
+        <a href="strona1.html" class="group block bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition transform hover:-translate-y-1 border-2 border-transparent hover:border-blue-500">
+            <div class="h-40 bg-gray-50 flex items-center justify-center border-b border-gray-100 group-hover:bg-blue-50 transition">
+                <span class="text-6xl filter grayscale group-hover:grayscale-0 transition duration-300">☀️</span>
+            </div>
+            <div class="p-6 text-center">
+                <h2 class="text-2xl font-bold text-gray-800 group-hover:text-blue-600 transition">Wersja 1</h2>
+            </div>
+        </a>
 
-        <h1 class="text-5xl md:text-7xl font-bold text-gray-900 tracking-tight mb-6">
-            Błażej <span class="text-blue-600">Kaczmar</span>
-        </h1>
-        
-        <p class="text-xl md:text-2xl text-gray-600 max-w-2xl leading-relaxed">
-            Witaj na mojej pierwszej stronie.
-        </p>
+        <!-- Opcja 2: Ciemna -->
+        <a href="strona2.html" class="group block bg-gray-900 rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition transform hover:-translate-y-1 border-2 border-transparent hover:border-green-500">
+            <div class="h-40 bg-gray-800 flex items-center justify-center border-b border-gray-700 group-hover:bg-gray-700 transition">
+                <span class="text-6xl filter grayscale group-hover:grayscale-0 transition duration-300">🌙</span>
+            </div>
+            <div class="p-6 text-center">
+                <h2 class="text-2xl font-bold text-white group-hover:text-green-400 transition">Wersja 2</h2>
+            </div>
+        </a>
 
-        <div class="mt-10 flex flex-col md:flex-row gap-4">
-            <a href="#kontakt" class="px-8 py-3 bg-white text-gray-700 border border-gray-300 rounded-full font-semibold hover:bg-gray-100 transition">
-                Kontakt
-            </a>
-        </div>
-    </header>
+    </div>
 
-    <!-- Sekcja Kontakt -->
-    <section id="kontakt" class="py-20 bg-gray-50">
-        <div class="container mx-auto px-6 max-w-4xl text-center">
-            <h2 class="text-3xl font-bold mb-8">Nawiążmy kontakt</h2>
-            <p class="text-gray-600 mb-10">Masz pytania? Napisz do mnie.</p>
-            
-            <a href="mailto:blazej.kaczmar@gmail.com" class="text-2xl md:text-4xl font-bold text-blue-600 hover:underline break-all">
-                blazej.kaczmar@gmail.com
-            </a>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="py-6 text-center text-gray-400 text-sm">
-        &copy; 2023 Błażej Kaczmar. Wszelkie prawa zastrzeżone.
-    </footer>
+    <!-- Sekcja kontaktowa na dole -->
+    <div class="mt-16 text-center animate-fade-in">
+        <p class="text-gray-500 mb-2">Zapraszam do kontaktu:</p>
+        <a href="mailto:blazej.kaczmar@gmail.com" class="text-xl md:text-2xl font-bold text-blue-600 hover:underline transition">
+            blazej.kaczmar@gmail.com
+        </a>
+    </div>
 
 </body>
 </html>
