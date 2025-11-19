@@ -2,7 +2,7 @@
 <html lang="pl" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>BK CNC - Precyzyjna Obróbka CNC Typu Szwajcarskiego</title>
 
     <!-- Meta SEO -->
@@ -63,7 +63,8 @@
             background-color: var(--color-bg);
             color: var(--color-text-secondary);
             transition: background-color 0.3s ease, color 0.3s ease;
-            overflow-x: hidden;
+            overflow-x: hidden; /* KLUCZOWE: Zapobiega przewijaniu na boki na mobile */
+            width: 100%;
         }
 
         h1, h2, h3, h4, .font-heading {
@@ -116,7 +117,7 @@
             pointer-events: none;
         }
 
-        /* Sticky Header Logic - Chowanie/Pokazywanie */
+        /* Sticky Header Logic */
         .header-glass {
             background-color: rgba(15, 23, 42, 0.85);
             backdrop-filter: blur(8px);
@@ -125,8 +126,6 @@
         html.light .header-glass {
             background-color: rgba(248, 250, 252, 0.85);
         }
-        
-        /* Klasa ukrywająca nagłówek */
         .header-hidden {
             transform: translateY(-100%);
         }
@@ -134,12 +133,12 @@
         /* Game Canvas */
         #gameCanvas {
             width: 100%;
-            max-width: 800px;
+            height: auto;
             aspect-ratio: 16/9;
             background: var(--color-bg);
             border: 2px solid var(--color-accent);
-            cursor: crosshair; /* Kursor celownika przed wejściem w pointer lock */
-            touch-action: none; 
+            cursor: crosshair; 
+            touch-action: none; /* Blokuje przewijanie strony podczas gry na mobile */
         }
 
         /* Custom Inputs */
@@ -182,9 +181,7 @@
 
                     <!-- Theme Toggle -->
                     <button id="theme-toggle" class="p-2 rounded-full hover:bg-[var(--color-bg-card)] transition-colors" aria-label="Zmień motyw">
-                        <!-- Sun Icon -->
                         <svg class="w-5 h-5 hidden dark-icon text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m8.66-15.66l-.707.707M4.04 19.96l-.707.707M21 12h-1M4 12H3m15.66 8.66l-.707-.707M6.04 6.04l-.707-.707M12 18a6 6 0 100-12 6 6 0 000 12z"/></svg>
-                        <!-- Moon Icon -->
                         <svg class="w-5 h-5 block light-icon text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9 9 0 008.354-5.646z"/></svg>
                     </button>
                 </nav>
@@ -219,7 +216,7 @@
             <canvas id="heroCanvas"></canvas>
             
             <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center">
-                <div class="lg:w-1/2 text-center lg:text-left" data-aos="fade-right">
+                <div class="lg:w-1/2 text-center lg:text-left mb-10 lg:mb-0" data-aos="fade-right">
                     <div class="inline-block px-3 py-1 mb-4 text-xs font-bold tracking-wider text-accent uppercase bg-[rgba(6,182,212,0.1)] rounded-full border border-accent">
                         Swiss Type Turning
                     </div>
@@ -242,8 +239,8 @@
                 </div>
 
                 <!-- Animated Visual -->
-                <div class="lg:w-1/2 mt-16 lg:mt-0 relative" data-aos="fade-left" data-aos-delay="200">
-                    <svg class="w-full h-auto max-w-lg mx-auto text-accent opacity-90" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+                <div class="lg:w-1/2 relative flex justify-center" data-aos="fade-left" data-aos-delay="200">
+                    <svg class="w-full max-w-[300px] sm:max-w-[400px] h-auto text-accent opacity-90" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
                         <defs>
                             <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
                                 <feGaussianBlur stdDeviation="5" result="blur" />
@@ -301,7 +298,7 @@
         </section>
 
         <!-- USŁUGI -->
-        <section id="uslugi" class="py-24 bg-[var(--color-bg-secondary)] border-y border-[var(--border-color)]">
+        <section id="uslugi" class="py-24 bg-[var(--color-bg-secondary)] border-y border-[var(--border-color)] overflow-hidden">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="lg:flex items-center gap-16">
                     <div class="lg:w-1/2" data-aos="fade-right">
@@ -344,7 +341,7 @@
             </div>
         </section>
 
-        <!-- KALKULATOR CNC (Zaktualizowany - 3 Kolumny) -->
+        <!-- KALKULATOR CNC -->
         <section id="kalkulator" class="py-24 bg-[var(--color-bg)]">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-12" data-aos="fade-up">
@@ -355,7 +352,7 @@
                 <div class="card rounded-2xl shadow-2xl border-t-4 border-t-accent overflow-hidden" data-aos="fade-up">
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-[var(--border-color)]">
                         
-                        <!-- Moduł 1: Obroty (n) -->
+                        <!-- Moduł 1 -->
                         <div class="p-8">
                             <h3 class="text-xl font-semibold mb-6 flex items-center text-accent">
                                 <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
@@ -377,7 +374,7 @@
                             </div>
                         </div>
 
-                        <!-- Moduł 2: Posuw Minutowy (Vf) -->
+                        <!-- Moduł 2 -->
                         <div class="p-8">
                             <h3 class="text-xl font-semibold mb-6 flex items-center text-accent">
                                 <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
@@ -399,7 +396,7 @@
                             </div>
                         </div>
 
-                        <!-- Moduł 3: Chropowatość (Ra) -->
+                        <!-- Moduł 3 -->
                         <div class="p-8">
                             <h3 class="text-xl font-semibold mb-6 flex items-center text-accent">
                                 <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
@@ -414,7 +411,6 @@
                                     <label class="block text-sm font-medium text-[var(--color-text-muted)] mb-1">Promień płytki (r) [mm]</label>
                                     <input type="number" id="input-r" class="custom-input w-full rounded-md p-3" placeholder="np. 0.4">
                                 </div>
-                                <!-- Przycisk poprawiony na btn-primary -->
                                 <button onclick="calculateRa()" class="btn-primary w-full py-3 rounded-md font-bold">Oblicz Ra</button>
                                 <div class="mt-4 p-4 bg-[rgba(0,0,0,0.2)] rounded-lg text-center">
                                     Wynik: <span id="result-ra" class="text-2xl font-bold text-green-400">0</span> µm
@@ -427,32 +423,34 @@
             </div>
         </section>
 
-        <!-- GAME SECTION (ARKANOID 2.0) -->
-        <section id="gra" class="py-20 bg-[var(--color-bg-secondary)] border-y border-[var(--border-color)]">
+        <!-- GAME SECTION -->
+        <section id="gra" class="py-20 bg-[var(--color-bg-secondary)] border-y border-[var(--border-color)] overflow-hidden">
             <div class="max-w-4xl mx-auto px-4">
                 <div class="text-center mb-10">
                     <h2 class="text-3xl font-bold">Strefa Relaksu Operatora</h2>
                     <p class="text-[var(--color-text-muted)] mt-2">
-                        Kliknij w grę, aby zablokować kursor.<br>
+                        <span class="hidden md:inline">Kliknij w grę, aby zablokować kursor.<br></span>
+                        <span class="md:hidden">Dotknij ekranu, aby sterować.<br></span>
                         <span class="text-green-400">Apteczki (+Czas)</span> | <span class="text-blue-400">Pigułki (+Szerokość)</span><br>
                         <span class="text-red-500 font-bold">UWAGA: Szare cegły są twarde (2 uderzenia)!</span>
                     </p>
                 </div>
                 
-                <div class="relative rounded-xl overflow-hidden shadow-2xl ring-4 ring-[var(--color-border-color)]">
+                <div class="relative rounded-xl overflow-hidden shadow-2xl ring-4 ring-[var(--color-border-color)] bg-black select-none">
+                    <!-- Canvas set to full width for responsiveness -->
                     <canvas id="gameCanvas" width="800" height="450"></canvas>
                     
                     <!-- Game UI Overlay -->
-                    <div id="game-ui" class="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center bg-black/80 transition-opacity duration-300 z-10">
-                        <h3 class="text-4xl font-bold text-accent mb-2">CNC ARKANOD</h3>
+                    <div id="game-ui" class="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center bg-black/80 transition-opacity duration-300 z-10 p-4 text-center">
+                        <h3 class="text-3xl md:text-4xl font-bold text-accent mb-2">CNC ARKANOD</h3>
                         <p class="text-white mb-8 text-lg">Wyeliminuj błędy w produkcji!</p>
-                        <button id="start-game-btn" class="btn-primary px-10 py-4 rounded-full text-xl font-bold tracking-wider hover:scale-105 transform transition-transform">
+                        <button id="start-game-btn" class="btn-primary px-8 py-3 md:px-10 md:py-4 rounded-full text-lg md:text-xl font-bold tracking-wider hover:scale-105 transform transition-transform">
                             START PRODUKCJI
                         </button>
                         <p id="high-score-label" class="mt-6 text-[var(--color-text-muted)] text-sm">Rekord: <span id="high-score-val">0</span></p>
                     </div>
 
-                    <!-- Level Overlay (Temporary) -->
+                    <!-- Level Overlay -->
                     <div id="level-overlay" class="absolute top-0 left-0 w-full h-full flex items-center justify-center bg-black/60 pointer-events-none opacity-0 transition-opacity duration-500 z-20">
                         <h2 id="level-text" class="text-5xl font-bold text-accent neon-glow transform scale-110">POZIOM 1</h2>
                     </div>
@@ -484,7 +482,7 @@
                                 </div>
                                 <div>
                                     <p class="text-sm text-[var(--color-text-muted)]">Email</p>
-                                    <a href="mailto:blazej.kaczmar@gmail.com" class="text-lg font-semibold hover:text-accent transition-colors">blazej.kaczmar@gmail.com</a>
+                                    <a href="mailto:blazej.kaczmar@gmail.com" class="text-lg font-semibold hover:text-accent transition-colors break-all">blazej.kaczmar@gmail.com</a>
                                 </div>
                             </div>
                             <div class="flex items-center">
@@ -523,7 +521,7 @@
     </main>
 
     <footer class="bg-[var(--color-bg-secondary)] border-t border-[var(--border-color)] py-8 text-center">
-        <p class="text-[var(--color-text-muted)] text-sm">
+        <p class="text-[var(--color-text-muted)] text-sm px-4">
             &copy; 2024 BK CNC. Precyzyjna Obróbka Metali. <br class="md:hidden"> Tczew, ul. Gen. Bora-Komorowskiego 3c
         </p>
     </footer>
@@ -533,7 +531,12 @@
     
     <script>
         /* --- INITIALIZATION --- */
-        AOS.init({ duration: 800, once: true, offset: 100 });
+        AOS.init({ 
+            duration: 800, 
+            once: true, 
+            offset: 100,
+            disable: 'mobile' // Opcjonalne: wyłącz animacje na bardzo małych ekranach jeśli nadal są problemy
+        });
 
         /* --- THEME TOGGLE --- */
         const themeToggleBtn = document.getElementById('theme-toggle');
@@ -602,7 +605,6 @@
         const fontSize = 14;
         let frameCount = 0;
         
-        // Tabela komend G-code i M-code dla efektu Matrix
         const cncCodes = ["G0", "G1", "G02", "G03", "M3", "M5", "M8", "X", "Z", "F", "S", "T01", "G54", "G28"];
 
         function resizeHeroCanvas() {
@@ -616,18 +618,17 @@
             if (!ctx) return;
             const isLight = html.classList.contains('light');
             
-            // Jeszcze wolniej: Aktualizacja co 8 klatkę
+            // 8x slower update
             if (frameCount % 8 === 0) {
                 ctx.fillStyle = isLight ? 'rgba(248, 250, 252, 0.1)' : 'rgba(15, 23, 42, 0.1)';
                 ctx.fillRect(0, 0, width, height);
 
                 ctx.fillStyle = isLight ? '#0891b2' : '#06b6d4'; 
-                ctx.font = fontSize + 'px monospace'; // Monospace pasuje do kodu CNC
+                ctx.font = fontSize + 'px monospace'; 
 
                 for (let i = 0; i < drops.length; i++) {
-                    // Losowy kod z tablicy cncCodes
                     const text = cncCodes[Math.floor(Math.random() * cncCodes.length)];
-                    ctx.fillText(text, i * fontSize * 2, drops[i] * fontSize); // *2 dla odstępów bo kody są dłuższe
+                    ctx.fillText(text, i * fontSize * 2, drops[i] * fontSize);
 
                     if (drops[i] * fontSize > height && Math.random() > 0.975) {
                         drops[i] = 0;
@@ -686,7 +687,7 @@
             }
         }
 
-        /* --- GAME ENGINE (Advanced Arkanoid) --- */
+        /* --- GAME ENGINE (Mobile Fixed) --- */
         const gameCanvas = document.getElementById('gameCanvas');
         const gCtx = gameCanvas.getContext('2d');
         const uiOverlay = document.getElementById('game-ui');
@@ -706,16 +707,17 @@
         let highScore = localStorage.getItem('cnc_game_highscore') || 0;
         highScoreEl.innerText = highScore;
 
-        let paddle = { x: 350, y: 420, w: 100, h: 10, color: '#06b6d4', baseW: 100 };
-        const ball = { x: 400, y: 400, r: 6, dx: 0, dy: 0, speed: 5, active: false };
+        // Zwiększona szerokość paletki dla lepszej grywalności na mobile
+        let paddle = { x: 350, y: 420, w: 120, h: 10, color: '#06b6d4', baseW: 120 };
+        // Zmniejszona prędkość piłki (3 zamiast 5)
+        const ball = { x: 400, y: 400, r: 6, dx: 0, dy: 0, speed: 3, active: false };
         let bricks = [];
         let bonuses = [];
         let particles = [];
         
+        // Pointer Lock Wrapper (Bezpieczny na mobile)
         gameCanvas.requestPointerLock = gameCanvas.requestPointerLock || gameCanvas.mozRequestPointerLock;
-        document.addEventListener('pointerlockchange', () => {}, false);
-        document.addEventListener('mozpointerlockchange', () => {}, false);
-
+        
         // Audio
         let sounds = {};
         async function initAudio() {
@@ -735,9 +737,7 @@
             let w = (gameCanvas.width - (cols + 1) * padding) / cols;
             let h = 20;
 
-            // Konfiguracja poziomów
             if (level === 2) {
-                // Szachownica
                 rows = 5; cols = 10;
                 w = (gameCanvas.width - (cols + 1) * padding) / cols;
                 for(let r=0; r<rows; r++) {
@@ -748,11 +748,9 @@
                     }
                 }
             } else if (level === 3) {
-                // Twarde cegły (Iron)
                 rows = 5; cols = 8;
                 for(let r=0; r<rows; r++) {
                     for(let c=0; c<cols; c++) {
-                        // Co druga cegła jest twarda (status 2 = szara)
                         let isHard = (c % 2 === 0);
                         bricks.push({ 
                             x: c * (w + padding) + padding, 
@@ -765,7 +763,6 @@
                     }
                 }
             } else if (level >= 4) {
-                // Random Chaos
                 rows = 6; cols = 9;
                 w = (gameCanvas.width - (cols + 1) * padding) / cols;
                 for(let r=0; r<rows; r++) {
@@ -776,7 +773,6 @@
                     }
                 }
             } else {
-                // Poziom 1: Standard
                 for(let r=0; r<rows; r++) {
                     for(let c=0; c<cols; c++) {
                         if (Math.random() > 0.05) { 
@@ -799,8 +795,8 @@
             level++;
             levelEl.innerText = level;
             score += 500;
-            ball.speed += 1.5; // Przyspieszamy
-            paddle.w = paddle.baseW; // Reset paletki
+            ball.speed += 0.8; // Mniejszy przyrost prędkości
+            paddle.w = paddle.baseW; 
             createBricks();
             resetBall();
             showLevelText();
@@ -808,7 +804,7 @@
 
         function spawnBonus(x, y) {
             const rand = Math.random();
-            if (rand < 0.15) { // 15% szansy
+            if (rand < 0.15) { 
                 let type = 'time';
                 let color = '#4ade80';
                 if (rand < 0.07) { 
@@ -848,7 +844,6 @@
             if (ball.active) {
                 ball.x += ball.dx; ball.y += ball.dy;
                 
-                // Ściany
                 if (ball.x + ball.r > gameCanvas.width || ball.x - ball.r < 0) { ball.dx *= -1; sounds.hit?.triggerAttackRelease("C2", "32n"); }
                 if (ball.y - ball.r < 0) { ball.dy *= -1; sounds.hit?.triggerAttackRelease("C2", "32n"); }
                 
@@ -863,7 +858,6 @@
                     sounds.hit?.triggerAttackRelease("E2", "16n");
                 }
 
-                // Skucha
                 if (ball.y - ball.r > gameCanvas.height) { score = Math.max(0, score - 50); scoreEl.innerText = score; resetBall(); }
 
                 // Cegły
@@ -873,8 +867,6 @@
                         activeBricks++;
                         if (ball.x > b.x && ball.x < b.x + b.w && ball.y > b.y && ball.y < b.y + b.h) {
                             ball.dy *= -1; 
-                            
-                            // Logika wytrzymałości cegieł
                             b.health--;
                             
                             if (b.health <= 0) {
@@ -884,17 +876,15 @@
                                 createParticles(b.x + b.w/2, b.y + b.h/2, b.color);
                                 spawnBonus(b.x + b.w/2, b.y + b.h/2);
                             } else {
-                                // Uderzenie w twardą cegłę (ale nie zniszczenie)
                                 sounds.hardHit?.triggerAttackRelease("16n");
-                                b.color = '#ef4444'; // Zmiana koloru na "uszkodzony" (czerwony)
-                                createParticles(b.x + b.w/2, b.y + b.h/2, '#94a3b8'); // Szare iskry
+                                b.color = '#ef4444'; 
+                                createParticles(b.x + b.w/2, b.y + b.h/2, '#94a3b8');
                             }
                             scoreEl.innerText = score; 
                         }
                     }
                 });
                 
-                // Przejście poziomu
                 if (activeBricks === 0) { 
                     nextLevel();
                 }
@@ -924,7 +914,6 @@
                 }
             });
             
-            // Cząsteczki
             particles.forEach(p => {
                 p.x += p.vx; p.y += p.vy; p.life -= 0.05;
             });
@@ -935,18 +924,14 @@
             gCtx.fillStyle = getComputedStyle(html).getPropertyValue('--color-bg'); 
             gCtx.fillRect(0, 0, gameCanvas.width, gameCanvas.height);
             
-            // Paddle
             gCtx.fillStyle = paddle.color; gCtx.fillRect(paddle.x, paddle.y, paddle.w, paddle.h);
             
-            // Ball
             gCtx.beginPath(); gCtx.arc(ball.x, ball.y, ball.r, 0, Math.PI*2); gCtx.fillStyle = '#fff'; gCtx.fill(); gCtx.closePath();
             
-            // Bricks
             bricks.forEach(b => { 
                 if (b.status === 1) { 
                     gCtx.fillStyle = b.color; 
                     gCtx.fillRect(b.x, b.y, b.w-2, b.h-2); 
-                    // Oznaczenie twardych cegieł
                     if (b.health > 1) {
                          gCtx.strokeStyle = '#fff';
                          gCtx.lineWidth = 1;
@@ -955,7 +940,6 @@
                 } 
             });
             
-            // Bonuses
             bonuses.forEach(b => {
                 if (b.active) {
                     gCtx.fillStyle = b.color;
@@ -966,7 +950,6 @@
                 }
             });
             
-            // Particles
             particles.forEach(p => {
                 gCtx.fillStyle = p.color;
                 gCtx.globalAlpha = p.life;
@@ -980,27 +963,62 @@
             if (gameState === 'playing') gameLoopId = requestAnimationFrame(loop);
         }
 
-        function movePaddle(e) {
-            if (gameState !== 'playing') return;
-
+        // Input Handling (Unified Touch & Mouse)
+        function movePaddle(clientX) {
+            const rect = gameCanvas.getBoundingClientRect();
+            const scaleX = gameCanvas.width / rect.width;
+            let mouseX = (clientX - rect.left) * scaleX;
+            
+            // Jeśli używamy PointerLock (tylko Desktop)
             if (document.pointerLockElement === gameCanvas) {
-                paddle.x += e.movementX;
+                // Tutaj logika ruchu względnego byłaby inna, ale dla uproszczenia unifikujemy
+                // PointerLock jest obsługiwany przez zdarzenie 'mousemove' z movementX poniżej
             } else {
-                const rect = gameCanvas.getBoundingClientRect();
-                const scaleX = gameCanvas.width / rect.width;
-                let mouseX = (e.clientX - rect.left) * scaleX;
                 paddle.x = mouseX - paddle.w / 2;
             }
-
+            
+            // Clamp
             if (paddle.x < 0) paddle.x = 0;
             if (paddle.x + paddle.w > gameCanvas.width) paddle.x = gameCanvas.width - paddle.w;
         }
 
-        gameCanvas.addEventListener('mousemove', movePaddle);
+        // Desktop - Pointer Lock Movement
+        gameCanvas.addEventListener('mousemove', e => {
+             if (gameState !== 'playing') return;
+             if (document.pointerLockElement === gameCanvas) {
+                paddle.x += e.movementX;
+                if (paddle.x < 0) paddle.x = 0;
+                if (paddle.x + paddle.w > gameCanvas.width) paddle.x = gameCanvas.width - paddle.w;
+             } else {
+                 // Fallback if pointer lock is lost but mouse is over canvas
+                 movePaddle(e.clientX);
+             }
+        });
+
+        // Mobile - Touch Movement
+        gameCanvas.addEventListener('touchmove', e => {
+            if (gameState !== 'playing') return;
+            e.preventDefault(); // Prevent scrolling
+            movePaddle(e.touches[0].clientX);
+        }, {passive: false});
+
         gameCanvas.addEventListener('click', () => {
-            gameCanvas.requestPointerLock();
+            // Only request lock on desktop devices (non-touch usually)
+            // A simple check is if the screen width is large
+            if (window.innerWidth > 768) {
+                gameCanvas.requestPointerLock();
+            }
             launchBall();
         });
+        
+        // Touch start to launch ball without lock
+        gameCanvas.addEventListener('touchstart', (e) => {
+             if (gameState === 'playing' && !ball.active) {
+                 e.preventDefault();
+                 launchBall();
+             }
+        }, {passive: false});
+
 
         let timerInterval;
         function startTimer() {
@@ -1015,13 +1033,14 @@
         function startGame() {
             initAudio().catch(e => console.log("Audio blocked"));
             gameState = 'playing'; score = 0; level = 1; levelEl.innerText = 1; 
-            scoreEl.innerText = 0; ball.speed = 5;
+            scoreEl.innerText = 0; ball.speed = 3; // Zmienione na 3
             paddle.w = paddle.baseW; 
             bonuses = []; particles = [];
             createBricks(); resetBall();
             uiOverlay.classList.add('opacity-0', 'pointer-events-none');
             startTimer(); loop();
-            gameCanvas.requestPointerLock(); 
+            // Try lock only on desktop
+            if(window.innerWidth > 768) gameCanvas.requestPointerLock(); 
         }
 
         function gameOver() {
@@ -1031,7 +1050,7 @@
             uiOverlay.querySelector('p').innerText = `Wynik: ${score} | Poziom: ${level}`;
             startBtn.innerText = "ZAGRAJ PONOWNIE";
             if (score > highScore) { highScore = score; localStorage.setItem('cnc_game_highscore', highScore); highScoreEl.innerText = highScore; }
-            document.exitPointerLock(); 
+            if(document.exitPointerLock) document.exitPointerLock(); 
         }
 
         startBtn.addEventListener('click', startGame);
