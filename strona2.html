@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="pl" class="scroll-smooth">
+<html lang="pl" class="scroll-smooth" style="overflow-x: hidden;">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>BK CNC | Precyzyjna Obróbka Szwajcarska i Toczenie CNC</title>
 
     <!-- SEO & Meta Tags -->
@@ -121,7 +121,8 @@
             background-color: var(--color-bg);
             color: var(--color-text-secondary);
             transition: background-color 0.4s ease, color 0.4s ease;
-            overflow-x: hidden;
+            overflow-x: hidden; /* Critical for preventing horizontal scroll */
+            width: 100%;
             -webkit-font-smoothing: antialiased;
         }
 
@@ -736,14 +737,13 @@
             }
         });
 
-        /* --- CANVAS BACKGROUND (Optimized + Observer) --- */
+        /* --- CANVAS BACKGROUND (Optimized & Smoother) --- */
         const canvas = document.getElementById('heroCanvas');
         const ctx = canvas.getContext('2d');
         let width, height;
         let drops = [];
         const fontSize = 14;
         const cncCodes = ["G0", "G1", "G02", "G03", "M3", "X", "Z", "F", "T01"];
-        let bgFrameCount = 0; 
         let bgLoopId; 
         let isBgAnimating = false;
 
@@ -755,23 +755,26 @@
         }
 
         function drawBG() {
-            if (bgFrameCount % 2 === 0) {
-                const isLight = html.classList.contains('light');
-                ctx.fillStyle = isLight ? 'rgba(248, 250, 252, 0.15)' : 'rgba(15, 23, 42, 0.15)';
-                ctx.fillRect(0, 0, width, height);
-                ctx.fillStyle = isLight ? '#0891b2' : '#06b6d4'; 
-                ctx.font = fontSize + 'px monospace';
+            const isLight = html.classList.contains('light');
+            
+            // Smooth Fade Effect (Lower alpha = longer trails, less flickering)
+            ctx.fillStyle = isLight ? 'rgba(248, 250, 252, 0.05)' : 'rgba(15, 23, 42, 0.05)';
+            ctx.fillRect(0, 0, width, height);
+            
+            // Consistent Color
+            ctx.fillStyle = isLight ? '#0891b2' : '#06b6d4'; 
+            ctx.font = fontSize + 'px monospace';
 
-                for (let i = 0; i < drops.length; i++) {
-                    if(Math.random() > 0.95) { 
-                        const text = cncCodes[Math.floor(Math.random() * cncCodes.length)];
-                        ctx.fillText(text, i * fontSize * 1.5, drops[i] * fontSize);
-                        if (drops[i] * fontSize > height && Math.random() > 0.975) drops[i] = 0;
-                        drops[i]++;
-                    }
+            for (let i = 0; i < drops.length; i++) {
+                if(Math.random() > 0.95) { 
+                    const text = cncCodes[Math.floor(Math.random() * cncCodes.length)];
+                    ctx.fillText(text, i * fontSize * 1.5, drops[i] * fontSize);
+                    
+                    if (drops[i] * fontSize > height && Math.random() > 0.975) drops[i] = 0;
+                    drops[i]++;
                 }
             }
-            bgFrameCount++;
+            
             if (isBgAnimating) {
                 bgLoopId = requestAnimationFrame(drawBG);
             }
