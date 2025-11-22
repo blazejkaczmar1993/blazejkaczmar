@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CNC Viz 10.0 - Ultimate Studio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { margin: 0; overflow: hidden; background-color: #0b0b0d; color: #e0e0e0; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
+        #canvas-container { width: 100vw; height: 100vh; position: absolute; top: 0; left: 0; z-index: 1; background: radial-gradient(circle at center, #1f2937 0%, #000000 120%); }
+        #ui-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10; pointer-events: none; display: flex; flex-direction: column; justify-content: space-between; }
+        
+        .panel {
+            pointer-events: auto;
+            background: rgba(18, 18, 20, 0.96);
+            border: 1px solid #333;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8);
+            border-radius: 6px;
+            backdrop-filter: blur(12px);
+            display: flex; flex-direction: column;
+        }
+
+        .btn-icon {
+            @apply p-1.5 rounded hover:bg-white/10 transition text-gray-300 hover:text-white border border-transparent hover:border-white/20 text-xs font-semibold tracking-wide;
+        }
+
+        /* Details / Accordion */
+        details > summary {
+            list-style: none; cursor: pointer; padding: 8px;
+            background-color: rgba(255, 255, 255, 0.03); border-bottom: 1px solid #333;
+            font-size: 11px; font-weight: 700; color: #60a5fa; text-transform: uppercase;
+            display: flex; justify-content: space-between; align-items: center; transition: background-color 0.2s;
+        }
+        details > summary:hover { background-color: rgba(255, 255, 255, 0.07); }
+        details > summary::after { content: '+'; font-size: 14px; font-weight: bold; }
+        details[open] > summary::after { content: '-'; }
+        .details-content { padding: 10px; max-height: 350px; overflow-y: auto; }
+
+        /* Editor */
+        .editor-wrapper {
+            position: relative; display: flex; height: 100%; background-color: #0d0d0d;
+            font-family: 'JetBrains Mono', 'Consolas', monospace; font-size: 13px; line-height: 20px; overflow: hidden;
+        }
+        .line-numbers {
+            min-width: 35px; background-color: #151515; color: #555; text-align: right; padding: 10px 6px 10px 0;
+            border-right: 1px solid #333; user-select: none; overflow: hidden; white-space: pre-wrap;
+        }
+        textarea { 
+            flex-grow: 1; background-color: transparent; color: #a5f3fc; border: none; outline: none; padding: 10px;
+            resize: none; white-space: pre; overflow-wrap: normal; overflow-x: auto; overflow-y: scroll;
+        }
+        textarea::selection { background-color: #2563eb; color: white; }
+
+        /* Inputs */
+        input[type=number], select, input[type=text] {
+            background-color: #000 !important; color: #ffffff !important;
+            border: 1px solid #444 !important; border-radius: 3px; padding: 2px 6px;
+            font-family: monospace; font-weight: 500; width: 100%; font-size: 11px; transition: border-color 0.2s;
+        }
+        input[type=number]:focus, select:focus { outline: none; border-color: #3b82f6 !important; }
+        
+        /* Tool Table */
+        table { width: 100%; border-collapse: collapse; font-size: 10px; }
+        th { text-align: left; color: #9ca3af; font-weight: 700; padding: 4px; border-bottom: 1px solid #444; font-size: 9px; text-transform: uppercase; }
+        td { padding: 2px; border-bottom: 1px solid #222; vertical-align: middle; }
+        .del-btn { color: #ef4444; cursor: pointer; font-weight: bold; padding: 0 4px; }
+        .del-btn:hover { color: #fca5a5; }
+
+        label { color: #9ca3af !important; font-size: 10px !important; font-weight: 700 !important; text-transform: uppercase; letter-spacing: 0.05em; display: block; margin-bottom: 2px; }
+        .chk-container { display: flex; align-items: center; gap: 8px; cursor: pointer; }
+        .chk-box { width: 14px; height: 14px; border: 1px solid #555; border-radius: 3px; background: #1a1a1a; display: flex; align-items: center; justify-content: center; }
+        input[type="checkbox"] { display: none; }
+        input[type="checkbox"]:checked + .chk-box { background: #2563eb; border-color: #2563eb; }
+        input[type="checkbox"]:checked + .chk-box::after { content: '✓'; font-size: 10px; color: white; }
+
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #0d0d0d; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+        input[type=range] { -webkit-appearance: none; background: transparent; height: 20px; cursor: pointer; }
+        input[type=range]::-webkit-slider-runnable-track { width: 100%; height: 4px; background: #333; border-radius: 2px; }
+        input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; height: 14px; width: 14px; border-radius: 50%; background: #3b82f6; margin-top: -5px; border: 2px solid #ffffff; box-shadow: 0 0 5px rgba(0,0,0,0.5); }
+        
+        .heatmap-gradient { width: 100%; height: 6px; border-radius: 3px; background: linear-gradient(to right, #3b82f6, #10b981, #eab308, #ef4444); margin-top: 4px; }
+        .gcode-row { display: flex; justify-content: space-between; padding: 2px 0; border-bottom: 1px solid #222; font-family: monospace; font-size: 10px; color: #aaa; }
+        .gcode-key { color: #93c5fd; font-weight: bold; }
+    </style>
+    
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <div id="canvas-container"></div>
+
+    <div id="ui-layer" class="p-3">
+        
+        <!-- Top Bar -->
+        <div class="panel w-full flex items-center justify-between p-2 mb-3 h-12 flex-row">
+            <div class="flex items-center gap-4 pl-2">
+                <div class="font-bold text-lg tracking-widest text-white flex items-center gap-2 select-none">
+                    <span class="text-blue-500">CNC</span><span class="text-gray-400">VIZ</span>
+                    <span class="bg-purple-900/50 text-purple-300 text-[10px] px-1.5 py-0.5 rounded border border-purple-800">ULTIMATE 10.0</span>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-2">
+                <label class="btn-icon cursor-pointer flex items-center gap-2 bg-white/5 border border-white/10 px-3 hover:bg-blue-600/20">
+                    <input type="file" id="file-upload" accept=".nc,.gcode,.txt" class="hidden">
+                    <span class="opacity-80">OTWÓRZ NC</span>
+                </label>
+                <button id="btn-export-stl" class="btn-icon text-green-400 border-green-900/50 bg-green-900/20 hover:bg-green-800">ZAPISZ STL</button>
+                <div class="h-4 w-px bg-gray-700 mx-1"></div>
+                <button id="cam-iso" class="btn-icon">ISO</button>
+                <button id="cam-top" class="btn-icon">TOP</button>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex flex-col md:flex-row gap-3 h-full overflow-hidden pb-3 relative">
+            
+            <!-- Left Sidebar -->
+            <div class="flex flex-col gap-3 w-full md:w-80 lg:w-96 flex-shrink-0 order-2 md:order-1 max-h-[calc(100vh-90px)] overflow-hidden">
+                
+                <!-- Accordion Panel -->
+                <div class="panel flex-shrink-0 overflow-hidden flex flex-col" style="max-height: 60%;">
+                    
+                    <!-- Tools Section -->
+                    <details open class="border-b border-gray-800">
+                        <summary>Menedżer Narzędzi</summary>
+                        <div class="details-content bg-black/20">
+                            <table class="mb-2">
+                                <thead><tr><th width="5%"></th><th width="15%">T#</th><th width="35%">Typ</th><th width="20%">Ø</th><th width="25%">Ostrze</th></tr></thead>
+                                <tbody id="tool-table-body"></tbody>
+                            </table>
+                            <button onclick="addNewTool()" class="w-full bg-gray-800 hover:bg-gray-700 text-[10px] text-blue-400 py-1 rounded border border-gray-700 border-dashed">+ DODAJ NARZĘDZIE</button>
+                        </div>
+                    </details>
+
+                    <!-- Stock Section -->
+                    <details>
+                        <summary>Przygotówka (Stock)</summary>
+                        <div class="details-content space-y-3">
+                            <div class="grid grid-cols-3 gap-2">
+                                <div><label>X (Szer)</label><input type="number" id="stock-w" value="100"></div>
+                                <div><label>Y (Dług)</label><input type="number" id="stock-d" value="100"></div>
+                                <div><label>Z (Wys)</label><input type="number" id="stock-h" value="20"></div>
+                            </div>
+                            <div class="flex gap-3 items-center justify-between text-[10px]">
+                                <label class="chk-container"><input type="checkbox" id="chk-invert-y"><span class="chk-box"></span><span>Lustro Y</span></label>
+                                <label class="chk-container"><input type="checkbox" id="chk-comp"><span class="chk-box"></span><span>Kompensacja</span></label>
+                            </div>
+                            <button id="btn-update-stock" class="bg-blue-700 hover:bg-blue-600 text-[10px] font-bold text-white rounded py-1.5 w-full shadow">AKTUALIZUJ BRYŁĘ</button>
+                        </div>
+                    </details>
+
+                    <!-- G-Code Info Section -->
+                    <details>
+                        <summary>Info G-Code (Legenda)</summary>
+                        <div class="details-content">
+                            <div id="gcode-legend" class="space-y-0">
+                                <!-- Dynamic Content -->
+                            </div>
+                        </div>
+                    </details>
+                </div>
+
+                <!-- Code Editor -->
+                <div class="panel flex-grow flex flex-col overflow-hidden border-t-2 border-blue-600 min-h-0">
+                    <div class="p-1.5 bg-[#151515] border-b border-gray-800 flex justify-between items-center flex-shrink-0">
+                        <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest pl-2">Program NC</span>
+                        <button id="btn-render" class="bg-green-700 hover:bg-green-600 text-white text-[10px] font-bold py-0.5 px-2 rounded uppercase tracking-wide transition">Przelicz</button>
+                    </div>
+                    <div class="editor-wrapper flex-grow">
+                        <div id="line-numbers" class="line-numbers">1</div>
+                        <textarea id="gcode-input" spellcheck="false" placeholder="Wklej G-kod..."></textarea>
+                    </div>
+                </div>
+
+                <!-- Playback Controls -->
+                <div class="panel p-3 flex-shrink-0">
+                    <div class="flex items-center justify-between mb-2 gap-3">
+                        <button id="btn-play" class="w-8 h-8 flex-shrink-0 rounded-full bg-white text-black hover:bg-gray-200 flex items-center justify-center transition shadow-lg">
+                            <svg id="icon-play" class="w-4 h-4 ml-0.5" fill="currentColor" viewBox="0 0 20 20"><path d="M4 4l12 6-12 6z"/></svg>
+                            <svg id="icon-pause" class="w-4 h-4 hidden" fill="currentColor" viewBox="0 0 20 20"><path d="M5 4h3v12H5V4zm7 0h3v12h-3V4z"/></svg>
+                        </button>
+                        <div class="flex flex-col flex-grow">
+                             <div class="flex justify-between text-[10px] font-bold text-gray-400 mb-1 font-mono">
+                                <span id="current-line-idx" class="text-blue-400">N: 0</span>
+                                <span id="tool-display" class="text-yellow-400">T: -</span>
+                                <span id="progress-percent" class="text-green-400">0%</span>
+                            </div>
+                            <input type="range" id="progress-slider" min="0" max="1000" value="0" class="w-full h-1 bg-gray-700 rounded-lg appearance-none cursor-pointer">
+                        </div>
+                        <button id="btn-reset" class="p-1.5 text-gray-500 hover:text-white transition" title="Resetuj"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right DRO & Stats -->
+            <div class="absolute right-4 top-4 pointer-events-none flex flex-col gap-2 items-end">
+                <div class="panel p-4 pointer-events-auto min-w-[200px]">
+                    <div class="text-[10px] font-bold text-gray-500 tracking-widest mb-2 border-b border-gray-700 pb-1">POZYCJA (DRO)</div>
+                    <div class="font-mono text-lg grid grid-cols-[20px_1fr] gap-y-1">
+                        <span class="text-red-500 font-bold">X</span><span id="pos-x" class="text-right text-white font-bold tracking-wider">0.00</span>
+                        <span class="text-green-500 font-bold">Y</span><span id="pos-y" class="text-right text-white font-bold tracking-wider">0.00</span>
+                        <span class="text-blue-500 font-bold">Z</span><span id="pos-z" class="text-right text-white font-bold tracking-wider">0.00</span>
+                    </div>
+                    <div id="collision-alert" class="hidden mt-2 text-center bg-red-900/80 border border-red-600 text-white text-[10px] font-bold py-1 px-2 rounded animate-pulse">
+                        ⚠️ KOLIZJA OPRAWKI ⚠️
+                    </div>
+                </div>
+                
+                <div class="panel p-3 pointer-events-auto min-w-[200px]">
+                    <div class="text-[10px] font-bold text-gray-500 tracking-widest mb-2">GŁĘBOKOŚĆ SKRAWANIA</div>
+                    <div class="heatmap-gradient"></div>
+                    <div class="flex justify-between text-[9px] text-gray-400 mt-1 font-mono">
+                        <span>0 (GÓRA)</span>
+                        <span>MAX</span>
+                    </div>
+                </div>
+
+                <div class="panel p-3 pointer-events-auto text-[10px] text-gray-400 px-4 flex flex-col items-end gap-1">
+                   <span class="font-bold border-b border-gray-700 pb-1 mb-1 block w-full text-right">ZAKRESY</span>
+                   <div class="grid grid-cols-2 gap-x-4 gap-y-1 text-right">
+                       <span>X:</span><span id="range-x" class="text-white font-mono">-</span>
+                       <span>Y:</span><span id="range-y" class="text-white font-mono">-</span>
+                       <span>Z:</span><span id="range-z" class="text-white font-mono">-</span>
+                   </div>
+                   <span class="mt-2 pt-2 border-t border-gray-800 w-full text-right text-green-400 font-bold">Czas: <span id="est-time" class="text-white font-mono">00:00:00</span></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import * as THREE from 'three';
+        import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+        import { STLExporter } from 'three/addons/exporters/STLExporter.js';
+
+        const CONF = {
+            colorStockTop: 0x999999, colorStockSide: 0x666666, millRes: 256, rapidSpeed: 3000, defaultFeed: 500, safeLength: 30
+        };
+
+        // --- DATA: Tool Library (Mutable) ---
+        let toolsDB = [
+            { id: 1, type: 'FLAT', dia: 40, len: 50 }, // Głowica
+            { id: 2, type: 'FLAT', dia: 10, len: 30 }, // Płaski
+            { id: 3, type: 'BALL', dia: 6, len: 20 },  // Kulowy
+            { id: 4, type: 'DRILL', dia: 5, len: 40 }, // Wiertło
+            { id: 5, type: 'TAP', dia: 6, len: 35 }    // Gwintownik
+        ];
+
+        // --- DATA: G-Code Descriptions ---
+        const G_DESC = {
+            'G0': 'Ruch Szybki', 'G1': 'Ruch Roboczy', 'G2': 'Łuk CW', 'G3': 'Łuk CCW',
+            'G17': 'Płaszczyzna XY', 'G18': 'Płaszczyzna XZ', 'G19': 'Płaszczyzna YZ',
+            'G40': 'Kompensacja: OFF', 'G41': 'Kompensacja: Lewa', 'G42': 'Kompensacja: Prawa',
+            'G43': 'Kompensacja Długości', 'G49': 'Anuluj Komp. Dł.',
+            'G54': 'Układ Współrzędnych 1', 'G80': 'Anuluj Cykl',
+            'G81': 'Wiercenie', 'G83': 'Wiercenie Głębokie (Peck)', 'G84': 'Gwintowanie',
+            'G90': 'Współrzędne Absolutne', 'G91': 'Współrzędne Przyrostowe',
+            'M3': 'Wrzeciono CW', 'M4': 'Wrzeciono CCW', 'M5': 'Stop Wrzeciona',
+            'M6': 'Zmiana Narzędzia', 'M8': 'Chłodziwo ON', 'M9': 'Chłodziwo OFF', 'M30': 'Koniec Programu',
+            'T': 'Wybór Narzędzia', 'F': 'Posuw', 'S': 'Obroty'
+        };
+
+        const state = {
+            isPlaying: false, speed: 1, progress: 0, currentSegmentIdx: 0, segments: [],
+            bounds: { min: new THREE.Vector3(), max: new THREE.Vector3() },
+            activeToolId: 1, stockGroup: null, stockGeometry: null, sideGeometries: { f: null, b: null, l: null, r: null },
+            invertY: false, useComp: false, totalTimeMin: 0, simulatedHeadIdx: 0
+        };
+
+        let scene, camera, renderer, controls;
+        let toolMesh, toolFlutes, toolShank, highlightMesh, highlightSphere;
+        let pathGroup = new THREE.Group();
+        let helpersGroup = new THREE.Group();
+        let raycaster, mouse, chipSystem;
+        
+        const el = (id) => document.getElementById(id);
+        const els = {
+            input: el('gcode-input'), lineNums: el('line-numbers'),
+            btnRender: el('btn-render'), btnPlay: el('btn-play'), btnReset: el('btn-reset'), btnExport: el('btn-export-stl'),
+            slider: el('progress-slider'), btnUpdateStock: el('btn-update-stock'),
+            chkInvertY: el('chk-invert-y'), chkComp: el('chk-comp'),
+            stockW: el('stock-w'), stockD: el('stock-d'), stockH: el('stock-h'), 
+            toolTableBody: el('tool-table-body'), gcodeLegend: el('gcode-legend'),
+            posX: el('pos-x'), posY: el('pos-y'), posZ: el('pos-z'), collisionAlert: el('collision-alert'),
+            rangeX: el('range-x'), rangeY: el('range-y'), rangeZ: el('range-z'),
+            lineIdx: el('current-line-idx'), percent: el('progress-percent'), estTime: el('est-time'), toolDisplay: el('tool-display'),
+            iconPlay: el('icon-play'), iconPause: el('icon-pause')
+        };
+
+        // --- UI Functions ---
+        function renderToolTable() {
+            const tbody = els.toolTableBody; tbody.innerHTML = '';
+            toolsDB.forEach((t, idx) => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td class="text-center"><span class="del-btn" onclick="removeTool(${idx})">×</span></td>
+                    <td><input type="number" value="${t.id}" onchange="editTool(${idx}, 'id', this.value)" style="width:30px; text-align:center;"></td>
+                    <td><select onchange="editTool(${idx}, 'type', this.value)" class="bg-transparent border-none h-5 text-[10px]">
+                        <option value="FLAT" ${t.type==='FLAT'?'selected':''}>Frez Płaski</option>
+                        <option value="BALL" ${t.type==='BALL'?'selected':''}>Frez Kulowy</option>
+                        <option value="DRILL" ${t.type==='DRILL'?'selected':''}>Wiertło</option>
+                        <option value="TAP" ${t.type==='TAP'?'selected':''}>Gwintownik</option>
+                    </select></td>
+                    <td><input type="number" value="${t.dia}" onchange="editTool(${idx}, 'dia', this.value)" class="h-5 text-[10px]"></td>
+                    <td><input type="number" value="${t.len}" onchange="editTool(${idx}, 'len', this.value)" class="h-5 text-[10px]"></td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+        window.editTool = (arrIdx, key, val) => {
+            const t = toolsDB[arrIdx];
+            if(key==='type') t.type=val; else t[key]=parseFloat(val);
+            if(t.id === state.activeToolId) updateToolMesh(t.id);
+        };
+        window.removeTool = (arrIdx) => {
+            toolsDB.splice(arrIdx, 1); renderToolTable();
+        };
+        window.addNewTool = () => {
+            const newId = toolsDB.length > 0 ? Math.max(...toolsDB.map(t=>t.id)) + 1 : 1;
+            toolsDB.push({ id: newId, type: 'FLAT', dia: 10, len: 30 });
+            renderToolTable();
+        };
+        
+        // Helper function to update the Bounds
+        function updateBounds(v) { 
+            state.bounds.min.min(v); 
+            state.bounds.max.max(v); 
+        }
+
+        function updateLineNumbers() {
+            const lines = els.input.value.split('\n').length;
+            els.lineNums.innerHTML = Array(lines).fill(0).map((_, i) => i + 1).join('<br>');
+        }
+
+        // --- Chip System ---
+        class ChipSystem {
+            constructor(scene) {
+                this.max = 3000; this.idx = 0;
+                this.geo = new THREE.BufferGeometry();
+                this.pos = new Float32Array(this.max*3); this.vel = new Float32Array(this.max*3); this.life = new Float32Array(this.max);
+                this.geo.setAttribute('position', new THREE.BufferAttribute(this.pos, 3));
+                this.mesh = new THREE.Points(this.geo, new THREE.PointsMaterial({color: 0xffd700, size: 0.6, transparent: true, opacity:0.8}));
+                this.mesh.frustumCulled = false; scene.add(this.mesh);
+            }
+            emit(p, vol) {
+                const cnt = Math.min(Math.floor(vol*5), 40);
+                for(let i=0; i<cnt; i++) {
+                    const k = this.idx;
+                    this.pos[k*3] = p.x+(Math.random()-0.5)*2; this.pos[k*3+1] = p.y+Math.random(); this.pos[k*3+2] = p.z+(Math.random()-0.5)*2;
+                    this.vel[k*3] = (Math.random()-0.5)*3; this.vel[k*3+1] = Math.random()*3+2; this.vel[k*3+2] = (Math.random()-0.5)*3;
+                    this.life[k] = 1.0;
+                    this.idx = (this.idx+1) % this.max;
+                }
+            }
+            update() {
+                for(let i=0; i<this.max; i++) {
+                    if(this.life[i]>0) {
+                        this.vel[i*3+1] -= 0.15;
+                        this.pos[i*3] += this.vel[i*3]; this.pos[i*3+1] += this.vel[i*3+1]; this.pos[i*3+2] += this.vel[i*3+2];
+                        if(this.pos[i*3+1]<0) { this.pos[i*3+1]=0; this.vel[i*3+1]*=-0.5; this.vel[i*3]*=0.8; this.vel[i*3+2]*=0.8; }
+                        this.life[i] -= 0.03;
+                    } else { this.pos[i*3+1] = -999; }
+                }
+                this.geo.attributes.position.needsUpdate = true;
+            }
+        }
+
+        function init() {
+            scene = new THREE.Scene(); scene.fog = new THREE.FogExp2(0x1a1a20, 0.001);
+            camera = new THREE.PerspectiveCamera(50, window.innerWidth/window.innerHeight, 0.1, 5000);
+            camera.position.set(120, 150, 200);
+            renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(window.devicePixelRatio);
+            renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+            el('canvas-container').appendChild(renderer.domElement);
+            controls = new OrbitControls(camera, renderer.domElement); controls.enableDamping = true; controls.dampingFactor=0.05;
+            
+            scene.add(new THREE.AmbientLight(0xffffff, 0.5));
+            const dl = new THREE.DirectionalLight(0xffffff, 1.0); dl.position.set(50, 200, 100); dl.castShadow=true; 
+            dl.shadow.mapSize.width=2048; dl.shadow.mapSize.height=2048; scene.add(dl);
+            
+            scene.add(pathGroup); scene.add(helpersGroup);
+            
+            // FIX: Init Raycaster & Mouse BEFORE usage
+            raycaster = new THREE.Raycaster();
+            raycaster.params.Line.threshold = 3.0; 
+            mouse = new THREE.Vector2();
+
+            chipSystem = new ChipSystem(scene);
+            
+            const hg = new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(), new THREE.Vector3()]);
+            highlightMesh = new THREE.Line(hg, new THREE.LineBasicMaterial({color:0xff00ff, linewidth:5, depthTest:false}));
+            highlightMesh.renderOrder=999; highlightMesh.visible=false; scene.add(highlightMesh);
+            highlightSphere = new THREE.Mesh(new THREE.SphereGeometry(1.5), new THREE.MeshBasicMaterial({color:0xff00ff, depthTest:false}));
+            highlightSphere.renderOrder=999; highlightSphere.visible=false; scene.add(highlightSphere);
+
+            renderToolTable();
+            updateToolMesh(1); updateEnvironment();
+            
+            els.input.value = sampleMill; updateLineNumbers(); processCode();
+            
+            window.addEventListener('resize', onResize);
+            el('canvas-container').addEventListener('mousedown', on3DClick);
+            els.input.addEventListener('click', onEditorClick);
+            els.input.addEventListener('keyup', onEditorClick);
+            els.input.addEventListener('input', updateLineNumbers);
+            els.input.addEventListener('scroll', () => { els.lineNums.scrollTop = els.input.scrollTop; });
+            els.slider.addEventListener('input', onSliderScrub);
+            animate();
+        }
+
+        function onResize() { camera.aspect = window.innerWidth/window.innerHeight; camera.updateProjectionMatrix(); renderer.setSize(window.innerWidth, window.innerHeight); }
+        
+        function updateToolMesh(id) {
+            state.activeToolId = id;
+            const t = toolsDB.find(x => x.id == id) || toolsDB[0];
+            if(!t) return;
+            
+            const r = t.dia / 2;
+            const fluteLen = t.len;
+            
+            els.toolDisplay.innerText = `T${id}: ${t.type} D${t.dia}`;
+            
+            if(toolMesh) scene.remove(toolMesh);
+            toolMesh = new THREE.Group();
+            
+            let tipGeo, flutes, shank;
+            
+            if (t.type === 'BALL') {
+                tipGeo = new THREE.SphereGeometry(r, 32, 16); tipGeo.translate(0, r, 0);
+                const cylGeo = new THREE.CylinderGeometry(r, r, fluteLen - r, 32);
+                cylGeo.translate(0, r + (fluteLen-r)/2, 0);
+                flutes = new THREE.Group();
+                flutes.add(new THREE.Mesh(tipGeo, new THREE.MeshStandardMaterial({ color: 0xFFD700, roughness: 0.3 })));
+                flutes.add(new THREE.Mesh(cylGeo, new THREE.MeshStandardMaterial({ color: 0xFFD700, roughness: 0.3 })));
+            } else if (t.type === 'DRILL' || t.type === 'TAP') {
+                const tipH = r / Math.tan(59 * Math.PI/180);
+                tipGeo = new THREE.ConeGeometry(r, tipH, 32);
+                tipGeo.rotateX(Math.PI); tipGeo.translate(0, tipH/2, 0);
+                const bodyLen = fluteLen - tipH;
+                const bodyGeo = new THREE.CylinderGeometry(r, r, bodyLen, 32);
+                bodyGeo.translate(0, tipH + bodyLen/2, 0);
+                flutes = new THREE.Group();
+                const color = t.type === 'TAP' ? 0x88ccff : 0xFFD700; // Blueish for Tap
+                flutes.add(new THREE.Mesh(tipGeo, new THREE.MeshStandardMaterial({ color: color })));
+                flutes.add(new THREE.Mesh(bodyGeo, new THREE.MeshStandardMaterial({ color: color })));
+            } else {
+                tipGeo = new THREE.CylinderGeometry(r, r, fluteLen, 32);
+                tipGeo.translate(0, fluteLen/2, 0);
+                flutes = new THREE.Mesh(tipGeo, new THREE.MeshStandardMaterial({ color: 0xFFD700, metalness: 0.8 }));
+            }
+            
+            flutes.castShadow = true; toolFlutes = flutes; 
+            
+            const shankLen = 40;
+            const shankGeo = new THREE.CylinderGeometry(r, r, shankLen, 32);
+            shankGeo.translate(0, fluteLen + shankLen/2, 0);
+            shank = new THREE.Mesh(shankGeo, new THREE.MeshStandardMaterial({ color: 0xAAAAAA }));
+            toolShank = shank;
+
+            toolMesh.add(flutes); toolMesh.add(shank); scene.add(toolMesh);
+        }
+
+        function updateEnvironment() {
+            helpersGroup.clear();
+            helpersGroup.add(new THREE.GridHelper(300, 30, 0x555555, 0x222222));
+            helpersGroup.add(new THREE.AxesHelper(30));
+            const lbl = (t,c,p) => {
+                const cv=document.createElement('canvas'); cv.width=64; cv.height=64;
+                const x=cv.getContext('2d'); x.fillStyle=c; x.font="bold 48px Arial"; x.fillText(t,32,48);
+                const s=new THREE.Sprite(new THREE.SpriteMaterial({map:new THREE.CanvasTexture(cv), transparent:true, depthTest:false}));
+                s.position.copy(p); s.scale.set(8,8,1); helpersGroup.add(s);
+            };
+            lbl("X", "#f44", new THREE.Vector3(35,0,0)); lbl("Z", "#44f", new THREE.Vector3(0,35,0)); lbl("Y", "#4f4", new THREE.Vector3(0,0,-35));
+            const table = new THREE.Mesh(new THREE.BoxGeometry(300, 2, 300), new THREE.MeshStandardMaterial({color:0x222222}));
+            table.position.y = -1; table.receiveShadow = true; helpersGroup.add(table);
+            createStockMesh();
+        }
+
+        function createStockMesh() {
+            if (state.stockGroup) { scene.remove(state.stockGroup); if (state.stockGeometry) state.stockGeometry.dispose(); }
+            const w = parseFloat(els.stockW.value)||100; const d = parseFloat(els.stockD.value)||100; const h = parseFloat(els.stockH.value)||15;
+            state.stockGroup = new THREE.Group();
+            const segs = CONF.millRes;
+            const geo = new THREE.PlaneGeometry(w, d, segs, segs);
+            state.stockGeometry = geo;
+            const count = geo.attributes.position.count;
+            geo.setAttribute('color', new THREE.BufferAttribute(new Float32Array(count*3), 3));
+            const col = geo.attributes.color;
+            const base = new THREE.Color(CONF.colorStockTop);
+            for(let i=0; i<count; i++) col.setXYZ(i, base.r, base.g, base.b);
+            const mat = new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 0.5, metalness: 0.6, flatShading: false, side: THREE.DoubleSide });
+            const mesh = new THREE.Mesh(geo, mat);
+            mesh.rotation.x = -Math.PI/2; mesh.position.set(w/2, h, -d/2);
+            mesh.castShadow = true; mesh.receiveShadow = true;
+            state.stockGroup.add(mesh);
+            const matS = new THREE.MeshStandardMaterial({ color: CONF.colorStockSide, roughness: 0.7 });
+            const wall = (wd, ht, ax, p) => {
+                const m = new THREE.Mesh(new THREE.PlaneGeometry(wd, ht, segs, 1), matS);
+                if(ax==='y') m.rotation.y = Math.PI; else if(ax==='l') m.rotation.y = -Math.PI/2; else if(ax==='r') m.rotation.y = Math.PI/2;
+                m.position.copy(p); state.stockGroup.add(m); return m;
+            };
+            state.sideGeometries.f = wall(w, h, '', new THREE.Vector3(w/2, h/2, 0));
+            state.sideGeometries.b = wall(w, h, 'y', new THREE.Vector3(w/2, h/2, -d));
+            state.sideGeometries.l = wall(d, h, 'l', new THREE.Vector3(0, h/2, -d/2));
+            state.sideGeometries.r = wall(d, h, 'r', new THREE.Vector3(w, h/2, -d/2));
+            scene.add(state.stockGroup);
+            state.simulatedHeadIdx = 0;
+        }
+
+        function mapCoords(c) { return new THREE.Vector3(c.x, c.z, c.y * (state.invertY ? 1 : -1)); }
+        function getOffset(p1, p2, mode, dia) {
+            const dx = p2.x - p1.x, dz = p2.z - p1.z; const len = Math.sqrt(dx*dx + dz*dz);
+            if(len < 0.001) return {x:0, z:0};
+            const r = dia/2; let nx, nz;
+            if(mode==='G41') { nx = -dz/len; nz = dx/len; } else { nx = dz/len; nz = -dx/len; }
+            return {x: nx*r, z: nz*r};
+        }
+
+        function processCode() {
+            const lines = els.input.value.split('\n');
+            state.segments = []; pathGroup.clear(); highlightMesh.visible=false; highlightSphere.visible=false;
+            let curPos = { x:0, y:0, z:50 }; let curMode = 'G0'; let curFeed = CONF.defaultFeed; let curComp = 'G40';
+            let curToolId = 1; let totalTimeMin = 0;
+            state.bounds.min.set(Infinity, Infinity, Infinity); state.bounds.max.set(-Infinity, -Infinity, -Infinity);
+            let buffer = []; const usedCodes = new Set();
+
+            lines.forEach((line, idx) => {
+                let clean = line.replace(/\(.*\)/g, '').split(';')[0].trim().toUpperCase();
+                if(!clean) return;
+                // Collect G-codes for legend
+                const tokens = clean.match(/[GM]\d+/g);
+                if(tokens) tokens.forEach(t => usedCodes.add(t));
+                if(clean.includes('T')) usedCodes.add('T'); if(clean.includes('F')) usedCodes.add('F'); if(clean.includes('S')) usedCodes.add('S');
+
+                // Tool
+                const tMatch = clean.match(/T(\d+)/);
+                if(tMatch) {
+                    let tid = parseInt(tMatch[1]);
+                    if(tid > 100) tid = Math.floor(tid/100); 
+                    if(toolsDB.find(t=>t.id==tid)) curToolId = tid;
+                }
+                
+                if(clean.includes('G40')) curComp='G40'; if(clean.includes('G41')) curComp='G41'; if(clean.includes('G42')) curComp='G42';
+                
+                let target = { ...curPos }; let hasMove = false;
+                const parts = clean.match(/([GXYZFIJRZRKQ])([0-9.-]+)/g);
+                let drillR=2, drillZ=0, drillQ=0, i=0, j=0;
+
+                if(parts) {
+                    parts.forEach(p => {
+                        const c = p[0], v = parseFloat(p.slice(1));
+                        if(c==='G') { if(v===0) curMode='G0'; else if(v===1) curMode='G1'; else if(v===2) curMode='G2'; else if(v===3) curMode='G3'; }
+                        if(c==='X') { target.x=v; hasMove=true; } if(c==='Y') { target.y=v; hasMove=true; } if(c==='Z') { target.z=v; hasMove=true; }
+                        if(c==='F') curFeed=v;
+                        if(c==='R') drillR=v; if(c==='K' || c==='Q') drillQ=v; if(c==='I') i=v; if(c==='J') j=v;
+                    });
+                }
+
+                // Cycles G81/G83/G84
+                if (clean.includes('G81') || clean.includes('G83') || clean.includes('G84')) {
+                    const pStart = mapCoords(curPos);
+                    const pR = mapCoords({x:target.x, y:target.y, z:drillR});
+                    const pZ = mapCoords({x:target.x, y:target.y, z:target.z}); // target.z is drilled depth
+                    state.segments.push({start:pStart, end:pR, type:'G0', lineIdx:idx, toolId:curToolId});
+                    if(clean.includes('G83') && drillQ > 0) {
+                        let d = drillR;
+                        while(d > target.z) {
+                            let n = Math.max(target.z, d - drillQ);
+                            let pIn = mapCoords({x:target.x, y:target.y, z:n});
+                            let pOut = mapCoords({x:target.x, y:target.y, z:d+0.5});
+                            state.segments.push({start:mapCoords({x:target.x, y:target.y, z:d}), end:pIn, type:'G1', lineIdx:idx, feed:curFeed, toolId:curToolId});
+                            state.segments.push({start:pIn, end:pOut, type:'G0', lineIdx:idx, toolId:curToolId});
+                            d = n;
+                        }
+                        state.segments.push({start:mapCoords({x:target.x, y:target.y, z:target.z}), end:pR, type:'G0', lineIdx:idx, toolId:curToolId});
+                    } else {
+                        state.segments.push({start:pR, end:pZ, type:'G1', lineIdx:idx, feed:curFeed, toolId:curToolId});
+                        state.segments.push({start:pZ, end:pR, type:'G0', lineIdx:idx, toolId:curToolId});
+                    }
+                    curPos = {x:target.x, y:target.y, z:drillR}; // Return to R
+                    return;
+                }
+
+                // Arcs
+                if (hasMove && (curMode==='G2' || curMode==='G3')) {
+                    const p1 = mapCoords(curPos); const p2 = mapCoords(target);
+                    const yFact = state.invertY ? 1 : -1;
+                    const segs = arcToSegments(p1, p2.x, p2.z, i, j*yFact, curMode==='G2', idx, curToolId, curFeed);
+                    segs.forEach(s => state.segments.push(s));
+                    curPos = target; return;
+                }
+
+                if(hasMove) {
+                    const p1 = mapCoords(curPos); const p2 = mapCoords(target);
+                    let p1f = p1.clone(), p2f = p2.clone();
+                    if(state.useComp && curComp!=='G40' && curMode==='G1') {
+                        const t = toolsDB.find(x=>x.id==curToolId) || toolsDB[0];
+                        const off = getOffset(p1, p2, curComp, t.dia);
+                        p1f.x+=off.x; p1f.z+=off.z; p2f.x+=off.x; p2f.z+=off.z;
+                    }
+                    updateBounds(p1f); updateBounds(p2f);
+                    const dist = p1f.distanceTo(p2f);
+                    const speed = curMode==='G0' ? CONF.rapidSpeed : curFeed;
+                    totalTimeMin += dist/speed;
+                    state.segments.push({start:p1f, end:p2f, type:curMode, lineIdx:idx, feed:curFeed, toolId:curToolId});
+                    
+                    const color = curMode==='G0' ? 0xff3333 : 0x00ff00;
+                    const mat = curMode==='G0' ? new THREE.LineDashedMaterial({color, dashSize:2, gapSize:2, opacity:0.5, transparent:true}) : new THREE.LineBasicMaterial({color});
+                    const line = new THREE.Line(new THREE.BufferGeometry().setFromPoints([p1f, p2f]), mat);
+                    if(curMode==='G0') line.computeLineDistances();
+                    pathGroup.add(line);
+                    curPos = target;
+                }
+            });
+
+            renderLegend(usedCodes);
+            const totSec = totalTimeMin * 60;
+            els.estTime.innerText = new Date(totSec * 1000).toISOString().substr(11, 8);
+            els.rangeX.innerText = `${state.bounds.min.x.toFixed(0)}/${state.bounds.max.x.toFixed(0)}`;
+            els.rangeY.innerText = `${state.bounds.min.z.toFixed(0)}/${state.bounds.max.z.toFixed(0)}`;
+            els.rangeZ.innerText = `${(-state.bounds.max.y).toFixed(0)}/${(-state.bounds.min.y).toFixed(0)}`;
+            resetSim();
+        }
+
+        function arcToSegments(p1, x2, z2, i, j, isCw, idx, tid, feed) {
+            const cx = p1.x + i, cz = p1.z + j;
+            const r = Math.sqrt(i*i + j*j);
+            const a1 = Math.atan2(p1.z - cz, p1.x - cx);
+            let a2 = Math.atan2(z2 - cz, x2 - cx);
+            if(isCw && a2 > a1) a2 -= Math.PI*2; if(!isCw && a2 < a1) a2 += Math.PI*2;
+            const segs = []; const res = 16; const step = (a2-a1)/res;
+            let prev = p1.clone();
+            for(let k=1; k<=res; k++) {
+                const th = a1 + step*k;
+                const p = new THREE.Vector3(cx + r*Math.cos(th), p1.y, cz + r*Math.sin(th));
+                segs.push({start:prev, end:p, type:'G1', lineIdx:idx, feed, toolId:tid});
+                prev = p;
+            }
+            return segs;
+        }
+
+        function renderLegend(codes) {
+            els.gcodeLegend.innerHTML = '';
+            const sorted = Array.from(codes).sort();
+            sorted.forEach(c => {
+                const div = document.createElement('div');
+                div.className = 'gcode-row';
+                div.innerHTML = `<span class="gcode-key">${c}</span> <span>${G_DESC[c] || 'User/Macro'}</span>`;
+                els.gcodeLegend.appendChild(div);
+            });
+        }
+
+        function animate() {
+            requestAnimationFrame(animate); controls.update(); chipSystem.update();
+            if(state.isPlaying && state.segments.length > 0) {
+                const seg = state.segments[state.currentSegmentIdx];
+                const dist = seg.start.distanceTo(seg.end);
+                let step = (seg.type==='G0' ? 8 : 1) * state.speed; if(dist<0.001) step=1;
+                state.progress += step / (dist||1);
+                
+                if(seg.toolId !== state.activeToolId) updateToolMesh(seg.toolId);
+
+                if(state.progress >= 1) {
+                    if(seg.type === 'G1') { deformStockSegment(seg.start, seg.end, seg.toolId); chipSystem.emit(seg.end, 1.0); }
+                    state.simulatedHeadIdx = state.currentSegmentIdx + 1;
+                    state.progress = 0; state.currentSegmentIdx++;
+                    if(state.currentSegmentIdx >= state.segments.length) {
+                        state.isPlaying = false; state.currentSegmentIdx = state.segments.length-1; state.progress=1; updatePlayUI();
+                    }
+                }
+                const curSeg = state.segments[state.currentSegmentIdx];
+                const pos = new THREE.Vector3().lerpVectors(curSeg.start, curSeg.end, state.progress);
+                toolMesh.position.copy(pos);
+                if(curSeg.type==='G1') {
+                    const prev = new THREE.Vector3().lerpVectors(curSeg.start, curSeg.end, Math.max(0, state.progress - step/(dist||1)));
+                    deformStockSegment(prev, pos, curSeg.toolId); chipSystem.emit(pos, 0.2);
+                }
+                updateDRO(pos); highlightSelection(curSeg);
+                const total = state.segments.length; let ratio = (state.currentSegmentIdx + state.progress) / total;
+                if(state.currentSegmentIdx >= total-1 && state.progress >= 1) ratio = 1.0;
+                els.percent.innerText = `${Math.floor(ratio*100)}%`;
+                if(state.currentSegmentIdx % 10 === 0) els.lineIdx.innerText = `N: ${curSeg.lineIdx + 1}`;
+                els.slider.value = ratio * 1000;
+            }
+            renderer.render(scene, camera);
+        }
+
+        function updateDRO(pos) {
+            const inv = state.invertY ? 1 : -1;
+            els.posX.innerText = pos.x.toFixed(2); els.posY.innerText = (pos.z/inv).toFixed(2); els.posZ.innerText = pos.y.toFixed(2);
+            const t = toolsDB.find(x=>x.id==state.activeToolId) || toolsDB[0];
+            const stockH = parseFloat(els.stockH.value)||15;
+            const depth = stockH - pos.y;
+            if (depth > t.len && pos.y < stockH) { toolShank.material.color.setHex(0xff0000); els.collisionAlert.classList.remove('hidden'); } 
+            else { toolShank.material.color.setHex(0xaaaaaa); els.collisionAlert.classList.add('hidden'); }
+        }
+
+        function resetSim() {
+            state.isPlaying = false; state.currentSegmentIdx = 0; state.progress = 0; els.slider.value = 0; els.percent.innerText = "0%"; updatePlayUI();
+            if(state.segments.length>0) { toolMesh.position.copy(state.segments[0].start); if(state.segments[0].toolId !== state.activeToolId) updateToolMesh(state.segments[0].toolId); }
+            restoreStock(); highlightMesh.visible=false; highlightSphere.visible=false; els.collisionAlert.classList.add('hidden');
+        }
+        function restoreStock() {
+            if(!state.stockGeometry) return;
+            const pos = state.stockGeometry.attributes.position; const col = state.stockGeometry.attributes.color; const cnt = pos.count;
+            const baseC = new THREE.Color(CONF.colorStockTop);
+            for(let i=0; i<cnt; i++) { pos.setZ(i, 0); col.setXYZ(i, baseC.r, baseC.g, baseC.b); }
+            pos.needsUpdate=true; col.needsUpdate=true; state.stockGeometry.computeVertexNormals();
+            const h = parseFloat(els.stockH.value)||15; const segs=CONF.millRes;
+            const resetW = (m) => { if(!m) return; const a = m.geometry.attributes.position; for(let i=0; i<=segs; i++) a.setY(i, h/2); a.needsUpdate=true; };
+            resetW(state.sideGeometries.f); resetW(state.sideGeometries.b); resetW(state.sideGeometries.l); resetW(state.sideGeometries.r);
+            state.simulatedHeadIdx = 0;
+        }
+        function simulateToState(idx) {
+            if(idx < state.simulatedHeadIdx) restoreStock();
+            for(let i=state.simulatedHeadIdx; i<idx; i++) { const s = state.segments[i]; if(s.type==='G1') deformStockSegment(s.start, s.end, s.toolId); }
+            state.simulatedHeadIdx = idx;
+        }
+        function deformStockSegment(p1, p2, toolId) {
+            if (!state.stockGeometry) return;
+            const t = toolsDB.find(x=>x.id==toolId) || toolsDB[0];
+            const r = t.dia / 2; const rSq = r*r;
+            const geo = state.stockGeometry; const posAttr = geo.attributes.position; const colAttr = geo.attributes.color;
+            const w = parseFloat(els.stockW.value); const d = parseFloat(els.stockD.value); const stockH = parseFloat(els.stockH.value);
+            const p1x = p1.x - w/2; const p1y = -d/2 - p1.z; const p2x = p2.x - w/2; const p2y = -d/2 - p2.z;
+            const segs = CONF.millRes; const stepX = w / segs; const stepY = d / segs;
+            const minX = Math.min(p1x, p2x) - r - stepX; const maxX = Math.max(p1x, p2x) + r + stepX;
+            const minY = Math.min(p1y, p2y) - r - stepY; const maxY = Math.max(p1y, p2y) + r + stepY;
+            const iMinX = Math.max(0, Math.floor((minX + w/2) / stepX)); const iMaxX = Math.min(segs, Math.ceil((maxX + w/2) / stepX));
+            const iMinY = Math.max(0, Math.floor((d/2 - maxY) / stepY)); const iMaxY = Math.min(segs, Math.ceil((d/2 - minY) / stepY));
+            const wVerts = segs + 1; const tipH = Math.min(p1.y, p2.y); const safeH = 0; 
+            const l2 = (p1x-p2x)**2 + (p1y-p2y)**2;
+            const isBall = t.type==='BALL'; const isDrill = t.type==='DRILL' || t.type==='TAP';
+            const { f: pF, b: pB, l: pL, r: pR } = state.sideGeometries;
+            const posF = pF?pF.geometry.attributes.position:null; const posB = pB?pB.geometry.attributes.position:null;
+            const posL = pL?pL.geometry.attributes.position:null; const posR = pR?pR.geometry.attributes.position:null;
+            let updateW = false;
+            for(let iy=iMinY; iy<=iMaxY; iy++) {
+                for(let ix=iMinX; ix<=iMaxX; ix++) {
+                    const idx = iy * wVerts + ix;
+                    const vx = posAttr.getX(idx); const vy = posAttr.getY(idx);
+                    let distSq;
+                    if(l2===0) distSq = (vx-p1x)**2 + (vy-p1y)**2;
+                    else {
+                        let t = ((vx-p1x)*(p2x-p1x) + (vy-p1y)*(p2y-p1y)) / l2; t = Math.max(0, Math.min(1, t));
+                        distSq = (vx-(p1x+t*(p2x-p1x)))**2 + (vy-(p1y+t*(p2y-p1y)))**2;
+                    }
+                    if(distSq < rSq) {
+                        const curH = stockH + posAttr.getZ(idx);
+                        let effH = tipH;
+                        if(isBall || (isDrill && distSq < rSq)) effH = tipH + (r - Math.sqrt(Math.max(0, rSq - distSq)));
+                        if(curH > effH && effH >= safeH) {
+                            posAttr.setZ(idx, effH - stockH);
+                            const dr = (stockH - effH)/stockH; const hue = 0.6 - dr*0.6; const c = new THREE.Color().setHSL(hue, 1.0, 0.5); colAttr.setXYZ(idx, c.r, c.g, c.b);
+                            updateW = true;
+                            if (iy === 0 && posB) { const k=segs-ix; if(k>=0) posB.setY(k, effH - stockH/2); }
+                            if (iy === segs && posF) { const k=ix; if(k>=0) posF.setY(k, effH - stockH/2); }
+                            if (ix === 0 && posL) { const k=iy; if(k>=0) posL.setY(k, effH - stockH/2); }
+                            if (ix === segs && posR) { const k=segs-iy; if(k>=0) posR.setY(k, effH - stockH/2); }
+                        }
+                    }
+                }
+            }
+            posAttr.needsUpdate=true; colAttr.needsUpdate=true; geo.computeVertexNormals();
+            if(updateW) { if(posF) posF.needsUpdate=true; if(posB) posB.needsUpdate=true; if(posL) posL.needsUpdate=true; if(posR) posR.needsUpdate=true; }
+        }
+
+        function on3DClick(e) {
+            const r=renderer.domElement.getBoundingClientRect(); mouse.x=((e.clientX-r.left)/r.width)*2-1; mouse.y=-((e.clientY-r.top)/r.height)*2+1;
+            raycaster.setFromCamera(mouse, camera);
+            let min=Infinity, idx=-1;
+            for(let i=0; i<state.segments.length; i++) { const d = raycaster.ray.distanceSqToSegment(state.segments[i].start, state.segments[i].end); if(d<min) { min=d; idx=i; } }
+            if(idx!==-1 && min<5) selectSeg(idx);
+        }
+        function onEditorClick() {
+            const l = els.input.value.substring(0, els.input.selectionStart).split('\n').length-1;
+            const i = state.segments.findIndex(s => s.lineIdx === l); if(i!==-1) selectSeg(i, false);
+        }
+        function onSliderScrub(e) {
+            state.isPlaying=false; updatePlayUI(); const v = e.target.value/1000; const n = state.segments.length; if(n===0) return;
+            let i = Math.floor(v*n); let p = (v*n)-i; if(i>=n) { i=n-1; p=1; }
+            const s = state.segments[i]; if(s.toolId!==state.activeToolId) updateToolMesh(s.toolId);
+            state.currentSegmentIdx=i; state.progress=p;
+            const pos = new THREE.Vector3().lerpVectors(s.start, s.end, p); toolMesh.position.copy(pos); updateDRO(pos);
+            els.percent.innerText = `${Math.floor(v*100)}%`; els.lineIdx.innerText = `N: ${s.lineIdx+1}`;
+            simulateToState(i); if(s.type==='G1') deformStockSegment(s.start, pos, s.toolId);
+        }
+        function selectSeg(i, scrollEditor=true) {
+            if(i<0 || i>=state.segments.length) return; state.currentSegmentIdx=i; state.progress=0; state.isPlaying=false; updatePlayUI();
+            const s = state.segments[i]; if(s.toolId!==state.activeToolId) updateToolMesh(s.toolId);
+            toolMesh.position.copy(s.start); updateDRO(s.start);
+            highlightSelection(s); if(scrollEditor) highlightLineInEditor(s.lineIdx);
+            const r = i/state.segments.length; els.percent.innerText = `${Math.floor(r*100)}%`; els.slider.value=r*1000; els.lineIdx.innerText = `N: ${s.lineIdx+1}`;
+            simulateToState(i);
+        }
+        function highlightSelection(s) {
+            const a = highlightMesh.geometry.attributes.position; a.setXYZ(0, s.start.x, s.start.y, s.start.z); a.setXYZ(1, s.end.x, s.end.y, s.end.z);
+            a.needsUpdate=true; highlightMesh.visible=true; highlightSphere.position.copy(s.start); highlightSphere.visible=true;
+        }
+        function highlightLineInEditor(l) { els.input.scrollTop = (l*20) - (els.input.clientHeight/2); }
+        function updatePlayUI() { if(state.isPlaying) { els.iconPlay.classList.add('hidden'); els.iconPause.classList.remove('hidden'); } else { els.iconPlay.classList.remove('hidden'); els.iconPause.classList.add('hidden'); } }
+
+        els.btnPlay.addEventListener('click', () => { if(state.segments.length>0) { if(state.currentSegmentIdx>=state.segments.length-1 && state.progress>=1) { state.currentSegmentIdx=0; state.progress=0; } state.isPlaying=!state.isPlaying; updatePlayUI(); }});
+        els.btnReset.addEventListener('click', resetSim); els.btnRender.addEventListener('click', processCode);
+        els.btnUpdateStock.addEventListener('click', () => { createStockMesh(); resetSim(); });
+        els.chkInvertY.addEventListener('change', (e) => { state.invertY = e.target.checked; processCode(); });
+        els.chkComp.addEventListener('change', (e) => { state.useComp = e.target.checked; processCode(); });
+        el('file-upload').addEventListener('change', (e) => { const f=e.target.files[0]; if(!f)return; const r=new FileReader(); r.onload=(ev)=>{els.input.value=ev.target.result; updateLineNumbers(); processCode();}; r.readAsText(f); });
+        el('cam-iso').addEventListener('click', () => { camera.position.set(120, 150, 200); controls.target.set(50,0,-50); controls.update(); });
+        el('cam-top').addEventListener('click', () => { camera.position.set(50, 250, -50); controls.target.set(50,0,-50); controls.update(); });
+        els.btnExport.addEventListener('click', () => { const e=new STLExporter(); const r=e.parse(state.stockGroup); const b=new Blob([r], {type:'text/plain'}); const l=document.createElement('a'); l.href=URL.createObjectURL(b); l.download='cnc_stock.stl'; l.click(); });
+
+        const sampleMill = `(ULTIMATE CNC TEST v10)\n(Stock: 100x100x20)\n(T1: Glowica 40mm)\n(T2: Frez 10mm)\n(T3: Frez Kulowy 6mm)\n(T4: Wiertlo 5mm)\n(T5: Gwintownik M6)\n\nG0 Z50\nG0 X-20 Y-20\n\n(--- OPERACJA 1: PLANOWANIE T1 ---)\nT1 M6\nG0 Z5\nG0 X-25 Y50\nG1 Z0 F1000\nG1 X125\nG0 Z50\n\n(--- OPERACJA 2: KONTUR G41 T2 ---)\nT2 M6\nG0 X10 Y10\nG0 Z5\nG1 Z-5 F800\nG41 (Kompensacja Lewa)\nG1 X90 Y10\nG1 X90 Y90\nG1 X10 Y90\nG1 X10 Y10\nG40 (Koniec Kompensacji)\nG0 Z50\n\n(--- OPERACJA 3: KIESZEN KOLO T3 ---)\nT3 M6\nG0 X50 Y50\nG0 Z5\nG1 Z-5 F500\n(Spiralne wejscie G3)\nG3 X50 Y50 I15 J0\nG3 X50 Y50 I10 J0\nG0 Z50\n\n(--- OPERACJA 4: WIERCENIE G83 T4 ---)\nT4 M6\nG0 X20 Y20 Z10\nG83 X20 Y20 Z-10 R2 Q3 F200 (Peck Drill)\nG83 X80 Y20 Z-10 R2 Q3\nG80 (Koniec cyklu)\nG0 Z50\n\n(--- OPERACJA 5: GWINTOWANIE G84 T5 ---)\nT5 M6\nG0 X20 Y20 Z10\nG84 X20 Y20 Z-8 R5 F1.0 (Gwint)\nG84 X80 Y20 Z-8 R5\nG80\nG0 Z50\nM30`;
+        init();
+    </script>
+</body>
+</html>
