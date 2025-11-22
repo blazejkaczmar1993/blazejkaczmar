@@ -140,10 +140,10 @@
                     <div class="h-px bg-gray-300 dark:bg-gray-700 w-12 md:w-32"></div>
                 </div>
                  
-                <!-- Grid Layout: Zmieniono na 3 kolumny dla Kalkulatora -->
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Grid Layout: Zmieniono na 2 kolumny dla układu 2x2 przy 4 elementach -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     
-                    <!-- NOWY ELEMENT: Kalkulator HTML -->
+                    <!-- Element 1: Kalkulator HTML -->
                     <a href="kalkulator.html" class="group relative bg-white dark:bg-gray-800 rounded-2xl p-1 border border-gray-200 dark:border-gray-700 card-hover-effect hover:-translate-y-2 hover:shadow-2xl hover:border-orange-400/50 dark:hover:border-orange-500/50">
                         <div class="absolute -top-3 -right-3 bg-orange-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg transform rotate-12 group-hover:rotate-0 transition-transform">NOWOŚĆ</div>
                         <div class="h-full p-6 rounded-xl flex flex-col bg-gradient-to-b from-transparent to-gray-50 dark:to-gray-800/50">
@@ -158,7 +158,22 @@
                         </div>
                     </a>
 
-                    <!-- Strona 1 -->
+                    <!-- NOWY ELEMENT: Wizualizer CNC -->
+                    <a href="WIzualizercnc.html" class="group relative bg-white dark:bg-gray-800 rounded-2xl p-1 border border-gray-200 dark:border-gray-700 card-hover-effect hover:-translate-y-2 hover:shadow-2xl hover:border-purple-400/50 dark:hover:border-purple-500/50">
+                        <div class="absolute -top-3 -right-3 bg-purple-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg transform -rotate-6 group-hover:rotate-0 transition-transform">BETA</div>
+                        <div class="h-full p-6 rounded-xl flex flex-col bg-gradient-to-b from-transparent to-gray-50 dark:to-gray-800/50">
+                            <div class="w-16 h-16 mb-6 rounded-2xl bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center text-purple-600 dark:text-purple-400 group-hover:scale-110 transition-transform duration-300">
+                                <!-- Ikona 3D/Cube -->
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5" />
+                                </svg>
+                            </div>
+                            <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">Wizualizer G-Code</h3>
+                            <p class="text-gray-500 dark:text-gray-400 text-sm mb-4 flex-grow">Symulacja ścieżek narzędzia w 3D. Wklej swój kod i zobacz wynik w przeglądarce.</p>
+                        </div>
+                    </a>
+
+                    <!-- Element 3: Strona 1 -->
                     <a href="strona1.html" class="group bg-white dark:bg-gray-800 rounded-2xl p-1 border border-gray-200 dark:border-gray-700 card-hover-effect hover:-translate-y-2 hover:shadow-2xl hover:border-blue-400/50 dark:hover:border-blue-500/50">
                         <div class="h-full p-6 rounded-xl flex flex-col bg-gradient-to-b from-transparent to-gray-50 dark:to-gray-800/50">
                             <div class="w-16 h-16 mb-6 rounded-2xl bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400 group-hover:scale-110 transition-transform duration-300">
@@ -172,7 +187,7 @@
                         </div>
                     </a>
 
-                    <!-- Strona 2 -->
+                    <!-- Element 4: Strona 2 -->
                     <a href="strona2.html" class="group bg-white dark:bg-gray-800 rounded-2xl p-1 border border-gray-200 dark:border-gray-700 card-hover-effect hover:-translate-y-2 hover:shadow-2xl hover:border-emerald-400/50 dark:hover:border-emerald-500/50">
                         <div class="h-full p-6 rounded-xl flex flex-col bg-gradient-to-b from-transparent to-gray-50 dark:to-gray-800/50">
                             <div class="w-16 h-16 mb-6 rounded-2xl bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center text-emerald-600 dark:text-emerald-400 group-hover:scale-110 transition-transform duration-300">
