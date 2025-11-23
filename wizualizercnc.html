@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CNC Viz 10.0 - Ultimate Studio</title>
+    <title>CNC Viz 11.5 - Solid Studio (Z-Top Base)</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body { margin: 0; overflow: hidden; background-color: #0b0b0d; color: #e0e0e0; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
@@ -20,9 +20,22 @@
             display: flex; flex-direction: column;
         }
 
-        .btn-icon {
-            @apply p-1.5 rounded hover:bg-white/10 transition text-gray-300 hover:text-white border border-transparent hover:border-white/20 text-xs font-semibold tracking-wide;
+        /* Nowy, jednolity styl przycisków */
+        .btn-toolbar {
+            @apply px-3 py-1.5 rounded border text-[11px] font-bold tracking-wide transition uppercase flex items-center gap-2;
+            background: rgba(255,255,255,0.05);
+            border-color: rgba(255,255,255,0.1);
+            color: #bbb;
         }
+        .btn-toolbar:hover {
+            background: rgba(255,255,255,0.15);
+            color: #fff;
+            border-color: rgba(255,255,255,0.3);
+            box-shadow: 0 0 10px rgba(255,255,255,0.1);
+        }
+        .btn-toolbar.action-save { @apply hover:border-green-500 hover:text-green-400 hover:shadow-green-900/50; }
+        .btn-toolbar.action-txt { @apply hover:border-blue-500 hover:text-blue-400 hover:shadow-blue-900/50; }
+        .btn-toolbar.action-cam { @apply w-10 justify-center px-0; }
 
         /* Details / Accordion */
         details > summary {
@@ -101,23 +114,35 @@
     <div id="ui-layer" class="p-3">
         
         <!-- Top Bar -->
-        <div class="panel w-full flex items-center justify-between p-2 mb-3 h-12 flex-row">
+        <div class="panel w-full flex items-center justify-between p-2 mb-3 h-12 flex-row gap-2">
             <div class="flex items-center gap-4 pl-2">
                 <div class="font-bold text-lg tracking-widest text-white flex items-center gap-2 select-none">
                     <span class="text-blue-500">CNC</span><span class="text-gray-400">VIZ</span>
-                    <span class="bg-purple-900/50 text-purple-300 text-[10px] px-1.5 py-0.5 rounded border border-purple-800">ULTIMATE 10.0</span>
+                    <span class="bg-blue-900/50 text-blue-200 text-[10px] px-1.5 py-0.5 rounded border border-blue-800">V11.5</span>
                 </div>
             </div>
 
-            <div class="flex items-center gap-2">
-                <label class="btn-icon cursor-pointer flex items-center gap-2 bg-white/5 border border-white/10 px-3 hover:bg-blue-600/20">
+            <div class="flex items-center gap-2 pr-2">
+                <label class="btn-toolbar cursor-pointer">
                     <input type="file" id="file-upload" accept=".nc,.gcode,.txt" class="hidden">
-                    <span class="opacity-80">OTWÓRZ NC</span>
+                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
+                    <span>OTWÓRZ</span>
                 </label>
-                <button id="btn-export-stl" class="btn-icon text-green-400 border-green-900/50 bg-green-900/20 hover:bg-green-800">ZAPISZ STL</button>
+                
+                <button id="btn-export-stl" class="btn-toolbar action-save">
+                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
+                    <span>STL</span>
+                </button>
+                
+                <button id="btn-export-txt" class="btn-toolbar action-txt">
+                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                    <span>TXT</span>
+                </button>
+                
                 <div class="h-4 w-px bg-gray-700 mx-1"></div>
-                <button id="cam-iso" class="btn-icon">ISO</button>
-                <button id="cam-top" class="btn-icon">TOP</button>
+                
+                <button id="cam-iso" class="btn-toolbar action-cam" title="Widok ISO">ISO</button>
+                <button id="cam-top" class="btn-toolbar action-cam" title="Widok z góry">TOP</button>
             </div>
         </div>
 
@@ -174,7 +199,10 @@
                 <div class="panel flex-grow flex flex-col overflow-hidden border-t-2 border-blue-600 min-h-0">
                     <div class="p-1.5 bg-[#151515] border-b border-gray-800 flex justify-between items-center flex-shrink-0">
                         <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest pl-2">Program NC</span>
-                        <button id="btn-render" class="bg-green-700 hover:bg-green-600 text-white text-[10px] font-bold py-0.5 px-2 rounded uppercase tracking-wide transition">Przelicz</button>
+                        <div class="flex gap-2">
+                            <button id="btn-save-local" class="text-xs text-gray-500 hover:text-white" title="Zapisz do pamięci przeglądarki">💾 Auto-Save</button>
+                            <button id="btn-render" class="bg-green-700 hover:bg-green-600 text-white text-[10px] font-bold py-0.5 px-2 rounded uppercase tracking-wide transition">Przelicz</button>
+                        </div>
                     </div>
                     <div class="editor-wrapper flex-grow">
                         <div id="line-numbers" class="line-numbers">1</div>
@@ -211,8 +239,8 @@
                         <span class="text-green-500 font-bold">Y</span><span id="pos-y" class="text-right text-white font-bold tracking-wider">0.00</span>
                         <span class="text-blue-500 font-bold">Z</span><span id="pos-z" class="text-right text-white font-bold tracking-wider">0.00</span>
                     </div>
-                    <div id="collision-alert" class="hidden mt-2 text-center bg-red-900/80 border border-red-600 text-white text-[10px] font-bold py-1 px-2 rounded animate-pulse">
-                        ⚠️ KOLIZJA OPRAWKI ⚠️
+                    <div id="collision-alert" class="hidden mt-2 text-center bg-red-900/90 border border-red-600 text-white text-[10px] font-bold py-2 px-2 rounded animate-pulse shadow-[0_0_15px_rgba(255,0,0,0.5)]">
+                        ⚠️ KOLIZJA ⚠️<br><span id="collision-msg">OPRAWKA</span>
                     </div>
                 </div>
                 
@@ -243,9 +271,17 @@
         import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
         import { STLExporter } from 'three/addons/exporters/STLExporter.js';
 
+        // --- KONFIGURACJA ---
         const CONF = {
-            colorStockTop: 0x999999, colorStockSide: 0x666666, millRes: 256, rapidSpeed: 3000, defaultFeed: 500, safeLength: 30
+            colorStockTop: 0xcccccc, 
+            colorStockSide: 0x888888, 
+            millRes: 256, // Rozdzielczość siatki
+            rapidSpeed: 3000, 
+            defaultFeed: 500,
+            toolChangePos: { x:0, y:0, z:50 } // Makro wymiany narzędzia
         };
+
+        const STORAGE_KEY = 'cnc_viz_data_v11';
 
         // --- DATA: Tool Library (Mutable) ---
         let toolsDB = [
@@ -266,14 +302,16 @@
             'G81': 'Wiercenie', 'G83': 'Wiercenie Głębokie (Peck)', 'G84': 'Gwintowanie',
             'G90': 'Współrzędne Absolutne', 'G91': 'Współrzędne Przyrostowe',
             'M3': 'Wrzeciono CW', 'M4': 'Wrzeciono CCW', 'M5': 'Stop Wrzeciona',
-            'M6': 'Zmiana Narzędzia', 'M8': 'Chłodziwo ON', 'M9': 'Chłodziwo OFF', 'M30': 'Koniec Programu',
+            'M6': 'Zmiana Narzędzia (AUTO)', 'M8': 'Chłodziwo ON', 'M9': 'Chłodziwo OFF', 'M30': 'Koniec Programu',
             'T': 'Wybór Narzędzia', 'F': 'Posuw', 'S': 'Obroty'
         };
 
         const state = {
             isPlaying: false, speed: 1, progress: 0, currentSegmentIdx: 0, segments: [],
             bounds: { min: new THREE.Vector3(), max: new THREE.Vector3() },
-            activeToolId: 1, stockGroup: null, stockGeometry: null, sideGeometries: { f: null, b: null, l: null, r: null },
+            activeToolId: 1, stockMesh: null, 
+            gridMap: null,
+            stockDims: { w: 100, d: 100, h: 20, stepX: 1, stepZ: 1, segs: 256 },
             invertY: false, useComp: false, totalTimeMin: 0, simulatedHeadIdx: 0
         };
 
@@ -286,16 +324,44 @@
         const el = (id) => document.getElementById(id);
         const els = {
             input: el('gcode-input'), lineNums: el('line-numbers'),
-            btnRender: el('btn-render'), btnPlay: el('btn-play'), btnReset: el('btn-reset'), btnExport: el('btn-export-stl'),
+            btnRender: el('btn-render'), btnPlay: el('btn-play'), btnReset: el('btn-reset'), 
+            btnExportSTL: el('btn-export-stl'), btnExportTXT: el('btn-export-txt'),
             slider: el('progress-slider'), btnUpdateStock: el('btn-update-stock'),
             chkInvertY: el('chk-invert-y'), chkComp: el('chk-comp'),
             stockW: el('stock-w'), stockD: el('stock-d'), stockH: el('stock-h'), 
             toolTableBody: el('tool-table-body'), gcodeLegend: el('gcode-legend'),
-            posX: el('pos-x'), posY: el('pos-y'), posZ: el('pos-z'), collisionAlert: el('collision-alert'),
+            posX: el('pos-x'), posY: el('pos-y'), posZ: el('pos-z'), 
+            collisionAlert: el('collision-alert'), collisionMsg: el('collision-msg'),
             rangeX: el('range-x'), rangeY: el('range-y'), rangeZ: el('range-z'),
             lineIdx: el('current-line-idx'), percent: el('progress-percent'), estTime: el('est-time'), toolDisplay: el('tool-display'),
             iconPlay: el('icon-play'), iconPause: el('icon-pause')
         };
+
+        // --- Persistence ---
+        function loadData() {
+            try {
+                const raw = localStorage.getItem(STORAGE_KEY);
+                if (raw) {
+                    const data = JSON.parse(raw);
+                    if (data.tools) toolsDB = data.tools;
+                    if (data.code) els.input.value = data.code;
+                    if (data.dims) {
+                        els.stockW.value = data.dims.w;
+                        els.stockD.value = data.dims.d;
+                        els.stockH.value = data.dims.h;
+                    }
+                }
+            } catch (e) { console.warn("Failed to load local data", e); }
+        }
+
+        function saveData() {
+            const data = {
+                tools: toolsDB,
+                code: els.input.value,
+                dims: { w: els.stockW.value, d: els.stockD.value, h: els.stockH.value }
+            };
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+        }
 
         // --- UI Functions ---
         function renderToolTable() {
@@ -304,7 +370,7 @@
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
                     <td class="text-center"><span class="del-btn" onclick="removeTool(${idx})">×</span></td>
-                    <td><input type="number" value="${t.id}" onchange="editTool(${idx}, 'id', this.value)" style="width:30px; text-align:center;"></td>
+                    <td><input type="number" value="${t.id}" onchange="editTool(${idx}, 'id', this.value)" style="width:40px; text-align:center;"></td>
                     <td><select onchange="editTool(${idx}, 'type', this.value)" class="bg-transparent border-none h-5 text-[10px]">
                         <option value="FLAT" ${t.type==='FLAT'?'selected':''}>Frez Płaski</option>
                         <option value="BALL" ${t.type==='BALL'?'selected':''}>Frez Kulowy</option>
@@ -316,14 +382,16 @@
                 `;
                 tbody.appendChild(tr);
             });
+            saveData();
         }
         window.editTool = (arrIdx, key, val) => {
             const t = toolsDB[arrIdx];
             if(key==='type') t.type=val; else t[key]=parseFloat(val);
             if(t.id === state.activeToolId) updateToolMesh(t.id);
+            saveData();
         };
         window.removeTool = (arrIdx) => {
-            toolsDB.splice(arrIdx, 1); renderToolTable();
+            toolsDB.splice(arrIdx, 1); renderToolTable(); saveData();
         };
         window.addNewTool = () => {
             const newId = toolsDB.length > 0 ? Math.max(...toolsDB.map(t=>t.id)) + 1 : 1;
@@ -331,7 +399,6 @@
             renderToolTable();
         };
         
-        // Helper function to update the Bounds
         function updateBounds(v) { 
             state.bounds.min.min(v); 
             state.bounds.max.max(v); 
@@ -376,6 +443,8 @@
         }
 
         function init() {
+            loadData();
+
             scene = new THREE.Scene(); scene.fog = new THREE.FogExp2(0x1a1a20, 0.001);
             camera = new THREE.PerspectiveCamera(50, window.innerWidth/window.innerHeight, 0.1, 5000);
             camera.position.set(120, 150, 200);
@@ -392,7 +461,6 @@
             
             scene.add(pathGroup); scene.add(helpersGroup);
             
-            // FIX: Init Raycaster & Mouse BEFORE usage
             raycaster = new THREE.Raycaster();
             raycaster.params.Line.threshold = 3.0; 
             mouse = new THREE.Vector2();
@@ -408,13 +476,15 @@
             renderToolTable();
             updateToolMesh(1); updateEnvironment();
             
-            els.input.value = sampleMill; updateLineNumbers(); processCode();
+            if (!els.input.value) els.input.value = sampleMill;
+            updateLineNumbers(); 
+            processCode();
             
             window.addEventListener('resize', onResize);
             el('canvas-container').addEventListener('mousedown', on3DClick);
             els.input.addEventListener('click', onEditorClick);
             els.input.addEventListener('keyup', onEditorClick);
-            els.input.addEventListener('input', updateLineNumbers);
+            els.input.addEventListener('input', () => { updateLineNumbers(); saveData(); });
             els.input.addEventListener('scroll', () => { els.lineNums.scrollTop = els.input.scrollTop; });
             els.slider.addEventListener('input', onSliderScrub);
             animate();
@@ -472,6 +542,7 @@
             toolMesh.add(flutes); toolMesh.add(shank); scene.add(toolMesh);
         }
 
+        // --- ENVIRONMENT: GRID AND TABLE ---
         function updateEnvironment() {
             helpersGroup.clear();
             helpersGroup.add(new THREE.GridHelper(300, 30, 0x555555, 0x222222));
@@ -483,68 +554,156 @@
                 s.position.copy(p); s.scale.set(8,8,1); helpersGroup.add(s);
             };
             lbl("X", "#f44", new THREE.Vector3(35,0,0)); lbl("Z", "#44f", new THREE.Vector3(0,35,0)); lbl("Y", "#4f4", new THREE.Vector3(0,0,-35));
-            const table = new THREE.Mesh(new THREE.BoxGeometry(300, 2, 300), new THREE.MeshStandardMaterial({color:0x222222}));
-            table.position.y = -1; table.receiveShadow = true; helpersGroup.add(table);
+            
+            // FIX: Stół/Siatka pomocnicza powinna być na spodzie materiału, jeśli Z=0 to góra.
+            // Stock Top = 0. Stock Height = h. Stock Bottom = -h.
+            const h = parseFloat(els.stockH.value)||20;
+            
+            // Przesuwamy GridHelper i Table na poziom -h (spód materiału)
+            const grid = new THREE.GridHelper(300, 30, 0x444444, 0x222222);
+            grid.position.y = -h;
+            helpersGroup.add(grid);
+
+            const table = new THREE.Mesh(new THREE.BoxGeometry(300, 2, 300), new THREE.MeshStandardMaterial({color:0x111111}));
+            table.position.y = -h - 1; // 1 to połowa grubości stołu (2)
+            table.receiveShadow = true; 
+            helpersGroup.add(table);
+
             createStockMesh();
         }
 
+        // --- STOCK MESH: Z=0 is TOP ---
         function createStockMesh() {
-            if (state.stockGroup) { scene.remove(state.stockGroup); if (state.stockGeometry) state.stockGeometry.dispose(); }
-            const w = parseFloat(els.stockW.value)||100; const d = parseFloat(els.stockD.value)||100; const h = parseFloat(els.stockH.value)||15;
-            state.stockGroup = new THREE.Group();
+            if (state.stockMesh) { scene.remove(state.stockMesh); if(state.stockMesh.geometry) state.stockMesh.geometry.dispose(); }
+            
+            const w = parseFloat(els.stockW.value)||100; 
+            const d = parseFloat(els.stockD.value)||100; 
+            const h = parseFloat(els.stockH.value)||20;
+            
             const segs = CONF.millRes;
-            const geo = new THREE.PlaneGeometry(w, d, segs, segs);
-            state.stockGeometry = geo;
+            const geo = new THREE.BoxGeometry(w, h, d, segs, 1, segs);
+            
             const count = geo.attributes.position.count;
             geo.setAttribute('color', new THREE.BufferAttribute(new Float32Array(count*3), 3));
             const col = geo.attributes.color;
-            const base = new THREE.Color(CONF.colorStockTop);
-            for(let i=0; i<count; i++) col.setXYZ(i, base.r, base.g, base.b);
-            const mat = new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 0.5, metalness: 0.6, flatShading: false, side: THREE.DoubleSide });
+            const pos = geo.attributes.position;
+            
+            const topColor = new THREE.Color(CONF.colorStockTop);
+            const sideColor = new THREE.Color(CONF.colorStockSide);
+            
+            state.gridMap = new Array((segs + 1) * (segs + 1)).fill(null).map(() => []);
+            const stepX = w / segs;
+            const stepZ = d / segs;
+            
+            // Zapisujemy parametry do stanu, aby funkcja kolizji mogła z nich korzystać
+            state.stockDims = { w, d, h, stepX, stepZ, segs };
+
+            const epsilon = 0.01;
+
+            for(let i=0; i<count; i++) {
+                const y = pos.getY(i);
+                // BoxGeometry jest wycentrowane w 0,0,0. Wysokość h.
+                // Zatem lokalne Y idzie od -h/2 do +h/2.
+                // Góra to h/2.
+                if (y > (h/2 - epsilon)) {
+                    col.setXYZ(i, topColor.r, topColor.g, topColor.b);
+                    
+                    const x = pos.getX(i) + w/2;
+                    const z = pos.getZ(i) + d/2;
+                    const ix = Math.round(x / stepX);
+                    const iz = Math.round(z / stepZ);
+                    const gridIdx = (segs - iz) * (segs + 1) + ix;
+                    if (state.gridMap[gridIdx]) state.gridMap[gridIdx].push(i);
+                } else {
+                    col.setXYZ(i, sideColor.r, sideColor.g, sideColor.b);
+                }
+            }
+
+            const mat = new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 0.5, metalness: 0.3, flatShading: false });
             const mesh = new THREE.Mesh(geo, mat);
-            mesh.rotation.x = -Math.PI/2; mesh.position.set(w/2, h, -d/2);
+            
+            // FIX: POZYCJONOWANIE
+            // Wcześniej: mesh.position.set(w/2, h/2, -d/2); -> Góra była na Y=h.
+            // Teraz: Chcemy by Góra (lokalne h/2) była na Świecie Y=0.
+            // Zatem Mesh Y = -h/2.
+            mesh.position.set(w/2, -h/2, -d/2);
+            
             mesh.castShadow = true; mesh.receiveShadow = true;
-            state.stockGroup.add(mesh);
-            const matS = new THREE.MeshStandardMaterial({ color: CONF.colorStockSide, roughness: 0.7 });
-            const wall = (wd, ht, ax, p) => {
-                const m = new THREE.Mesh(new THREE.PlaneGeometry(wd, ht, segs, 1), matS);
-                if(ax==='y') m.rotation.y = Math.PI; else if(ax==='l') m.rotation.y = -Math.PI/2; else if(ax==='r') m.rotation.y = Math.PI/2;
-                m.position.copy(p); state.stockGroup.add(m); return m;
-            };
-            state.sideGeometries.f = wall(w, h, '', new THREE.Vector3(w/2, h/2, 0));
-            state.sideGeometries.b = wall(w, h, 'y', new THREE.Vector3(w/2, h/2, -d));
-            state.sideGeometries.l = wall(d, h, 'l', new THREE.Vector3(0, h/2, -d/2));
-            state.sideGeometries.r = wall(d, h, 'r', new THREE.Vector3(w, h/2, -d/2));
-            scene.add(state.stockGroup);
+            state.stockMesh = mesh;
+            scene.add(mesh);
+            
             state.simulatedHeadIdx = 0;
+            saveData();
         }
 
         function mapCoords(c) { return new THREE.Vector3(c.x, c.z, c.y * (state.invertY ? 1 : -1)); }
-        function getOffset(p1, p2, mode, dia) {
-            const dx = p2.x - p1.x, dz = p2.z - p1.z; const len = Math.sqrt(dx*dx + dz*dz);
-            if(len < 0.001) return {x:0, z:0};
-            const r = dia/2; let nx, nz;
-            if(mode==='G41') { nx = -dz/len; nz = dx/len; } else { nx = dz/len; nz = -dx/len; }
-            return {x: nx*r, z: nz*r};
+        
+        // --- NOWA FUNKCJA: Sprawdzanie wysokości materiału w danym punkcie ---
+        function getMaterialHeightAt(wx, wz) {
+            if (!state.stockMesh || !state.gridMap) return -999; // Brak materiału
+            
+            const { w, d, h, stepX, stepZ, segs } = state.stockDims;
+
+            // Szybki check bounding box
+            if (wx < 0 || wx > w || wz < -d || wz > 0) return -999; // Poza obrysem materiału jest bezpiecznie (pusto)
+
+            const ix = Math.round(wx / stepX);
+            const iz = Math.round((wz + d) / stepZ);
+
+            if (ix < 0 || ix > segs || iz < 0 || iz > segs) return -999;
+
+            const gridIdx = (segs - iz) * (segs + 1) + ix;
+            if (gridIdx < 0 || gridIdx >= state.gridMap.length) return -999;
+
+            const vertices = state.gridMap[gridIdx];
+            if (!vertices || vertices.length === 0) return -999;
+
+            // Pobieramy wysokość pierwszego wierzchołka w tym punkcie
+            const posAttr = state.stockMesh.geometry.attributes.position;
+            const localY = posAttr.getY(vertices[0]);
+            
+            // World Y = Local Y - h/2 (bo mesh jest przesunięty w dół o h/2)
+            return localY - (h/2);
         }
 
         function processCode() {
             const lines = els.input.value.split('\n');
             state.segments = []; pathGroup.clear(); highlightMesh.visible=false; highlightSphere.visible=false;
-            let curPos = { x:0, y:0, z:50 }; let curMode = 'G0'; let curFeed = CONF.defaultFeed; let curComp = 'G40';
+            // Startowa pozycja Z=50 (bezpieczna nad materiałem)
+            let curPos = { x:0, y:0, z:50 }; 
+            let curMode = 'G0'; let curFeed = CONF.defaultFeed; let curComp = 'G40';
             let curToolId = 1; let totalTimeMin = 0;
             state.bounds.min.set(Infinity, Infinity, Infinity); state.bounds.max.set(-Infinity, -Infinity, -Infinity);
-            let buffer = []; const usedCodes = new Set();
+            const usedCodes = new Set();
 
             lines.forEach((line, idx) => {
                 let clean = line.replace(/\(.*\)/g, '').split(';')[0].trim().toUpperCase();
                 if(!clean) return;
-                // Collect G-codes for legend
                 const tokens = clean.match(/[GM]\d+/g);
                 if(tokens) tokens.forEach(t => usedCodes.add(t));
                 if(clean.includes('T')) usedCodes.add('T'); if(clean.includes('F')) usedCodes.add('F'); if(clean.includes('S')) usedCodes.add('S');
 
-                // Tool
+                // --- TOOL CHANGE MACRO LOGIC (M6) ---
+                if(clean.includes('M6')) {
+                    // 1. Unieś na bezpieczne Z
+                    const pSafeZ = { ...curPos, z: CONF.toolChangePos.z };
+                    if(curPos.z < pSafeZ.z) {
+                        const pStart = mapCoords(curPos);
+                        const pEnd = mapCoords(pSafeZ);
+                        state.segments.push({start:pStart, end:pEnd, type:'G0', lineIdx:idx, toolId:curToolId});
+                        curPos = pSafeZ;
+                    }
+                    
+                    // 2. Jedź do pozycji wymiany X/Y
+                    const pChange = { x: CONF.toolChangePos.x, y: CONF.toolChangePos.y, z: CONF.toolChangePos.z };
+                    const pCStart = mapCoords(curPos);
+                    const pCEnd = mapCoords(pChange);
+                    state.segments.push({start:pCStart, end:pCEnd, type:'G0', lineIdx:idx, toolId:curToolId});
+                    curPos = pChange;
+                    
+                    // Teraz faktyczna zmiana ID narzędzia nastąpi poniżej
+                }
+
                 const tMatch = clean.match(/T(\d+)/);
                 if(tMatch) {
                     let tid = parseInt(tMatch[1]);
@@ -556,23 +715,24 @@
                 
                 let target = { ...curPos }; let hasMove = false;
                 const parts = clean.match(/([GXYZFIJRZRKQ])([0-9.-]+)/g);
-                let drillR=2, drillZ=0, drillQ=0, i=0, j=0;
+                let drillR=2, drillQ=0, i=0, j=0;
 
                 if(parts) {
                     parts.forEach(p => {
                         const c = p[0], v = parseFloat(p.slice(1));
                         if(c==='G') { if(v===0) curMode='G0'; else if(v===1) curMode='G1'; else if(v===2) curMode='G2'; else if(v===3) curMode='G3'; }
-                        if(c==='X') { target.x=v; hasMove=true; } if(c==='Y') { target.y=v; hasMove=true; } if(c==='Z') { target.z=v; hasMove=true; }
+                        if(c==='X') { target.x=v; hasMove=true; } if(c==='Y') { target.y=v; hasMove=true; } 
+                        // Z mapuje się na Y w Three.js, a Y na Z. 
+                        if(c==='Z') { target.z=v; hasMove=true; }
                         if(c==='F') curFeed=v;
                         if(c==='R') drillR=v; if(c==='K' || c==='Q') drillQ=v; if(c==='I') i=v; if(c==='J') j=v;
                     });
                 }
 
-                // Cycles G81/G83/G84
                 if (clean.includes('G81') || clean.includes('G83') || clean.includes('G84')) {
                     const pStart = mapCoords(curPos);
                     const pR = mapCoords({x:target.x, y:target.y, z:drillR});
-                    const pZ = mapCoords({x:target.x, y:target.y, z:target.z}); // target.z is drilled depth
+                    const pZ = mapCoords({x:target.x, y:target.y, z:target.z}); 
                     state.segments.push({start:pStart, end:pR, type:'G0', lineIdx:idx, toolId:curToolId});
                     if(clean.includes('G83') && drillQ > 0) {
                         let d = drillR;
@@ -589,11 +749,10 @@
                         state.segments.push({start:pR, end:pZ, type:'G1', lineIdx:idx, feed:curFeed, toolId:curToolId});
                         state.segments.push({start:pZ, end:pR, type:'G0', lineIdx:idx, toolId:curToolId});
                     }
-                    curPos = {x:target.x, y:target.y, z:drillR}; // Return to R
+                    curPos = {x:target.x, y:target.y, z:drillR}; 
                     return;
                 }
 
-                // Arcs
                 if (hasMove && (curMode==='G2' || curMode==='G3')) {
                     const p1 = mapCoords(curPos); const p2 = mapCoords(target);
                     const yFact = state.invertY ? 1 : -1;
@@ -632,19 +791,52 @@
             els.rangeY.innerText = `${state.bounds.min.z.toFixed(0)}/${state.bounds.max.z.toFixed(0)}`;
             els.rangeZ.innerText = `${(-state.bounds.max.y).toFixed(0)}/${(-state.bounds.min.y).toFixed(0)}`;
             resetSim();
+            saveData();
         }
 
+        // --- FIXED ARC LOGIC: Adaptive Resolution ---
         function arcToSegments(p1, x2, z2, i, j, isCw, idx, tid, feed) {
-            const cx = p1.x + i, cz = p1.z + j;
+            // Center calculation
+            const cx = p1.x + i;
+            const cz = p1.z + j;
             const r = Math.sqrt(i*i + j*j);
+            
+            // Calculate start and end angles
             const a1 = Math.atan2(p1.z - cz, p1.x - cx);
             let a2 = Math.atan2(z2 - cz, x2 - cx);
-            if(isCw && a2 > a1) a2 -= Math.PI*2; if(!isCw && a2 < a1) a2 += Math.PI*2;
-            const segs = []; const res = 16; const step = (a2-a1)/res;
+            
+            // Handle Wrap-around for CW/CCW logic
+            // G2 (CW): Angle decreases. If a2 > a1, we must have crossed -PI/PI boundary.
+            if(isCw && a2 > a1) {
+                a2 -= Math.PI * 2;
+            } 
+            // G3 (CCW): Angle increases. If a2 < a1, we crossed boundary.
+            else if(!isCw && a2 < a1) {
+                a2 += Math.PI * 2;
+            }
+
+            // Calculate arc length to determine resolution
+            const deltaAngle = Math.abs(a2 - a1);
+            const arcLen = r * deltaAngle;
+            
+            // Adaptive resolution: more segments for longer arcs
+            // Minimum 8 segments, max approx 1 segment per 1 unit length (or finer)
+            let res = Math.max(12, Math.ceil(arcLen * 2)); 
+            // Cap resolution to avoid performance hit on huge circles
+            if (res > 128) res = 128;
+
+            const segs = []; 
+            const step = (a2 - a1) / res;
+            
             let prev = p1.clone();
+            
             for(let k=1; k<=res; k++) {
-                const th = a1 + step*k;
-                const p = new THREE.Vector3(cx + r*Math.cos(th), p1.y, cz + r*Math.sin(th));
+                const th = a1 + step * k;
+                const p = new THREE.Vector3(
+                    cx + r * Math.cos(th), 
+                    p1.y, // Maintain constant Z (in CNC terms) / Y (in Three terms)
+                    cz + r * Math.sin(th)
+                );
                 segs.push({start:prev, end:p, type:'G1', lineIdx:idx, feed, toolId:tid});
                 prev = p;
             }
@@ -671,6 +863,26 @@
                 state.progress += step / (dist||1);
                 
                 if(seg.toolId !== state.activeToolId) updateToolMesh(seg.toolId);
+
+                // --- G0 COLLISION CHECK (FIXED) ---
+                // Z=0 to góra materiału.
+                const curPos = new THREE.Vector3().lerpVectors(seg.start, seg.end, state.progress);
+                
+                if (seg.type === 'G0') {
+                    // Pobierz aktualną wysokość materiału w tym punkcie
+                    // Jeśli wiertło jest w otworze, matH będzie np. -10.
+                    const matH = getMaterialHeightAt(curPos.x, curPos.z);
+                    
+                    // Sprawdzamy kolizję tylko jeśli narzędzie jest niżej niż materiał (+ tolerancja 0.5mm)
+                    // Jeśli matH wynosi -999 (brak materiału), warunek curPos.y < -999 będzie fałszywy (bezpiecznie)
+                    if (curPos.y < (matH - 0.5)) {
+                        state.isPlaying = false;
+                        els.collisionMsg.innerText = "G0 (RAPID) W MATERIALE!";
+                        els.collisionAlert.classList.remove('hidden');
+                        updatePlayUI();
+                        return;
+                    }
+                }
 
                 if(state.progress >= 1) {
                     if(seg.type === 'G1') { deformStockSegment(seg.start, seg.end, seg.toolId); chipSystem.emit(seg.end, 1.0); }
@@ -701,10 +913,19 @@
             const inv = state.invertY ? 1 : -1;
             els.posX.innerText = pos.x.toFixed(2); els.posY.innerText = (pos.z/inv).toFixed(2); els.posZ.innerText = pos.y.toFixed(2);
             const t = toolsDB.find(x=>x.id==state.activeToolId) || toolsDB[0];
-            const stockH = parseFloat(els.stockH.value)||15;
-            const depth = stockH - pos.y;
-            if (depth > t.len && pos.y < stockH) { toolShank.material.color.setHex(0xff0000); els.collisionAlert.classList.remove('hidden'); } 
-            else { toolShank.material.color.setHex(0xaaaaaa); els.collisionAlert.classList.add('hidden'); }
+            // Z=0 to góra. Głębokość to po prostu -pos.y (o ile y < 0)
+            const depth = -pos.y;
+            // Kolizja oprawki
+            // Jeśli głębokość > długość narzędzia
+            if (depth > t.len) { 
+                toolShank.material.color.setHex(0xff0000); 
+                els.collisionMsg.innerText = "OPRAWKA";
+                els.collisionAlert.classList.remove('hidden'); 
+            } 
+            else { 
+                toolShank.material.color.setHex(0xaaaaaa); 
+                if (els.collisionMsg.innerText === "OPRAWKA") els.collisionAlert.classList.add('hidden'); 
+            }
         }
 
         function resetSim() {
@@ -713,14 +934,27 @@
             restoreStock(); highlightMesh.visible=false; highlightSphere.visible=false; els.collisionAlert.classList.add('hidden');
         }
         function restoreStock() {
-            if(!state.stockGeometry) return;
-            const pos = state.stockGeometry.attributes.position; const col = state.stockGeometry.attributes.color; const cnt = pos.count;
-            const baseC = new THREE.Color(CONF.colorStockTop);
-            for(let i=0; i<cnt; i++) { pos.setZ(i, 0); col.setXYZ(i, baseC.r, baseC.g, baseC.b); }
-            pos.needsUpdate=true; col.needsUpdate=true; state.stockGeometry.computeVertexNormals();
-            const h = parseFloat(els.stockH.value)||15; const segs=CONF.millRes;
-            const resetW = (m) => { if(!m) return; const a = m.geometry.attributes.position; for(let i=0; i<=segs; i++) a.setY(i, h/2); a.needsUpdate=true; };
-            resetW(state.sideGeometries.f); resetW(state.sideGeometries.b); resetW(state.sideGeometries.l); resetW(state.sideGeometries.r);
+            if(!state.stockMesh) return;
+            const geo = state.stockMesh.geometry;
+            const pos = geo.attributes.position; 
+            const col = geo.attributes.color; 
+            
+            const w = parseFloat(els.stockW.value);
+            const h = parseFloat(els.stockH.value);
+
+            const topColor = new THREE.Color(CONF.colorStockTop);
+            const map = state.gridMap;
+            if(!map) return;
+
+            map.forEach(indices => {
+                indices.forEach(idx => {
+                    // Resetujemy do h/2 (lokalny top w boxie), który po przesunięciu mesha jest na World Y=0
+                    pos.setY(idx, h/2); 
+                    col.setXYZ(idx, topColor.r, topColor.g, topColor.b);
+                });
+            });
+
+            pos.needsUpdate=true; col.needsUpdate=true; geo.computeVertexNormals();
             state.simulatedHeadIdx = 0;
         }
         function simulateToState(idx) {
@@ -728,53 +962,138 @@
             for(let i=state.simulatedHeadIdx; i<idx; i++) { const s = state.segments[i]; if(s.type==='G1') deformStockSegment(s.start, s.end, s.toolId); }
             state.simulatedHeadIdx = idx;
         }
+        
         function deformStockSegment(p1, p2, toolId) {
-            if (!state.stockGeometry) return;
+            if (!state.stockMesh) return;
             const t = toolsDB.find(x=>x.id==toolId) || toolsDB[0];
             const r = t.dia / 2; const rSq = r*r;
-            const geo = state.stockGeometry; const posAttr = geo.attributes.position; const colAttr = geo.attributes.color;
-            const w = parseFloat(els.stockW.value); const d = parseFloat(els.stockD.value); const stockH = parseFloat(els.stockH.value);
-            const p1x = p1.x - w/2; const p1y = -d/2 - p1.z; const p2x = p2.x - w/2; const p2y = -d/2 - p2.z;
-            const segs = CONF.millRes; const stepX = w / segs; const stepY = d / segs;
-            const minX = Math.min(p1x, p2x) - r - stepX; const maxX = Math.max(p1x, p2x) + r + stepX;
-            const minY = Math.min(p1y, p2y) - r - stepY; const maxY = Math.max(p1y, p2y) + r + stepY;
-            const iMinX = Math.max(0, Math.floor((minX + w/2) / stepX)); const iMaxX = Math.min(segs, Math.ceil((maxX + w/2) / stepX));
-            const iMinY = Math.max(0, Math.floor((d/2 - maxY) / stepY)); const iMaxY = Math.min(segs, Math.ceil((d/2 - minY) / stepY));
-            const wVerts = segs + 1; const tipH = Math.min(p1.y, p2.y); const safeH = 0; 
-            const l2 = (p1x-p2x)**2 + (p1y-p2y)**2;
+            
+            const geo = state.stockMesh.geometry; 
+            const posAttr = geo.attributes.position; 
+            const colAttr = geo.attributes.color;
+            
+            const w = parseFloat(els.stockW.value); 
+            const d = parseFloat(els.stockD.value); 
+            const stockH = parseFloat(els.stockH.value);
+            
+            // Mesh World Pos Y = -stockH/2.
+            // Vertex Local Y = World Y - Mesh Pos Y
+            // Vertex Local Y = World Y + stockH/2
+
+            const segs = CONF.millRes;
+            const stepX = w / segs; 
+            const stepZ = d / segs;
+            
+            const worldToGridX = (wx) => Math.round(wx / stepX);
+            const worldToGridZ = (wz) => Math.round((wz + d) / stepZ); 
+
+            const p1x = p1.x; const p1z = p1.z;
+            const p2x = p2.x; const p2z = p2.z;
+
+            const minX = Math.min(p1x, p2x) - r - stepX; 
+            const maxX = Math.max(p1x, p2x) + r + stepX;
+            const minZ = Math.min(p1z, p2z) - r - stepZ;
+            const maxZ = Math.max(p1z, p2z) + r + stepZ;
+
+            const iMinX = Math.max(0, Math.floor(minX / stepX));
+            const iMaxX = Math.min(segs, Math.ceil(maxX / stepX));
+            const iMinZ = Math.max(0, Math.floor((minZ + d) / stepZ));
+            const iMaxZ = Math.min(segs, Math.ceil((maxZ + d) / stepZ));
+
+            const tipH = Math.min(p1.y, p2.y); // To jest World Y (np. -5)
+            
+            const l2 = (p1x-p2x)**2 + (p1z-p2z)**2;
             const isBall = t.type==='BALL'; const isDrill = t.type==='DRILL' || t.type==='TAP';
-            const { f: pF, b: pB, l: pL, r: pR } = state.sideGeometries;
-            const posF = pF?pF.geometry.attributes.position:null; const posB = pB?pB.geometry.attributes.position:null;
-            const posL = pL?pL.geometry.attributes.position:null; const posR = pR?pR.geometry.attributes.position:null;
-            let updateW = false;
-            for(let iy=iMinY; iy<=iMaxY; iy++) {
+
+            for(let iz=iMinZ; iz<=iMaxZ; iz++) {
                 for(let ix=iMinX; ix<=iMaxX; ix++) {
-                    const idx = iy * wVerts + ix;
-                    const vx = posAttr.getX(idx); const vy = posAttr.getY(idx);
+                    
+                    const gridIdx = (segs - iz) * (segs + 1) + ix;
+                    if (gridIdx < 0 || gridIdx >= state.gridMap.length) continue;
+                    
+                    const vertices = state.gridMap[gridIdx];
+                    if (!vertices || vertices.length === 0) continue;
+
+                    const wx = ix * stepX;
+                    const wz = (iz * stepZ) - d;
+
                     let distSq;
-                    if(l2===0) distSq = (vx-p1x)**2 + (vy-p1y)**2;
+                    if(l2===0) distSq = (wx-p1x)**2 + (wz-p1z)**2;
                     else {
-                        let t = ((vx-p1x)*(p2x-p1x) + (vy-p1y)*(p2y-p1y)) / l2; t = Math.max(0, Math.min(1, t));
-                        distSq = (vx-(p1x+t*(p2x-p1x)))**2 + (vy-(p1y+t*(p2y-p1y)))**2;
+                        let t = ((wx-p1x)*(p2x-p1x) + (wz-p1z)*(p2z-p1z)) / l2; t = Math.max(0, Math.min(1, t));
+                        distSq = (wx-(p1x+t*(p2x-p1x)))**2 + (wz-(p1z+t*(p2z-p1z)))**2;
                     }
+
                     if(distSq < rSq) {
-                        const curH = stockH + posAttr.getZ(idx);
-                        let effH = tipH;
-                        if(isBall || (isDrill && distSq < rSq)) effH = tipH + (r - Math.sqrt(Math.max(0, rSq - distSq)));
-                        if(curH > effH && effH >= safeH) {
-                            posAttr.setZ(idx, effH - stockH);
-                            const dr = (stockH - effH)/stockH; const hue = 0.6 - dr*0.6; const c = new THREE.Color().setHSL(hue, 1.0, 0.5); colAttr.setXYZ(idx, c.r, c.g, c.b);
-                            updateW = true;
-                            if (iy === 0 && posB) { const k=segs-ix; if(k>=0) posB.setY(k, effH - stockH/2); }
-                            if (iy === segs && posF) { const k=ix; if(k>=0) posF.setY(k, effH - stockH/2); }
-                            if (ix === 0 && posL) { const k=iy; if(k>=0) posL.setY(k, effH - stockH/2); }
-                            if (ix === segs && posR) { const k=segs-iy; if(k>=0) posR.setY(k, effH - stockH/2); }
+                        const firstV = vertices[0];
+                        // Obecny World Y wierzchołka
+                        // LocalY = posAttr.getY(firstV).
+                        // WorldY = LocalY + mesh.position.y (czyli -stockH/2)
+                        const currentWorldY = posAttr.getY(firstV) - stockH/2;
+
+                        let targetWorldY = tipH;
+                        if(isBall || (isDrill && distSq < rSq)) {
+                            targetWorldY = tipH + (r - Math.sqrt(Math.max(0, rSq - distSq)));
+                        }
+
+                        // Tniemy tylko jeśli narzędzie jest niżej niż obecny materiał
+                        if(currentWorldY > targetWorldY) {
+                            // Nowy Local Y
+                            // newLocalY = targetWorldY - mesh.position.y
+                            // newLocalY = targetWorldY - (-stockH/2) = targetWorldY + stockH/2
+                            const newLocalY = targetWorldY + stockH/2;
+                            
+                            // Kolorowanie (0 = góra, -stockH = dół)
+                            // Głębokość skrawania od góry (0)
+                            const depth = -targetWorldY; 
+                            const dr = depth/stockH; 
+                            const hue = 0.6 - dr*0.6; 
+                            const c = new THREE.Color().setHSL(hue, 1.0, 0.5);
+
+                            for(let k=0; k<vertices.length; k++) {
+                                const vIdx = vertices[k];
+                                posAttr.setY(vIdx, newLocalY);
+                                colAttr.setXYZ(vIdx, c.r, c.g, c.b);
+                            }
                         }
                     }
                 }
             }
             posAttr.needsUpdate=true; colAttr.needsUpdate=true; geo.computeVertexNormals();
-            if(updateW) { if(posF) posF.needsUpdate=true; if(posB) posB.needsUpdate=true; if(posL) posL.needsUpdate=true; if(posR) posR.needsUpdate=true; }
+        }
+
+        function exportToTXT() {
+            if (!state.stockMesh) return;
+            let output = "X Y Z\n";
+            const pos = state.stockMesh.geometry.attributes.position;
+            
+            const w = parseFloat(els.stockW.value);
+            const d = parseFloat(els.stockD.value);
+            const h = parseFloat(els.stockH.value);
+            
+            state.gridMap.forEach(indices => {
+                if(indices.length > 0) {
+                    const i = indices[0]; 
+                    const ly = pos.getY(i);
+                    // World Y = Local Y - h/2
+                    const worldY = ly - h/2;
+                    
+                    // World Coords CNC:
+                    const lx = pos.getX(i);
+                    const lz = pos.getZ(i);
+
+                    const wx = lx + w/2;
+                    const wz = lz - d/2; 
+                    // Zapisujemy jako X Y Z, gdzie Z to wysokość (ujemna)
+                    output += `${wx.toFixed(3)} ${wz.toFixed(3)} ${worldY.toFixed(3)}\n`;
+                }
+            });
+
+            const blob = new Blob([output], { type: 'text/plain' });
+            const l = document.createElement('a');
+            l.href = URL.createObjectURL(blob);
+            l.download = 'cnc_cloud.txt';
+            l.click();
         }
 
         function on3DClick(e) {
@@ -814,15 +1133,27 @@
 
         els.btnPlay.addEventListener('click', () => { if(state.segments.length>0) { if(state.currentSegmentIdx>=state.segments.length-1 && state.progress>=1) { state.currentSegmentIdx=0; state.progress=0; } state.isPlaying=!state.isPlaying; updatePlayUI(); }});
         els.btnReset.addEventListener('click', resetSim); els.btnRender.addEventListener('click', processCode);
-        els.btnUpdateStock.addEventListener('click', () => { createStockMesh(); resetSim(); });
+        els.btnUpdateStock.addEventListener('click', () => { updateEnvironment(); resetSim(); });
         els.chkInvertY.addEventListener('change', (e) => { state.invertY = e.target.checked; processCode(); });
         els.chkComp.addEventListener('change', (e) => { state.useComp = e.target.checked; processCode(); });
-        el('file-upload').addEventListener('change', (e) => { const f=e.target.files[0]; if(!f)return; const r=new FileReader(); r.onload=(ev)=>{els.input.value=ev.target.result; updateLineNumbers(); processCode();}; r.readAsText(f); });
+        el('file-upload').addEventListener('change', (e) => { const f=e.target.files[0]; if(!f)return; const r=new FileReader(); r.onload=(ev)=>{els.input.value=ev.target.result; updateLineNumbers(); processCode(); saveData();}; r.readAsText(f); });
         el('cam-iso').addEventListener('click', () => { camera.position.set(120, 150, 200); controls.target.set(50,0,-50); controls.update(); });
         el('cam-top').addEventListener('click', () => { camera.position.set(50, 250, -50); controls.target.set(50,0,-50); controls.update(); });
-        els.btnExport.addEventListener('click', () => { const e=new STLExporter(); const r=e.parse(state.stockGroup); const b=new Blob([r], {type:'text/plain'}); const l=document.createElement('a'); l.href=URL.createObjectURL(b); l.download='cnc_stock.stl'; l.click(); });
+        
+        el('btn-save-local').addEventListener('click', () => { saveData(); alert("Zapisano stan!"); });
+        els.btnExportTXT.addEventListener('click', exportToTXT);
+        
+        els.btnExportSTL.addEventListener('click', () => { 
+            const e = new STLExporter(); 
+            const r = e.parse(state.stockMesh); 
+            const b = new Blob([r], {type:'text/plain'}); 
+            const l = document.createElement('a'); 
+            l.href = URL.createObjectURL(b); 
+            l.download = 'cnc_solid.stl'; 
+            l.click(); 
+        });
 
-        const sampleMill = `(ULTIMATE CNC TEST v10)\n(Stock: 100x100x20)\n(T1: Glowica 40mm)\n(T2: Frez 10mm)\n(T3: Frez Kulowy 6mm)\n(T4: Wiertlo 5mm)\n(T5: Gwintownik M6)\n\nG0 Z50\nG0 X-20 Y-20\n\n(--- OPERACJA 1: PLANOWANIE T1 ---)\nT1 M6\nG0 Z5\nG0 X-25 Y50\nG1 Z0 F1000\nG1 X125\nG0 Z50\n\n(--- OPERACJA 2: KONTUR G41 T2 ---)\nT2 M6\nG0 X10 Y10\nG0 Z5\nG1 Z-5 F800\nG41 (Kompensacja Lewa)\nG1 X90 Y10\nG1 X90 Y90\nG1 X10 Y90\nG1 X10 Y10\nG40 (Koniec Kompensacji)\nG0 Z50\n\n(--- OPERACJA 3: KIESZEN KOLO T3 ---)\nT3 M6\nG0 X50 Y50\nG0 Z5\nG1 Z-5 F500\n(Spiralne wejscie G3)\nG3 X50 Y50 I15 J0\nG3 X50 Y50 I10 J0\nG0 Z50\n\n(--- OPERACJA 4: WIERCENIE G83 T4 ---)\nT4 M6\nG0 X20 Y20 Z10\nG83 X20 Y20 Z-10 R2 Q3 F200 (Peck Drill)\nG83 X80 Y20 Z-10 R2 Q3\nG80 (Koniec cyklu)\nG0 Z50\n\n(--- OPERACJA 5: GWINTOWANIE G84 T5 ---)\nT5 M6\nG0 X20 Y20 Z10\nG84 X20 Y20 Z-8 R5 F1.0 (Gwint)\nG84 X80 Y20 Z-8 R5\nG80\nG0 Z50\nM30`;
+        const sampleMill = `(SOLID CNC TEST v11)\n(Stock: 100x100x20)\n(T1: Glowica 40mm)\n(T2: Frez 10mm)\n(T3: Frez Kulowy 6mm)\n(T4: Wiertlo 5mm)\n(T5: Gwintownik M6)\n\nG0 Z50\nG0 X-20 Y-20\n\n(--- OPERACJA 1: PLANOWANIE T1 ---)\nT1 M6\nG0 Z5\nG0 X-25 Y50\nG1 Z0 F1000\nG1 X125\nG0 Z50\n\n(--- OPERACJA 2: KONTUR G41 T2 ---)\nT2 M6\nG0 X10 Y10\nG0 Z5\nG1 Z-5 F800\nG41 (Kompensacja Lewa)\nG1 X90 Y10\nG1 X90 Y90\nG1 X10 Y90\nG1 X10 Y10\nG40 (Koniec Kompensacji)\nG0 Z50\n\n(--- OPERACJA 3: KIESZEN KOLO T3 ---)\nT3 M6\nG0 X50 Y50\nG0 Z5\nG1 Z-5 F500\n(Spiralne wejscie G3)\nG3 X50 Y50 I15 J0\nG3 X50 Y50 I10 J0\nG0 Z50\n\n(--- OPERACJA 4: WIERCENIE G83 T4 ---)\nT4 M6\nG0 X20 Y20 Z10\nG83 X20 Y20 Z-10 R2 Q3 F200 (Peck Drill)\nG83 X80 Y20 Z-10 R2 Q3\nG80 (Koniec cyklu)\nG0 Z50\n\n(--- OPERACJA 5: GWINTOWANIE G84 T5 ---)\nT5 M6\nG0 X20 Y20 Z10\nG84 X20 Y20 Z-8 R5 F1.0 (Gwint)\nG84 X80 Y20 Z-8 R5\nG80\nG0 Z50\nM30`;
         init();
     </script>
 </body>
