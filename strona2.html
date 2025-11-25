@@ -563,7 +563,7 @@
 
         <!-- GAME SECTION -->
         <section id="gra" class="py-20 bg-[var(--color-bg-secondary)] border-y border-[var(--border-color)] overflow-hidden">
-            <div class="max-w-4xl mx-auto px-4">
+            <div class="max-w-3xl mx-auto px-4">
                 <div class="text-center mb-10">
                     <h2 class="text-3xl font-bold flex items-center justify-center gap-3">
                         <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
@@ -573,6 +573,7 @@
                         Zbijaj bloki, łap kapsuły! <br>
                         <span class="text-blue-400 font-bold">Niebieska:</span> Szeroka paletka | <span class="text-red-400 font-bold">Czerwona:</span> Multiball | <span class="text-green-400 font-bold">Zielona:</span> Klej | <span class="text-pink-500 font-bold">Serce:</span> +1 Życie
                     </p>
+                    <div id="combo-display" class="h-8 text-xl font-bold text-yellow-400 transition-opacity duration-300 opacity-0 mt-2"></div>
                 </div>
                 
                 <div class="game-frame shadow-[0_0_40px_rgba(6,182,212,0.15)]">
@@ -832,7 +833,7 @@
             document.getElementById('result-ra').innerText = (f > 0 && r > 0) ? ((1000 * f * f) / (32 * r)).toFixed(2) : "---";
         }
 
-        /* --- GAME ENGINE: CNC ARKANOID PRO --- */
+        /* --- GAME ENGINE: CNC ARKANOID PRO (v2.10) --- */
         const gCanvas = document.getElementById('gameCanvas');
         const gCtx = gCanvas.getContext('2d');
         const ui = document.getElementById('game-ui');
@@ -843,23 +844,28 @@
         const startBtn = document.getElementById('start-game-btn');
         const levelOverlay = document.getElementById('level-overlay');
         const levelText = document.getElementById('level-text');
+        const comboDisplay = document.getElementById('combo-display');
 
-        let gameState = 'menu'; // menu, playing, gameover, transition
+        let gameState = 'menu'; 
         let score = 0;
         let lives = 3;
         let level = 1;
         let highScore = localStorage.getItem('cnc_game_highscore') || 0;
         highScoreElDisplay.innerText = highScore;
 
+        // Combo System Variables
+        let comboCount = 0;
+        let comboTimer = 0; // Frames until combo reset
+        let hotCutterMode = false;
+        let hotCutterTimer = 0;
+
         // Audio Context
         let synth, polySynth, noiseSynth;
         async function initAudio() {
             if(synth) return;
             await Tone.start();
-            // Use PolySynth to handle overlapping notes without error
             synth = new Tone.PolySynth(Tone.Synth).toDestination();
             polySynth = new Tone.PolySynth().toDestination();
-            // NoiseSynth is monophonic, we'll throttle calls
             noiseSynth = new Tone.NoiseSynth({ noise: { type: "white" }, envelope: { decay: 0.1 } }).toDestination();
             
             synth.volume.value = -10;
@@ -868,22 +874,19 @@
         }
 
         // Game Entities
-        let paddle = { x: 350, y: 420, w: 100, h: 10, color: '#06b6d4', sticky: false, widthBonus: false };
-        let balls = []; // Array for multiball
+        let paddle = { x: 350, y: 420, w: 100, h: 10, color: '#06b6d4', sticky: false };
+        let balls = []; 
         let bricks = [];
         let powerups = [];
         let particles = [];
-        let livesSpawned = 0; // Limit life spawns
+        let floatingTexts = []; // For combo points
+        let livesSpawned = 0; 
 
         // Level Patterns (Grid 10x5)
         const layouts = [
-            // Lvl 1: Standard Rows
             (r, c) => (r < 4) ? 1 : 0,
-            // Lvl 2: Pillars
             (r, c) => (c % 2 === 0) ? 1 : 0,
-            // Lvl 3: Pyramid
             (r, c) => (c >= 4-r && c <= 5+r) ? 1 : 0,
-            // Lvl 4: Fortress
             (r, c) => (r === 0 || r === 4 || c === 0 || c === 9) ? 2 : 1
         ];
 
@@ -892,6 +895,8 @@
             balls = [{ x: paddle.x + paddle.w/2, y: paddle.y - 10, r: 6, dx: 0, dy: 0, speed: 4 + (lvlIndex*0.5), active: false }];
             paddle.sticky = false; 
             paddle.w = 100; 
+            hotCutterMode = false;
+            comboCount = 0;
             
             let rows = 5; let cols = 10; let padding = 8;
             let w = (gCanvas.width - (cols + 1) * padding) / cols;
@@ -909,7 +914,7 @@
                             y: r * (h + padding) + 50, 
                             w: w, h: h, 
                             status: 1, 
-                            type: type, // 1=normal, 2=hard
+                            type: type, 
                             health: type,
                             color: color
                         });
@@ -918,21 +923,23 @@
             }
         }
 
+        function spawnFloatingText(x, y, text, color) {
+            floatingTexts.push({x: x, y: y, text: text, color: color, life: 1.0, dy: -1});
+        }
+
         function spawnPowerup(x, y) {
-            if (Math.random() > 0.2) return; // 20% chance to drop anything
+            if (Math.random() > 0.2) return; 
             
             let type = Math.random();
             let pType = 'wide';
-            let color = '#3b82f6'; // Blue
+            let color = '#3b82f6'; 
             
-            if (type > 0.95 && livesSpawned < 2) { // Very rare life drop (max 2 per session)
-                pType = 'life';
-                color = '#ec4899'; // Pink/Red
-                livesSpawned++;
+            if (type > 0.95 && livesSpawned < 2) { 
+                pType = 'life'; color = '#ec4899'; livesSpawned++;
             } else if (type > 0.6) { 
-                pType = 'multi'; color = '#ef4444'; // Red
+                pType = 'multi'; color = '#ef4444'; 
             } else if (type > 0.3) { 
-                pType = 'sticky'; color = '#22c55e'; // Green
+                pType = 'sticky'; color = '#22c55e'; 
             }
 
             powerups.push({ x: x, y: y, w: 15, h: 15, type: pType, color: color, dy: 2 });
@@ -954,6 +961,22 @@
             if (gameState !== 'playing') return;
             
             let noisePlayedThisFrame = false;
+
+            // Combo Logic
+            if (comboTimer > 0) {
+                comboTimer--;
+            } else if (comboCount > 0) {
+                comboCount = 0; // Reset combo if time runs out
+                comboDisplay.style.opacity = '0';
+            }
+
+            // Hot Cutter Timer
+            if (hotCutterMode) {
+                hotCutterTimer--;
+                if (hotCutterTimer <= 0) {
+                    hotCutterMode = false;
+                }
+            }
 
             // Balls Logic
             balls.forEach(ball => {
@@ -980,10 +1003,12 @@
                 if (ball.y + ball.r > paddle.y && ball.y - ball.r < paddle.y + paddle.h && 
                     ball.x > paddle.x && ball.x < paddle.x + paddle.w) {
                     
-                    // Fix: Prevent infinite horizontal bounce
                     if (ball.dy > 0) { 
+                        comboCount = 0; // Reset combo on paddle hit
+                        comboDisplay.style.opacity = '0';
+
                         if(paddle.sticky) {
-                            ball.active = false; // Catch it
+                            ball.active = false; 
                             ball.dy = 0; ball.dx = 0;
                             ball.y = paddle.y - 10;
                         } else {
@@ -1001,99 +1026,101 @@
                 bricks.forEach(b => {
                     if (b.status === 1) {
                         if (ball.x > b.x && ball.x < b.x + b.w && ball.y > b.y && ball.y < b.y + b.h) {
-                            ball.dy *= -1;
+                            
+                            // Hot Cutter Logic: Penetrate
+                            if (!hotCutterMode) {
+                                ball.dy *= -1;
+                            }
+
                             b.health--;
+                            if (hotCutterMode) b.health = 0; // Instakill in hot mode
+
                             if (b.health <= 0) {
                                 b.status = 0;
-                                score += 10 * level;
-                                spawnParticles(b.x + b.w/2, b.y + b.h/2, b.color);
+                                
+                                // Combo Logic
+                                comboCount++;
+                                comboTimer = 120; // 2 seconds to hit next
+                                let points = 10 * level;
+                                
+                                if (comboCount >= 3) {
+                                    points += 50 * comboCount;
+                                    spawnFloatingText(b.x, b.y, `COMBO x${comboCount}!`, '#fbbf24');
+                                    
+                                    // UI Feedback
+                                    comboDisplay.innerText = `COMBO x${comboCount}`;
+                                    comboDisplay.style.opacity = '1';
+                                }
+
+                                if (comboCount === 5 && !hotCutterMode) {
+                                    hotCutterMode = true;
+                                    hotCutterTimer = 180; // 3 seconds
+                                    spawnFloatingText(gCanvas.width/2, gCanvas.height/2, "HOT CUTTER!", '#ef4444');
+                                    if(polySynth) polySynth.triggerAttackRelease(["D4", "F#4", "A4"], "8n");
+                                }
+
+                                score += points;
+                                spawnParticles(b.x + b.w/2, b.y + b.h/2, hotCutterMode ? '#ef4444' : b.color);
                                 spawnPowerup(b.x + b.w/2, b.y + b.h/2);
+                                
                                 if(noiseSynth && !noisePlayedThisFrame) {
                                     noiseSynth.triggerAttackRelease("16n");
                                     noisePlayedThisFrame = true;
                                 }
                             } else {
-                                // Hit hard brick
                                 if(synth) synth.triggerAttackRelease("G1", "32n");
-                                b.color = '#ef4444'; // Show damage
+                                b.color = '#ef4444'; 
                             }
                             scoreEl.innerText = score;
                         }
                     }
                 });
 
-                // Death check
                 if (ball.y > gCanvas.height) {
                     ball.dead = true; 
                 }
             });
 
-            // Cleanup dead balls
             balls = balls.filter(b => !b.dead);
 
-            // Lose Life Logic
             if (balls.length === 0) {
                 lives--;
                 livesEl.innerText = lives;
+                hotCutterMode = false; // Lose mode on death
+                comboCount = 0;
                 if (lives > 0) {
-                    // Reset 1 ball
                     balls.push({ x: paddle.x + paddle.w/2, y: paddle.y - 10, r: 6, dx: 0, dy: 0, speed: 4 + (level*0.5), active: false });
                 } else {
                     gameOver();
                 }
             }
 
-            // Powerups Logic
+            // Powerups & Particles (Standard Logic)
             powerups.forEach(p => {
                 p.y += p.dy;
-                // Collision with paddle
                 if (p.y + p.h > paddle.y && p.x > paddle.x && p.x < paddle.x + paddle.w) {
-                    p.active = false; // Collected
+                    p.active = false; 
                     if(polySynth) polySynth.triggerAttackRelease(["C4", "E4", "G4"], "16n");
-                    
-                    if (p.type === 'wide') {
-                        paddle.w = 150;
-                        setTimeout(() => paddle.w = 100, 10000);
-                    } else if (p.type === 'sticky') {
-                        paddle.sticky = true;
-                        setTimeout(() => paddle.sticky = false, 10000);
-                    } else if (p.type === 'multi') {
-                        // Spawn 2 active balls
-                        for(let i=0; i<2; i++) {
-                            balls.push({ 
-                                x: paddle.x + paddle.w/2, y: paddle.y - 20, 
-                                r: 6, 
-                                dx: (Math.random()-0.5)*6, 
-                                dy: -4, 
-                                speed: 4 + (level*0.5), 
-                                active: true 
-                            });
-                        }
-                    } else if (p.type === 'life') {
-                        lives++;
-                        livesEl.innerText = lives;
-                    }
+                    if (p.type === 'wide') { paddle.w = 150; setTimeout(() => paddle.w = 100, 10000); } 
+                    else if (p.type === 'sticky') { paddle.sticky = true; setTimeout(() => paddle.sticky = false, 10000); } 
+                    else if (p.type === 'multi') { for(let i=0; i<2; i++) balls.push({ x: paddle.x + paddle.w/2, y: paddle.y - 20, r: 6, dx: (Math.random()-0.5)*6, dy: -4, speed: 4 + (level*0.5), active: true }); } 
+                    else if (p.type === 'life') { lives++; livesEl.innerText = lives; }
                 }
                 if (p.y > gCanvas.height) p.active = false;
             });
             powerups = powerups.filter(p => p.active !== false);
 
-            // Particles
-            particles.forEach((p, i) => {
-                p.x += p.vx; p.y += p.vy; p.life -= 0.05;
-                if (p.life <= 0) p.dead = true;
-            });
+            particles.forEach(p => { p.x += p.vx; p.y += p.vy; p.life -= 0.05; if (p.life <= 0) p.dead = true; });
             particles = particles.filter(p => !p.dead);
 
-            // Level Complete Check
-            if (bricks.every(b => b.status === 0)) {
-                nextLevel();
-            }
+            floatingTexts.forEach(ft => { ft.y += ft.dy; ft.life -= 0.02; if(ft.life <= 0) ft.dead = true; });
+            floatingTexts = floatingTexts.filter(ft => !ft.dead);
+
+            if (bricks.every(b => b.status === 0)) nextLevel();
         }
 
         function draw() {
-            // Clear
-            gCtx.fillStyle = 'rgba(15, 23, 42, 0.4)'; // Trail effect
+            gCtx.fillStyle = 'rgba(15, 23, 42, 0.4)'; 
             gCtx.fillRect(0, 0, gCanvas.width, gCanvas.height);
 
             // Paddle
@@ -1103,9 +1130,19 @@
             gCtx.shadowBlur = 0;
 
             // Balls
-            gCtx.fillStyle = '#fff';
             balls.forEach(ball => {
-                gCtx.beginPath(); gCtx.arc(ball.x, ball.y, ball.r, 0, Math.PI*2); gCtx.fill();
+                gCtx.beginPath(); 
+                gCtx.arc(ball.x, ball.y, ball.r, 0, Math.PI*2); 
+                // Hot Cutter Visual
+                if (hotCutterMode) {
+                    gCtx.fillStyle = '#ef4444';
+                    gCtx.shadowBlur = 20; gCtx.shadowColor = '#ef4444';
+                } else {
+                    gCtx.fillStyle = '#fff';
+                    gCtx.shadowBlur = 0;
+                }
+                gCtx.fill();
+                gCtx.shadowBlur = 0;
             });
 
             // Bricks
@@ -1113,7 +1150,6 @@
                 if(b.status === 1) {
                     gCtx.fillStyle = b.color; 
                     gCtx.fillRect(b.x, b.y, b.w-2, b.h-2);
-                    // Shine effect for hard blocks
                     if (b.type === 2) {
                         gCtx.strokeStyle = '#fff'; gCtx.lineWidth = 1;
                         gCtx.strokeRect(b.x, b.y, b.w-2, b.h-2);
@@ -1124,38 +1160,17 @@
             // Powerups
             powerups.forEach(p => {
                 if (p.type === 'life') {
-                    // Draw Heart Shape
                     gCtx.fillStyle = p.color;
                     gCtx.beginPath();
+                    // Heart drawing code same as before
                     const topCurveHeight = p.h * 0.3;
                     gCtx.moveTo(p.x, p.y + topCurveHeight);
-                    // top left curve
-                    gCtx.bezierCurveTo(
-                      p.x, p.y, 
-                      p.x - p.w / 2, p.y, 
-                      p.x - p.w / 2, p.y + topCurveHeight
-                    );
-                    // bottom left curve
-                    gCtx.bezierCurveTo(
-                      p.x - p.w / 2, p.y + (p.h + topCurveHeight) / 2, 
-                      p.x, p.y + (p.h + topCurveHeight) / 2, 
-                      p.x, p.y + p.h
-                    );
-                    // bottom right curve
-                    gCtx.bezierCurveTo(
-                      p.x, p.y + (p.h + topCurveHeight) / 2, 
-                      p.x + p.w / 2, p.y + (p.h + topCurveHeight) / 2, 
-                      p.x + p.w / 2, p.y + topCurveHeight
-                    );
-                    // top right curve
-                    gCtx.bezierCurveTo(
-                      p.x + p.w / 2, p.y, 
-                      p.x, p.y, 
-                      p.x, p.y + topCurveHeight
-                    );
+                    gCtx.bezierCurveTo(p.x, p.y, p.x - p.w / 2, p.y, p.x - p.w / 2, p.y + topCurveHeight);
+                    gCtx.bezierCurveTo(p.x - p.w / 2, p.y + (p.h + topCurveHeight) / 2, p.x, p.y + (p.h + topCurveHeight) / 2, p.x, p.y + p.h);
+                    gCtx.bezierCurveTo(p.x, p.y + (p.h + topCurveHeight) / 2, p.x + p.w / 2, p.y + (p.h + topCurveHeight) / 2, p.x + p.w / 2, p.y + topCurveHeight);
+                    gCtx.bezierCurveTo(p.x + p.w / 2, p.y, p.x, p.y, p.x, p.y + topCurveHeight);
                     gCtx.fill();
                 } else {
-                    // Standard Powerups
                     gCtx.fillStyle = p.color;
                     gCtx.beginPath(); gCtx.arc(p.x, p.y, 6, 0, Math.PI*2); gCtx.fill();
                     gCtx.fillStyle = '#fff'; gCtx.font = '10px Arial'; gCtx.fillText(p.type[0].toUpperCase(), p.x-3, p.y+3);
@@ -1167,103 +1182,30 @@
                 gCtx.fillStyle = `rgba(255,255,255,${p.life})`;
                 gCtx.fillRect(p.x, p.y, 3, 3);
             });
+
+            // Floating Texts
+            floatingTexts.forEach(ft => {
+                gCtx.fillStyle = ft.color;
+                gCtx.globalAlpha = ft.life;
+                gCtx.font = 'bold 20px Arial';
+                gCtx.fillText(ft.text, ft.x, ft.y);
+                gCtx.globalAlpha = 1.0;
+            });
         }
 
-        function loop() {
-            update(); draw();
-            if (gameState === 'playing') requestAnimationFrame(loop);
-        }
+        // Standard Loop & Init functions (Same as before)
+        function loop() { update(); draw(); if (gameState === 'playing') requestAnimationFrame(loop); }
+        function nextLevel() { gameState = 'transition'; level++; levelEl.innerText = level; levelText.innerText = `POZIOM ${level}`; levelOverlay.classList.remove('opacity-0'); if(polySynth) polySynth.triggerAttackRelease(["C3", "E3", "G3", "C4"], "4n"); setTimeout(() => { levelOverlay.classList.add('opacity-0'); initLevel(level); gameState = 'playing'; loop(); }, 2000); }
+        function startGame() { initAudio().catch(e => console.log("Audio block")); if(Tone.context.state !== 'running') Tone.context.resume(); gameState = 'playing'; score = 0; scoreEl.innerText = 0; lives = 3; livesEl.innerText = 3; level = 1; levelEl.innerText = 1; livesSpawned = 0; ui.classList.add('opacity-0', 'pointer-events-none'); initLevel(1); loop(); }
+        function gameOver() { gameState = 'menu'; ui.classList.remove('opacity-0', 'pointer-events-none'); if (score > highScore) { highScore = score; localStorage.setItem('cnc_game_highscore', highScore); highScoreElDisplay.innerText = highScore; } if(synth) synth.triggerAttackRelease(["A2", "G2", "E2", "C2"], "8n"); if (document.pointerLockElement === gCanvas) document.exitPointerLock(); }
 
-        function nextLevel() {
-            gameState = 'transition';
-            level++;
-            levelEl.innerText = level;
-            levelText.innerText = `POZIOM ${level}`;
-            levelOverlay.classList.remove('opacity-0');
-            
-            if(polySynth) polySynth.triggerAttackRelease(["C3", "E3", "G3", "C4"], "4n");
-
-            setTimeout(() => {
-                levelOverlay.classList.add('opacity-0');
-                initLevel(level);
-                gameState = 'playing';
-                loop();
-            }, 2000);
-        }
-
-        function startGame() {
-            initAudio().catch(e => console.log("Audio block"));
-            // Ensure audio context is running (for Chrome autoplay policy)
-            if(Tone.context.state !== 'running') Tone.context.resume();
-            
-            gameState = 'playing';
-            score = 0; scoreEl.innerText = 0;
-            lives = 3; livesEl.innerText = 3;
-            level = 1; levelEl.innerText = 1;
-            livesSpawned = 0; // Reset lives spawned per game
-            ui.classList.add('opacity-0', 'pointer-events-none');
-            initLevel(1);
-            loop();
-        }
-
-        function gameOver() {
-            gameState = 'menu';
-            ui.classList.remove('opacity-0', 'pointer-events-none');
-            if (score > highScore) {
-                highScore = score;
-                localStorage.setItem('cnc_game_highscore', highScore);
-                highScoreElDisplay.innerText = highScore;
-            }
-            if(synth) synth.triggerAttackRelease(["A2", "G2", "E2", "C2"], "8n");
-            
-            // Safe exit from pointer lock
-            if (document.pointerLockElement === gCanvas) {
-                document.exitPointerLock();
-            }
-        }
-
-        // Controls
-        gCanvas.addEventListener('mousemove', e => {
-            if (gameState === 'playing') {
-                const rect = gCanvas.getBoundingClientRect();
-                const scaleX = gCanvas.width / rect.width;
-                let mouseX = (e.clientX - rect.left) * scaleX;
-                paddle.x = mouseX - paddle.w / 2;
-                if (paddle.x < 0) paddle.x = 0;
-                if (paddle.x + paddle.w > gCanvas.width) paddle.x = gCanvas.width - paddle.w;
-            }
-        });
-
-        // Touch
-        gCanvas.addEventListener('touchmove', e => {
-            if (gameState === 'playing') {
-                e.preventDefault();
-                const rect = gCanvas.getBoundingClientRect();
-                const scaleX = gCanvas.width / rect.width;
-                paddle.x = (e.touches[0].clientX - rect.left) * scaleX - paddle.w/2;
-                if (paddle.x < 0) paddle.x = 0;
-                if (paddle.x + paddle.w > gCanvas.width) paddle.x = gCanvas.width - paddle.w;
-            }
-        }, {passive: false});
-
-        // Launch Ball
-        gCanvas.addEventListener('click', () => {
-            if (gameState === 'playing') {
-                // Launch all inactive balls attached to paddle
-                balls.forEach(b => {
-                    if (!b.active) {
-                        b.active = true;
-                        b.dy = -b.speed;
-                        b.dx = (Math.random() - 0.5) * 6;
-                    }
-                });
-            }
-        });
-
+        // Inputs
+        gCanvas.addEventListener('mousemove', e => { if (gameState === 'playing') { const rect = gCanvas.getBoundingClientRect(); const scaleX = gCanvas.width / rect.width; let mouseX = (e.clientX - rect.left) * scaleX; paddle.x = mouseX - paddle.w / 2; if (paddle.x < 0) paddle.x = 0; if (paddle.x + paddle.w > gCanvas.width) paddle.x = gCanvas.width - paddle.w; } });
+        gCanvas.addEventListener('touchmove', e => { if (gameState === 'playing') { e.preventDefault(); const rect = gCanvas.getBoundingClientRect(); const scaleX = gCanvas.width / rect.width; paddle.x = (e.touches[0].clientX - rect.left) * scaleX - paddle.w/2; if (paddle.x < 0) paddle.x = 0; if (paddle.x + paddle.w > gCanvas.width) paddle.x = gCanvas.width - paddle.w; } }, {passive: false});
+        gCanvas.addEventListener('click', () => { if (gameState === 'playing') { balls.forEach(b => { if (!b.active) { b.active = true; b.dy = -b.speed; b.dx = (Math.random() - 0.5) * 6; } }); } });
+        
         startBtn.addEventListener('click', startGame);
 
     </script>
 </body>
 </html>
-
-
