@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CNC Viz 2.14 - Arc Geometry Fixed</title>
+    <title>CNC Viz 3.02 - Classic Layout</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body { margin: 0; overflow: hidden; background-color: #0b0b0d; color: #e0e0e0; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
@@ -42,13 +42,17 @@
         .toolbar-sep { height: 24px; width: 1px; background: #333; margin: 0 4px; flex-shrink: 0; }
 
         /* --- PRZYCISKI PRĘDKOŚCI --- */
-        .speed-group { display: flex; background: #111; border-radius: 4px; padding: 2px; border: 1px solid #333; width: 140px; }
-        .btn-speed {
+        .ctrl-row { display: flex; gap: 8px; margin-top: 8px; }
+        .ctrl-group { flex: 1; display: flex; flex-direction: column; gap: 2px; }
+        .ctrl-label { font-size: 9px; font-weight: 800; color: #555; text-transform: uppercase; letter-spacing: 0.05em; }
+        
+        .switch-box { display: flex; background: #111; border-radius: 4px; padding: 2px; border: 1px solid #333; }
+        .btn-switch {
             flex: 1; font-size: 9px; font-weight: 800; padding: 4px 0; text-align: center; color: #666;
             border-radius: 2px; transition: all 0.2s; text-transform: uppercase; cursor: pointer;
         }
-        .btn-speed:hover { color: #aaa; background: rgba(255,255,255,0.05); }
-        .btn-speed.active { background: #2563eb; color: white; box-shadow: 0 1px 3px rgba(0,0,0,0.5); }
+        .btn-switch:hover { color: #aaa; background: rgba(255,255,255,0.05); }
+        .btn-switch.active { background: #2563eb; color: white; box-shadow: 0 1px 3px rgba(0,0,0,0.5); }
 
         /* Details / Accordion */
         details > summary {
@@ -104,12 +108,18 @@
         input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; height: 14px; width: 14px; border-radius: 50%; background: #3b82f6; margin-top: -5px; border: 2px solid #ffffff; box-shadow: 0 0 5px rgba(0,0,0,0.5); }
         
         .heatmap-gradient { width: 100%; height: 6px; border-radius: 3px; background: linear-gradient(to right, #3b82f6, #10b981, #eab308, #ef4444); margin-top: 4px; }
-        .gcode-row { display: flex; justify-content: space-between; padding: 2px 0; border-bottom: 1px solid #222; font-family: monospace; font-size: 10px; color: #aaa; }
-        .gcode-key { color: #93c5fd; font-weight: bold; }
         
+        /* LEGENDA - Operator Help Style */
+        .gcode-row { display: flex; justify-content: space-between; padding: 2px 4px; border-bottom: 1px solid #222; font-family: monospace; font-size: 10px; color: #666; border-radius: 2px; transition: color 0.2s; }
+        .gcode-key { color: #60a5fa; font-weight: bold; min-width: 30px; opacity: 0.7; }
+        
+        /* Styl dla kodu aktywnego */
+        .gcode-row.active-code { background-color: rgba(16, 185, 129, 0.15); color: #e0e0e0; border-color: rgba(16, 185, 129, 0.3); }
+        .gcode-row.active-code .gcode-key { color: #34d399; opacity: 1; }
+
         .legend-cat { 
-            font-size: 9px; font-weight: 800; color: #4ade80; text-transform: uppercase; 
-            margin-top: 8px; margin-bottom: 2px; letter-spacing: 0.05em; border-bottom: 1px solid #333; padding-bottom: 2px;
+            font-size: 9px; font-weight: 800; color: #9ca3af; text-transform: uppercase; 
+            margin-top: 12px; margin-bottom: 4px; letter-spacing: 0.05em; border-bottom: 1px solid #333; padding-bottom: 2px;
         }
     </style>
     
@@ -133,7 +143,7 @@
             <div class="flex items-center gap-4 pl-2 min-w-[180px]">
                 <div class="font-bold text-lg tracking-widest text-white flex items-center gap-2 select-none">
                     <span class="text-blue-500">CNC</span><span class="text-gray-400">VIZ</span>
-                    <span class="bg-blue-900/50 text-blue-200 text-[10px] px-1.5 py-0.5 rounded border border-blue-800">V2.14</span>
+                    <span class="bg-blue-900/50 text-blue-200 text-[10px] px-1.5 py-0.5 rounded border border-blue-800">V3.02</span>
                 </div>
             </div>
 
@@ -246,12 +256,14 @@
                             </div>
                             <input type="range" id="progress-slider" min="0" max="1000" value="0" class="w-full h-1 bg-gray-700 rounded-lg appearance-none cursor-pointer">
                             
-                            <!-- SPEED CONTROLS -->
-                            <div class="mt-2 flex items-center justify-between">
-                                <span class="text-[9px] text-gray-500 font-bold tracking-wider uppercase">Prędkość Symulacji</span>
-                                <div class="speed-group">
-                                    <div class="btn-speed" onclick="setSpeed(1, this)">Real (1x)</div>
-                                    <div class="btn-speed active" onclick="setSpeed(10, this)">Fast (10x)</div>
+                            <!-- CONTROL ROW: SPEED ONLY -->
+                            <div class="ctrl-row">
+                                <div class="ctrl-group">
+                                    <span class="ctrl-label">Prędkość</span>
+                                    <div class="switch-box">
+                                        <div class="btn-switch speed" onclick="setSpeed(1, this)">1x</div>
+                                        <div class="btn-switch active speed" onclick="setSpeed(10, this)">10x</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -305,13 +317,13 @@
         const CONF = {
             colorStockTop: 0xcccccc, 
             colorStockSide: 0x888888, 
-            millRes: 256, // Rozdzielczość siatki
+            millRes: 256, // Standard Quality
             rapidSpeed: 15000, 
             defaultFeed: 500,
             toolChangePos: { x:0, y:0, z:50 } 
         };
 
-        const STORAGE_KEY = 'cnc_viz_data_v2_14';
+        const STORAGE_KEY = 'cnc_viz_data_v3_02';
 
         // --- DATA: Tool Library (Mutable) ---
         let toolsDB = [
@@ -322,18 +334,37 @@
             { id: 5, type: 'TAP', dia: 6, len: 35 }    // Gwintownik
         ];
 
-        // --- DATA: G-Code Descriptions ---
+        // --- DATA: G-Code Descriptions (FULL HELP) ---
         const G_DESC = {
-            'G0': 'Ruch Szybki', 'G1': 'Ruch Roboczy', 'G2': 'Łuk CW', 'G3': 'Łuk CCW',
-            'G17': 'Płaszczyzna XY', 'G18': 'Płaszczyzna XZ', 'G19': 'Płaszczyzna YZ',
-            'G40': 'Kompensacja: OFF', 'G41': 'Kompensacja: Lewa', 'G42': 'Kompensacja: Prawa',
-            'G43': 'Kompensacja Długości', 'G49': 'Anuluj Komp. Dł.',
-            'G54': 'Układ Współrzędnych 1', 'G80': 'Anuluj Cykl',
-            'G81': 'Wiercenie', 'G83': 'Wiercenie Głębokie (Peck)', 'G84': 'Gwintowanie',
-            'G90': 'Współrzędne Absolutne', 'G91': 'Współrzędne Przyrostowe',
-            'M3': 'Wrzeciono CW', 'M4': 'Wrzeciono CCW', 'M5': 'Stop Wrzeciona',
-            'M6': 'Zmiana Narzędzia (AUTO)', 'M8': 'Chłodziwo ON', 'M9': 'Chłodziwo OFF', 'M30': 'Koniec Programu',
-            'T': 'Wybór Narzędzia', 'F': 'Posuw', 'S': 'Obroty'
+            'G0': 'Ruch Szybki (Rapid) - Pozycjonowanie',
+            'G1': 'Ruch Roboczy (Linear) - Skrawanie',
+            'G2': 'Łuk Zgodnie z Zegarem (CW)',
+            'G3': 'Łuk Przeciwnie do Zegara (CCW)',
+            'G17': 'Wybór Płaszczyzny XY',
+            'G18': 'Wybór Płaszczyzny XZ',
+            'G19': 'Wybór Płaszczyzny YZ',
+            'G40': 'Anulowanie Kompensacji Promienia',
+            'G41': 'Kompensacja Promienia: Lewa',
+            'G42': 'Kompensacja Promienia: Prawa',
+            'G43': 'Kompensacja Długości Narzędzia (+H)',
+            'G49': 'Anulowanie Kompensacji Długości',
+            'G54': 'Układ Współrzędnych Roboczych 1',
+            'G80': 'Anulowanie Cykli Wiercenia',
+            'G81': 'Cykl Wiercenia (Nawiercanie)',
+            'G83': 'Cykl Wiercenia Głębokiego (Peck)',
+            'G84': 'Cykl Gwintowania (Tapping)',
+            'G90': 'Tryb Absolutny (Względem Zera)',
+            'G91': 'Tryb Przyrostowy (Względem Narzędzia)',
+            'M3': 'Obroty Wrzeciona: Prawe (CW)',
+            'M4': 'Obroty Wrzeciona: Lewe (CCW)',
+            'M5': 'Stop Wrzeciona',
+            'M6': 'Automatyczna Wymiana Narzędzia',
+            'M8': 'Chłodziwo: Włącz (Flood)',
+            'M9': 'Chłodziwo: Wyłącz',
+            'M30': 'Koniec Programu (Rewind)',
+            'T': 'Wybór Narzędzia (Tool)',
+            'F': 'Posuw (Feed Rate mm/min)',
+            'S': 'Obroty (Spindle Speed RPM)'
         };
 
         const G_CATS = {
@@ -345,7 +376,7 @@
         };
 
         const state = {
-            isPlaying: false, speed: 10, // Default Fast
+            isPlaying: false, speed: 10, 
             progress: 0, currentSegmentIdx: 0, segments: [],
             bounds: { min: new THREE.Vector3(), max: new THREE.Vector3() },
             activeToolId: 1, stockMesh: null, 
@@ -378,10 +409,10 @@
             iconPlay: el('icon-play'), iconPause: el('icon-pause')
         };
 
-        // --- Speed Control Function ---
+        // --- CONTROLS Functions ---
         window.setSpeed = (val, elem) => {
             state.speed = val;
-            document.querySelectorAll('.btn-speed').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.btn-switch.speed').forEach(b => b.classList.remove('active'));
             elem.classList.add('active');
         };
 
@@ -608,7 +639,7 @@
             const h = parseFloat(els.stockH.value)||20;
             
             const grid = new THREE.GridHelper(300, 30, 0x444444, 0x222222);
-            grid.position.y = -h;
+            grid.position.y = -h; // Grid at bottom of stock
             helpersGroup.add(grid);
 
             const table = new THREE.Mesh(new THREE.BoxGeometry(300, 2, 300), new THREE.MeshStandardMaterial({color:0x111111}));
@@ -619,7 +650,7 @@
             createStockMesh();
         }
 
-        // --- STOCK MESH: CENTERED ORIGIN FIX ---
+        // --- STOCK MESH: CENTERED ORIGIN ---
         function createStockMesh() {
             if (state.stockMesh) { scene.remove(state.stockMesh); if(state.stockMesh.geometry) state.stockMesh.geometry.dispose(); }
             
@@ -648,13 +679,21 @@
 
             for(let i=0; i<count; i++) {
                 const y = pos.getY(i);
+                // Box is h tall, centered at local 0. Top is h/2.
                 if (y > (h/2 - epsilon)) {
                     col.setXYZ(i, topColor.r, topColor.g, topColor.b);
                     
+                    // Map vertex to grid index
+                    // Local X is -w/2 to w/2.
+                    // Grid index 0..segs maps to -w/2..w/2
+                    // ix = (localX + w/2) / stepX
                     const x = pos.getX(i) + w/2;
                     const z = pos.getZ(i) + d/2;
+                    
                     const ix = Math.round(x / stepX);
                     const iz = Math.round(z / stepZ);
+                    
+                    // Store index
                     const gridIdx = (segs - iz) * (segs + 1) + ix;
                     if (state.gridMap[gridIdx]) state.gridMap[gridIdx].push(i);
                 } else {
@@ -665,6 +704,9 @@
             const mat = new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 0.5, metalness: 0.3, flatShading: false });
             const mesh = new THREE.Mesh(geo, mat);
             
+            // Center the mesh so Top is at Y=0 in World Space.
+            // Local Top is h/2. To make it World 0, we shift by -h/2.
+            // This aligns X0 Y0 Z0 with Top Center.
             mesh.position.set(0, -h/2, 0);
             
             mesh.castShadow = true; mesh.receiveShadow = true;
@@ -820,8 +862,9 @@
 
                     // FIX: If R is present, convert R to I/J
                     if(R !== undefined) {
-                        // USE ORIGINAL isCw (curMode === 'G2') for I/J calc
-                        // DO NOT invert here. R is calculated in standard CNC space.
+                        // Use original CNC logic for center calc
+                        // FIX: NO INVERSION HERE FOR CENTER CALC
+                        // G2/G3 direction is standardized in 2D.
                         const offsets = convertRtoIJ(curPos.x, curPos.y, target.x, target.y, R, curMode==='G2');
                         I = offsets.i;
                         J = offsets.j;
@@ -870,8 +913,8 @@
         function convertRtoIJ(x1, y1, x2, y2, r, isCw) {
             const d2 = (x2-x1)**2 + (y2-y1)**2;
             const d = Math.sqrt(d2);
-            if (d2 === 0 || d > 2*Math.abs(r)) return {i:0, j:0};
-            
+            if (d < 0.0001) return {i:0, j:0};
+            if (d > 2*Math.abs(r)) r = d/2;
             const h = Math.sqrt(Math.max(0, r*r - d2/4));
             const dx = x2 - x1;
             const dy = y2 - y1;
@@ -881,25 +924,29 @@
             let side = isCw ? 1 : -1; 
             if (r < 0) { side = -side; r = Math.abs(r); } 
             
-            // Right normal vector scaled by h
+            // Center Right of Vector
             const cx = xMid + side * (dy * h / d);
             const cy = yMid + side * (-dx * h / d);
             
             return { i: cx - x1, j: cy - y1 };
         }
 
-        function arcToSegments(p1, x2, z2, i, j, isCw, idx, tid, feed) {
-            const cx = p1.x + i;
-            const cz = p1.z + j;
-            const r = Math.sqrt(i*i + j*j);
+        function arcToSegments(p1, x2, z2, I, J, isCw, idx, tid, feed) {
+            const cx = p1.x + I;
+            const cz = p1.z + J;
+            const r = Math.sqrt(I*I + J*J);
             
-            // If invalid radius (e.g. 0), fallback to linear
             if (r < 0.001) return [{start:p1.clone(), end:new THREE.Vector3(x2, p1.y, z2), type:'G1', lineIdx:idx, feed, toolId:tid}];
 
             const a1 = Math.atan2(p1.z - cz, p1.x - cx);
             let a2 = Math.atan2(z2 - cz, x2 - cx);
             
-            // FIX: Invert CW logic for visualizer
+            // FIX: INVERT LOGIC for Three.js Z axis mapping (which is -Y)
+            // CNC Y is up. Three Z is down. Angular direction flips.
+            // If state.invertY is FALSE: Y = -Z.
+            // CNC CW (G2) -> Math CCW in XZ plane.
+            // CNC CCW (G3) -> Math CW in XZ plane.
+            
             let logicCw = state.invertY ? isCw : !isCw;
 
             if(logicCw && a2 > a1) { a2 -= Math.PI * 2; } 
@@ -907,8 +954,8 @@
             
             const deltaAngle = Math.abs(a2 - a1);
             const arcLen = r * deltaAngle;
-            let res = Math.max(12, Math.ceil(arcLen * 2)); 
-            if (res > 128) res = 128;
+            let res = Math.max(16, Math.ceil(arcLen * 4)); // Moderate resolution
+            if (res > 256) res = 256;
             
             const segs = []; 
             const step = (a2 - a1) / res;
@@ -927,38 +974,34 @@
             return segs;
         }
 
-        function renderLegend(codes) {
-            els.gcodeLegend.innerHTML = '';
-            const usedSet = new Set(codes);
+        function renderLegend(set) {
+            const el = els.gcodeLegend; el.innerHTML='';
             
-            for (const [catName, catCodes] of Object.entries(G_CATS)) {
-                const activeInCat = catCodes.filter(c => usedSet.has(c));
-                if (activeInCat.length > 0) {
-                    const header = document.createElement('div');
-                    header.className = 'legend-cat';
-                    header.innerText = catName;
-                    els.gcodeLegend.appendChild(header);
-                    activeInCat.forEach(c => {
-                        const div = document.createElement('div');
-                        div.className = 'gcode-row';
-                        div.innerHTML = `<span class="gcode-key">${c}</span> <span>${G_DESC[c] || 'User/Macro'}</span>`;
-                        els.gcodeLegend.appendChild(div);
-                    });
-                }
+            for(let [k,v] of Object.entries(G_CATS)) {
+                const d = document.createElement('div'); d.className='legend-cat'; d.innerText=k; el.appendChild(d);
+                v.forEach(c => {
+                    const row = document.createElement('div'); row.className='gcode-row '+(set.has(c)?'active-code':'');
+                    row.innerHTML=`<span class="gcode-key">${c}</span><span>${G_DESC[c]||'Funkcja'}</span>`;
+                    el.appendChild(row);
+                });
             }
             
-            const allStandard = Object.values(G_CATS).flat();
-            const others = Array.from(usedSet).filter(c => !allStandard.includes(c));
-            if (others.length > 0) {
+            // Opcjonalnie: Dodajmy sekcję "Inne/Nierozpoznane" dla kodów z pliku, których nie ma w bazie
+            const allKnown = new Set(Object.values(G_CATS).flat());
+            const unknownActive = Array.from(set).filter(c => !allKnown.has(c));
+            
+            if(unknownActive.length > 0) {
                 const header = document.createElement('div');
                 header.className = 'legend-cat';
-                header.innerText = "INNE";
-                els.gcodeLegend.appendChild(header);
-                others.sort().forEach(c => {
+                header.innerText = "INNE / USER";
+                header.style.color = '#fbbf24'; 
+                el.appendChild(header);
+                
+                unknownActive.sort().forEach(c => {
                     const div = document.createElement('div');
-                    div.className = 'gcode-row';
-                    div.innerHTML = `<span class="gcode-key">${c}</span> <span>${G_DESC[c] || '-'}</span>`;
-                    els.gcodeLegend.appendChild(div);
+                    div.className = 'gcode-row active-code';
+                    div.innerHTML = `<span class="gcode-key">${c}</span> <span>${G_DESC[c] || 'Nierozpoznany'}</span>`;
+                    el.appendChild(div);
                 });
             }
         }
@@ -968,11 +1011,11 @@
             requestAnimationFrame(animate); controls.update(); chipSystem.update();
             frameCount++;
 
-            const dt = clock.getDelta(); // Seconds passed since last frame
+            const dt = clock.getDelta(); 
             
-            // If not playing, just render static
             if (!state.isPlaying) {
                 if(state.segments.length > 0) {
+                    // Only compute normals occasionally when stopped to save battery/cpu
                     if(frameCount % 60 === 0 && state.stockMesh) state.stockMesh.geometry.computeVertexNormals();
                     const curSeg = state.segments[state.currentSegmentIdx];
                     if(curSeg) {
@@ -984,11 +1027,9 @@
                 return;
             }
 
-            // --- SIMULATION LOGIC ---
             let timeToAdvance = (dt / 60) * state.speed; 
 
             while (timeToAdvance > 0 && state.isPlaying) {
-                // Get current segment
                 if (state.currentSegmentIdx >= state.segments.length) {
                     state.isPlaying = false;
                     state.currentSegmentIdx = state.segments.length - 1; 
@@ -998,14 +1039,10 @@
                 }
 
                 const seg = state.segments[state.currentSegmentIdx];
-                // Total duration of this segment (min)
-                const segDuration = seg.duration || 0.000001; // avoid 0
-                
-                // Time remaining in current segment
+                const segDuration = seg.duration || 0.000001; 
                 const remainingInSeg = (1 - state.progress) * segDuration;
 
                 if (timeToAdvance >= remainingInSeg) {
-                    // Finish segment
                     const endPos = seg.end;
                     const currentPos = new THREE.Vector3().lerpVectors(seg.start, seg.end, state.progress);
                     
@@ -1018,19 +1055,15 @@
                     toolMesh.position.copy(endPos);
 
                     timeToAdvance -= remainingInSeg;
-                    
                     state.progress = 0;
                     state.currentSegmentIdx++;
                     state.simulatedHeadIdx = state.currentSegmentIdx;
 
                 } else {
-                    // Partial move
                     const fractionToMove = timeToAdvance / segDuration;
-                    
-                    const oldProgress = state.progress;
                     state.progress += fractionToMove;
                     
-                    const pOld = new THREE.Vector3().lerpVectors(seg.start, seg.end, oldProgress);
+                    const pOld = new THREE.Vector3().lerpVectors(seg.start, seg.end, state.progress - fractionToMove);
                     const pNew = new THREE.Vector3().lerpVectors(seg.start, seg.end, state.progress);
                     
                     if(seg.type === 'G1') {
@@ -1056,7 +1089,6 @@
                 }
             }
 
-            // After loop: Update UI Stats
             if(state.segments.length > 0 && state.currentSegmentIdx < state.segments.length) {
                 const curSeg = state.segments[state.currentSegmentIdx];
                 const currentRunTime = curSeg.startTime + (curSeg.duration * state.progress);
@@ -1069,8 +1101,8 @@
                 highlightSelection(curSeg);
             }
 
-            if (frameCount % 5 === 0 && state.stockMesh) state.stockMesh.geometry.computeVertexNormals();
-
+            // Optimize: Normals
+            if (frameCount % 10 === 0 && state.stockMesh) state.stockMesh.geometry.computeVertexNormals();
             renderer.render(scene, camera);
         }
 
@@ -1100,10 +1132,8 @@
             const geo = state.stockMesh.geometry;
             const pos = geo.attributes.position; 
             const col = geo.attributes.color; 
-            
             const w = parseFloat(els.stockW.value);
             const h = parseFloat(els.stockH.value);
-
             const topColor = new THREE.Color(CONF.colorStockTop);
             const map = state.gridMap;
             if(!map) return;
@@ -1114,7 +1144,6 @@
                     col.setXYZ(idx, topColor.r, topColor.g, topColor.b);
                 });
             });
-
             pos.needsUpdate=true; col.needsUpdate=true; geo.computeVertexNormals();
             state.simulatedHeadIdx = 0;
         }
@@ -1188,11 +1217,7 @@
 
                         if(currentWorldY > targetWorldY) {
                             const newLocalY = targetWorldY + stockH/2;
-                            const depth = -targetWorldY; 
-                            const dr = depth/stockH; 
-                            const hue = 0.6 - dr*0.6; 
-                            const c = new THREE.Color().setHSL(hue, 1.0, 0.5);
-
+                            const c = new THREE.Color().setHSL(0.6 - (-targetWorldY/stockH)*0.6, 1.0, 0.5);
                             for(let k=0; k<vertices.length; k++) {
                                 const vIdx = vertices[k];
                                 posAttr.setY(vIdx, newLocalY);
@@ -1209,7 +1234,6 @@
             if (!state.stockMesh) return;
             let output = "X Y Z\n";
             const pos = state.stockMesh.geometry.attributes.position;
-            
             const w = parseFloat(els.stockW.value);
             const d = parseFloat(els.stockD.value);
             const h = parseFloat(els.stockH.value);
@@ -1219,27 +1243,18 @@
             
             state.gridMap.forEach((indices, gridIdx) => {
                 if(indices.length > 0) {
-                    // Get Grid indices from linear idx
                     const ix = gridIdx % (segs + 1);
                     const iz = (segs - Math.floor(gridIdx / (segs + 1)));
-                    
                     const i = indices[0]; 
                     const ly = pos.getY(i);
                     const worldY = ly - h/2;
-                    
-                    // Reconstruct World Coords from Grid
                     const wx = (ix * stepX) - w/2;
                     const wz = (iz * stepZ) - d/2;
-                    
                     output += `${wx.toFixed(3)} ${wz.toFixed(3)} ${worldY.toFixed(3)}\n`;
                 }
             });
-
             const blob = new Blob([output], { type: 'text/plain' });
-            const l = document.createElement('a');
-            l.href = URL.createObjectURL(blob);
-            l.download = 'cnc_cloud.txt';
-            l.click();
+            const l = document.createElement('a'); l.href = URL.createObjectURL(blob); l.download = 'cnc_cloud.txt'; l.click();
         }
 
         function on3DClick(e) {
@@ -1257,32 +1272,22 @@
             state.isPlaying=false; updatePlayUI(); 
             const ratio = e.target.value/1000;
             const targetTime = ratio * state.totalSimTime;
-            
             let foundIdx = 0;
             for(let i=0; i<state.segments.length; i++) {
                 const s = state.segments[i];
-                if (targetTime >= s.startTime && targetTime <= (s.startTime + s.duration)) {
-                    foundIdx = i;
-                    break;
-                }
+                if (targetTime >= s.startTime && targetTime <= (s.startTime + s.duration)) { foundIdx = i; break; }
                 if (targetTime > s.startTime + s.duration) foundIdx = i; 
             }
-            
             const s = state.segments[foundIdx];
             if(s.toolId!==state.activeToolId) updateToolMesh(s.toolId);
             state.currentSegmentIdx = foundIdx;
-            
             const segTime = targetTime - s.startTime;
-            state.progress = segTime / (s.duration || 1);
-            if(state.progress > 1) state.progress = 1;
-            
+            state.progress = segTime / (s.duration || 1); if(state.progress > 1) state.progress = 1;
             const pos = new THREE.Vector3().lerpVectors(s.start, s.end, state.progress); 
             toolMesh.position.copy(pos); updateDRO(pos);
             els.percent.innerText = `${Math.floor(ratio*100)}%`; els.lineIdx.innerText = `N: ${s.lineIdx+1}`;
-            
             simulateToState(foundIdx); 
             if(s.type==='G1') deformStockSegment(s.start, pos, s.toolId);
-            
             if(state.stockMesh) state.stockMesh.geometry.computeVertexNormals();
         }
         function selectSeg(i, scrollEditor=true) {
@@ -1290,7 +1295,6 @@
             const s = state.segments[i]; if(s.toolId!==state.activeToolId) updateToolMesh(s.toolId);
             toolMesh.position.copy(s.start); updateDRO(s.start);
             highlightSelection(s); if(scrollEditor) highlightLineInEditor(s.lineIdx);
-            
             const ratio = s.startTime / (state.totalSimTime || 1);
             els.percent.innerText = `${Math.floor(ratio*100)}%`; els.slider.value=ratio*1000; els.lineIdx.innerText = `N: ${s.lineIdx+1}`;
             simulateToState(i);
@@ -1333,7 +1337,7 @@
             l.click(); 
         });
 
-        const sampleMill = `(MASTER SHOWCASE V2.1)\n(Stock: 100x100x20 | Baza: Srodek X0 Y0)\n\n(Ustawienia Wstepne)\nG90 G17 G54\nG0 Z50\n\n(--- OP 1: PLANOWANIE POWIERZCHNI [T1 GLOWICA] ---)\n(Zbieramy 1mm z gory aby wyrownac material)\nT1 M6\nS2000 M3\nG0 X-60 Y0\nG0 Z5\nG1 Z-1 F800\nG1 X60\nG0 Z50\n\n(--- OP 2: KIESZEN Z WYSPA [T2 FREZ 10] ---)\n(Frezowanie ksztaltu wybierajacego material)\nT2 M6\nS3000 M3\nG0 X-35 Y-35\nG0 Z5\nG1 Z-4 F1000\n\n(Obwiednia zewnetrzna)\nG1 X35\nG1 Y35\nG1 X-35\nG1 Y-35\n\n(Wyspa srodkowa - pozostawienie materialu)\nG0 Z5\nG0 X-20 Y-20\nG1 Z-4 F1000\nG1 X20\nG1 Y20\nG1 X-20\nG1 Y-20\nG0 Z50\n\n(--- OP 3: ROZETA OZD [T3 KULA 6] ---)\n(Precyzyjne luki G2/G3)\nT3 M6\nS4500 M3\nG0 X0 Y0\nG0 Z2\nG1 Z-2 F1200\n\n(Luki spiralne)\nG3 X20 Y0 I10 J0\nG2 X0 Y20 R20\nG3 X-20 Y0 I-10 J0\nG2 X0 Y-20 R20\nG0 Z50\n\n(--- OP 4: WIERCENIE OTWOROW [T4 WIERTLO] ---)\n(Cykl G83 - z wycofaniem wiora)\nT4 M6\nS1500 M3\nG0 Z20\n(Otwor 1)\nG0 X40 Y40\nG83 X40 Y40 Z-15 R2 Q4 F300\n(Otwor 2)\nG83 X-40 Y40 Z-15 R2 Q4\n(Otwor 3)\nG83 X-40 Y-40 Z-15 R2 Q4\n(Otwor 4)\nG83 X40 Y-40 Z-15 R2 Q4\nG80\nG0 Z50\n\n(--- OP 5: GWINTOWANIE [T5 GWINTOWNIK] ---)\n(Cykl G84 - obroty prawe/lewe)\nT5 M6\nS400 M3\n(Gwintowanie otworow)\nG0 X40 Y40\nG84 X40 Y40 Z-12 R5 F1.5 (Skok 1.5mm)\nG84 X-40 Y40 Z-12 R5\nG84 X-40 Y-40 Z-12 R5\nG84 X40 Y-40 Z-12 R5\nG80\nG0 Z50\n\n(Koniec)\nG0 X0 Y0\nM30`;
+        const sampleMill = `(MASTER SHOWCASE V3.1)\n(Stock: 100x100x20 | Baza: Srodek X0 Y0)\n\n(Ustawienia Wstepne)\nG90 G17 G54\nG0 Z50\n\n(--- OP 1: PLANOWANIE POWIERZCHNI [T1 GLOWICA] ---)\n(Zbieramy 1mm z gory aby wyrownac material)\nT1 M6\nS2000 M3\nG0 X-60 Y0\nG0 Z5\nG1 Z-1 F800\nG1 X60\nG0 Z50\n\n(--- OP 2: KIESZEN Z WYSPA [T2 FREZ 10] ---)\n(Frezowanie ksztaltu wybierajacego material)\nT2 M6\nS3000 M3\nG0 X-35 Y-35\nG0 Z5\nG1 Z-4 F1000\n\n(Obwiednia zewnetrzna)\nG1 X35\nG1 Y35\nG1 X-35\nG1 Y-35\n\n(Wyspa srodkowa - pozostawienie materialu)\nG0 Z5\nG0 X-20 Y-20\nG1 Z-4 F1000\nG1 X20\nG1 Y20\nG1 X-20\nG1 Y-20\nG0 Z50\n\n(--- OP 3: OKRAG WEWNATRZ [T3 KULA 6] ---)\n(Frezowanie okregu G3 wewnatrz wyspy)\nT3 M6\nS4500 M3\nG0 X15 Y0\nG0 Z2\nG1 Z-2 F1200\n(Polkole 1 CCW)\nG3 X-15 Y0 I-15 J0\n(Polkole 2 CCW)\nG3 X15 Y0 I15 J0\nG0 Z50\n\n(--- OP 4: WIERCENIE OTWOROW [T4 WIERTLO] ---)\n(Cykl G83 - z wycofaniem wiora)\nT4 M6\nS1500 M3\nG0 Z20\n(Otwor 1)\nG0 X40 Y40\nG83 X40 Y40 Z-15 R2 Q4 F300\n(Otwor 2)\nG83 X-40 Y40 Z-15 R2 Q4\n(Otwor 3)\nG83 X-40 Y-40 Z-15 R2 Q4\n(Otwor 4)\nG83 X40 Y-40 Z-15 R2 Q4\nG80\nG0 Z50\n\n(--- OP 5: GWINTOWANIE [T5 GWINTOWNIK] ---)\n(Cykl G84 - obroty prawe/lewe)\nT5 M6\nS400 M3\n(Gwintowanie otworow)\nG0 X40 Y40\nG84 X40 Y40 Z-12 R5 F1.5 (Skok 1.5mm)\nG84 X-40 Y40 Z-12 R5\nG84 X-40 Y-40 Z-12 R5\nG84 X40 Y-40 Z-12 R5\nG80\nG0 Z50\n\n(Koniec)\nG0 X0 Y0\nM30`;
         init();
     </script>
 </body>
