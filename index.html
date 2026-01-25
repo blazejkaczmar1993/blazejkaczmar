@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="pl" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- --- 1. KLUCZOWE SEO --- -->
+    <title>Błażej Kaczmar - Portfolio CNC | Obróbka i Projekty</title>
+    <meta name="description"
+        content="Portfolio Błażeja Kaczmara. Specjalizacja w branży CNC, obróbce skrawaniem oraz projektowaniu technicznym. Sprawdź moje kalkulatory i projekty.">
+    <meta name="keywords"
+        content="CNC, obróbka skrawaniem, frezowanie, kalkulator CNC, inżynieria, Błażej Kaczmar, projekty techniczne">
+    <meta name="author" content="Błażej Kaczmar">
+
+    <!-- --- 2. SEO TECHNICZNE --- -->
+    <meta name="robots" content="index, follow">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0f172a">
+    <link rel="canonical" href="https://blazejkaczmar.pl/">
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+
+    <!-- --- 3. OPEN GRAPH --- -->
+    <meta property="og:type" content="profile">
+    <meta property="og:url" content="https://blazejkaczmar.pl/">
+    <meta property="og:title" content="Błażej Kaczmar - Portfolio CNC">
+    <meta property="og:description"
+        content="Zobacz moje projekty związane z CNC i skorzystaj z kalkulatora parametrów.">
+    <meta property="og:image" content="https://blazejkaczmar.pl/assets/thumbnail.jpg">
+
+    <!-- --- 4. STRUCTURED DATA --- -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Błażej Kaczmar",
+      "url": "https://blazejkaczmar.pl",
+      "jobTitle": "Specjalista CNC / Inżynier",
+      "description": "Specjalista w dziedzinie obróbki CNC i technologii mechanicznych."
+    }
+    </script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="js/tailwind-config.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body
+    class="bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-100 antialiased selection:bg-blue-500 selection:text-white flex flex-col min-h-screen bg-grid-pattern transition-colors duration-300">
+
+    <!-- Tło dekoracyjne (Blobs) -->
+    <div class="fixed inset-0 z-0 overflow-hidden pointer-events-none">
+        <div
+            class="absolute top-0 left-1/4 w-96 h-96 bg-blue-200 dark:bg-blue-900/30 rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-3xl opacity-70 animate-blob">
+        </div>
+        <div
+            class="absolute top-0 right-1/4 w-96 h-96 bg-purple-200 dark:bg-purple-900/30 rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-3xl opacity-70 animate-blob animation-delay-2000">
+        </div>
+    </div>
+
+    <!-- Przełącznik Motywu -->
+    <div class="fixed top-6 right-6 z-50">
+        <button id="theme-toggle"
+            class="p-3 rounded-xl bg-white/90 dark:bg-gray-800/90 backdrop-blur-md text-gray-600 dark:text-yellow-400 shadow-xl hover:scale-105 transition-transform border border-gray-200 dark:border-gray-700 ring-1 ring-gray-200 dark:ring-gray-700"
+            aria-label="Zmień motyw">
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd"
+                    d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 100 2h1z"
+                    clip-rule="evenodd"></path>
+            </svg>
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+            </svg>
+        </button>
+    </div>
+
+    <!-- Main Content -->
+    <main class="flex-grow relative z-10">
+
+        <!-- Header Section -->
+        <header class="min-h-[80vh] flex flex-col justify-center items-center px-4 text-center max-w-5xl mx-auto pt-20">
+
+            <!-- Modern Avatar Container -->
+            <div class="relative group mb-8 reveal">
+                <div
+                    class="absolute -inset-1 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-full blur opacity-25 group-hover:opacity-75 transition duration-1000 group-hover:duration-200">
+                </div>
+                <div
+                    class="relative w-36 h-36 bg-white dark:bg-gray-800 rounded-full flex items-center justify-center ring-4 ring-white dark:ring-gray-700 shadow-2xl">
+                    <span
+                        class="text-5xl font-black bg-clip-text text-transparent bg-gradient-to-br from-blue-600 to-cyan-500 select-none">BK</span>
+                </div>
+            </div>
+
+            <h1 class="text-5xl md:text-7xl font-extrabold text-gray-900 dark:text-white tracking-tight mb-6 reveal">
+                Błażej <span
+                    class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">Kaczmar</span>
+            </h1>
+
+            <p
+                class="text-xl md:text-2xl text-gray-600 dark:text-gray-300 max-w-2xl leading-relaxed mb-10 font-light reveal">
+                Inżynieria precyzyjna. Programowanie CNC. <br>
+                <span class="font-medium text-gray-800 dark:text-gray-100">Tworzę rozwiązania techniczne i
+                    cyfrowe.</span>
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto px-6 md:px-0 reveal">
+                <a href="#projekty"
+                    class="group relative px-8 py-3 bg-blue-600 text-white rounded-full font-semibold overflow-hidden shadow-lg shadow-blue-500/30 transition-all hover:scale-105">
+                    <span
+                        class="absolute w-0 h-0 transition-all duration-500 ease-out bg-white rounded-full group-hover:w-56 group-hover:h-56 opacity-10"></span>
+                    <span class="relative flex items-center justify-center gap-2">
+                        Moje Projekty
+                        <svg class="w-4 h-4 group-hover:translate-y-1 transition-transform" fill="none"
+                            stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                        </svg>
+                    </span>
+                </a>
+                <a href="#kontakt"
+                    class="px-8 py-3 bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm text-gray-700 dark:text-gray-200 border border-gray-300 dark:border-gray-600 rounded-full font-semibold hover:bg-white dark:hover:bg-gray-700 transition-all shadow-sm hover:shadow-md">
+                    Kontakt
+                </a>
+            </div>
+        </header>
+
+        <!-- Sekcja Projekty (GRID 3 KOLUMNY) -->
+        <section id="projekty" class="py-24 relative">
+            <div class="container mx-auto px-4 max-w-6xl">
+
+                <div class="flex items-center justify-center gap-4 mb-16 reveal">
+                    <div class="h-px bg-gray-300 dark:bg-gray-700 w-12 md:w-32"></div>
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white text-center">Portfolio &
+                        Narzędzia</h2>
+                    <div class="h-px bg-gray-300 dark:bg-gray-700 w-12 md:w-32"></div>
+                </div>
+
+                <!-- Grid Layout: Zmieniono na 2 kolumny dla układu 2x2 przy 4 elementach -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+                    <!-- Element 1: Kalkulator HTML -->
+                    <a href="kalkulator.html"
+                        class="group relative bg-white dark:bg-gray-800 rounded-2xl p-1 border border-gray-200 dark:border-gray-700 card-hover-effect hover:-translate-y-2 hover:shadow-2xl hover:border-orange-400/50 dark:hover:border-orange-500/50 reveal">
+                        <div
+                            class="absolute -top-3 -right-3 bg-orange-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg transform rotate-12 group-hover:rotate-0 transition-transform">
+                            NOWOŚĆ</div>
+                        <div
+                            class="h-full p-6 rounded-xl flex flex-col bg-gradient-to-b from-transparent to-gray-50 dark:to-gray-800/50">
+                            <div
+                                class="w-16 h-16 mb-6 rounded-2xl bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center text-orange-600 dark:text-orange-400 group-hover:scale-110 transition-transform duration-300">
+                                <!-- Ikona Kalkulatora -->
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                                </svg>
+                            </div>
+                            <h3
+                                class="text-2xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors">
+                                Kalkulator CNC</h3>
+                            <p class="text-gray-500 dark:text-gray-400 text-sm mb-4 flex-grow">Narzędzie do obliczania
+                                parametrów skrawania. Prędkość, posuw i czas obróbki.</p>
+                        </div>
+                    </a>
+
+                    <!-- NOWY ELEMENT: Wizualizer CNC -->
+                    <a href="wizualizercnc.html"
+                        class="group relative bg-white dark:bg-gray-800 rounded-2xl p-1 border border-gray-200 dark:border-gray-700 card-hover-effect hover:-translate-y-2 hover:shadow-2xl hover:border-purple-400/50 dark:hover:border-purple-500/50 reveal">
+                        <div
+                            class="absolute -top-3 -right-3 bg-purple-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg transform -rotate-6 group-hover:rotate-0 transition-transform">
+                            BETA</div>
+                        <div
+                            class="h-full p-6 rounded-xl flex flex-col bg-gradient-to-b from-transparent to-gray-50 dark:to-gray-800/50">
+                            <div
+                                class="w-16 h-16 mb-6 rounded-2xl bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center text-purple-600 dark:text-purple-400 group-hover:scale-110 transition-transform duration-300">
+                                <!-- Ikona 3D/Cube -->
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5" />
+                                </svg>
+                            </div>
+                            <h3
+                                class="text-2xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
+                                Wizualizer G-Code</h3>
+                            <p class="text-gray-500 dark:text-gray-400 text-sm mb-4 flex-grow">Symulacja ścieżek
+                                narzędzia w 3D. Wklej swój kod i zobacz wynik w przeglądarce.</p>
+                        </div>
+                    </a>
+
+                    <!-- Element 3: Strona 1 -->
+                    <a href="projekt-strona-firmowa.html"
+                        class="group bg-white dark:bg-gray-800 rounded-2xl p-1 border border-gray-200 dark:border-gray-700 card-hover-effect hover:-translate-y-2 hover:shadow-2xl hover:border-blue-400/50 dark:hover:border-blue-500/50 reveal">
+                        <div
+                            class="h-full p-6 rounded-xl flex flex-col bg-gradient-to-b from-transparent to-gray-50 dark:to-gray-800/50">
+                            <div
+                                class="w-16 h-16 mb-6 rounded-2xl bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400 group-hover:scale-110 transition-transform duration-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                </svg>
+                            </div>
+                            <h3
+                                class="text-2xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                                Firma CNC - Projekt 1</h3>
+                            <p class="text-gray-500 dark:text-gray-400 text-sm mb-4 flex-grow">Przykład strony
+                                internetowej dla nowoczesnej firmy obróbczej, prezentującej park maszynowy.</p>
+                        </div>
+                    </a>
+
+                    <!-- Element 4: Strona 2 -->
+                    <a href="projekt-wizytowka.html"
+                        class="group bg-white dark:bg-gray-800 rounded-2xl p-1 border border-gray-200 dark:border-gray-700 card-hover-effect hover:-translate-y-2 hover:shadow-2xl hover:border-emerald-400/50 dark:hover:border-emerald-500/50 reveal">
+                        <div
+                            class="h-full p-6 rounded-xl flex flex-col bg-gradient-to-b from-transparent to-gray-50 dark:to-gray-800/50">
+                            <div
+                                class="w-16 h-16 mb-6 rounded-2xl bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center text-emerald-600 dark:text-emerald-400 group-hover:scale-110 transition-transform duration-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                                </svg>
+                            </div>
+                            <h3
+                                class="text-2xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
+                                Firma CNC - Projekt 2</h3>
+                            <p class="text-gray-500 dark:text-gray-400 text-sm mb-4 flex-grow">Koncepcja wizytówki
+                                online dla zakładu produkcyjnego. Minimalistyczny design.</p>
+                        </div>
+                    </a>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Kontakt -->
+        <section id="kontakt" class="py-20 border-t border-gray-200 dark:border-gray-800/60 backdrop-blur-sm">
+            <div class="container mx-auto px-6 max-w-3xl text-center">
+                <h2 class="text-xs font-bold mb-8 text-gray-400 uppercase tracking-[0.3em]">Kontakt</h2>
+
+                <div
+                    class="bg-white dark:bg-gray-800 rounded-3xl p-8 shadow-xl border border-gray-100 dark:border-gray-700 relative overflow-hidden group reveal">
+                    <div
+                        class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-orange-500">
+                    </div>
+
+                    <h3 class="text-2xl font-bold text-gray-800 dark:text-white mb-6">Rozpocznijmy współpracę</h3>
+
+                    <a href="mailto:blazej.kaczmar@gmail.com"
+                        class="block text-xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-400 hover:to-blue-300 break-all mb-8 transition-all transform hover:scale-105">
+                        blazej.kaczmar@gmail.com
+                    </a>
+
+                    <div class="flex justify-center gap-4">
+                        <a href="https://www.linkedin.com/in/blazej-kaczmar" target="_blank" rel="noopener noreferrer"
+                            class="flex items-center gap-3 px-6 py-3 bg-gray-50 dark:bg-gray-700/50 text-gray-700 dark:text-gray-200 rounded-xl hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-600 dark:hover:text-blue-400 transition-all border border-gray-200 dark:border-gray-600 hover:border-blue-300">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                            </svg>
+                            LinkedIn
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer
+        class="py-8 text-center text-gray-400 text-sm bg-gray-50 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800/50 relative z-10">
+        <div class="container mx-auto px-4">
+            <p>&copy; 2025 Błażej Kaczmar. Wszystkie prawa zastrzeżone.</p>
+            <p class="mt-2 text-xs opacity-50">Designed with Precision.</p>
+        </div>
+    </footer>
+
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('service-worker.js')
+                    .then(reg => console.log('SW registered!', reg))
+                    .catch(err => console.log('SW registration failed', err));
+            });
+        }
+    </script>
+
+
+    <!-- Skrypt obsługujący tryb ciemny -->
+    <!-- Skrypt Animacji -->
+    <script src="js/animations.js"></script>
+    <script>setTimeout(() => { document.querySelectorAll('.reveal').forEach(e => e.classList.add('active')) }, 1000)</script>
+    <script src="js/theme.js"></script>
+</body>
+
+</html>
