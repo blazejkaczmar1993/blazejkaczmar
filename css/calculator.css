@@ -1,0 +1,111 @@
+/* Dark scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #0f172a;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #334155;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #475569;
+}
+
+.tab-content {
+    display: none;
+    animation: fadeIn 0.2s ease-out;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.iso-badge {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    text-align: center;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 24px;
+    margin-right: 8px;
+}
+
+.iso-p {
+    background-color: #3b82f6;
+    color: white;
+}
+
+.iso-m {
+    background-color: #eab308;
+    color: black;
+}
+
+.iso-k {
+    background-color: #ef4444;
+    color: white;
+}
+
+.iso-n {
+    background-color: #22c55e;
+    color: black;
+}
+
+.iso-s {
+    background-color: #d97706;
+    color: white;
+}
+
+.iso-h {
+    background-color: #94a3b8;
+    color: black;
+}
+
+.tol-group-label {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    color: #64748b;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+    letter-spacing: 0.05em;
+}
+
+.tile-card {
+    transition: all 0.2s ease-in-out;
+}
+
+.tile-card:active {
+    transform: scale(0.98);
+}
+
+/* Tailwind @apply replacement */
+.shape-btn.active {
+    background-color: #9333ea;
+    /* bg-purple-600 */
+    color: white;
+    border-color: transparent;
+}

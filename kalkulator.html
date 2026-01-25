@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CNC Master v5.1 - Engineering</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0f172a">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="css/calculator.css">
+</head>
+
+<body class="bg-slate-950 text-slate-200 font-sans min-h-screen flex flex-col">
+
+    <!-- Minimal Header -->
+    <header
+        class="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 border-b border-slate-700 p-4 sticky top-0 z-50 shadow-xl">
+        <div class="container mx-auto max-w-7xl flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <a href="index.html"
+                    class="flex items-center gap-2 px-3 py-2 bg-slate-700/50 hover:bg-slate-600 rounded-lg text-sm text-slate-300 transition-colors border border-slate-600">
+                    <i class="fa-solid fa-arrow-left"></i> Wróć
+                </a>
+                <div class="h-8 w-px bg-slate-700 mx-2"></div>
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-calculator text-blue-500 text-2xl"></i>
+                    <h1
+                        class="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-cyan-300">
+                        CNC Master</h1>
+                </div>
+            </div> <i class="fa-solid fa-layer-group text-amber-500 text-lg"></i>
+        </div>
+        <div>
+            <h1 class="font-bold text-base leading-none text-white">CNC<span class="text-amber-500">Master</span></h1>
+            <span class="text-[10px] text-slate-500 font-mono">v5.1 Engineering</span>
+        </div>
+        </div>
+        </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="flex-grow container mx-auto px-4 py-6 max-w-6xl">
+
+            <!-- DASHBOARD -->
+            <div id="tab-dashboard" class="tab-content active">
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+
+                    <!-- Section: Technologia -->
+                    <div class="col-span-full flex items-center gap-2 pb-1 border-b border-slate-800 mb-1">
+                        <i class="fa-solid fa-microchip text-blue-500 text-sm"></i>
+                        <span class="text-[10px] font-bold uppercase text-slate-500 tracking-wider">Technologia i
+                            Parametry</span>
+                    </div>
+
+                    <div onclick="switchTab('tab-feeds')"
+                        class="tile-card bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-blue-500/50 rounded-xl p-4 cursor-pointer group relative overflow-hidden">
+                        <div class="w-8 h-8 bg-blue-900/20 rounded flex items-center justify-center mb-2 text-blue-400">
+                            <i class="fa-solid fa-gauge-high"></i></div>
+                        <h3 class="text-sm font-bold text-white">Parametry</h3>
+                        <p class="text-[10px] text-slate-400">RPM, F, Vc</p>
+                    </div>
+
+                    <div onclick="switchTab('tab-library')"
+                        class="tile-card bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-amber-500/50 rounded-xl p-4 cursor-pointer group relative overflow-hidden">
+                        <div
+                            class="w-8 h-8 bg-amber-900/20 rounded flex items-center justify-center mb-2 text-amber-400">
+                            <i class="fa-solid fa-database"></i></div>
+                        <h3 class="text-sm font-bold text-white">Baza Wiedzy</h3>
+                        <p class="text-[10px] text-slate-400">Porady i Materiały</p>
+                    </div>
+
+                    <div onclick="switchTab('tab-power')"
+                        class="tile-card bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-yellow-500/50 rounded-xl p-4 cursor-pointer group relative overflow-hidden">
+                        <div
+                            class="w-8 h-8 bg-yellow-900/20 rounded flex items-center justify-center mb-2 text-yellow-400">
+                            <i class="fa-solid fa-bolt"></i>
+                        </div>
+                        <h3 class="text-sm font-bold text-white">Moc i Moment</h3>
+                        <p class="text-[10px] text-slate-400">kW, Nm, Opory</p>
+                    </div>
+
+                    <div onclick="switchTab('tab-mrr')"
+                        class="tile-card bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-cyan-500/50 rounded-xl p-4 cursor-pointer group relative overflow-hidden">
+                        <div class="w-8 h-8 bg-cyan-900/20 rounded flex items-center justify-center mb-2 text-cyan-400">
+                            <i class="fa-solid fa-cubes"></i></div>
+                        <h3 class="text-sm font-bold text-white">MRR</h3>
+                        <p class="text-[10px] text-slate-400">Wydajność</p>
+                    </div>
+
+                    <!-- Section: Warsztat -->
+                    <div class="col-span-full flex items-center gap-2 pb-1 border-b border-slate-800 mb-1 mt-3">
+                        <i class="fa-solid fa-ruler-combined text-red-500 text-sm"></i>
+                        <span class="text-[10px] font-bold uppercase text-slate-500 tracking-wider">Warsztat i
+                            Geometria</span>
+                    </div>
+
+                    <div onclick="switchTab('tab-iso')"
+                        class="tile-card bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-red-500/50 rounded-xl p-4 cursor-pointer group relative overflow-hidden">
+                        <div class="w-8 h-8 bg-red-900/20 rounded flex items-center justify-center mb-2 text-red-400"><i
+                                class="fa-solid fa-ruler-combined"></i></div>
+                        <h3 class="text-sm font-bold text-white">Tolerancje</h3>
+                        <p class="text-[10px] text-slate-400">ISO 286 Rozszerzone</p>
+                    </div>
+
+                    <div onclick="switchTab('tab-trig')"
+                        class="tile-card bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-indigo-500/50 rounded-xl p-4 cursor-pointer group relative overflow-hidden">
+                        <div
+                            class="w-8 h-8 bg-indigo-900/20 rounded flex items-center justify-center mb-2 text-indigo-400">
+                            <i class="fa-solid fa-draw-polygon"></i>
+                        </div>
+                        <h3 class="text-sm font-bold text-white">Trygonometria</h3>
+                        <p class="text-[10px] text-slate-400">Fazy, Trójkąty</p>
+                    </div>
+
+                    <div onclick="switchTab('tab-geo')"
+                        class="tile-card bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-pink-500/50 rounded-xl p-4 cursor-pointer group relative overflow-hidden">
+                        <div class="w-8 h-8 bg-pink-900/20 rounded flex items-center justify-center mb-2 text-pink-400">
+                            <i class="fa-solid fa-compass-drafting"></i></div>
+                        <h3 class="text-sm font-bold text-white">Geometria Narzędzi</h3>
+                        <p class="text-[10px] text-slate-400">Stożki, Wiertła</p>
+                    </div>
+
+                    <div onclick="switchTab('tab-threads')"
+                        class="tile-card bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-green-500/50 rounded-xl p-4 cursor-pointer group relative overflow-hidden">
+                        <div
+                            class="w-8 h-8 bg-green-900/20 rounded flex items-center justify-center mb-2 text-green-400">
+                            <i class="fa-solid fa-hashtag"></i></div>
+                        <h3 class="text-sm font-bold text-white">Gwinty</h3>
+                        <p class="text-[10px] text-slate-400">G84, Wiertła</p>
+                    </div>
+
+                    <!-- Section: Inne -->
+                    <div class="col-span-full flex items-center gap-2 pb-1 border-b border-slate-800 mb-1 mt-3">
+                        <i class="fa-solid fa-toolbox text-slate-500 text-sm"></i>
+                        <span class="text-[10px] font-bold uppercase text-slate-500 tracking-wider">Narzędzia
+                            Pomocnicze</span>
+                    </div>
+
+                    <div onclick="switchTab('tab-screws')"
+                        class="tile-card bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-orange-500/50 rounded-xl p-4 cursor-pointer group relative overflow-hidden">
+                        <div
+                            class="w-8 h-8 bg-orange-900/20 rounded flex items-center justify-center mb-2 text-orange-400">
+                            <i class="fa-solid fa-screwdriver-wrench"></i>
+                        </div>
+                        <h3 class="text-sm font-bold text-white">Śruby DIN 912</h3>
+                        <p class="text-[10px] text-slate-400">Wymiary łbów</p>
+                    </div>
+
+                    <div onclick="switchTab('tab-weight')"
+                        class="tile-card bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-purple-500/50 rounded-xl p-4 cursor-pointer group relative overflow-hidden">
+                        <div
+                            class="w-8 h-8 bg-purple-900/20 rounded flex items-center justify-center mb-2 text-purple-400">
+                            <i class="fa-solid fa-weight-hanging"></i>
+                        </div>
+                        <h3 class="text-sm font-bold text-white">Masa</h3>
+                        <p class="text-[10px] text-slate-400">Kalkulator Wagi</p>
+                    </div>
+
+                    <div onclick="switchTab('tab-conv')"
+                        class="tile-card bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-teal-500/50 rounded-xl p-4 cursor-pointer group relative overflow-hidden">
+                        <div class="w-8 h-8 bg-teal-900/20 rounded flex items-center justify-center mb-2 text-teal-400">
+                            <i class="fa-solid fa-right-left"></i></div>
+                        <h3 class="text-sm font-bold text-white">Konwerter</h3>
+                        <p class="text-[10px] text-slate-400">Jednostki CNC</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TOOL: Feeds -->
+            <div id="tab-feeds" class="tab-content">
+                <div class="mb-4"><button onclick="switchTab('tab-dashboard')"
+                        class="text-slate-400 hover:text-white text-sm flex items-center"><i
+                            class="fa-solid fa-arrow-left mr-2"></i> Wróć do pulpitu</button></div>
+                <div class="bg-slate-900 rounded-xl shadow-lg border border-slate-800 p-6">
+                    <h2 class="text-xl font-bold text-white mb-6 border-b border-slate-800 pb-4 text-blue-500"><i
+                            class="fa-solid fa-gauge-high mr-2"></i> Parametry Skrawania</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="space-y-5">
+                            <div><label class="text-xs text-slate-400 uppercase font-bold ml-1">Średnica
+                                    (D)</label><input type="number" id="sf-d"
+                                    class="w-full bg-slate-950 border border-slate-700 rounded-lg p-3 text-white focus:border-blue-500 outline-none"
+                                    placeholder="12"></div>
+                            <div><label class="text-xs text-slate-400 uppercase font-bold ml-1">Vc [m/min]</label><input
+                                    type="number" id="sf-vc"
+                                    class="w-full bg-slate-950 border border-slate-700 rounded-lg p-3 text-white focus:border-blue-500 outline-none"
+                                    placeholder="80"></div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div><label class="text-xs text-slate-400 uppercase font-bold ml-1">Zęby
+                                        (Z)</label><input type="number" id="sf-z"
+                                        class="w-full bg-slate-950 border border-slate-700 rounded-lg p-3 text-white focus:border-blue-500 outline-none"
+                                        placeholder="4"></div>
+                                <div><label class="text-xs text-slate-400 uppercase font-bold ml-1">fz
+                                        [mm]</label><input type="number" id="sf-fz" step="0.01"
+                                        class="w-full bg-slate-950 border border-slate-700 rounded-lg p-3 text-white focus:border-blue-500 outline-none"
+                                        placeholder="0.05"></div>
+                            </div>
+                            <button onclick="calculateSF()"
+                                class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 rounded-lg shadow-lg transition">OBLICZ</button>
+                        </div>
+                        <div
+                            class="bg-slate-800 rounded-xl border border-slate-700 p-6 flex flex-col justify-center space-y-6">
+                            <div class="flex justify-between items-center border-b border-slate-700 pb-2"><span
+                                    class="text-slate-400 text-sm">Obroty (S)</span>
+                                <div class="text-right"><span class="text-3xl font-mono font-bold text-white"
+                                        id="res-rpm">0</span> <span class="text-xs text-slate-500">RPM</span></div>
+                            </div>
+                            <div class="flex justify-between items-center border-b border-slate-700 pb-2"><span
+                                    class="text-slate-400 text-sm">Posuw (F)</span>
+                                <div class="text-right"><span class="text-3xl font-mono font-bold text-green-400"
+                                        id="res-feed">0</span> <span class="text-xs text-slate-500">mm/min</span></div>
+                            </div>
+                            <div class="flex justify-between items-center"><span class="text-slate-400 text-sm">Posuw na
+                                    obrót</span>
+                                <div class="text-right"><span class="text-xl font-mono font-bold text-blue-400"
+                                        id="res-fn">0.00</span> <span class="text-xs text-slate-500">mm/obr</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TOOL: Library -->
+            <div id="tab-library" class="tab-content">
+                <div class="mb-4"><button onclick="switchTab('tab-dashboard')"
+                        class="text-slate-400 hover:text-white text-sm flex items-center"><i
+                            class="fa-solid fa-arrow-left mr-2"></i> Wróć do pulpitu</button></div>
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <div class="lg:col-span-1 bg-slate-900 p-6 rounded-xl border border-slate-800">
+                        <h2 class="text-xl font-bold text-amber-500 mb-4">Materiał</h2>
+                        <label class="block text-xs text-slate-400 mb-2">Wybierz grupę materiałową</label>
+                        <select id="lib-mat" onchange="updateLibrary()"
+                            class="w-full bg-slate-950 border border-slate-700 rounded-lg p-3 text-white mb-6 focus:border-amber-500 outline-none">
+                            <option value="P">ISO P - Stal (Niestopowa / Niskowęglowa)</option>
+                            <option value="M">ISO M - Stal Nierdzewna (INOX)</option>
+                            <option value="K">ISO K - Żeliwo</option>
+                            <option value="N">ISO N - Aluminium / Metale Kolorowe</option>
+                            <option value="S">ISO S - Superstopy / Tytan</option>
+                            <option value="H">ISO H - Materiały Hartowane</option>
+                        </select>
+
+                        <div class="bg-slate-800/50 p-4 rounded border border-slate-700">
+                            <h3 class="text-sm font-bold text-white mb-2">Szybkie Parametry (Vc)</h3>
+                            <div class="flex justify-between items-center text-sm mb-1"><span
+                                    class="text-slate-400">HSS:</span> <span id="lib-vc-hss"
+                                    class="text-white font-mono">-</span></div>
+                            <div class="flex justify-between items-center text-sm mb-1"><span
+                                    class="text-slate-400">HSS-Co:</span> <span id="lib-vc-hssco"
+                                    class="text-white font-mono">-</span></div>
+                            <div class="flex justify-between items-center text-sm"><span
+                                    class="text-slate-400">VHM:</span>
+                                <span id="lib-vc-vhm" class="text-white font-mono font-bold text-amber-400">-</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div
+                        class="lg:col-span-2 bg-slate-900 p-6 rounded-xl border border-slate-800 relative overflow-hidden">
+                        <div id="lib-badge" class="absolute top-6 right-6 iso-badge iso-p text-sm w-8 h-8 leading-8">P
+                        </div>
+                        <h2 class="text-xl font-bold text-white mb-2" id="lib-name">Stal</h2>
+                        <p class="text-slate-400 text-sm mb-6 italic" id="lib-desc">Opis...</p>
+
+                        <div class="bg-slate-950/50 rounded-lg p-5 border border-slate-800">
+                            <h3 class="text-sm font-bold text-amber-500 mb-3 uppercase tracking-wide"><i
+                                    class="fa-solid fa-lightbulb mr-2"></i>Porady Technologiczne</h3>
+                            <ul class="space-y-3 text-sm text-slate-300" id="lib-tips">
+                                <!-- JS will populate this -->
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TOOL: Power & Torque -->
+            <div id="tab-power" class="tab-content">
+                <div class="mb-4"><button onclick="switchTab('tab-dashboard')"
+                        class="text-slate-400 hover:text-white text-sm flex items-center"><i
+                            class="fa-solid fa-arrow-left mr-2"></i> Wróć do pulpitu</button></div>
+                <div class="bg-slate-900 rounded-xl shadow-lg border border-slate-800 p-6">
+                    <h2 class="text-xl font-bold text-white mb-6 border-b border-slate-800 pb-4 text-yellow-500">
+                        <i class="fa-solid fa-bolt mr-2"></i> Moc i Moment Obrotowy
+                    </h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="space-y-4">
+                            <div>
+                                <label class="text-xs text-slate-400 block mb-1">Materiał (określa opór kc1.1)</label>
+                                <select id="power-mat"
+                                    class="w-full bg-slate-950 border border-slate-700 rounded p-2 text-white">
+                                    <option value="2000">Stal (~2000 N/mm²)</option>
+                                    <option value="2400">Nierdzewka (~2400 N/mm²)</option>
+                                    <option value="1300">Żeliwo (~1300 N/mm²)</option>
+                                    <option value="800">Aluminium (~800 N/mm²)</option>
+                                    <option value="3000">Tytan (~3000 N/mm²)</option>
+                                </select>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div><label class="text-xs text-slate-400 block mb-1">ap [mm] (głębokość)</label><input
+                                        type="number" id="p-ap"
+                                        class="w-full bg-slate-950 border border-slate-700 rounded p-2 text-white">
+                                </div>
+                                <div><label class="text-xs text-slate-400 block mb-1">ae [mm] (szerokość)</label><input
+                                        type="number" id="p-ae"
+                                        class="w-full bg-slate-950 border border-slate-700 rounded p-2 text-white">
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div><label class="text-xs text-slate-400 block mb-1">Posuw F [mm/min]</label><input
+                                        type="number" id="p-f"
+                                        class="w-full bg-slate-950 border border-slate-700 rounded p-2 text-white">
+                                </div>
+                                <div><label class="text-xs text-slate-400 block mb-1">Obroty S [obr/min]</label><input
+                                        type="number" id="p-s"
+                                        class="w-full bg-slate-950 border border-slate-700 rounded p-2 text-white">
+                                </div>
+                            </div>
+                            <button onclick="calculatePower()"
+                                class="w-full bg-yellow-600 hover:bg-yellow-500 text-black font-bold py-2 rounded mt-2">Oblicz</button>
+                        </div>
+
+                        <div
+                            class="bg-slate-800 rounded-xl p-6 border border-slate-700 flex flex-col justify-center space-y-6">
+                            <div class="text-center">
+                                <span class="text-slate-400 text-xs uppercase tracking-widest">Moc Skrawania (Pc)</span>
+                                <div class="flex items-baseline justify-center gap-2 mt-1">
+                                    <span id="res-power" class="text-4xl font-mono font-bold text-white">0.0</span>
+                                    <span class="text-yellow-500 font-bold">kW</span>
+                                </div>
+                            </div>
+                            <div class="text-center border-t border-slate-700 pt-4">
+                                <span class="text-slate-400 text-xs uppercase tracking-widest">Moment Obrotowy
+                                    (Mc)</span>
+                                <div class="flex items-baseline justify-center gap-2 mt-1">
+                                    <span id="res-torque" class="text-3xl font-mono font-bold text-white">0.0</span>
+                                    <span class="text-yellow-500 font-bold">Nm</span>
+                                </div>
+                                <p class="text-[10px] text-slate-500 mt-2">*Szacunek dla sprawności 80%</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TOOL: MRR -->
+            <div id="tab-mrr" class="tab-content">
+                <div class="mb-4"><button onclick="switchTab('tab-dashboard')"
+                        class="text-slate-400 hover:text-white text-sm flex items-center"><i
+                            class="fa-solid fa-arrow-left mr-2"></i> Wróć do pulpitu</button></div>
+                <div class="bg-slate-900 rounded-xl shadow-lg border border-slate-800 p-6">
+                    <h2 class="text-xl font-bold text-white mb-6 border-b border-slate-800 pb-4 text-cyan-500">
+                        <i class="fa-solid fa-cubes mr-2"></i> MRR (Wydajność Usuwania)
+                    </h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="md:col-span-1 space-y-4">
+                            <div><label class="text-xs text-slate-400 block mb-1">Głębokość (Ap) [mm]</label><input
+                                    type="number" id="mrr-ap"
+                                    class="w-full bg-slate-950 border border-slate-700 rounded p-2 text-white"></div>
+                            <div><label class="text-xs text-slate-400 block mb-1">Szerokość (Ae) [mm]</label><input
+                                    type="number" id="mrr-ae"
+                                    class="w-full bg-slate-950 border border-slate-700 rounded p-2 text-white"></div>
+                            <div><label class="text-xs text-slate-400 block mb-1">Posuw (F) [mm/min]</label><input
+                                    type="number" id="mrr-f"
+                                    class="w-full bg-slate-950 border border-slate-700 rounded p-2 text-white"></div>
+                            <button onclick="calculateMRR()"
+                                class="w-full bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-2 rounded transition">Oblicz
+                                MRR</button>
+                        </div>
+                        <div
+                            class="md:col-span-2 bg-slate-800 rounded-xl flex flex-col items-center justify-center p-8 border border-slate-700">
+                            <i class="fa-solid fa-trash-can text-slate-600 text-4xl mb-4"></i>
+                            <div class="text-5xl font-bold text-white font-mono mb-2" id="res-mrr">0.0</div>
+                            <div class="text-slate-400">cm³ / min</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TOOL: ISO Tolerances -->
+            <div id="tab-iso" class="tab-content">
+                <div class="mb-4"><button onclick="switchTab('tab-dashboard')"
+                        class="text-slate-400 hover:text-white text-sm flex items-center"><i
+                            class="fa-solid fa-arrow-left mr-2"></i> Wróć do pulpitu</button></div>
+                <div class="bg-slate-900 rounded-xl shadow-lg border border-slate-800 p-6">
+                    <h2 class="text-xl font-bold text-white mb-6 border-b border-slate-800 pb-4 text-red-500">
+                        <i class="fa-solid fa-ruler-combined mr-2"></i> Tolerancje ISO 286
+                    </h2>
+                    <div class="mb-4 bg-slate-800 p-4 rounded-lg border border-slate-700">
+                        <div class="w-full">
+                            <label class="block text-xs text-slate-400 mb-1 uppercase font-bold">Wymiar nominalny
+                                [mm]</label>
+                            <input type="number" id="iso-dim" oninput="calculateISO()"
+                                class="w-full bg-slate-950 border border-slate-600 rounded p-2 text-white"
+                                placeholder="np. 25">
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                        <div class="bg-slate-800/50 p-4 rounded border border-slate-700">
+                            <h3 class="text-sm font-bold text-slate-200 mb-4 uppercase border-b border-slate-700 pb-2">
+                                Otwory (Holes)</h3>
+                            <div class="space-y-4">
+                                <div>
+                                    <div class="tol-group-label">Podstawowe</div>
+                                    <div class="grid grid-cols-6 gap-2">
+                                        <button onclick="setTol('H6', 'hole', this)"
+                                            class="tol-btn bg-slate-700 text-white py-1 rounded text-xs border border-slate-600">H6</button>
+                                        <button onclick="setTol('H7', 'hole', this)"
+                                            class="tol-btn bg-slate-700 text-white py-1 rounded text-xs border border-slate-600">H7</button>
+                                        <button onclick="setTol('H8', 'hole', this)"
+                                            class="tol-btn bg-slate-700 text-white py-1 rounded text-xs border border-slate-600">H8</button>
+                                        <button onclick="setTol('H9', 'hole', this)"
+                                            class="tol-btn bg-slate-700 text-white py-1 rounded text-xs border border-slate-600">H9</button>
+                                        <button onclick="setTol('H11', 'hole', this)"
+                                            class="tol-btn bg-slate-700 text-white py-1 rounded text-xs border border-slate-600">H11</button>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="tol-group-label">Mieszane</div>
+                                    <div class="grid grid-cols-6 gap-2">
+                                        <button onclick="setTol('N9', 'hole', this)"
+                                            class="tol-btn bg-red-900/40 text-white py-1 rounded text-xs border border-slate-600">N9</button>
+                                        <button onclick="setTol('P9', 'hole', this)"
+                                            class="tol-btn bg-red-900/40 text-white py-1 rounded text-xs border border-slate-600">P9</button>
+                                        <button onclick="setTol('JS7', 'hole', this)"
+                                            class="tol-btn bg-slate-700 text-white py-1 rounded text-xs border border-slate-600">JS7</button>
+                                        <button onclick="setTol('K7', 'hole', this)"
+                                            class="tol-btn bg-red-900/40 text-white py-1 rounded text-xs border border-slate-600">K7</button>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="tol-group-label">Luźne</div>
+                                    <div class="grid grid-cols-6 gap-2">
+                                        <button onclick="setTol('D10', 'hole', this)"
+                                            class="tol-btn bg-slate-700 text-white py-1 rounded text-xs border border-slate-600">D10</button>
+                                        <button onclick="setTol('E9', 'hole', this)"
+                                            class="tol-btn bg-slate-700 text-white py-1 rounded text-xs border border-slate-600">E9</button>
+                                        <button onclick="setTol('F8', 'hole', this)"
+                                            class="tol-btn bg-slate-700 text-white py-1 rounded text-xs border border-slate-600">F8</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-slate-800/50 p-4 rounded border border-slate-700">
+                            <h3 class="text-sm font-bold text-slate-200 mb-4 uppercase border-b border-slate-700 pb-2">
+                                Wałki
+                                (Shafts)</h3>
+                            <div class="space-y-4">
+                                <div>
+                                    <div class="tol-group-label">Podstawowe</div>
+                                    <div class="grid grid-cols-6 gap-2">
+                                        <button onclick="setTol('h5', 'shaft', this)"
+                                            class="tol-btn bg-slate-700 text-white py-1 rounded text-xs border border-slate-600">h5</button>
+                                        <button onclick="setTol('h6', 'shaft', this)"
+                                            class="tol-btn bg-slate-700 text-white py-1 rounded text-xs border border-slate-600">h6</button>
+                                        <button onclick="setTol('h7', 'shaft', this)"
+                                            class="tol-btn bg-slate-700 text-white py-1 rounded text-xs border border-slate-600">h7</button>
+                                        <button onclick="setTol('g5', 'shaft', this)"
+                                            class="tol-btn bg-slate-700 text-white py-1 rounded text-xs border border-slate-600">g5</button>
+                                        <button onclick="setTol('g6', 'shaft', this)"
+                                            class="tol-btn bg-slate-700 text-white py-1 rounded text-xs border border-slate-600">g6</button>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="tol-group-label">Wcisk</div>
+                                    <div class="grid grid-cols-6 gap-2">
+                                        <button onclick="setTol('k6', 'shaft', this)"
+                                            class="tol-btn bg-red-900/40 text-white py-1 rounded text-xs border border-slate-600">k6</button>
+                                        <button onclick="setTol('m6', 'shaft', this)"
+                                            class="tol-btn bg-red-900/40 text-white py-1 rounded text-xs border border-slate-600">m6</button>
+                                        <button onclick="setTol('n6', 'shaft', this)"
+                                            class="tol-btn bg-red-900/40 text-white py-1 rounded text-xs border border-slate-600">n6</button>
+                                        <button onclick="setTol('p6', 'shaft', this)"
+                                            class="tol-btn bg-red-900/40 text-white py-1 rounded text-xs border border-slate-600">p6</button>
+                                        <button onclick="setTol('r6', 'shaft', this)"
+                                            class="tol-btn bg-red-900/40 text-white py-1 rounded text-xs border border-slate-600">r6</button>
+                                        <button onclick="setTol('s6', 'shaft', this)"
+                                            class="tol-btn bg-red-900/40 text-white py-1 rounded text-xs border border-slate-600">s6</button>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="tol-group-label">Inne</div>
+                                    <div class="grid grid-cols-6 gap-2">
+                                        <button onclick="setTol('js5', 'shaft', this)"
+                                            class="tol-btn bg-slate-700 text-white py-1 rounded text-xs border border-slate-600">js5</button>
+                                        <button onclick="setTol('js6', 'shaft', this)"
+                                            class="tol-btn bg-slate-700 text-white py-1 rounded text-xs border border-slate-600">js6</button>
+                                        <button onclick="setTol('f7', 'shaft', this)"
+                                            class="tol-btn bg-slate-700 text-white py-1 rounded text-xs border border-slate-600">f7</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="hidden" id="selected-tol" value=""><input type="hidden" id="selected-type" value="">
+                    <div id="iso-results-panel" class="mt-6 bg-slate-800 p-6 rounded-lg border border-slate-700 hidden">
+                        <div class="flex justify-between items-start mb-6">
+                            <div><span class="text-sm text-slate-500 block">Klasa</span><span id="iso-class-display"
+                                    class="text-4xl font-bold text-white">-</span></div>
+                            <div class="text-right"><span class="text-sm text-slate-500 block">Zakres</span><span
+                                    id="iso-range-display" class="text-slate-300 font-mono text-sm">-</span></div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4 text-center mb-6">
+                            <div class="bg-slate-900 p-3 rounded border border-green-900/30"><span
+                                    class="text-xs text-slate-500 block">Górna (ES/es)</span><span id="iso-upper"
+                                    class="text-2xl font-mono font-bold text-green-400"></span></div>
+                            <div class="bg-slate-900 p-3 rounded border border-red-900/30"><span
+                                    class="text-xs text-slate-500 block">Dolna (EI/ei)</span><span id="iso-lower"
+                                    class="text-2xl font-mono font-bold text-red-400"></span></div>
+                        </div>
+                        <div class="flex justify-between text-sm border-t border-slate-700 pt-4"><span
+                                class="text-slate-400">Max: <strong id="iso-max-dim"
+                                    class="text-white"></strong></span><span class="text-slate-400">Min: <strong
+                                    id="iso-min-dim" class="text-white"></strong></span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TOOL: Trigonometry (Fixed & Enhanced) -->
+            <div id="tab-trig" class="tab-content">
+                <div class="mb-4"><button onclick="switchTab('tab-dashboard')"
+                        class="text-slate-400 hover:text-white text-sm flex items-center"><i
+                            class="fa-solid fa-arrow-left mr-2"></i> Wróć do pulpitu</button></div>
+                <div class="bg-slate-900 rounded-xl shadow-lg border border-slate-800 p-6">
+                    <h2 class="text-xl font-bold text-white mb-6 border-b border-slate-800 pb-4 text-indigo-500">
+                        <i class="fa-solid fa-draw-polygon mr-2"></i> Trygonometria CNC
+                    </h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <!-- Chamfer Calc (Manual Comp) -->
+                        <div class="bg-slate-800 p-5 rounded-lg border border-slate-700">
+                            <h3 class="text-white font-bold mb-4 flex items-center gap-2"><i
+                                    class="fa-solid fa-vector-square text-indigo-400"></i> Faza z promieniem (Bez G41)
+                            </h3>
+                            <p class="text-xs text-slate-400 mb-4">Oblicza o ile przesunąć ścieżkę narzędzia, aby faza
+                                wyszła poprawnie (uwzględniając promień płytki).</p>
+
+                            <div class="grid grid-cols-2 gap-3 mb-4">
+                                <div>
+                                    <label class="text-[10px] text-slate-400 uppercase font-bold">Rozmiar Fazy
+                                        (C)</label>
+                                    <input type="number" id="trig-c"
+                                        class="w-full bg-slate-950 border border-slate-700 rounded px-3 py-2 text-white text-sm"
+                                        placeholder="np. 1.0">
+                                </div>
+                                <div>
+                                    <label class="text-[10px] text-slate-400 uppercase font-bold">Kąt</label>
+                                    <input type="number" id="trig-a"
+                                        class="w-full bg-slate-950 border border-slate-700 rounded px-3 py-2 text-white text-sm"
+                                        value="45">
+                                </div>
+                                <div class="col-span-2">
+                                    <label
+                                        class="text-[10px] text-slate-400 uppercase font-bold text-indigo-300">Promień
+                                        Narzędzia (R)</label>
+                                    <input type="number" id="trig-r"
+                                        class="w-full bg-slate-950 border border-indigo-900/50 rounded px-3 py-2 text-white text-sm focus:border-indigo-500"
+                                        placeholder="np. 0.4">
+                                </div>
+                            </div>
+                            <button onclick="calcChamferCoords()"
+                                class="w-full bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-bold py-2 rounded mb-4">Oblicz
+                                Korekty</button>
+
+                            <div class="bg-slate-900 p-4 rounded text-center border border-slate-800">
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div>
+                                        <div class="text-[10px] text-slate-500 uppercase">Start (Z)</div>
+                                        <div class="text-lg font-mono font-bold text-white" id="res-chamfer-z">0.000
+                                        </div>
+                                        <div class="text-[9px] text-slate-600">mm wcześniej</div>
+                                    </div>
+                                    <div>
+                                        <div class="text-[10px] text-slate-500 uppercase">Koniec (X)</div>
+                                        <div class="text-lg font-mono font-bold text-white" id="res-chamfer-x">0.000
+                                        </div>
+                                        <div class="text-[9px] text-slate-600">mm dalej</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right Triangle -->
+                        <div class="bg-slate-800 p-5 rounded-lg border border-slate-700">
+                            <h3 class="text-white font-bold mb-4 flex items-center gap-2"><i
+                                    class="fa-solid fa-ruler-triangle text-indigo-400"></i> Trójkąt Prostokątny</h3>
+                            <div class="space-y-3">
+                                <div class="flex gap-2 items-center">
+                                    <span class="text-xs font-bold w-6 text-indigo-400">a:</span>
+                                    <input type="number" id="tri-a"
+                                        class="w-full bg-slate-950 border border-slate-700 rounded px-3 py-2 text-white text-sm"
+                                        placeholder="Przyprost.">
+                                </div>
+                                <div class="flex gap-2 items-center">
+                                    <span class="text-xs font-bold w-6 text-indigo-400">b:</span>
+                                    <input type="number" id="tri-b"
+                                        class="w-full bg-slate-950 border border-slate-700 rounded px-3 py-2 text-white text-sm"
+                                        placeholder="Przyprost.">
+                                </div>
+                                <div class="flex gap-2 items-center">
+                                    <span class="text-xs font-bold w-6 text-white">c:</span>
+                                    <input type="number" id="tri-c"
+                                        class="w-full bg-slate-950 border border-slate-700 rounded px-3 py-2 text-white text-sm"
+                                        placeholder="Przeciwprost.">
+                                </div>
+                                <button onclick="solveTriangle()"
+                                    class="w-full bg-slate-700 hover:bg-slate-600 text-white text-sm font-bold py-2 rounded mt-2">Oblicz
+                                    brakujący bok</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TOOL: Geometry (Updated) -->
+            <div id="tab-geo" class="tab-content">
+                <div class="mb-4"><button onclick="switchTab('tab-dashboard')"
+                        class="text-slate-400 text-sm flex items-center"><i class="fa-solid fa-arrow-left mr-2"></i>
+                        Wróć do
+                        pulpitu</button></div>
+                <div class="bg-slate-900 rounded-xl p-6 border border-slate-800">
+                    <h2 class="text-xl font-bold text-pink-500 mb-4"><i class="fa-solid fa-compass-drafting mr-2"></i>
+                        Geometria</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-slate-800 p-5 rounded border border-slate-700">
+                            <h3 class="text-white font-bold mb-3">Stożek Wiertła</h3>
+                            <input type="number" id="geo-drill-d" oninput="calcDrillTip()" placeholder="Średnica D [mm]"
+                                class="w-full bg-slate-950 p-2 border border-slate-700 rounded mb-2 text-white">
+                            <select id="geo-drill-angle" onchange="calcDrillTip()"
+                                class="w-full bg-slate-950 p-2 mb-4 text-white border border-slate-700 rounded">
+                                <option value="90">90° (NC / Nawiertak)</option>
+                                <option value="118">118° (HSS Standard)</option>
+                                <option value="130">130° (VHM Uniwersalne)</option>
+                                <option value="135">135° (VHM / HSS-Co)</option>
+                                <option value="140">140° (VHM Wysokowydajne)</option>
+                            </select>
+                            <div class="text-right text-slate-400 text-sm">Długość czubka: <span id="geo-drill-res"
+                                    class="text-xl text-pink-400 font-bold font-mono ml-2">0.00</span> mm</div>
+                        </div>
+                        <div class="bg-slate-800 p-5 rounded border border-slate-700">
+                            <h3 class="text-white font-bold mb-3">Zjazd na Fazę 90°</h3>
+                            <input type="number" id="geo-chamfer-d" oninput="calcChamfer()"
+                                placeholder="Docelowa średnica fazy"
+                                class="w-full bg-slate-950 p-2 border border-slate-700 rounded mb-2 text-white">
+                            <input type="number" id="geo-chamfer-tip" oninput="calcChamfer()"
+                                placeholder="Średnica czubka (opcja)"
+                                class="w-full bg-slate-950 p-2 border border-slate-700 rounded mb-4 text-white">
+                            <div class="text-right text-slate-400 text-sm">Głębokość Z: <span id="geo-chamfer-res"
+                                    class="text-xl text-pink-400 font-bold font-mono ml-2">0.00</span> mm</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Threads (Updated) -->
+            <div id="tab-threads" class="tab-content">
+                <div class="mb-4"><button onclick="switchTab('tab-dashboard')"
+                        class="text-slate-400 text-sm flex items-center"><i class="fa-solid fa-arrow-left mr-2"></i>
+                        Wróć do
+                        pulpitu</button></div>
+                <div class="bg-slate-900 rounded-xl p-6 border border-slate-800">
+                    <h2 class="text-xl font-bold text-green-500 mb-4"><i class="fa-solid fa-hashtag mr-2"></i> Gwinty i
+                        G84
+                    </h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <label class="text-sm text-slate-400 mb-2 block">Wybór Gwintu</label>
+                            <select id="thread-select" onchange="updateThreadInfo()"
+                                class="w-full bg-slate-950 p-3 text-white border border-slate-700 rounded mb-4">
+                                <option value="0">-- Wybierz --</option>
+                                <option class="font-bold bg-slate-900" disabled>Standardowe</option>
+                                <option value="3:0.5">M3 (x0.5)</option>
+                                <option value="4:0.7">M4 (x0.7)</option>
+                                <option value="5:0.8">M5 (x0.8)</option>
+                                <option value="6:1.0">M6 (x1.0)</option>
+                                <option value="8:1.25">M8 (x1.25)</option>
+                                <option value="10:1.5">M10 (x1.5)</option>
+                                <option value="12:1.75">M12 (x1.75)</option>
+                                <option value="16:2.0">M16 (x2.0)</option>
+                                <option value="20:2.5">M20 (x2.5)</option>
+                                <option class="font-bold bg-slate-900" disabled>Drobnozwojne</option>
+                                <option value="8:1.0">M8 x 1.0</option>
+                                <option value="10:1.0">M10 x 1.0</option>
+                                <option value="10:1.25">M10 x 1.25</option>
+                                <option value="12:1.25">M12 x 1.25</option>
+                                <option value="12:1.5">M12 x 1.5</option>
+                                <option value="14:1.5">M14 x 1.5</option>
+                                <option value="16:1.5">M16 x 1.5</option>
+                                <option value="18:1.5">M18 x 1.5</option>
+                                <option value="20:1.5">M20 x 1.5</option>
+                            </select>
+                            <div
+                                class="bg-green-900/20 p-4 rounded border border-green-800 flex justify-between items-center">
+                                <span class="text-slate-300">Wiertło pod gwint:</span>
+                                <span id="th-drill" class="text-green-400 font-bold text-2xl font-mono">-</span>
+                            </div>
+                        </div>
+                        <div class="bg-slate-800 p-5 rounded border border-slate-700">
+                            <h3 class="text-white font-bold mb-3">Kalkulator G84 (Sztywne)</h3>
+                            <input type="number" id="tap-pitch" placeholder="Skok P [mm]"
+                                class="w-full bg-slate-950 p-2 text-white border border-slate-700 rounded mb-2">
+                            <input type="number" id="tap-rpm" placeholder="Obroty S [rpm]"
+                                class="w-full bg-slate-950 p-2 text-white border border-slate-700 rounded mb-2">
+                            <button onclick="calcTapping()"
+                                class="w-full bg-green-600 hover:bg-green-500 text-white font-bold py-2 rounded mt-2">Oblicz
+                                Posuw F</button>
+                            <div class="mt-4 text-center">
+                                <span class="text-xs text-slate-400 uppercase">Wymagany Posuw</span>
+                                <div id="tap-feed-res" class="text-3xl text-white font-mono font-bold mt-1">0</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Screws -->
+            <div id="tab-screws" class="tab-content">
+                <div class="mb-4"><button onclick="switchTab('tab-dashboard')"
+                        class="text-slate-400 text-sm flex items-center"><i class="fa-solid fa-arrow-left mr-2"></i>
+                        Wróć do
+                        pulpitu</button></div>
+                <div class="bg-slate-900 rounded-xl p-6 border border-slate-800">
+                    <h2 class="text-xl font-bold text-orange-500 mb-4"><i
+                            class="fa-solid fa-screwdriver-wrench mr-2"></i>
+                        Śruby Imbusowe DIN 912</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <label class="block text-sm text-slate-400 mb-2">Rozmiar Śruby</label>
+                            <select id="screw-select" onchange="updateScrewInfo()"
+                                class="w-full bg-slate-950 p-3 text-white border border-slate-700 rounded">
+                                <option value="0">-- Wybierz --</option>
+                                <option value="M3">M3</option>
+                                <option value="M4">M4</option>
+                                <option value="M5">M5</option>
+                                <option value="M6">M6</option>
+                                <option value="M8">M8</option>
+                                <option value="M10">M10</option>
+                                <option value="M12">M12</option>
+                                <option value="M16">M16</option>
+                                <option value="M20">M20</option>
+                            </select>
+                        </div>
+                        <div
+                            class="bg-slate-800 p-6 rounded border border-slate-700 grid grid-cols-2 gap-6 text-center">
+                            <div><span class="text-xs text-slate-500 uppercase block">Średnica Łba (dk)</span><span
+                                    id="sc-head-dia" class="text-2xl text-orange-400 font-bold">-</span></div>
+                            <div><span class="text-xs text-slate-500 uppercase block">Wysokość Łba (k)</span><span
+                                    id="sc-head-h" class="text-2xl text-orange-400 font-bold">-</span></div>
+                            <div class="col-span-2 pt-4 border-t border-slate-700">
+                                <span class="text-xs text-slate-500 uppercase block mb-1">Pogłębienie (C-Bore)</span>
+                                <div class="text-xl text-white font-mono"><span id="sc-cb-dia">-</span> mm <span
+                                        class="text-slate-500">x</span> <span id="sc-cb-depth">-</span> mm</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Weight -->
+            <div id="tab-weight" class="tab-content">
+                <div class="mb-4"><button onclick="switchTab('tab-dashboard')"
+                        class="text-slate-400 text-sm flex items-center"><i class="fa-solid fa-arrow-left mr-2"></i>
+                        Wróć do
+                        pulpitu</button></div>
+                <div class="bg-slate-900 rounded-xl p-6 border border-slate-800">
+                    <h2 class="text-xl font-bold text-purple-500 mb-4"><i class="fa-solid fa-weight-hanging mr-2"></i>
+                        Kalkulator Masy</h2>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <div class="space-y-4">
+                            <div>
+                                <label class="text-xs text-slate-400 block mb-1">Kształt</label>
+                                <div class="grid grid-cols-3 gap-2">
+                                    <button onclick="setShape('round')"
+                                        class="shape-btn active bg-purple-600 text-white py-2 rounded border border-transparent text-sm font-bold"
+                                        data-shape="round">Wałek</button>
+                                    <button onclick="setShape('rect')"
+                                        class="shape-btn bg-slate-800 text-slate-300 py-2 rounded border border-slate-600 text-sm font-bold"
+                                        data-shape="rect">Kostka</button>
+                                    <button onclick="setShape('tube')"
+                                        class="shape-btn bg-slate-800 text-slate-300 py-2 rounded border border-slate-600 text-sm font-bold"
+                                        data-shape="tube">Rura</button>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="text-xs text-slate-400 block mb-1">Materiał / Gęstość</label>
+                                <select id="weight-mat" onchange="updateDensity()"
+                                    class="w-full bg-slate-950 p-2 text-white border border-slate-700 rounded mb-2">
+                                    <option value="7.85">Stal (7.85)</option>
+                                    <option value="2.7">Aluminium (2.7)</option>
+                                    <option value="8.96">Miedź (8.96)</option>
+                                    <option value="8.5">Mosiądz (8.5)</option>
+                                    <option value="4.5">Tytan (4.5)</option>
+                                    <option value="1.2">Plastik (1.2)</option>
+                                    <option value="custom">Inny...</option>
+                                </select>
+                                <input type="number" id="weight-density" value="7.85"
+                                    class="w-full bg-slate-950 p-2 text-white border border-slate-700 rounded hidden"
+                                    placeholder="Własna gęstość">
+                            </div>
+
+                            <!-- Dynamic Inputs -->
+                            <div id="inputs-round" class="shape-inputs space-y-2">
+                                <input type="number" id="w-d" placeholder="Średnica D [mm]"
+                                    class="w-full bg-slate-950 p-2 text-white border border-slate-700 rounded">
+                                <input type="number" id="w-l-round" placeholder="Długość L [mm]"
+                                    class="w-full bg-slate-950 p-2 text-white border border-slate-700 rounded">
+                            </div>
+                            <div id="inputs-rect" class="shape-inputs hidden space-y-2">
+                                <div class="grid grid-cols-2 gap-2">
+                                    <input type="number" id="w-w" placeholder="Szerokość [mm]"
+                                        class="w-full bg-slate-950 p-2 text-white border border-slate-700 rounded">
+                                    <input type="number" id="w-h" placeholder="Wysokość [mm]"
+                                        class="w-full bg-slate-950 p-2 text-white border border-slate-700 rounded">
+                                </div>
+                                <input type="number" id="w-l-rect" placeholder="Długość L [mm]"
+                                    class="w-full bg-slate-950 p-2 text-white border border-slate-700 rounded">
+                            </div>
+                            <div id="inputs-tube" class="shape-inputs hidden space-y-2">
+                                <div class="grid grid-cols-2 gap-2">
+                                    <input type="number" id="w-od" placeholder="Średnica Zew. [mm]"
+                                        class="w-full bg-slate-950 p-2 text-white border border-slate-700 rounded">
+                                    <input type="number" id="w-wall" placeholder="Grubość ścianki [mm]"
+                                        class="w-full bg-slate-950 p-2 text-white border border-slate-700 rounded">
+                                </div>
+                                <input type="number" id="w-l-tube" placeholder="Długość L [mm]"
+                                    class="w-full bg-slate-950 p-2 text-white border border-slate-700 rounded">
+                            </div>
+
+                            <button onclick="calculateWeight()"
+                                class="w-full bg-purple-600 hover:bg-purple-500 text-white font-bold py-3 rounded shadow-lg mt-2">Oblicz
+                                Masę</button>
+                        </div>
+                        <div
+                            class="bg-slate-800 rounded-xl border border-slate-700 flex flex-col items-center justify-center">
+                            <div id="weight-res-kg" class="text-6xl text-white font-mono font-bold">0.00</div>
+                            <span class="text-purple-400 font-bold text-xl">kg</span>
+                            <div id="weight-res-g" class="text-slate-500 mt-2">0 g</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Converter -->
+            <div id="tab-conv" class="tab-content">
+                <div class="mb-4"><button onclick="switchTab('tab-dashboard')"
+                        class="text-slate-400 text-sm flex items-center"><i class="fa-solid fa-arrow-left mr-2"></i>
+                        Wróć do
+                        pulpitu</button></div>
+                <div class="bg-slate-900 rounded-xl p-6 border border-slate-800">
+                    <h2 class="text-xl font-bold text-teal-500 mb-4"><i class="fa-solid fa-right-left mr-2"></i>
+                        Konwerter
+                    </h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="bg-slate-800 p-6 rounded border border-slate-700">
+                            <h3 class="text-white font-bold mb-4">Długość</h3>
+                            <div class="flex items-center gap-2">
+                                <input type="number" id="conv-mm" oninput="convLength('mm')" placeholder="mm"
+                                    class="w-1/2 bg-slate-950 p-3 text-white border border-slate-700 rounded">
+                                <span class="text-slate-500">=</span>
+                                <input type="number" id="conv-inch" oninput="convLength('in')" placeholder="inch"
+                                    class="w-1/2 bg-slate-950 p-3 text-white border border-slate-700 rounded">
+                            </div>
+                        </div>
+                        <div class="bg-slate-800 p-6 rounded border border-slate-700">
+                            <h3 class="text-white font-bold mb-4">Prędkość</h3>
+                            <div class="flex items-center gap-2">
+                                <input type="number" id="conv-mmin" oninput="convSpeed('m')" placeholder="m/min"
+                                    class="w-1/2 bg-slate-950 p-3 text-white border border-slate-700 rounded">
+                                <span class="text-slate-500">=</span>
+                                <input type="number" id="conv-ftmin" oninput="convSpeed('ft')" placeholder="SFM"
+                                    class="w-1/2 bg-slate-950 p-3 text-white border border-slate-700 rounded">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+
+        <script src="js/calculator.js"></script>
+        <script>
+            if ('serviceWorker' in navigator) {
+                window.addEventListener('load', () => {
+                    navigator.serviceWorker.register('service-worker.js')
+                        .then(reg => console.log('SW registered!', reg))
+                        .catch(err => console.log('SW registration failed', err));
+                });
+            }
+        </script>
+</body>
+
+</html>
