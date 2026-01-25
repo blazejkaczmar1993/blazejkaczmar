@@ -12,12 +12,15 @@ const translations = {
         "card.site.desc": "Przykład strony internetowej dla nowoczesnej firmy obróbczej.",
         "card.card.title": "Firma CNC - Projekt 2",
         "card.card.desc": "Koncepcja wizytówki online. Minimalistyczny design.",
+        "card.mes.title": "System MES",
+        "card.mes.desc": "Autorski system zarządzania produkcją. Monitorowanie wydajności i procesów (YouTube).",
         "contact.section": "Kontakt",
         "contact.title": "Rozpocznijmy współpracę",
         "footer.rights": "Wszelkie prawa zastrzeżone.",
         "footer.design": "Designed with Precision.",
         "label.new": "NOWOŚĆ",
-        "label.beta": "BETA"
+        "label.beta": "BETA",
+        "label.video": "WIDEO"
     },
     en: {
         "hero.subtitle": "Precision Engineering. CNC Programming.<br><span class=\"font-medium text-gray-800 dark:text-gray-100\">Creating technical and digital solutions.</span>",
@@ -34,12 +37,15 @@ const translations = {
         "card.site.desc": "Example website for a modern manufacturing company.",
         "card.card.title": "CNC Company - Project 2",
         "card.card.desc": "Online business card concept. Minimalist design.",
+        "card.mes.title": "MES System",
+        "card.mes.desc": "Proprietary Manufacturing Execution System. Performance tracking & monitoring (YouTube).",
         "contact.section": "Contact",
         "contact.title": "Let's work together",
         "footer.rights": "All rights reserved.",
         "footer.design": "Designed with Precision.",
         "label.new": "NEW",
-        "label.beta": "BETA"
+        "label.beta": "BETA",
+        "label.video": "VIDEO"
     }
 };
 
