@@ -58,10 +58,23 @@
         </div>
     </div>
 
-    <!-- Przełącznik Motywu -->
-    <div class="fixed top-6 right-6 z-50">
+    <!-- Theme Toggle & Language -->
+    <div class="fixed top-6 right-6 z-50 flex items-center gap-3">
+        <!-- Lang Switcher -->
+        <div
+            class="flex gap-2 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-1.5 rounded-full shadow-lg border border-gray-200 dark:border-gray-700">
+            <button onclick="setLanguage('pl')"
+                class="lang-btn text-xs px-2 py-1 rounded hover:bg-gray-100 dark:hover:bg-gray-700 transition font-bold"
+                data-lang="pl">PL</button>
+            <div class="w-px bg-gray-300 dark:bg-gray-600"></div>
+            <button onclick="setLanguage('en')"
+                class="lang-btn text-xs px-2 py-1 rounded hover:bg-gray-100 dark:hover:bg-gray-700 transition"
+                data-lang="en">EN</button>
+        </div>
+
+        <!-- Theme Toggle -->
         <button id="theme-toggle"
-            class="p-3 rounded-xl bg-white/90 dark:bg-gray-800/90 backdrop-blur-md text-gray-600 dark:text-yellow-400 shadow-xl hover:scale-105 transition-transform border border-gray-200 dark:border-gray-700 ring-1 ring-gray-200 dark:ring-gray-700"
+            class="p-3 rounded-full bg-white/90 dark:bg-gray-800/90 backdrop-blur-md text-gray-600 dark:text-yellow-400 shadow-xl hover:scale-105 transition-transform border border-gray-200 dark:border-gray-700 ring-1 ring-gray-200 dark:ring-gray-700"
             aria-label="Zmień motyw">
             <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                 <path fill-rule="evenodd"
@@ -97,8 +110,8 @@
                     class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">Kaczmar</span>
             </h1>
 
-            <p
-                class="text-xl md:text-2xl text-gray-600 dark:text-gray-300 max-w-2xl leading-relaxed mb-10 font-light reveal">
+            <p class="text-xl md:text-2xl text-gray-600 dark:text-gray-300 max-w-2xl leading-relaxed mb-10 font-light reveal"
+                data-i18n="hero.subtitle">
                 Inżynieria precyzyjna. Programowanie CNC. <br>
                 <span class="font-medium text-gray-800 dark:text-gray-100">Tworzę rozwiązania techniczne i
                     cyfrowe.</span>
@@ -109,7 +122,7 @@
                     class="group relative px-8 py-3 bg-blue-600 text-white rounded-full font-semibold overflow-hidden shadow-lg shadow-blue-500/30 transition-all hover:scale-105">
                     <span
                         class="absolute w-0 h-0 transition-all duration-500 ease-out bg-white rounded-full group-hover:w-56 group-hover:h-56 opacity-10"></span>
-                    <span class="relative flex items-center justify-center gap-2">
+                    <span class="relative flex items-center justify-center gap-2" data-i18n="btn.projects">
                         Moje Projekty
                         <svg class="w-4 h-4 group-hover:translate-y-1 transition-transform" fill="none"
                             stroke="currentColor" viewBox="0 0 24 24">
@@ -119,7 +132,8 @@
                     </span>
                 </a>
                 <a href="#kontakt"
-                    class="px-8 py-3 bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm text-gray-700 dark:text-gray-200 border border-gray-300 dark:border-gray-600 rounded-full font-semibold hover:bg-white dark:hover:bg-gray-700 transition-all shadow-sm hover:shadow-md">
+                    class="px-8 py-3 bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm text-gray-700 dark:text-gray-200 border border-gray-300 dark:border-gray-600 rounded-full font-semibold hover:bg-white dark:hover:bg-gray-700 transition-all shadow-sm hover:shadow-md"
+                    data-i18n="btn.contact">
                     Kontakt
                 </a>
             </div>
@@ -131,7 +145,8 @@
 
                 <div class="flex items-center justify-center gap-4 mb-16 reveal">
                     <div class="h-px bg-gray-300 dark:bg-gray-700 w-12 md:w-32"></div>
-                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white text-center">Portfolio &
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white text-center"
+                        data-i18n="sec.portfolio">Portfolio &
                         Narzędzia</h2>
                     <div class="h-px bg-gray-300 dark:bg-gray-700 w-12 md:w-32"></div>
                 </div>
@@ -142,8 +157,8 @@
                     <!-- Element 1: Kalkulator HTML -->
                     <a href="kalkulator.html"
                         class="group relative bg-white dark:bg-gray-800 rounded-2xl p-1 border border-gray-200 dark:border-gray-700 card-hover-effect hover:-translate-y-2 hover:shadow-2xl hover:border-orange-400/50 dark:hover:border-orange-500/50 reveal">
-                        <div
-                            class="absolute -top-3 -right-3 bg-orange-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg transform rotate-12 group-hover:rotate-0 transition-transform">
+                        <div class="absolute -top-3 -right-3 bg-orange-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg transform rotate-12 group-hover:rotate-0 transition-transform"
+                            data-i18n="label.new">
                             NOWOŚĆ</div>
                         <div
                             class="h-full p-6 rounded-xl flex flex-col bg-gradient-to-b from-transparent to-gray-50 dark:to-gray-800/50">
@@ -156,10 +171,11 @@
                                         d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
                                 </svg>
                             </div>
-                            <h3
-                                class="text-2xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors">
+                            <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors"
+                                data-i18n="card.calc.title">
                                 Kalkulator CNC</h3>
-                            <p class="text-gray-500 dark:text-gray-400 text-sm mb-4 flex-grow">Narzędzie do obliczania
+                            <p class="text-gray-500 dark:text-gray-400 text-sm mb-4 flex-grow"
+                                data-i18n="card.calc.desc">Narzędzie do obliczania
                                 parametrów skrawania. Prędkość, posuw i czas obróbki.</p>
                         </div>
                     </a>
@@ -167,8 +183,8 @@
                     <!-- NOWY ELEMENT: Wizualizer CNC -->
                     <a href="wizualizercnc.html"
                         class="group relative bg-white dark:bg-gray-800 rounded-2xl p-1 border border-gray-200 dark:border-gray-700 card-hover-effect hover:-translate-y-2 hover:shadow-2xl hover:border-purple-400/50 dark:hover:border-purple-500/50 reveal">
-                        <div
-                            class="absolute -top-3 -right-3 bg-purple-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg transform -rotate-6 group-hover:rotate-0 transition-transform">
+                        <div class="absolute -top-3 -right-3 bg-purple-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg transform -rotate-6 group-hover:rotate-0 transition-transform"
+                            data-i18n="label.beta">
                             BETA</div>
                         <div
                             class="h-full p-6 rounded-xl flex flex-col bg-gradient-to-b from-transparent to-gray-50 dark:to-gray-800/50">
@@ -181,10 +197,11 @@
                                         d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5" />
                                 </svg>
                             </div>
-                            <h3
-                                class="text-2xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
+                            <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors"
+                                data-i18n="card.viz.title">
                                 Wizualizer G-Code</h3>
-                            <p class="text-gray-500 dark:text-gray-400 text-sm mb-4 flex-grow">Symulacja ścieżek
+                            <p class="text-gray-500 dark:text-gray-400 text-sm mb-4 flex-grow"
+                                data-i18n="card.viz.desc">Symulacja ścieżek
                                 narzędzia w 3D. Wklej swój kod i zobacz wynik w przeglądarce.</p>
                         </div>
                     </a>
@@ -204,10 +221,11 @@
                                         d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                                 </svg>
                             </div>
-                            <h3
-                                class="text-2xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                            <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors"
+                                data-i18n="card.site.title">
                                 Firma CNC - Projekt 1</h3>
-                            <p class="text-gray-500 dark:text-gray-400 text-sm mb-4 flex-grow">Przykład strony
+                            <p class="text-gray-500 dark:text-gray-400 text-sm mb-4 flex-grow"
+                                data-i18n="card.site.desc">Przykład strony
                                 internetowej dla nowoczesnej firmy obróbczej, prezentującej park maszynowy.</p>
                         </div>
                     </a>
@@ -225,10 +243,11 @@
                                         d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                                 </svg>
                             </div>
-                            <h3
-                                class="text-2xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
+                            <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors"
+                                data-i18n="card.card.title">
                                 Firma CNC - Projekt 2</h3>
-                            <p class="text-gray-500 dark:text-gray-400 text-sm mb-4 flex-grow">Koncepcja wizytówki
+                            <p class="text-gray-500 dark:text-gray-400 text-sm mb-4 flex-grow"
+                                data-i18n="card.card.desc">Koncepcja wizytówki
                                 online dla zakładu produkcyjnego. Minimalistyczny design.</p>
                         </div>
                     </a>
@@ -240,7 +259,8 @@
         <!-- Kontakt -->
         <section id="kontakt" class="py-20 border-t border-gray-200 dark:border-gray-800/60 backdrop-blur-sm">
             <div class="container mx-auto px-6 max-w-3xl text-center">
-                <h2 class="text-xs font-bold mb-8 text-gray-400 uppercase tracking-[0.3em]">Kontakt</h2>
+                <h2 class="text-xs font-bold mb-8 text-gray-400 uppercase tracking-[0.3em]" data-i18n="contact.section">
+                    Kontakt</h2>
 
                 <div
                     class="bg-white dark:bg-gray-800 rounded-3xl p-8 shadow-xl border border-gray-100 dark:border-gray-700 relative overflow-hidden group reveal">
@@ -248,7 +268,8 @@
                         class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-orange-500">
                     </div>
 
-                    <h3 class="text-2xl font-bold text-gray-800 dark:text-white mb-6">Rozpocznijmy współpracę</h3>
+                    <h3 class="text-2xl font-bold text-gray-800 dark:text-white mb-6" data-i18n="contact.title">
+                        Rozpocznijmy współpracę</h3>
 
                     <a href="mailto:blazej.kaczmar@gmail.com"
                         class="block text-xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-400 hover:to-blue-300 break-all mb-8 transition-all transform hover:scale-105">
@@ -273,8 +294,8 @@
     <footer
         class="py-8 text-center text-gray-400 text-sm bg-gray-50 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800/50 relative z-10">
         <div class="container mx-auto px-4">
-            <p>&copy; 2025 Błażej Kaczmar. Wszystkie prawa zastrzeżone.</p>
-            <p class="mt-2 text-xs opacity-50">Designed with Precision.</p>
+            <p>&copy; 2025 Błażej Kaczmar. <span data-i18n="footer.rights">Wszystkie prawa zastrzeżone.</span></p>
+            <p class="mt-2 text-xs opacity-50" data-i18n="footer.design">Designed with Precision.</p>
         </div>
     </footer>
 
@@ -295,6 +316,8 @@
     <script src="js/animations.js"></script>
     <script>setTimeout(() => { document.querySelectorAll('.reveal').forEach(e => e.classList.add('active')) }, 1000)</script>
     <script src="js/theme.js"></script>
+    <script src="js/i18n.js"></script>
+</body>
 </body>
 
 </html>
