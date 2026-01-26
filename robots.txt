@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://blazejkaczmar.pl/sitemap.xml
