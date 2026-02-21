@@ -1,43 +1,50 @@
 <!DOCTYPE html>
 <html lang="pl"> <!-- Domyślny motyw ciemny -->
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BK CNC - Precyzyjna Obróbka CNC Typu Szwajcarskiego</title>
 
-    
-    <meta name="description" content="BK CNC specjalizuje się w precyzyjnej obróbce skrawaniem CNC na automatach tokarskich typu szwajcarskiego. Oferujemy produkcję małych i złożonych detali z najwyższą dokładnością.">
-    <meta name="keywords" content="toczenie CNC, obróbka skrawaniem, automaty tokarskie, typ szwajcarski, precyzyjne detale, obróbka metali, CNC Warszawa, BK CNC">
+
+    <meta name="description"
+        content="BK CNC specjalizuje się w precyzyjnej obróbce skrawaniem CNC na automatach tokarskich typu szwajcarskiego. Oferujemy produkcję małych i złożonych detali z najwyższą dokładnością.">
+    <meta name="keywords"
+        content="toczenie CNC, obróbka skrawaniem, automaty tokarskie, typ szwajcarski, precyzyjne detale, obróbka metali, CNC Warszawa, BK CNC">
     <meta name="author" content="BK CNC">
-    
+
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.blazejkaczmar.pl/">
     <meta property="og:title" content="BK CNC - Precyzyjna Obróbka CNC Typu Szwajcarskiego">
-    <meta property="og:description" content="Specjalizacja w produkcji małych, złożonych detali na automatach szwajcarskich.">
+    <meta property="og:description"
+        content="Specjalizacja w produkcji małych, złożonych detali na automatach szwajcarskich.">
     <meta property="og:image" content="https://www.blazejkaczmar.pl/zawias-toczony-10-x-55-bez-logo.webp">
-    
+
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://www.blazejkaczmar.pl/">
     <meta property="twitter:title" content="BK CNC - Precyzyjna Obróbka CNC Typu Szwajcarskiego">
-    <meta property="twitter:description" content="Specjalizacja w produkcji małych, złożonych detali na automatach szwajcarskich.">
+    <meta property="twitter:description"
+        content="Specjalizacja w produkcji małych, złożonych detali na automatach szwajcarskich.">
     <meta property="twitter:image" content="https://www.blazejkaczmar.pl/zawias-toczony-10-x-55-bez-logo.webp">
 
-    <script src="https://cdn.tailwindcss.com"></script>
-    
+    <link rel="stylesheet" href="css/tailwind.css">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@700;800&family=Inter:wght@100..900&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@700;800&family=Inter:wght@100..900&display=swap"
+        rel="stylesheet">
+
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
 
     <style>
-        
         :root {
             /* Nowe kolory tła z pełnym kryciem */
-            --color-bg-secondary-rgb: 22, 27, 34; /* #161b22 */
-            --color-bg-mobile: #0d1117; /* Użyj pełnego krycia BG */
+            --color-bg-secondary-rgb: 22, 27, 34;
+            /* #161b22 */
+            --color-bg-mobile: #0d1117;
+            /* Użyj pełnego krycia BG */
             --color-bg: #0d1117;
             --color-bg-secondary: #161b22;
             --color-bg-card: #1f2937;
@@ -63,8 +70,10 @@
 
         html.light {
             /* Nowe kolory tła z pełnym kryciem */
-            --color-bg-secondary-rgb: 243, 244, 246; /* #f3f4f6 */
-            --color-bg-mobile: #f9fafb; /* Użyj pełnego krycia BG */
+            --color-bg-secondary-rgb: 243, 244, 246;
+            /* #f3f4f6 */
+            --color-bg-mobile: #f9fafb;
+            /* Użyj pełnego krycia BG */
             --color-bg: #f9fafb;
             --color-bg-secondary: #f3f4f6;
             --color-bg-card: #ffffff;
@@ -84,111 +93,252 @@
             --color-shadow-card: rgba(8, 145, 178, 0.1);
             --color-game-grid: rgba(55, 65, 81, 0.2);
             --color-text-warning: #dc2626;
-            --color-form-input-bg: var(--color-bg); 
+            --color-form-input-bg: var(--color-bg);
             --color-form-card-bg: var(--color-bg-secondary);
         }
 
-        
-        html { scroll-behavior: smooth; }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
-            background-color: var(--color-bg); 
-            color: var(--color-text-secondary); 
+            background-color: var(--color-bg);
+            color: var(--color-text-secondary);
             transition: color 0.3s ease;
         }
-        h1, h2 { font-family: 'Exo 2', sans-serif; color: var(--color-text-primary); }
-        h3 { font-family: 'Exo 2', sans-serif; color: var(--color-text-primary); }
-        .accent-color { color: var(--color-accent); }
-        .accent-bg { background-color: var(--color-accent); }
-        .shadow-metal { box-shadow: 0 4px 6px -1px var(--color-shadow-metal), 0 2px 4px -2px var(--color-shadow-metal); }
-        
-        .bg-secondary { background-color: var(--color-bg-secondary); }
-        .bg-card { background-color: var(--color-bg-card); }
-        .bg-card-alt { background-color: var(--color-bg-card-alt); }
-        .bg-footer { background-color: var(--color-bg-footer); }
-        .text-primary { color: var(--color-text-primary); }
-        .text-muted { color: var(--color-text-muted); }
-        .text-form { color: var(--color-text-form); }
-        .border-primary { border-color: var(--color-border-primary); }
-        .border-accent { border-color: var(--color-border-accent); }
-        .text-accent-dark { color: var(--color-accent-text-dark); }
-        .text-accent-light { color: var(--color-accent-text-light); }
-        .hover-accent:hover { background-color: var(--color-accent-hover); }
-        .timer-warning { color: var(--color-text-warning); }
-        
-        html.light .shadow-metal { box-shadow: 0 4px 6px -1px var(--color-shadow-metal), 0 2px 4px -2px var(--color-shadow-metal); }
-        html.light .nav-contact-button { color: var(--color-accent-text-dark); } 
-        html.light .cta-button, html.light .form-button { color: var(--color-accent-text-dark); } 
 
-        
-        .metal-pattern { 
+        h1,
+        h2 {
+            font-family: 'Exo 2', sans-serif;
+            color: var(--color-text-primary);
+        }
+
+        h3 {
+            font-family: 'Exo 2', sans-serif;
+            color: var(--color-text-primary);
+        }
+
+        .accent-color {
+            color: var(--color-accent);
+        }
+
+        .accent-bg {
+            background-color: var(--color-accent);
+        }
+
+        .shadow-metal {
+            box-shadow: 0 4px 6px -1px var(--color-shadow-metal), 0 2px 4px -2px var(--color-shadow-metal);
+        }
+
+        .bg-secondary {
             background-color: var(--color-bg-secondary);
         }
 
-        .img-placeholder { display: flex; align-items: center; justify-content: center; height: 400px; width: 100%; background-color: var(--color-bg-card); color: var(--color-accent); border: 2px solid var(--color-accent); border-radius: 0.5rem; font-size: 1.5rem; font-weight: 600; text-align: center; box-shadow: 0 0 40px var(--color-shadow-card); }
-        
+        .bg-card {
+            background-color: var(--color-bg-card);
+        }
+
+        .bg-card-alt {
+            background-color: var(--color-bg-card-alt);
+        }
+
+        .bg-footer {
+            background-color: var(--color-bg-footer);
+        }
+
+        .text-primary {
+            color: var(--color-text-primary);
+        }
+
+        .text-muted {
+            color: var(--color-text-muted);
+        }
+
+        .text-form {
+            color: var(--color-text-form);
+        }
+
+        .border-primary {
+            border-color: var(--color-border-primary);
+        }
+
+        .border-accent {
+            border-color: var(--color-border-accent);
+        }
+
+        .text-accent-dark {
+            color: var(--color-accent-text-dark);
+        }
+
+        .text-accent-light {
+            color: var(--color-accent-text-light);
+        }
+
+        .hover-accent:hover {
+            background-color: var(--color-accent-hover);
+        }
+
+        .timer-warning {
+            color: var(--color-text-warning);
+        }
+
+        html.light .shadow-metal {
+            box-shadow: 0 4px 6px -1px var(--color-shadow-metal), 0 2px 4px -2px var(--color-shadow-metal);
+        }
+
+        html.light .nav-contact-button {
+            color: var(--color-accent-text-dark);
+        }
+
+        html.light .cta-button,
+        html.light .form-button {
+            color: var(--color-accent-text-dark);
+        }
+
+
+        .metal-pattern {
+            background-color: var(--color-bg-secondary);
+        }
+
+        .img-placeholder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 400px;
+            width: 100%;
+            background-color: var(--color-bg-card);
+            color: var(--color-accent);
+            border: 2px solid var(--color-accent);
+            border-radius: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: 600;
+            text-align: center;
+            box-shadow: 0 0 40px var(--color-shadow-card);
+        }
+
         /* POPRAWKA: Usunięto odniesienie do linii siatki */
-        #gameCanvas { touch-action: none; width: 100%; max-width: 700px; height: auto; aspect-ratio: 700 / 400; cursor: none; background-color: var(--color-bg-secondary); border-color: var(--color-border-primary); }
+        #gameCanvas {
+            touch-action: none;
+            width: 100%;
+            max-width: 700px;
+            height: auto;
+            aspect-ratio: 700 / 400;
+            cursor: none;
+            background-color: var(--color-bg-secondary);
+            border-color: var(--color-border-primary);
+        }
+
         /* Usunięto .game-grid-line */
 
-        #mobile-menu-button.active svg:first-child { display: none; } #mobile-menu-button.active svg:last-child { display: block; } #mobile-menu-button svg:last-child { display: none; }
+        #mobile-menu-button.active svg:first-child {
+            display: none;
+        }
 
-        h1 .accent-color { text-shadow: 0 0 15px var(--color-shadow-metal); }
-        html.light h1 .accent-color { text-shadow: 0 0 15px var(--color-shadow-metal); }
-        
-        @keyframes pulseWarning { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.8; transform: scale(1.1); } }
-        .timer-warning { animation: pulseWarning 1s infinite; }
+        #mobile-menu-button.active svg:last-child {
+            display: block;
+        }
 
-        
+        #mobile-menu-button svg:last-child {
+            display: none;
+        }
+
+        h1 .accent-color {
+            text-shadow: 0 0 15px var(--color-shadow-metal);
+        }
+
+        html.light h1 .accent-color {
+            text-shadow: 0 0 15px var(--color-shadow-metal);
+        }
+
+        @keyframes pulseWarning {
+
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.8;
+                transform: scale(1.1);
+            }
+        }
+
+        .timer-warning {
+            animation: pulseWarning 1s infinite;
+        }
+
+
         #parallax-image {
             background-image: url('zawias-toczony-10-x-55-bez-logo.webp');
             background-attachment: fixed;
             background-position: center;
             background-repeat: no-repeat;
             background-size: cover;
-            min-height: 400px; 
-            border-radius: 0.75rem; 
-            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1); 
-        }
-        @media (max-width: 768px) {
-             #parallax-image { background-attachment: scroll; }
+            min-height: 400px;
+            border-radius: 0.75rem;
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
         }
 
-        
-        #heroCanvas {
-            position: absolute; top: 0; left: 0;
-            width: 100%; height: 100%;
-            z-index: 0; 
-            opacity: 0.2; 
+        @media (max-width: 768px) {
+            #parallax-image {
+                background-attachment: scroll;
+            }
         }
-        .hero-content { position: relative; z-index: 1; }
-        
-        
-        html.light #theme-toggle .sun-icon, 
-        html.light #mobile-theme-toggle .sun-icon { display: none; }
+
+
+        #heroCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.2;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+
+        html.light #theme-toggle .sun-icon,
+        html.light #mobile-theme-toggle .sun-icon {
+            display: none;
+        }
+
         html:not(.light) #theme-toggle .moon-icon,
-        html:not(.light) #mobile-theme-toggle .moon-icon { display: none; }
-        
-        
+        html:not(.light) #mobile-theme-toggle .moon-icon {
+            display: none;
+        }
+
+
         .form-label {
             @apply block text-sm font-medium text-muted mb-2;
         }
+
         .form-input {
             @apply block w-full p-3 border border-primary rounded-md text-form focus:border-accent focus:ring-accent transition-colors;
-            background-color: var(--color-bg); 
+            background-color: var(--color-bg);
         }
+
         .form-input-textarea {
-             @apply block w-full p-3 border border-primary rounded-md text-form focus:border-accent focus:ring-accent transition-colors;
-             background-color: var(--color-bg); 
-             min-height: 140px; 
-           }
+            @apply block w-full p-3 border border-primary rounded-md text-form focus:border-accent focus:ring-accent transition-colors;
+            background-color: var(--color-bg);
+            min-height: 140px;
+        }
+
         .form-button {
             @apply w-full px-4 py-3 bg-gradient-to-r from-cyan-500 to-cyan-700 text-accent-dark font-bold rounded-lg hover-accent transition duration-300 shadow-metal transform hover:scale-105 active:scale-95 group flex items-center justify-center;
         }
+
         html.light .form-button {
-             color: var(--color-accent-text-dark);
+            color: var(--color-accent-text-dark);
         }
-        
+
         /* NOWE STYLE DLA UKRYWANIA NAGŁÓWKA */
         .sticky-header {
             transition: transform 0.3s ease-out, background-color 0.3s ease-out;
@@ -210,309 +360,665 @@
         /* POPRAWKA 3: Ustawienie wysokości menu mobilnego na AUTO */
         #mobile-menu {
             background-color: var(--color-bg-mobile) !important;
-            height: auto; /* Zmiana z min-height: calc(100vh - 64px) na auto */
-            min-height: 0; /* Zapewnienie, że nie ma narzuconego minimum */
-            border-top: 1px solid var(--color-border-primary); /* Dodanie linii odcinającej */
+            height: auto;
+            /* Zmiana z min-height: calc(100vh - 64px) na auto */
+            min-height: 0;
+            /* Zapewnienie, że nie ma narzuconego minimum */
+            border-top: 1px solid var(--color-border-primary);
+            /* Dodanie linii odcinającej */
         }
     </style>
+
+    <!-- Zapobieganie miganiu trybu jasnego/ciemnego (FOUC) -->
+    <script>
+        if (localStorage.getItem('theme') === 'light' || (!('theme' in localStorage) && !window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('light');
+        }
+    </script>
 </head>
+
 <body class="antialiased bg-bg text-secondary">
 
-    
+
     <!-- POPRAWKA: Nagłówek jest kryjący -->
     <header id="main-header" class="sticky top-0 z-40 bg-bg-secondary shadow-lg border-b border-primary sticky-header">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
-                <a href="#hero" class="text-3xl font-extrabold tracking-tight accent-color">BK <span class="text-primary">CNC</span></a>
-                
-                <nav id="desktop-menu" class="hidden md:flex items-center space-x-8 text-sm font-medium text-muted"> 
-                    <a href="#o-nas" class="py-2 hover:text-primary transition duration-300">O Nas</a> 
-                    <a href="#uslugi" class="py-2 hover:text-primary transition duration-300">Usługi</a> 
-                    <a href="#technologia" class="py-2 hover:text-primary transition duration-300">Technologia</a> 
-                    <a href="#parametry-cnc" class="py-2 hover:text-primary transition duration-300">Kalkulator CNC</a> 
-                    <a href="#gra-cnc" class="py-2 hover:text-primary transition duration-300">Gra CNC</a> 
-                    
-                    <a href="#kontakt" class="group inline-flex items-center px-5 py-2 rounded-full bg-cyan-600 text-gray-900 font-semibold hover:bg-cyan-500 transition duration-300 shadow-metal transform hover:scale-105 active:scale-95"> 
-                        Kontakt 
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1.5 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                <a href="#hero" class="text-3xl font-extrabold tracking-tight accent-color">BK <span
+                        class="text-primary">CNC</span></a>
+
+                <nav id="desktop-menu" class="hidden md:flex items-center space-x-8 text-sm font-medium text-muted">
+                    <a href="#o-nas" class="py-2 hover:text-primary transition duration-300">O Nas</a>
+                    <a href="#uslugi" class="py-2 hover:text-primary transition duration-300">Usługi</a>
+                    <a href="#technologia" class="py-2 hover:text-primary transition duration-300">Technologia</a>
+                    <a href="#parametry-cnc" class="py-2 hover:text-primary transition duration-300">Kalkulator CNC</a>
+                    <a href="#gra-cnc" class="py-2 hover:text-primary transition duration-300">Gra CNC</a>
+
+                    <a href="#kontakt"
+                        class="group inline-flex items-center px-5 py-2 rounded-full bg-cyan-600 text-gray-900 font-semibold hover:bg-cyan-500 transition duration-300 shadow-metal transform hover:scale-105 active:scale-95">
+                        Kontakt
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                            class="h-4 w-4 ml-1.5 transition-transform duration-300 group-hover:translate-x-1"
+                            fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
                     </a>
-                    
-                    <button id="theme-toggle" title="Zmień motyw" class="w-10 h-10 p-2 rounded-full text-muted hover:text-primary hover:bg-card transition-all duration-300">
-                        <svg class="sun-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m8.66-15.66l-.707.707M4.04 19.96l-.707.707M21 12h-1M4 12H3m15.66 8.66l-.707-.707M6.04 6.04l-.707-.707M12 18a6 6 0 100-12 6 6 0 000 12z" /></svg>
-                        <svg class="moon-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9 9 0 008.354-5.646z" /></svg>
+
+                    <button id="theme-toggle" title="Zmień motyw"
+                        class="w-10 h-10 p-2 rounded-full text-muted hover:text-primary hover:bg-card transition-all duration-300">
+                        <svg class="sun-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 3v1m0 16v1m8.66-15.66l-.707.707M4.04 19.96l-.707.707M21 12h-1M4 12H3m15.66 8.66l-.707-.707M6.04 6.04l-.707-.707M12 18a6 6 0 100-12 6 6 0 000 12z" />
+                        </svg>
+                        <svg class="moon-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9 9 0 008.354-5.646z" />
+                        </svg>
                     </button>
                 </nav>
                 <div class="flex items-center md:hidden">
-                    <button id="mobile-theme-toggle" title="Zmień motyw" class="w-10 h-10 p-2 rounded-full text-muted hover:text-primary hover:bg-card transition-all duration-300 mr-2">
-                        <svg class="sun-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m8.66-15.66l-.707.707M4.04 19.96l-.707.707M21 12h-1M4 12H3m15.66 8.66l-.707-.707M6.04 6.04l-.707-.707M12 18a6 6 0 100-12 6 6 0 000 12z" /></svg>
-                        <svg class="moon-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9 9 0 008.354-5.646z" /></svg>
+                    <button id="mobile-theme-toggle" title="Zmień motyw"
+                        class="w-10 h-10 p-2 rounded-full text-muted hover:text-primary hover:bg-card transition-all duration-300 mr-2">
+                        <svg class="sun-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 3v1m0 16v1m8.66-15.66l-.707.707M4.04 19.96l-.707.707M21 12h-1M4 12H3m15.66 8.66l-.707-.707M6.04 6.04l-.707-.707M12 18a6 6 0 100-12 6 6 0 000 12z" />
+                        </svg>
+                        <svg class="moon-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9 9 0 008.354-5.646z" />
+                        </svg>
                     </button>
-                    <button id="mobile-menu-button" class="p-2 rounded-md hover:bg-card transition duration-300" aria-label="Toggle menu"> <svg class="w-6 h-6 accent-color" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg> <svg class="w-6 h-6 accent-color" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg> </button>
+                    <button id="mobile-menu-button" class="p-2 rounded-md hover:bg-card transition duration-300"
+                        aria-label="Toggle menu"> <svg class="w-6 h-6 accent-color" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16m-7 6h7"></path>
+                        </svg> <svg class="w-6 h-6 accent-color" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12"></path>
+                        </svg> </button>
                 </div>
             </div>
         </div>
     </header>
-    
+
     <!-- Menu mobilne: rozmiar dostosowuje się do zawartości, a nie do całego widoku -->
-    <nav id="mobile-menu" class="hidden md:hidden fixed top-16 left-0 right-0 z-50 bg-bg-secondary p-4 shadow-lg"> 
-        <div class="flex flex-col space-y-3 text-center text-muted"> 
-            <a href="#o-nas" class="block py-2 hover:text-primary transition duration-300 mobile-menu-link">O Nas</a> 
-            <a href="#uslugi" class="block py-2 hover:text-primary transition duration-300 mobile-menu-link">Usługi</a> 
-            <a href="#technologia" class="block py-2 hover:text-primary transition duration-300 mobile-menu-link">Technologia</a> 
-            <a href="#parametry-cnc" class="block py-2 hover:text-primary transition duration-300 mobile-menu-link">Kalkulator CNC</a> 
-            <a href="#gra-cnc" class="block py-2 hover:text-primary transition duration-300 mobile-menu-link">Gra CNC</a> 
-            <a href="#kontakt" class="block py-2 px-4 mt-2 rounded-full bg-cyan-600 text-gray-900 font-semibold hover:bg-cyan-500 transition duration-300 shadow-metal mobile-menu-link">Kontakt</a> 
-        </div> 
+    <nav id="mobile-menu" class="hidden md:hidden fixed top-16 left-0 right-0 z-50 bg-bg-secondary p-4 shadow-lg">
+        <div class="flex flex-col space-y-3 text-center text-muted">
+            <a href="#o-nas" class="block py-2 hover:text-primary transition duration-300 mobile-menu-link">O Nas</a>
+            <a href="#uslugi" class="block py-2 hover:text-primary transition duration-300 mobile-menu-link">Usługi</a>
+            <a href="#technologia"
+                class="block py-2 hover:text-primary transition duration-300 mobile-menu-link">Technologia</a>
+            <a href="#parametry-cnc"
+                class="block py-2 hover:text-primary transition duration-300 mobile-menu-link">Kalkulator CNC</a>
+            <a href="#gra-cnc" class="block py-2 hover:text-primary transition duration-300 mobile-menu-link">Gra
+                CNC</a>
+            <a href="#kontakt"
+                class="block py-2 px-4 mt-2 rounded-full bg-cyan-600 text-gray-900 font-semibold hover:bg-cyan-500 transition duration-300 shadow-metal mobile-menu-link">Kontakt</a>
+        </div>
     </nav>
 
     <main>
-        
-        <section id="hero" class="bg-secondary pt-24 pb-36 relative overflow-hidden"> 
-            <canvas id="heroCanvas"></canvas> 
-            <div class="hero-content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between"> 
-                <div class="md:w-1/2 mb-12 md:mb-0 text-center md:text-left" data-aos="fade-right"> <span class="text-xl font-medium uppercase accent-color mb-3 block">Precyzja, której Możesz Ufać</span> <h1 class="text-5xl sm:text-6xl lg:text-7xl font-extrabold leading-tight tracking-tighter">Toczenie CNC <span class="accent-color">Typu Szwajcarskiego</span></h1> <p class="mt-8 text-lg text-secondary max-w-lg mx-auto md:mx-0 leading-relaxed">Specjalizujemy się w produkcji złożonych, małych i bardzo małych detali z zachowaniem mikronowej dokładności. Osiągnij niezrównaną jakość i powtarzalność.</p> <div class="mt-12 flex justify-center md:justify-start space-x-4"> <a href="#kontakt" class="cta-button group flex items-center px-8 py-3 bg-gradient-to-r from-cyan-500 to-cyan-700 text-accent-dark font-bold rounded-lg hover-accent transition duration-300 shadow-xl shadow-cyan-800/50 transform hover:scale-105 active:scale-95">Wycena Projektu <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg></a> <a href="#uslugi" class="px-8 py-3 border border-primary text-primary font-medium rounded-lg hover:border-accent hover:text-accent transition duration-300 transform hover:scale-105 active:scale-95">Nasze Możliwości</a> </div> </div> 
-                <div class="md:w-1/2 flex justify-center md:justify-end relative" data-aos="fade-left" data-aos-delay="200"> <svg class="w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 accent-color opacity-80" viewBox="0 0 100 100"><defs><filter id="glow"><feGaussianBlur stdDeviation="3.5" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><g transform="translate(50 50)" filter="url(#glow)"><circle cx="0" cy="0" r="40" fill="none" stroke="currentColor" stroke-width="3" opacity="0.5"/><path d="M 0 -35 A 35 35 0 1 1 0 35 A 35 35 0 1 1 0 -35 Z" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="5 5"><animateTransform attributeName="transform" type="rotate" from="0 0 0" to="360 0 0" dur="15s" repeatCount="indefinite"/></path><path d="M 0 -20 A 20 20 0 1 0 0 20 A 20 20 0 1 0 0 -20 Z" fill="none" stroke="currentColor" stroke-width="2"><animateTransform attributeName="transform" type="rotate" from="360 0 0" to="0 0 0" dur="10s" repeatCount="indefinite"/></path><circle cx="0" cy="0" r="5" fill="currentColor"/></g></svg> </div> 
-            </div> </section>
-        <section id="o-nas" class="py-28 bg-secondary border-t border-primary"> <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"> <div class="text-center mb-20" data-aos="fade-up"> <h2 class="text-4xl font-extrabold mb-4">BK CNC: Fundament Precyzji</h2> <p class="text-lg text-muted leading-relaxed">Ponad 10 lat doświadczenia w obróbce metali w najnowszych technologiach.</p> </div> <div class="grid grid-cols-1 md:grid-cols-3 gap-12"> 
-                
-                <div class="p-8 rounded-xl bg-card shadow-2xl transition duration-500 transform hover:-translate-y-2 hover:shadow-cyan-800/60 border-t-4 border-accent hover:border-b-2 hover:border-l-2 hover:border-r-2" data-aos="fade-up" data-aos-delay="100"> 
-                    <svg class="w-12 h-12 accent-color mb-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37a1.724 1.724 0 002.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg> 
-                    <h3 class="text-2xl font-semibold mb-3">Automaty Szwajcarskie</h3> 
-                    <p class="text-muted leading-relaxed">Wykorzystujemy najnowszej generacji automaty tokarskie typu szwajcarskiego...</p> 
-                </div> 
-                <div class="p-8 rounded-xl bg-card-alt shadow-2xl transition duration-500 transform hover:-translate-y-2 hover:shadow-cyan-800/60 border-t-4 border-accent hover:border-b-2 hover:border-l-2 hover:border-r-2" data-aos="fade-up" data-aos-delay="200"> 
-                    <svg class="w-12 h-12 accent-color mb-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.001 12.001 0 0012 21a12.001 12.001 0 008.618-3.04z"></path></svg> 
-                    <h3 class="text-2xl font-semibold mb-3">Kontrola i Certyfikacja</h3> <p class="text-muted leading-relaxed">Każdy wyprodukowany detal podlega rygorystycznej kontroli...</p> 
-                </div> 
-                <div class="p-8 rounded-xl bg-card shadow-2xl transition duration-500 transform hover:-translate-y-2 hover:shadow-cyan-800/60 border-t-4 border-accent hover:border-b-2 hover:border-l-2 hover:border-r-2" data-aos="fade-up" data-aos-delay="300"> 
-                    <svg class="w-12 h-12 accent-color mb-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg> 
-                    <h3 class="text-2xl font-semibold mb-3">Złożone Detale i Serie</h3> <p class="text-muted leading-relaxed">Obsługujemy zarówno długie serie produkcyjne, jak i skomplikowane detale prototypowe...</p> 
-                </div> 
-            </div> </div> </section>
-        <section id="uslugi" class="py-28 bg-secondary border-t border-primary overflow-hidden"> <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"> <div class="text-center mb-20" data-aos="fade-up"> <span class="text-lg font-medium uppercase accent-color mb-2 block">Czym się zajmujemy</span> <h2 class="text-4xl font-extrabold">Kluczowe Obszary Działalności</h2> </div> <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center"> <div data-aos="fade-right"> <ul class="space-y-8"> <li class="flex items-start group"> <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 mr-4 mt-1 flex-shrink-0 text-accent transition-transform duration-300 group-hover:scale-125" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6-6l-6.5 6.5" /></svg> <div><h4 class="text-xl font-semibold text-primary">Toczenie Długich Elementów</h4> <p class="text-muted mt-1 leading-relaxed">Specjalizacja w obróbce detali o wydłużonym kształcie...</p></div> </li> <li class="flex items-start group"> <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 mr-4 mt-1 flex-shrink-0 text-accent transition-transform duration-300 group-hover:scale-125" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37a1.724 1.724 0 002.572-1.065z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg> <div><h4 class="text-xl font-semibold text-primary">Obróbka Złożona</h4> <p class="text-muted mt-1 leading-relaxed">Pełne możliwości frezowania, wiercenia i gwintowania...</p></div> </li> <li class="flex items-start group"> <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 mr-4 mt-1 flex-shrink-0 text-accent transition-transform duration-300 group-hover:scale-125" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" /></svg> <div><h4 class="text-xl font-semibold text-primary">Szeroki Zakres Materiałów</h4> <p class="text-muted mt-1 leading-relaxed">Obróbka stali nierdzewnej, mosiądzu, aluminium, tytanu...</p></div> </li> </ul> </div> 
-            <div class="hidden lg:block" data-aos="fade-left" data-aos-delay="200"> 
-                <div class="p-6 bg-secondary border-2 border-accent/50 rounded-lg shadow-2xl shadow-cyan-900/30 flex justify-center items-center"> 
-                    <img src="detal-zlozony-przyklad.webp" alt="Precyzyjnie toczony detal wykonany na automacie szwajcarskim" class="rounded-lg max-w-full h-auto w-full object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x400/161b22/06b6d4?text=Zlozony+Detal+CNC';">
-                </div> 
-                <p class="text-center mt-4 text-sm text-muted italic">Wizualizacja detalu z uwzględnieniem tolerancji.</p> 
-            </div> 
-        </div> </div> </section>
-        <section id="technologia" class="py-28 bg-secondary border-t border-primary overflow-hidden"> <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"> <div class="text-center mb-20" data-aos="fade-up"> <span class="text-lg font-medium uppercase accent-color mb-2 block">Dlaczego Automaty Szwajcarskie?</span> <h2 class="text-4xl font-extrabold">Niezrównana Metoda Obróbki</h2> </div> <div class="lg:flex lg:space-x-16 items-center"> 
-            <div class="lg:w-1/2 mb-12 lg:mb-0" data-aos="fade-right"> 
-                <div id="parallax-image" class="rounded-xl shadow-2xl"></div> 
-                <p class="mt-4 text-sm text-muted italic text-center">Przykładowy detal z naszej produkcji.</p> 
-            </div> 
-            <div class="lg:w-1/2 space-y-10" data-aos="fade-left" data-aos-delay="200"> <div class="flex items-start"> <div class="flex-shrink-0 w-12 h-12 accent-bg rounded-full flex items-center justify-center mr-5 text-accent-dark font-bold text-xl shadow-metal">1</div> <div> <h3 class="text-2xl font-semibold mb-2">Precyzja Lidera Branży</h3> <p class="text-muted leading-relaxed">W tokarce szwajcarskiej narzędzie pracuje bardzo blisko tulei prowadzącej...</p> </div> </div> <div class="flex items-start"> <div class="flex-shrink-0 w-12 h-12 accent-bg rounded-full flex items-center justify-center mr-5 text-accent-dark font-bold text-xl shadow-metal">2</div> <div> <h3 class="text-2xl font-semibold mb-2">Wykończenie Powierzchni</h3> <p class="text-muted leading-relaxed">Stałe podparcie materiału blisko strefy skrawania pozwala uzyskać lepszą jakość...</p> </div> </div> <div class="flex items-start"> <div class="flex-shrink-0 w-12 h-12 accent-bg rounded-full flex items-center justify-center mr-5 text-accent-dark font-bold text-xl shadow-metal">3</div> <div> <h3 class="text-2xl font-semibold mb-2">Obróbka Długich i Cienkich Detali</h3> <p class="text-muted leading-relaxed">Automaty typu szwajcarskiego są niezastąpione przy produkcji długich, cienkich elementów...</p> </div> </div> </div> </div> </div> </section>
-        <section id="parametry-cnc" class="py-28 bg-secondary border-t border-primary"> <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8" data-aos="fade-up"> <div class="text-center mb-16"> <span class="text-lg font-medium uppercase accent-color mb-2 block">Wsparcie Inżynierskie</span> <h2 class="text-4xl font-extrabold">Kalkulator Parametrów Toczenia</h2> </div> <div class="p-10 bg-card rounded-xl shadow-2xl border-t-4 border-accent"> <h3 class="text-2xl font-semibold accent-color mb-8 flex items-center"> <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg> Obliczenia podstawowych parametrów </h3> <div class="grid grid-cols-1 md:grid-cols-2 gap-8"> <div class="p-6 bg-secondary rounded-lg shadow-inner"> <label for="Vc" class="block text-sm font-medium text-muted">Prędkość Skrawania (Vc) [m/min]</label> <input type="number" step="0.1" id="Vc" placeholder="np. 250" class="mt-1 block w-full p-3 border border-primary bg-bg rounded-md text-form focus:border-accent focus:ring-accent"> <label for="D" class="block text-sm font-medium text-muted mt-4">Średnica Detalu (D) [mm]</label> <input type="number" step="0.1" id="D" placeholder="np. 12" class="mt-1 block w-full p-3 border border-primary bg-bg rounded-md text-form focus:border-accent focus:ring-accent"> <button onclick="calculateRPM()" class="w-full mt-6 px-4 py-3 bg-gradient-to-r from-cyan-500 to-cyan-700 text-accent-dark font-bold rounded-lg hover-accent transition duration-300 transform hover:scale-105 active:scale-95 group flex items-center justify-center cta-button"> Oblicz Obroty (n) <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 transition-transform duration-300 group-hover:rotate-90" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg> </button> <div class="mt-5 text-lg font-bold text-primary"> n = <span id="n_result" class="accent-color text-xl">0</span> obr/min </div> </div> <div class="p-6 bg-secondary rounded-lg shadow-inner"> <label for="f" class="block text-sm font-medium text-muted">Posuw (f) [mm/obr]</label> <input type="number" step="0.001" id="f" placeholder="np. 0.08" class="mt-1 block w-full p-3 border border-primary bg-bg rounded-md text-form focus:border-accent focus:ring-accent"> <label for="n_input" class="block text-sm font-medium text-muted mt-4">Obroty Wrzeciona (n) [obr/min]</label> <input type="number" step="1" id="n_input" placeholder="Wartość z lewej lub własna" class="mt-1 block w-full p-3 border border-primary bg-bg rounded-md text-form focus:border-accent focus:ring-accent"> <button onclick="calculateFeedRate()" class="w-full mt-6 px-4 py-3 bg-gradient-to-r from-cyan-500 to-cyan-700 text-accent-dark font-bold rounded-lg hover-accent transition duration-300 transform hover:scale-105 active:scale-95 group flex items-center justify-center cta-button"> Oblicz Posuw (Vf) <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg> </button> <div class="mt-5 text-lg font-bold text-primary"> Vf = <span id="Vf_result" class="accent-color text-xl">0</span> mm/min </div> </div> </div> <div id="calculator-message" class="mt-8 p-3 bg-red-900/50 text-red-300 rounded-lg hidden"></div> </div> </div> </section>
-        <section id="gra-cnc" class="py-28 bg-secondary border-t border-primary"> <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8" data-aos="fade-up"> <div class="text-center mb-16"> <span class="text-lg font-medium uppercase accent-color mb-2 block">Rozrywka Techniczna</span> <h2 class="text-4xl font-extrabold">Gra Operator CNC (Arkanoid)</h2> <p class="text-muted mt-3 leading-relaxed">Użyj myszy lub dotyku, aby sterować operatorem i odbijać piłkę. Zbijaj "usterki" i nie pozwól piłce uciec!</p> </div> <div class="p-8 bg-card rounded-xl shadow-2xl border-t-4 border-accent flex flex-col items-center"> <canvas id="gameCanvas" width="700" height="400" class="border border-primary rounded-md"></canvas> 
-            <div class="mt-8 flex flex-col sm:flex-row justify-between w-full max-w-2xl text-lg font-bold space-y-2 sm:space-y-0 text-primary"> 
-                <p>Poziom: <span id="levelDisplay" class="accent-color">1</span></p> 
-                <p>Czas: <span id="timeDisplay" class="accent-color">45</span>s</p>
-                <p>Wynik: <span id="scoreDisplay" class="accent-color">0</span></p> 
-                <p>Usterki: <span id="targetCountDisplay" class="accent-color">0</span></p>
-                <p>Rekord: <span id="highScoreDisplay" class="text-yellow-400">0</span></p> 
-            </div> 
-            <div class="mt-8 text-center"> 
-                <button id="startButton" class="cta-button px-8 py-3 bg-gradient-to-r from-cyan-500 to-cyan-700 text-accent-dark font-bold rounded-lg hover-accent transition duration-300 shadow-metal transform hover:scale-105 active:scale-95 group flex items-center justify-center"> 
-                    Start Gry <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg> 
-                </button> 
-             </div> <div id="gameMessage" class="mt-8 p-4 bg-secondary text-primary rounded-lg hidden text-center font-semibold text-lg"></div> </div> </div> </section>
-        <section id="kontakt" class="py-28 bg-secondary border-t border-primary overflow-hidden"> <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"> <div class="text-center mb-16" data-aos="fade-up"> <h2 class="text-4xl font-extrabold mb-4">Skontaktuj się z Nami</h2> <p class="text-lg text-muted leading-relaxed">Prześlij zapytanie, rysunki techniczne lub skontaktuj się...</p> </div> 
-            
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-12"> 
-            
-            <div class="lg:col-span-2 p-10 rounded-xl shadow-2xl" data-aos="fade-right" style="background-color: var(--color-form-card-bg);"> 
-                
-                <form class="space-y-6"> 
-                    <div> 
-                        <label for="form_name_simple" class="block text-sm font-medium text-muted mb-2">Imię i Nazwisko / Firma</label> 
-                        <input type="text" id="form_name_simple" name="Imię lub Firma" class="block w-full p-3 border border-primary rounded-md text-form focus:border-accent focus:ring-accent transition-colors" style="background-color: var(--color-form-input-bg);" required> 
-                    </div> 
-                    <div> 
-                        <label for="form_email_simple" class="block text-sm font-medium text-muted mb-2">Adres E-mail</label> 
-                        <input type="email" id="form_email_simple" name="Adres Email" class="block w-full p-3 border border-primary rounded-md text-form focus:border-accent focus:ring-accent transition-colors" style="background-color: var(--color-form-input-bg);" required> 
-                    </div> 
-                    <div> 
-                        <label for="form_message_simple" class="block text-sm font-medium text-muted mb-2">Wiadomość / Opis zapytania</label> 
-                        <textarea id="form_message_simple" name="Treść Wiadomości" rows="5" class="block w-full p-3 border border-primary rounded-md text-form focus:border-accent focus:ring-accent transition-colors" style="background-color: var(--color-form-input-bg);" required></textarea> 
-                    </div> 
-                    <button type="button" class="w-full px-4 py-3 bg-gradient-to-r from-cyan-500 to-cyan-700 text-accent-dark font-bold rounded-lg hover-accent transition duration-300 shadow-metal transform hover:scale-105 active:scale-95 group flex items-center justify-center cta-button form-button"> Wyślij Zapytanie <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg> </button> 
-                    <p class="text-xs text-muted mt-4 text-center">Formularz tymczasowo nieaktywny. Prosimy o kontakt mailowy lub telefoniczny.</p>
-                </form> 
-            </div> 
-            <div class="lg:col-span-1 p-10 bg-card rounded-xl shadow-2xl" data-aos="fade-left" data-aos-delay="200"> <h3 class="text-2xl font-semibold accent-color mb-6">Dane Kontaktowe</h3> <div class="space-y-5 text-muted"> <p class="flex items-start"> <svg class="w-6 h-6 mr-4 flex-shrink-0 accent-color mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg> 
-                        <span><strong class="text-primary">BK CNC</strong><br>ul. Gen. Bora-Komorowskiego 3c<br>83-110 Tczew</span> 
-                    </p> <p class="flex items-center"> <svg class="w-6 h-6 mr-4 flex-shrink-0 accent-color" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg> 
-                        <a href="tel:+48123456789" class="hover:text-accent transition duration-300">+48 123 456 789</a> 
-                    </p> <p class="flex items-center"> <svg class="w-6 h-6 mr-4 flex-shrink-0 accent-color" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg> <a href="mailto:blazejkaczmar@gmail.com" class="hover:text-accent transition duration-300">blazejkaczmar@gmail.com</a> </p> </div> </div> </div> </div> </section>
+
+        <section id="hero" class="bg-secondary pt-24 pb-36 relative overflow-hidden">
+            <canvas id="heroCanvas"></canvas>
+            <div
+                class="hero-content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between">
+                <div class="md:w-1/2 mb-12 md:mb-0 text-center md:text-left" data-aos="fade-right"> <span
+                        class="text-xl font-medium uppercase accent-color mb-3 block">Precyzja, której Możesz
+                        Ufać</span>
+                    <h1 class="text-5xl sm:text-6xl lg:text-7xl font-extrabold leading-tight tracking-tighter">Toczenie
+                        CNC <span class="accent-color">Typu Szwajcarskiego</span></h1>
+                    <p class="mt-8 text-lg text-secondary max-w-lg mx-auto md:mx-0 leading-relaxed">Specjalizujemy się w
+                        produkcji złożonych, małych i bardzo małych detali z zachowaniem mikronowej dokładności.
+                        Osiągnij niezrównaną jakość i powtarzalność.</p>
+                    <div class="mt-12 flex justify-center md:justify-start space-x-4"> <a href="#kontakt"
+                            class="cta-button group flex items-center px-8 py-3 bg-gradient-to-r from-cyan-500 to-cyan-700 text-accent-dark font-bold rounded-lg hover-accent transition duration-300 shadow-xl shadow-cyan-800/50 transform hover:scale-105 active:scale-95">Wycena
+                            Projektu <svg xmlns="http://www.w3.org/2000/svg"
+                                class="h-5 w-5 ml-2 transition-transform duration-300 group-hover:translate-x-1"
+                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                            </svg></a> <a href="#uslugi"
+                            class="px-8 py-3 border border-primary text-primary font-medium rounded-lg hover:border-accent hover:text-accent transition duration-300 transform hover:scale-105 active:scale-95">Nasze
+                            Możliwości</a> </div>
+                </div>
+                <div class="md:w-1/2 flex justify-center md:justify-end relative" data-aos="fade-left"
+                    data-aos-delay="200"> <svg class="w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 accent-color opacity-80"
+                        viewBox="0 0 100 100">
+                        <defs>
+                            <filter id="glow">
+                                <feGaussianBlur stdDeviation="3.5" result="coloredBlur" />
+                                <feMerge>
+                                    <feMergeNode in="coloredBlur" />
+                                    <feMergeNode in="SourceGraphic" />
+                                </feMerge>
+                            </filter>
+                        </defs>
+                        <g transform="translate(50 50)" filter="url(#glow)">
+                            <circle cx="0" cy="0" r="40" fill="none" stroke="currentColor" stroke-width="3"
+                                opacity="0.5" />
+                            <path d="M 0 -35 A 35 35 0 1 1 0 35 A 35 35 0 1 1 0 -35 Z" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-dasharray="5 5">
+                                <animateTransform attributeName="transform" type="rotate" from="0 0 0" to="360 0 0"
+                                    dur="15s" repeatCount="indefinite" />
+                            </path>
+                            <path d="M 0 -20 A 20 20 0 1 0 0 20 A 20 20 0 1 0 0 -20 Z" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <animateTransform attributeName="transform" type="rotate" from="360 0 0" to="0 0 0"
+                                    dur="10s" repeatCount="indefinite" />
+                            </path>
+                            <circle cx="0" cy="0" r="5" fill="currentColor" />
+                        </g>
+                    </svg> </div>
+            </div>
+        </section>
+        <section id="o-nas" class="py-28 bg-secondary border-t border-primary">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-20" data-aos="fade-up">
+                    <h2 class="text-4xl font-extrabold mb-4">BK CNC: Fundament Precyzji</h2>
+                    <p class="text-lg text-muted leading-relaxed">Ponad 10 lat doświadczenia w obróbce metali w
+                        najnowszych technologiach.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+
+                    <div class="p-8 rounded-xl bg-card shadow-2xl transition duration-500 transform hover:-translate-y-2 hover:shadow-cyan-800/60 border-t-4 border-accent hover:border-b-2 hover:border-l-2 hover:border-r-2"
+                        data-aos="fade-up" data-aos-delay="100">
+                        <svg class="w-12 h-12 accent-color mb-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37a1.724 1.724 0 002.572-1.065z">
+                            </path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                        </svg>
+                        <h3 class="text-2xl font-semibold mb-3">Automaty Szwajcarskie</h3>
+                        <p class="text-muted leading-relaxed">Wykorzystujemy najnowszej generacji automaty tokarskie
+                            typu szwajcarskiego...</p>
+                    </div>
+                    <div class="p-8 rounded-xl bg-card-alt shadow-2xl transition duration-500 transform hover:-translate-y-2 hover:shadow-cyan-800/60 border-t-4 border-accent hover:border-b-2 hover:border-l-2 hover:border-r-2"
+                        data-aos="fade-up" data-aos-delay="200">
+                        <svg class="w-12 h-12 accent-color mb-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.001 12.001 0 0012 21a12.001 12.001 0 008.618-3.04z">
+                            </path>
+                        </svg>
+                        <h3 class="text-2xl font-semibold mb-3">Kontrola i Certyfikacja</h3>
+                        <p class="text-muted leading-relaxed">Każdy wyprodukowany detal podlega rygorystycznej
+                            kontroli...</p>
+                    </div>
+                    <div class="p-8 rounded-xl bg-card shadow-2xl transition duration-500 transform hover:-translate-y-2 hover:shadow-cyan-800/60 border-t-4 border-accent hover:border-b-2 hover:border-l-2 hover:border-r-2"
+                        data-aos="fade-up" data-aos-delay="300">
+                        <svg class="w-12 h-12 accent-color mb-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                        <h3 class="text-2xl font-semibold mb-3">Złożone Detale i Serie</h3>
+                        <p class="text-muted leading-relaxed">Obsługujemy zarówno długie serie produkcyjne, jak i
+                            skomplikowane detale prototypowe...</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="uslugi" class="py-28 bg-secondary border-t border-primary overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-20" data-aos="fade-up"> <span
+                        class="text-lg font-medium uppercase accent-color mb-2 block">Czym się zajmujemy</span>
+                    <h2 class="text-4xl font-extrabold">Kluczowe Obszary Działalności</h2>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                    <div data-aos="fade-right">
+                        <ul class="space-y-8">
+                            <li class="flex items-start group"> <svg xmlns="http://www.w3.org/2000/svg"
+                                    class="w-7 h-7 mr-4 mt-1 flex-shrink-0 text-accent transition-transform duration-300 group-hover:scale-125"
+                                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 12l2 2 4-4m6-6l-6.5 6.5" />
+                                </svg>
+                                <div>
+                                    <h4 class="text-xl font-semibold text-primary">Toczenie Długich Elementów</h4>
+                                    <p class="text-muted mt-1 leading-relaxed">Specjalizacja w obróbce detali o
+                                        wydłużonym kształcie...</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start group"> <svg xmlns="http://www.w3.org/2000/svg"
+                                    class="w-7 h-7 mr-4 mt-1 flex-shrink-0 text-accent transition-transform duration-300 group-hover:scale-125"
+                                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37a1.724 1.724 0 002.572-1.065z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                </svg>
+                                <div>
+                                    <h4 class="text-xl font-semibold text-primary">Obróbka Złożona</h4>
+                                    <p class="text-muted mt-1 leading-relaxed">Pełne możliwości frezowania, wiercenia i
+                                        gwintowania...</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start group"> <svg xmlns="http://www.w3.org/2000/svg"
+                                    class="w-7 h-7 mr-4 mt-1 flex-shrink-0 text-accent transition-transform duration-300 group-hover:scale-125"
+                                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                                </svg>
+                                <div>
+                                    <h4 class="text-xl font-semibold text-primary">Szeroki Zakres Materiałów</h4>
+                                    <p class="text-muted mt-1 leading-relaxed">Obróbka stali nierdzewnej, mosiądzu,
+                                        aluminium, tytanu...</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="hidden lg:block" data-aos="fade-left" data-aos-delay="200">
+                        <div
+                            class="p-6 bg-secondary border-2 border-accent/50 rounded-lg shadow-2xl shadow-cyan-900/30 flex justify-center items-center">
+                            <img src="detal-zlozony-przyklad.webp"
+                                alt="Precyzyjnie toczony detal wykonany na automacie szwajcarskim"
+                                class="rounded-lg max-w-full h-auto w-full object-cover"
+                                onerror="this.onerror=null;this.src='https://placehold.co/600x400/161b22/06b6d4?text=Zlozony+Detal+CNC';">
+                        </div>
+                        <p class="text-center mt-4 text-sm text-muted italic">Wizualizacja detalu z uwzględnieniem
+                            tolerancji.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="technologia" class="py-28 bg-secondary border-t border-primary overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-20" data-aos="fade-up"> <span
+                        class="text-lg font-medium uppercase accent-color mb-2 block">Dlaczego Automaty
+                        Szwajcarskie?</span>
+                    <h2 class="text-4xl font-extrabold">Niezrównana Metoda Obróbki</h2>
+                </div>
+                <div class="lg:flex lg:space-x-16 items-center">
+                    <div class="lg:w-1/2 mb-12 lg:mb-0" data-aos="fade-right">
+                        <div id="parallax-image" class="rounded-xl shadow-2xl"></div>
+                        <p class="mt-4 text-sm text-muted italic text-center">Przykładowy detal z naszej produkcji.</p>
+                    </div>
+                    <div class="lg:w-1/2 space-y-10" data-aos="fade-left" data-aos-delay="200">
+                        <div class="flex items-start">
+                            <div
+                                class="flex-shrink-0 w-12 h-12 accent-bg rounded-full flex items-center justify-center mr-5 text-accent-dark font-bold text-xl shadow-metal">
+                                1</div>
+                            <div>
+                                <h3 class="text-2xl font-semibold mb-2">Precyzja Lidera Branży</h3>
+                                <p class="text-muted leading-relaxed">W tokarce szwajcarskiej narzędzie pracuje bardzo
+                                    blisko tulei prowadzącej...</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div
+                                class="flex-shrink-0 w-12 h-12 accent-bg rounded-full flex items-center justify-center mr-5 text-accent-dark font-bold text-xl shadow-metal">
+                                2</div>
+                            <div>
+                                <h3 class="text-2xl font-semibold mb-2">Wykończenie Powierzchni</h3>
+                                <p class="text-muted leading-relaxed">Stałe podparcie materiału blisko strefy skrawania
+                                    pozwala uzyskać lepszą jakość...</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div
+                                class="flex-shrink-0 w-12 h-12 accent-bg rounded-full flex items-center justify-center mr-5 text-accent-dark font-bold text-xl shadow-metal">
+                                3</div>
+                            <div>
+                                <h3 class="text-2xl font-semibold mb-2">Obróbka Długich i Cienkich Detali</h3>
+                                <p class="text-muted leading-relaxed">Automaty typu szwajcarskiego są niezastąpione przy
+                                    produkcji długich, cienkich elementów...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="parametry-cnc" class="py-28 bg-secondary border-t border-primary">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8" data-aos="fade-up">
+                <div class="text-center mb-16"> <span
+                        class="text-lg font-medium uppercase accent-color mb-2 block">Wsparcie Inżynierskie</span>
+                    <h2 class="text-4xl font-extrabold">Kalkulator Parametrów Toczenia</h2>
+                </div>
+                <div class="p-10 bg-card rounded-xl shadow-2xl border-t-4 border-accent">
+                    <h3 class="text-2xl font-semibold accent-color mb-8 flex items-center"> <svg
+                            xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mr-3" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                        </svg> Obliczenia podstawowych parametrów </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="p-6 bg-secondary rounded-lg shadow-inner"> <label for="Vc"
+                                class="block text-sm font-medium text-muted">Prędkość Skrawania (Vc) [m/min]</label>
+                            <input type="number" step="0.1" id="Vc" placeholder="np. 250"
+                                class="mt-1 block w-full p-3 border border-primary bg-bg rounded-md text-form focus:border-accent focus:ring-accent">
+                            <label for="D" class="block text-sm font-medium text-muted mt-4">Średnica Detalu (D)
+                                [mm]</label> <input type="number" step="0.1" id="D" placeholder="np. 12"
+                                class="mt-1 block w-full p-3 border border-primary bg-bg rounded-md text-form focus:border-accent focus:ring-accent">
+                            <button onclick="calculateRPM()"
+                                class="w-full mt-6 px-4 py-3 bg-gradient-to-r from-cyan-500 to-cyan-700 text-accent-dark font-bold rounded-lg hover-accent transition duration-300 transform hover:scale-105 active:scale-95 group flex items-center justify-center cta-button">
+                                Oblicz Obroty (n) <svg xmlns="http://www.w3.org/2000/svg"
+                                    class="h-5 w-5 ml-2 transition-transform duration-300 group-hover:rotate-90"
+                                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                </svg> </button>
+                            <div class="mt-5 text-lg font-bold text-primary"> n = <span id="n_result"
+                                    class="accent-color text-xl">0</span> obr/min </div>
+                        </div>
+                        <div class="p-6 bg-secondary rounded-lg shadow-inner"> <label for="f"
+                                class="block text-sm font-medium text-muted">Posuw (f) [mm/obr]</label> <input
+                                type="number" step="0.001" id="f" placeholder="np. 0.08"
+                                class="mt-1 block w-full p-3 border border-primary bg-bg rounded-md text-form focus:border-accent focus:ring-accent">
+                            <label for="n_input" class="block text-sm font-medium text-muted mt-4">Obroty Wrzeciona (n)
+                                [obr/min]</label> <input type="number" step="1" id="n_input"
+                                placeholder="Wartość z lewej lub własna"
+                                class="mt-1 block w-full p-3 border border-primary bg-bg rounded-md text-form focus:border-accent focus:ring-accent">
+                            <button onclick="calculateFeedRate()"
+                                class="w-full mt-6 px-4 py-3 bg-gradient-to-r from-cyan-500 to-cyan-700 text-accent-dark font-bold rounded-lg hover-accent transition duration-300 transform hover:scale-105 active:scale-95 group flex items-center justify-center cta-button">
+                                Oblicz Posuw (Vf) <svg xmlns="http://www.w3.org/2000/svg"
+                                    class="h-5 w-5 ml-2 transition-transform duration-300 group-hover:translate-x-1"
+                                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                </svg> </button>
+                            <div class="mt-5 text-lg font-bold text-primary"> Vf = <span id="Vf_result"
+                                    class="accent-color text-xl">0</span> mm/min </div>
+                        </div>
+                    </div>
+                    <div id="calculator-message" class="mt-8 p-3 bg-red-900/50 text-red-300 rounded-lg hidden"></div>
+                </div>
+            </div>
+        </section>
+        <section id="gra-cnc" class="py-28 bg-secondary border-t border-primary">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8" data-aos="fade-up">
+                <div class="text-center mb-16"> <span
+                        class="text-lg font-medium uppercase accent-color mb-2 block">Rozrywka Techniczna</span>
+                    <h2 class="text-4xl font-extrabold">Gra Operator CNC (Arkanoid)</h2>
+                    <p class="text-muted mt-3 leading-relaxed">Użyj myszy lub dotyku, aby sterować operatorem i odbijać
+                        piłkę. Zbijaj "usterki" i nie pozwól piłce uciec!</p>
+                </div>
+                <div class="p-8 bg-card rounded-xl shadow-2xl border-t-4 border-accent flex flex-col items-center">
+                    <canvas id="gameCanvas" width="700" height="400" class="border border-primary rounded-md"></canvas>
+                    <div
+                        class="mt-8 flex flex-col sm:flex-row justify-between w-full max-w-2xl text-lg font-bold space-y-2 sm:space-y-0 text-primary">
+                        <p>Poziom: <span id="levelDisplay" class="accent-color">1</span></p>
+                        <p>Czas: <span id="timeDisplay" class="accent-color">45</span>s</p>
+                        <p>Wynik: <span id="scoreDisplay" class="accent-color">0</span></p>
+                        <p>Usterki: <span id="targetCountDisplay" class="accent-color">0</span></p>
+                        <p>Rekord: <span id="highScoreDisplay" class="text-yellow-400">0</span></p>
+                    </div>
+                    <div class="mt-8 text-center">
+                        <button id="startButton"
+                            class="cta-button px-8 py-3 bg-gradient-to-r from-cyan-500 to-cyan-700 text-accent-dark font-bold rounded-lg hover-accent transition duration-300 shadow-metal transform hover:scale-105 active:scale-95 group flex items-center justify-center">
+                            Start Gry <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div id="gameMessage"
+                        class="mt-8 p-4 bg-secondary text-primary rounded-lg hidden text-center font-semibold text-lg">
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="kontakt" class="py-28 bg-secondary border-t border-primary overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16" data-aos="fade-up">
+                    <h2 class="text-4xl font-extrabold mb-4">Skontaktuj się z Nami</h2>
+                    <p class="text-lg text-muted leading-relaxed">Prześlij zapytanie, rysunki techniczne lub skontaktuj
+                        się...</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+
+                    <div class="lg:col-span-2 p-10 rounded-xl shadow-2xl" data-aos="fade-right"
+                        style="background-color: var(--color-form-card-bg);">
+
+                        <form class="space-y-6">
+                            <div>
+                                <label for="form_name_simple" class="block text-sm font-medium text-muted mb-2">Imię i
+                                    Nazwisko / Firma</label>
+                                <input type="text" id="form_name_simple" name="Imię lub Firma"
+                                    class="block w-full p-3 border border-primary rounded-md text-form focus:border-accent focus:ring-accent transition-colors"
+                                    style="background-color: var(--color-form-input-bg);" required>
+                            </div>
+                            <div>
+                                <label for="form_email_simple" class="block text-sm font-medium text-muted mb-2">Adres
+                                    E-mail</label>
+                                <input type="email" id="form_email_simple" name="Adres Email"
+                                    class="block w-full p-3 border border-primary rounded-md text-form focus:border-accent focus:ring-accent transition-colors"
+                                    style="background-color: var(--color-form-input-bg);" required>
+                            </div>
+                            <div>
+                                <label for="form_message_simple"
+                                    class="block text-sm font-medium text-muted mb-2">Wiadomość / Opis zapytania</label>
+                                <textarea id="form_message_simple" name="Treść Wiadomości" rows="5"
+                                    class="block w-full p-3 border border-primary rounded-md text-form focus:border-accent focus:ring-accent transition-colors"
+                                    style="background-color: var(--color-form-input-bg);" required></textarea>
+                            </div>
+                            <button type="button"
+                                class="w-full px-4 py-3 bg-gradient-to-r from-cyan-500 to-cyan-700 text-accent-dark font-bold rounded-lg hover-accent transition duration-300 shadow-metal transform hover:scale-105 active:scale-95 group flex items-center justify-center cta-button form-button">
+                                Wyślij Zapytanie <svg xmlns="http://www.w3.org/2000/svg"
+                                    class="h-5 w-5 ml-2 transition-transform duration-300 group-hover:translate-x-1"
+                                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                                </svg> </button>
+                            <p class="text-xs text-muted mt-4 text-center">Formularz tymczasowo nieaktywny. Prosimy o
+                                kontakt mailowy lub telefoniczny.</p>
+                        </form>
+                    </div>
+                    <div class="lg:col-span-1 p-10 bg-card rounded-xl shadow-2xl" data-aos="fade-left"
+                        data-aos-delay="200">
+                        <h3 class="text-2xl font-semibold accent-color mb-6">Dane Kontaktowe</h3>
+                        <div class="space-y-5 text-muted">
+                            <p class="flex items-start"> <svg class="w-6 h-6 mr-4 flex-shrink-0 accent-color mt-1"
+                                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z">
+                                    </path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                </svg>
+                                <span><strong class="text-primary">BK CNC</strong><br>ul. Gen. Bora-Komorowskiego
+                                    3c<br>83-110 Tczew</span>
+                            </p>
+                            <p class="flex items-center"> <svg class="w-6 h-6 mr-4 flex-shrink-0 accent-color"
+                                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z">
+                                    </path>
+                                </svg>
+                                <a href="tel:+48123456789" class="hover:text-accent transition duration-300">+48 123 456
+                                    789</a>
+                            </p>
+                            <p class="flex items-center"> <svg class="w-6 h-6 mr-4 flex-shrink-0 accent-color"
+                                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
+                                    </path>
+                                </svg> <a href="mailto:blazejkaczmar@gmail.com"
+                                    class="hover:text-accent transition duration-300">blazejkaczmar@gmail.com</a> </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
-    <footer class="bg-footer border-t border-primary py-10"> <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-muted text-sm"> <p>&copy; 2024 BK CNC. Wszelkie prawa zastrzeżone. Mietki w moim sercu | Adres: ul. Gen. Bora-Komorowskiego 3c</p> </div> </footer>
+    <footer class="bg-footer border-t border-primary py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-muted text-sm">
+            <p>&copy; 2024 BK CNC. Wszelkie prawa zastrzeżone. Mietki w moim sercu | Adres: ul. Gen. Bora-Komorowskiego
+                3c</p>
+        </div>
+    </footer>
 
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script> 
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
     <script>
-        
-        let mobileMenuButton, mobileMenu, mobileMenuLinks, header;
-        let themeToggle, mobileThemeToggle; 
 
-        
+        let mobileMenuButton, mobileMenu, mobileMenuLinks, header;
+        let themeToggle, mobileThemeToggle;
+
+
         function displayMessage(message, isError = false) { const msgElement = document.getElementById('calculator-message'); if (!msgElement) return; msgElement.textContent = message; msgElement.classList.remove('hidden'); msgElement.className = msgElement.className.replace(/bg-(red|green)-900\/50 text-(red|green)-300/g, ''); msgElement.classList.add(isError ? 'bg-red-900/50 text-red-300' : 'bg-green-900/50 text-green-300'); }
         function calculateRPM() { const vcInput = document.getElementById('Vc'); const dInput = document.getElementById('D'); const resultElement = document.getElementById('n_result'); const nInput = document.getElementById('n_input'); if (!vcInput || !dInput || !resultElement || !nInput) return; const Vc = parseFloat(vcInput.value); const D = parseFloat(dInput.value); if (isNaN(Vc) || isNaN(D) || Vc <= 0 || D <= 0) { resultElement.textContent = '0'; nInput.value = ''; displayMessage("Błąd: Vc i D muszą być > 0.", true); return; } const n = (Vc * 1000) / (Math.PI * D); const roundedN = Math.round(n); resultElement.textContent = roundedN; nInput.value = roundedN; displayMessage(`Obroty (n) obliczone dla Vc=${Vc}, D=${D}.`, false); }
         function calculateFeedRate() { const fInput = document.getElementById('f'); const nInput = document.getElementById('n_input'); const resultElement = document.getElementById('Vf_result'); if (!fInput || !nInput || !resultElement) return; const f = parseFloat(fInput.value); const n = parseFloat(nInput.value); if (isNaN(f) || isNaN(n) || f <= 0 || n <= 0) { resultElement.textContent = '0'; displayMessage("Błąd: f i n muszą być > 0.", true); return; } const Vf = f * n; resultElement.textContent = Vf.toFixed(2); displayMessage(`Posuw (Vf) obliczony dla f=${f}, n=${n}.`, false); }
 
-        
-        let canvas, ctx; 
+
+        let canvas, ctx;
         let CANVAS_WIDTH = 700, CANVAS_HEIGHT = 400, GAME_DURATION = 45, BASE_TARGETS = 5, MAX_LEVEL = 10;
         let gameLoopInterval, gameTime, isGameOver = true, animationFrameId, currentLevel = 1;
-        
+
         // NOWE ZMIENNE GRY DLA POPRAWIONEJ FIZYKI
-        let BASE_BALL_VELOCITY; 
+        let BASE_BALL_VELOCITY;
         const BASE_BALL_VELOCITY_FACTOR = 0.008; // 0.8% szerokości canvasa na klatkę (ok. 5.6px dla 700px)
         const PLAYER_INFLUENCE_FACTOR = 0.5; // Jak bardzo ruch paletki (velocityY) wpływa na kąt kulki
-        
-        let player = { velocityY: 0, lastY: 0, currentBaseSpeed: 0 }; 
-        let balls = []; 
+
+        let player = { velocityY: 0, lastY: 0, currentBaseSpeed: 0 };
+        let balls = [];
         let targets = [], bonuses = [], obstacles = [], particles = [];
-        let timeDisplay, targetCountDisplay, hitsDisplay, gameMessage, startButton, levelDisplay, scoreDisplay, highScoreDisplay; 
+        let timeDisplay, targetCountDisplay, hitsDisplay, gameMessage, startButton, levelDisplay, scoreDisplay, highScoreDisplay;
         let score = 0, highScore = 0, hitCount = 0;
-        let mousePosition = { y: CANVAS_HEIGHT / 2 }; 
+        let mousePosition = { y: CANVAS_HEIGHT / 2 };
         const BONUS_CHANCE = 0.3;
         let soundsReady = false, shootSynth, hitSynth, bounceSynth, bonusSynth, endSynth, multiBallSynth;
         let lastBounceSoundTime = 0, lastHitSoundTime = 0;
-        const soundThrottleTime = 50; 
+        const soundThrottleTime = 50;
 
-        
+
         async function setupSounds() { try { await Tone.start(); shootSynth = new Tone.Synth({ oscillator: { type: "square" }, envelope: { attack: 0.01, decay: 0.1, sustain: 0.05, release: 0.1 } }).toDestination(); hitSynth = new Tone.MembraneSynth({ pitchDecay: 0.01, octaves: 6, envelope: { attack: 0.001, decay: 0.2, sustain: 0 } }).toDestination(); bounceSynth = new Tone.PluckSynth({ attackNoise: 0.5, dampening: 4000, resonance: 0.7 }).toDestination(); bonusSynth = new Tone.FMSynth({ harmonicity: 3, modulationIndex: 10, envelope: { attack: 0.01, decay: 0.2 }, modulationEnvelope: { attack: 0.01, decay: 0.2 } }).toDestination(); endSynth = new Tone.NoiseSynth({ noise: { type: "white" }, envelope: { attack: 0.005, decay: 0.1, sustain: 0 } }).toDestination(); multiBallSynth = new Tone.PolySynth(Tone.Synth, { oscillator: { type: "fmsquare" }, envelope: { attack: 0.01, decay: 0.1, release: 0.2 } }).toDestination(); soundsReady = true; console.log("Audio ready."); } catch (e) { console.error("Failed to initialize audio:", e); soundsReady = false; } }
         function playSound(synth, note, duration = "8n", type = null) { const now = performance.now(); if (soundsReady && synth && Tone.context.state === 'running') { if (type === 'bounce' && now - lastBounceSoundTime < soundThrottleTime) return; if (type === 'hit' && now - lastHitSoundTime < soundThrottleTime) return; try { const startTime = Tone.now() + (Tone.context.lookAhead || 0.01); synth.triggerAttackRelease(note, duration, startTime); if (type === 'bounce') lastBounceSoundTime = now; if (type === 'hit') lastHitSoundTime = now; } catch (e) { /* Ignoruj błąd czasu startu */ } } }
 
-        
-        function resizeCanvas() { if (!canvas) return; const parentWidth = canvas.parentElement.clientWidth; CANVAS_WIDTH = Math.min(parentWidth - 16, 700); CANVAS_HEIGHT = (CANVAS_WIDTH / 700) * 400; canvas.width = CANVAS_WIDTH; canvas.height = CANVAS_HEIGHT; if (isGameOver || player.width === undefined) { 
-            player.width = CANVAS_WIDTH * 0.02; 
-            player.height = CANVAS_HEIGHT * 0.2; 
-            player.x = CANVAS_WIDTH * 0.02; 
-            player.y = CANVAS_HEIGHT / 2 - player.height / 2;
-            player.baseHeight = CANVAS_HEIGHT * 0.2; // Ustawienie baseHeight
-            mousePosition.y = player.y + player.height / 2; 
-            player.lastY = player.y; 
-            player.velocityY = 0;
-        } if (!isGameOver && ctx) { draw(); } } 
-        
-        function initGame(resetLevel = true) { 
-             if (!ctx) { console.error("Canvas context not ready for initGame"); return; } 
-             resizeCanvas(); 
-             if (resetLevel) { currentLevel = 1; hitCount = 0; score = 0; } 
-             highScore = localStorage.getItem('cncHighScore') || 0; 
-             if(highScoreDisplay) highScoreDisplay.textContent = highScore; 
 
-             const targetsToGenerate = BASE_TARGETS + (currentLevel - 1); 
-             GAME_DURATION = 50 - (currentLevel - 1) * 3; if (GAME_DURATION < 15) GAME_DURATION = 15; 
-             
-             // Ustawienie bazowej prędkości kulki z przyspieszeniem na poziom
-             BASE_BALL_VELOCITY = CANVAS_WIDTH * BASE_BALL_VELOCITY_FACTOR;
-             const speedMultiplier = 1.0 + Math.min(currentLevel - 1, MAX_LEVEL) * 0.12; // Zwiększenie prędkości o 12% na poziom
-             player = { 
-                width: CANVAS_WIDTH * 0.02, height: CANVAS_HEIGHT * 0.2, x: CANVAS_WIDTH * 0.02, 
-                y: CANVAS_HEIGHT / 2 - (CANVAS_HEIGHT * 0.2) / 2, speed: 0.15, 
-                color: 'var(--color-accent)', effectTimer: 0, 
-                baseHeight: CANVAS_HEIGHT * 0.2, velocityY: 0, 
+        function resizeCanvas() {
+            if (!canvas) return; const parentWidth = canvas.parentElement.clientWidth; CANVAS_WIDTH = Math.min(parentWidth - 16, 700); CANVAS_HEIGHT = (CANVAS_WIDTH / 700) * 400; canvas.width = CANVAS_WIDTH; canvas.height = CANVAS_HEIGHT; if (isGameOver || player.width === undefined) {
+                player.width = CANVAS_WIDTH * 0.02;
+                player.height = CANVAS_HEIGHT * 0.2;
+                player.x = CANVAS_WIDTH * 0.02;
+                player.y = CANVAS_HEIGHT / 2 - player.height / 2;
+                player.baseHeight = CANVAS_HEIGHT * 0.2; // Ustawienie baseHeight
+                mousePosition.y = player.y + player.height / 2;
+                player.lastY = player.y;
+                player.velocityY = 0;
+            } if (!isGameOver && ctx) { draw(); }
+        }
+
+        function initGame(resetLevel = true) {
+            if (!ctx) { console.error("Canvas context not ready for initGame"); return; }
+            resizeCanvas();
+            if (resetLevel) { currentLevel = 1; hitCount = 0; score = 0; }
+            highScore = localStorage.getItem('cncHighScore') || 0;
+            if (highScoreDisplay) highScoreDisplay.textContent = highScore;
+
+            const targetsToGenerate = BASE_TARGETS + (currentLevel - 1);
+            GAME_DURATION = 50 - (currentLevel - 1) * 3; if (GAME_DURATION < 15) GAME_DURATION = 15;
+
+            // Ustawienie bazowej prędkości kulki z przyspieszeniem na poziom
+            BASE_BALL_VELOCITY = CANVAS_WIDTH * BASE_BALL_VELOCITY_FACTOR;
+            const speedMultiplier = 1.0 + Math.min(currentLevel - 1, MAX_LEVEL) * 0.12; // Zwiększenie prędkości o 12% na poziom
+            player = {
+                width: CANVAS_WIDTH * 0.02, height: CANVAS_HEIGHT * 0.2, x: CANVAS_WIDTH * 0.02,
+                y: CANVAS_HEIGHT / 2 - (CANVAS_HEIGHT * 0.2) / 2, speed: 0.15,
+                color: 'var(--color-accent)', effectTimer: 0,
+                baseHeight: CANVAS_HEIGHT * 0.2, velocityY: 0,
                 lastY: CANVAS_HEIGHT / 2 - (CANVAS_HEIGHT * 0.2) / 2,
                 currentBaseSpeed: BASE_BALL_VELOCITY * speedMultiplier // Aktualna prędkość bazowa dla poziomu
-             }; 
-             
-             balls = []; 
-             
-             targets = []; bonuses = []; obstacles = []; particles = []; gameTime = GAME_DURATION; isGameOver = false; 
-             if(levelDisplay) levelDisplay.textContent = currentLevel; 
-             if(timeDisplay) { timeDisplay.textContent = GAME_DURATION; timeDisplay.classList.remove('timer-warning'); }
-             if(scoreDisplay) scoreDisplay.textContent = score; 
-             if(gameMessage) gameMessage.classList.add('hidden'); 
-             if(startButton) startButton.textContent = "Restart Gry"; 
-             
-             if (currentLevel >= 7) { generateObstacles(Math.min(currentLevel - 6, 2), true); } 
-             if (currentLevel >= 2) { generateObstacles(Math.min(currentLevel - 1, 3), false); } 
-             if (currentLevel >= 3) { generateAngledObstacles(Math.min(Math.floor((currentLevel - 1) / 2), 3)); } 
-             if (currentLevel === 10) { generateBoss(); } else { generateTargets(targetsToGenerate); }
+            };
 
-             if(targetCountDisplay) targetCountDisplay.textContent = targets.filter(t => t.active).length; 
-             mousePosition.y = player.y + player.height / 2; 
+            balls = [];
+
+            targets = []; bonuses = []; obstacles = []; particles = []; gameTime = GAME_DURATION; isGameOver = false;
+            if (levelDisplay) levelDisplay.textContent = currentLevel;
+            if (timeDisplay) { timeDisplay.textContent = GAME_DURATION; timeDisplay.classList.remove('timer-warning'); }
+            if (scoreDisplay) scoreDisplay.textContent = score;
+            if (gameMessage) gameMessage.classList.add('hidden');
+            if (startButton) startButton.textContent = "Restart Gry";
+
+            if (currentLevel >= 7) { generateObstacles(Math.min(currentLevel - 6, 2), true); }
+            if (currentLevel >= 2) { generateObstacles(Math.min(currentLevel - 1, 3), false); }
+            if (currentLevel >= 3) { generateAngledObstacles(Math.min(Math.floor((currentLevel - 1) / 2), 3)); }
+            if (currentLevel === 10) { generateBoss(); } else { generateTargets(targetsToGenerate); }
+
+            if (targetCountDisplay) targetCountDisplay.textContent = targets.filter(t => t.active).length;
+            mousePosition.y = player.y + player.height / 2;
         }
-        
-        
-        function generateTargets(count) { 
-             const targetRadius = CANVAS_WIDTH * 0.015; 
-             const safeMarginX = targetRadius * 4; const safeMarginY = targetRadius * 1.5;
-             const minY = player.height * 0.5; const maxY = CANVAS_HEIGHT - player.height * 0.5; 
-             const minX = CANVAS_WIDTH * 0.5; const maxX = CANVAS_WIDTH * 0.85; 
 
-             for (let i = 0; i < count; i++) { 
-                 let newX, newY, collision, attempts = 0;
-                 do { 
-                     collision = false; 
-                     newX = Math.random() * (maxX - minX) + minX; 
-                     newY = Math.random() * (maxY - minY) + minY; 
-                     for (const obs of obstacles) { if (newX + targetRadius + safeMarginX > obs.x && newX - targetRadius - safeMarginX < obs.x + obs.width && newY + targetRadius + safeMarginY > obs.y && newY - targetRadius - safeMarginY < obs.y + obs.height) { collision = true; break; } } 
-                     for(const existingTarget of targets){ const distSq = (newX - existingTarget.x)**2 + (newY - existingTarget.y)**2; if(distSq < (targetRadius * 3)**2){ collision = true; break; } } 
-                     attempts++; 
-                 } while (collision && attempts < 30); 
-                 
-                 let hitsRequired = 1;
-                 if (currentLevel >= 4 && Math.random() < 0.3) hitsRequired = 2; 
-                 if (currentLevel >= 6 && Math.random() < 0.1) hitsRequired = 3; 
-                 
-                 let isMoving = false; let moveSpeed = 0;
-                 if (currentLevel >= 6 && Math.random() < 0.25) { isMoving = true; moveSpeed = (Math.random() * 1 + 0.5) * (Math.random() > 0.5 ? 1 : -1) * (CANVAS_HEIGHT / 400); }
 
-                 targets.push({ x: newX, y: newY, radius: targetRadius, active: true, color: '#dc2626', hitsRequired: hitsRequired, maxHits: hitsRequired, isMoving: isMoving, moveSpeed: moveSpeed }); 
-             } 
+        function generateTargets(count) {
+            const targetRadius = CANVAS_WIDTH * 0.015;
+            const safeMarginX = targetRadius * 4; const safeMarginY = targetRadius * 1.5;
+            const minY = player.height * 0.5; const maxY = CANVAS_HEIGHT - player.height * 0.5;
+            const minX = CANVAS_WIDTH * 0.5; const maxX = CANVAS_WIDTH * 0.85;
+
+            for (let i = 0; i < count; i++) {
+                let newX, newY, collision, attempts = 0;
+                do {
+                    collision = false;
+                    newX = Math.random() * (maxX - minX) + minX;
+                    newY = Math.random() * (maxY - minY) + minY;
+                    for (const obs of obstacles) { if (newX + targetRadius + safeMarginX > obs.x && newX - targetRadius - safeMarginX < obs.x + obs.width && newY + targetRadius + safeMarginY > obs.y && newY - targetRadius - safeMarginY < obs.y + obs.height) { collision = true; break; } }
+                    for (const existingTarget of targets) { const distSq = (newX - existingTarget.x) ** 2 + (newY - existingTarget.y) ** 2; if (distSq < (targetRadius * 3) ** 2) { collision = true; break; } }
+                    attempts++;
+                } while (collision && attempts < 30);
+
+                let hitsRequired = 1;
+                if (currentLevel >= 4 && Math.random() < 0.3) hitsRequired = 2;
+                if (currentLevel >= 6 && Math.random() < 0.1) hitsRequired = 3;
+
+                let isMoving = false; let moveSpeed = 0;
+                if (currentLevel >= 6 && Math.random() < 0.25) { isMoving = true; moveSpeed = (Math.random() * 1 + 0.5) * (Math.random() > 0.5 ? 1 : -1) * (CANVAS_HEIGHT / 400); }
+
+                targets.push({ x: newX, y: newY, radius: targetRadius, active: true, color: '#dc2626', hitsRequired: hitsRequired, maxHits: hitsRequired, isMoving: isMoving, moveSpeed: moveSpeed });
+            }
         }
         function generateBoss() { targets.push({ x: CANVAS_WIDTH * 0.7, y: CANVAS_HEIGHT / 2, radius: CANVAS_WIDTH * 0.08, active: true, color: '#b91c1c', hitsRequired: 20, maxHits: 20, isMoving: true, moveSpeed: 0.5 * (CANVAS_HEIGHT / 400) }); }
         function generateObstacles(count, invisible = false) { const obsWidth = CANVAS_WIDTH * 0.02; const obsHeight = CANVAS_HEIGHT * 0.18; const marginX = CANVAS_WIDTH * 0.1; const marginY = obsHeight * 0.7; for (let i = 0; i < count; i++) { let newX, newY, collision, attempts = 0; do { collision = false; newX = Math.random() * (CANVAS_WIDTH * 0.6 - CANVAS_WIDTH * 0.3 - 2 * marginX) + CANVAS_WIDTH * 0.3 + marginX; newY = Math.random() * (CANVAS_HEIGHT - obsHeight - 2 * marginY) + marginY; for (const obs of obstacles) { if (newX < obs.x + obs.width + marginX && newX + obsWidth > obs.x - marginX && newY < obs.y + obs.height + marginY * 1.5 && newY + obsHeight > obs.y - marginY * 1.5) { collision = true; break; } } attempts++; } while (collision && attempts < 30); if (!collision) { obstacles.push({ type: 'rect', x: newX, y: newY, width: obsWidth, height: obsHeight, color: invisible ? 'rgba(107, 114, 128, 0.5)' : '#6b7280', isInvisible: invisible, fadeTimer: 2.0 }); } } }
         function generateAngledObstacles(count) { const size = CANVAS_WIDTH * 0.05; const margin = size * 1.5; for (let i = 0; i < count; i++) { const angle = Math.random() > 0.5 ? 45 : -45; let posX, posY, collision, attempts = 0; do { collision = false; posX = CANVAS_WIDTH - margin - size - (Math.random() * CANVAS_WIDTH * 0.2); posY = margin * 1.5 + Math.random() * (CANVAS_HEIGHT - 3 * margin - size); for (const obs of obstacles) { const checkMargin = margin * 0.8; if (posX < obs.x + obs.width + checkMargin && posX + size > obs.x - checkMargin && posY < obs.y + obs.height + checkMargin && posY + size > obs.y - checkMargin) { collision = true; break; } } attempts++; } while (collision && attempts < 25); if (!collision) { obstacles.push({ type: 'angled', x: posX, y: posY, width: size, height: size, angle: angle, color: '#9ca3af' }); } } }
         function dropBonus(x, y) { if (Math.random() < BONUS_CHANCE) { const bonusSize = CANVAS_WIDTH * 0.024; let bonusType = 'time'; const rand = Math.random(); if (currentLevel >= 2 && rand < 0.2) bonusType = 'slow'; else if (currentLevel >= 4 && rand < 0.4) bonusType = 'enlarge'; else if (currentLevel >= 5 && rand < 0.6) bonusType = 'multi-ball'; else if (currentLevel >= 6 && rand < 0.7) bonusType = 'piercing'; else if (currentLevel >= 7 && rand < 0.8) bonusType = 'shrink'; bonuses.push({ x: x - bonusSize / 2, y: y - bonusSize / 2, width: bonusSize, height: bonusSize, speedY: (0.5 + Math.random() * 0.5) * (CANVAS_HEIGHT / 400), type: bonusType, active: true, color: (bonusType === 'speedup' || bonusType === 'shrink') ? '#f87171' : '#facc15', effectTimer: bonusType === 'slow' ? 5 : 0 }); } }
-        
-        
-        function drawBonus(bonus) { ctx.fillStyle = bonus.color; ctx.fillRect(bonus.x, bonus.y, bonus.width, bonus.height); ctx.fillStyle = 'var(--color-accent-text-dark)'; ctx.font = `bold ${bonus.width * 0.5}px Inter`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; let symbol = '+5s'; if(bonus.type === 'slow') symbol = '🐢'; else if(bonus.type === 'enlarge') symbol = '↕'; else if(bonus.type === 'speedup') symbol = '⚡'; else if(bonus.type === 'multi-ball') symbol = '•••'; else if(bonus.type === 'piercing') symbol = '🔥'; else if(bonus.type === 'shrink') symbol = '↔'; ctx.fillText(symbol, bonus.x + bonus.width / 2, bonus.y + bonus.height / 2); }
+
+
+        function drawBonus(bonus) { ctx.fillStyle = bonus.color; ctx.fillRect(bonus.x, bonus.y, bonus.width, bonus.height); ctx.fillStyle = 'var(--color-accent-text-dark)'; ctx.font = `bold ${bonus.width * 0.5}px Inter`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; let symbol = '+5s'; if (bonus.type === 'slow') symbol = '🐢'; else if (bonus.type === 'enlarge') symbol = '↕'; else if (bonus.type === 'speedup') symbol = '⚡'; else if (bonus.type === 'multi-ball') symbol = '•••'; else if (bonus.type === 'piercing') symbol = '🔥'; else if (bonus.type === 'shrink') symbol = '↔'; ctx.fillText(symbol, bonus.x + bonus.width / 2, bonus.y + bonus.height / 2); }
         function createParticles(x, y, count = 10, color = 'var(--color-text-primary)') { for (let i = 0; i < count; i++) { particles.push({ x: x, y: y, radius: Math.random() * (CANVAS_WIDTH * 0.004) + 1, speedX: (Math.random() - 0.5) * (CANVAS_WIDTH * 0.01), speedY: (Math.random() - 0.5) * (CANVAS_WIDTH * 0.01), alpha: 1, decay: Math.random() * 0.05 + 0.01, color: color }); } }
         function drawParticles() { particles.forEach((p) => { ctx.save(); ctx.globalAlpha = p.alpha; ctx.fillStyle = p.color; ctx.beginPath(); ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2); ctx.fill(); ctx.restore(); }); }
         function updateParticles() { particles.forEach(p => { p.x += p.speedX; p.y += p.speedY; p.alpha -= p.decay; }); particles = particles.filter(p => p.alpha > 0); }
 
         // POPRAWIONY RYSUNEK CELÓW (detali) i usunięcie siatki
-        function draw() { 
-            if (!ctx) return; 
-            ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT); 
+        function draw() {
+            if (!ctx) return;
+            ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 
             // Rysowanie Paletki (Operatora)
-            ctx.fillStyle = player.color; 
-            ctx.fillRect(player.x, player.y, player.width, player.height); 
-            
+            ctx.fillStyle = player.color;
+            ctx.fillRect(player.x, player.y, player.width, player.height);
+
             // Rysowanie Kul
-            balls.forEach(ball => { 
-                if (ball.active) { 
-                    ctx.fillStyle = ball.isPiercing ? 'var(--color-accent)' : ball.color; 
-                    ctx.beginPath(); 
-                    ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2); 
-                    ctx.fill(); 
-                } 
+            balls.forEach(ball => {
+                if (ball.active) {
+                    ctx.fillStyle = ball.isPiercing ? 'var(--color-accent)' : ball.color;
+                    ctx.beginPath();
+                    ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
+                    ctx.fill();
+                }
             });
-            
+
             // Rysowanie Celów (Detali)
-            targets.forEach(target => { 
-                if (target.active) { 
+            targets.forEach(target => {
+                if (target.active) {
                     // Kolory detali w zależności od 'wytrzymałości' (hitsRequired)
                     if (target.hitsRequired >= 3) ctx.fillStyle = '#ef4444'; // Twardszy materiał (czerwony)
                     else if (target.hitsRequired === 2) ctx.fillStyle = '#f97316'; // Średni materiał (pomarańczowy)
                     else ctx.fillStyle = '#facc15'; // Miękki materiał (żółty)
-                    
+
                     const size = target.radius * 2;
-                    
+
                     // Rysowanie detalu (zaokrąglony prostokąt - dla czytelności Arkanoida)
                     ctx.beginPath();
                     ctx.roundRect(target.x - target.radius, target.y - target.radius, size, size, target.radius * 0.25);
                     ctx.fill();
 
-                    ctx.strokeStyle = 'var(--color-text-primary)'; 
-                    ctx.lineWidth = target.hitsRequired > 1 ? 2 : 1; 
+                    ctx.strokeStyle = 'var(--color-text-primary)';
+                    ctx.lineWidth = target.hitsRequired > 1 ? 2 : 1;
                     ctx.stroke();
 
                     // Wyświetlenie "życia" detalu dla detali o podwyższonej wytrzymałości
@@ -523,209 +1029,208 @@
                         ctx.textBaseline = 'middle';
                         ctx.fillText(target.hitsRequired, target.x, target.y);
                     }
-                } 
-            }); 
-            
+                }
+            });
+
             // Rysowanie Bonusów
-            bonuses.forEach(bonus => { if (bonus.active) { drawBonus(bonus); } }); 
-            
+            bonuses.forEach(bonus => { if (bonus.active) { drawBonus(bonus); } });
+
             // Rysowanie Przeszkód
-            obstacles.forEach(obs => { 
-                ctx.save(); 
-                if (obs.isInvisible) ctx.globalAlpha = obs.fadeTimer > 0 ? (obs.fadeTimer / 2.0) : 0; 
-                ctx.fillStyle = obs.color; 
-                ctx.strokeStyle = 'var(--color-text-primary)'; 
-                ctx.lineWidth = 2; 
-                if (obs.type === 'rect') { 
-                    ctx.fillRect(obs.x, obs.y, obs.width, obs.height); 
-                    ctx.strokeRect(obs.x, obs.y, obs.width, obs.height); 
-                } else if (obs.type === 'angled') { 
-                    ctx.translate(obs.x + obs.width / 2, obs.y + obs.height / 2); 
-                    ctx.rotate(obs.angle * Math.PI / 180); 
-                    ctx.fillRect(-obs.width / 2, -obs.height / 2, obs.width, obs.height); 
-                    ctx.strokeRect(-obs.width / 2, -obs.height / 2, obs.width, obs.height); 
-                } 
-                ctx.restore(); 
-            }); 
-            
-            drawParticles(); 
+            obstacles.forEach(obs => {
+                ctx.save();
+                if (obs.isInvisible) ctx.globalAlpha = obs.fadeTimer > 0 ? (obs.fadeTimer / 2.0) : 0;
+                ctx.fillStyle = obs.color;
+                ctx.strokeStyle = 'var(--color-text-primary)';
+                ctx.lineWidth = 2;
+                if (obs.type === 'rect') {
+                    ctx.fillRect(obs.x, obs.y, obs.width, obs.height);
+                    ctx.strokeRect(obs.x, obs.y, obs.width, obs.height);
+                } else if (obs.type === 'angled') {
+                    ctx.translate(obs.x + obs.width / 2, obs.y + obs.height / 2);
+                    ctx.rotate(obs.angle * Math.PI / 180);
+                    ctx.fillRect(-obs.width / 2, -obs.height / 2, obs.width, obs.height);
+                    ctx.strokeRect(-obs.width / 2, -obs.height / 2, obs.width, obs.height);
+                }
+                ctx.restore();
+            });
+
+            drawParticles();
         }
-        
-        
+
+
         // NOWA FUNKCJA TWORZENIA KULKI
         function createBall(isInitial = false, x = player.x + player.width + 5, y = player.y + player.height / 2, initialSpeedX = null, initialSpeedY = null) {
-             const baseSpeed = player.currentBaseSpeed || CANVAS_WIDTH * BASE_BALL_VELOCITY_FACTOR;
+            const baseSpeed = player.currentBaseSpeed || CANVAS_WIDTH * BASE_BALL_VELOCITY_FACTOR;
 
-             let speedX = initialSpeedX !== null ? initialSpeedX : baseSpeed;
-             let speedY = initialSpeedY !== null ? initialSpeedY : (Math.random() - 0.5) * (baseSpeed * 0.6); // Kąt początkowy
-            
-             // Normalizacja prędkości, aby była stała (eliminacja przypadkowego przyspieszania)
-             const speedMagnitude = Math.sqrt(speedX * speedX + speedY * speedY);
-             if (speedMagnitude !== baseSpeed && speedMagnitude !== 0) {
-                 const factor = baseSpeed / speedMagnitude;
-                 speedX *= factor;
-                 speedY *= factor;
-             }
+            let speedX = initialSpeedX !== null ? initialSpeedX : baseSpeed;
+            let speedY = initialSpeedY !== null ? initialSpeedY : (Math.random() - 0.5) * (baseSpeed * 0.6); // Kąt początkowy
 
-             balls.push({ 
-                radius: CANVAS_WIDTH * 0.007, 
-                x: x, y: y, 
-                speedX: speedX, speedY: speedY, 
-                active: true, 
-                color: 'var(--color-text-primary)', 
-                speedMultiplier: 1, 
-                isPiercing: false, 
-                effectTimer: 0 
+            // Normalizacja prędkości, aby była stała (eliminacja przypadkowego przyspieszania)
+            const speedMagnitude = Math.sqrt(speedX * speedX + speedY * speedY);
+            if (speedMagnitude !== baseSpeed && speedMagnitude !== 0) {
+                const factor = baseSpeed / speedMagnitude;
+                speedX *= factor;
+                speedY *= factor;
+            }
+
+            balls.push({
+                radius: CANVAS_WIDTH * 0.007,
+                x: x, y: y,
+                speedX: speedX, speedY: speedY,
+                active: true,
+                color: 'var(--color-text-primary)',
+                speedMultiplier: 1,
+                isPiercing: false,
+                effectTimer: 0
             });
         }
 
         // POPRAWIONA FUNKCJA WYSTRZAŁU (shoot)
-        function shoot() { 
-             
-             if (isGameOver || balls.some(b => b.active)) return; 
-             
-             const newBallY = player.y + player.height / 2;
-             const baseSpeed = player.currentBaseSpeed || CANVAS_WIDTH * BASE_BALL_VELOCITY_FACTOR;
-             const maxSpeedY = baseSpeed * 0.6; // Ograniczenie początkowego kąta
-             
-             // Wpływ ruchu paletki na kąt początkowy (dla strzału)
-             const initialSpeedY = Math.max(-maxSpeedY, Math.min(maxSpeedY, player.velocityY * PLAYER_INFLUENCE_FACTOR)); 
-             
-             // Obliczenie SpeedX, aby całkowita prędkość była stała (normalizacja)
-             const initialSpeedX = Math.sqrt(baseSpeed * baseSpeed - initialSpeedY * initialSpeedY); 
-             
-             createBall(false, player.x + player.width + CANVAS_WIDTH * 0.007 + 5, newBallY, initialSpeedX, initialSpeedY);
-             playSound(shootSynth, "C4", "16n"); 
-        } 
-        
-        function updateGame() { 
-             if (isGameOver || !ctx) return; 
+        function shoot() {
 
-             // Aktualizacja efektów paletki i piłek
-             if (player.effectTimer > 0) { player.effectTimer -= 1 / 60; if (player.effectTimer <= 0) { player.height = player.baseHeight; player.y = Math.min(player.y, CANVAS_HEIGHT - player.height); if(gameMessage) gameMessage.classList.add('hidden'); } } 
-             balls.forEach(ball => { 
-                if (ball.effectTimer > 0) { ball.effectTimer -= 1 / 60; } 
+            if (isGameOver || balls.some(b => b.active)) return;
+
+            const newBallY = player.y + player.height / 2;
+            const baseSpeed = player.currentBaseSpeed || CANVAS_WIDTH * BASE_BALL_VELOCITY_FACTOR;
+            const maxSpeedY = baseSpeed * 0.6; // Ograniczenie początkowego kąta
+
+            // Wpływ ruchu paletki na kąt początkowy (dla strzału)
+            const initialSpeedY = Math.max(-maxSpeedY, Math.min(maxSpeedY, player.velocityY * PLAYER_INFLUENCE_FACTOR));
+
+            // Obliczenie SpeedX, aby całkowita prędkość była stała (normalizacja)
+            const initialSpeedX = Math.sqrt(baseSpeed * baseSpeed - initialSpeedY * initialSpeedY);
+
+            createBall(false, player.x + player.width + CANVAS_WIDTH * 0.007 + 5, newBallY, initialSpeedX, initialSpeedY);
+            playSound(shootSynth, "C4", "16n");
+        }
+
+        function updateGame() {
+            if (isGameOver || !ctx) return;
+
+            // Aktualizacja efektów paletki i piłek
+            if (player.effectTimer > 0) { player.effectTimer -= 1 / 60; if (player.effectTimer <= 0) { player.height = player.baseHeight; player.y = Math.min(player.y, CANVAS_HEIGHT - player.height); if (gameMessage) gameMessage.classList.add('hidden'); } }
+            balls.forEach(ball => {
+                if (ball.effectTimer > 0) { ball.effectTimer -= 1 / 60; }
                 if (ball.effectTimer <= 0) { ball.isPiercing = false; ball.speedMultiplier = 1; } // Zakończenie efektów na kulce
             });
-             obstacles.forEach(obs => { if (obs.isInvisible && obs.fadeTimer > 0) { obs.fadeTimer -= 1 / 60; } });
+            obstacles.forEach(obs => { if (obs.isInvisible && obs.fadeTimer > 0) { obs.fadeTimer -= 1 / 60; } });
 
-             // Ruch paletki (Operatora)
-             const targetY = mousePosition.y - player.height / 2; const deltaY = targetY - player.y; player.y += deltaY * player.speed; if (player.y < 0) player.y = 0; if (player.y + player.height > CANVAS_HEIGHT) player.y = CANVAS_HEIGHT - player.height; player.velocityY = player.y - player.lastY; player.lastY = player.y; 
+            // Ruch paletki (Operatora)
+            const targetY = mousePosition.y - player.height / 2; const deltaY = targetY - player.y; player.y += deltaY * player.speed; if (player.y < 0) player.y = 0; if (player.y + player.height > CANVAS_HEIGHT) player.y = CANVAS_HEIGHT - player.height; player.velocityY = player.y - player.lastY; player.lastY = player.y;
 
-             balls.forEach((bullet) => {
-                 if (bullet.active) { 
-                     
-                     // ZAWSZE UŻYWAJ AKTUALNEJ PRĘDKOŚCI BAZOWEJ
-                     const currentTotalSpeed = player.currentBaseSpeed * bullet.speedMultiplier; 
-                     
-                     const currentSpeedX = bullet.speedX * bullet.speedMultiplier; 
-                     const currentSpeedY = bullet.speedY * bullet.speedMultiplier;
-                     
-                     bullet.x += currentSpeedX; bullet.y += currentSpeedY; 
-                     
-                     // Kolizja z górną/dolną ścianą
-                     if (bullet.y - bullet.radius < 0 || bullet.y + bullet.radius > CANVAS_HEIGHT) { 
-                        bullet.y = bullet.y - bullet.radius < 0 ? bullet.radius : CANVAS_HEIGHT - bullet.radius; 
-                        bullet.speedY *= -1; 
-                        playSound(bounceSynth, "G4", "16n", 'bounce'); 
-                     } 
-                     
-                     // Kolizja z prawą ścianą
-                     if (bullet.x + bullet.radius > CANVAS_WIDTH) { 
-                        bullet.x = CANVAS_WIDTH - bullet.radius; 
-                        bullet.speedX *= -1; 
-                        playSound(bounceSynth, "G4", "16n", 'bounce'); 
-                     }
-                     
-                     // POPRAWIONA LOGIKA ODBICIA OD PALETKI (Fix 2)
-                     if (bullet.x - bullet.radius < player.x + player.width && 
-                         bullet.x + bullet.radius > player.x && 
-                         bullet.y > player.y && 
-                         bullet.y < player.y + player.height && 
-                         bullet.speedX < 0) 
-                     { 
-                         // 1. Pozycja względna na paletce: [-1 (góra) do 1 (dół)]
-                         const relativeIntersectY = (player.y + player.height / 2) - bullet.y;
-                         const normalizedRelativeIntersectionY = relativeIntersectY / (player.height / 2);
-                         
-                         // 2. Wpływ prędkości paletki na kąt
-                         const playerInfluence = player.velocityY * PLAYER_INFLUENCE_FACTOR; 
-                         
-                         // 3. Nowa docelowa prędkość Y (kąt)
-                         // Użyj negatywnej normalizacji, by góra paletki (ujemna względna Y) odbijała w górę (ujemna SpeedY)
-                         let newSpeedY = (-normalizedRelativeIntersectionY * currentTotalSpeed * 0.8) + playerInfluence;
-                         
-                         // 4. Ograniczenie prędkości Y (maksymalny kąt)
-                         const maxSpeedY = currentTotalSpeed * 0.9;
-                         newSpeedY = Math.max(-maxSpeedY, Math.min(maxSpeedY, newSpeedY));
+            balls.forEach((bullet) => {
+                if (bullet.active) {
 
-                         // 5. Obliczenie SpeedX, aby całkowita prędkość (currentTotalSpeed) była stała (NORMALIZACJA)
-                         const newSpeedX = Math.sqrt(currentTotalSpeed * currentTotalSpeed - newSpeedY * newSpeedY);
-                         
-                         // 6. Zastosowanie nowych prędkości (speedX musi być dodatnie po odbiciu)
-                         bullet.speedX = newSpeedX;
-                         bullet.speedY = newSpeedY;
-                         
-                         bullet.x = player.x + player.width + bullet.radius; // Repozycjonowanie
-                         playSound(bounceSynth, "C5", "16n", 'bounce'); 
-                     } 
-                     
-                     // Piłka poza planszą
-                     if (bullet.x + bullet.radius < 0) { 
-                         bullet.active = false; 
-                         if (balls.filter(b => b.active).length === 0) { 
-                             score = Math.max(0, score - 20); 
-                             if(scoreDisplay) scoreDisplay.textContent = score;
-                             playSound(endSynth, "C3", "8n"); 
-                             showGameMessage("-20 Punktów! Kliknij, aby rzucić ponownie.", 'red');
-                         }
-                     } 
-                     
-                     // Kolizja z Celami (Detalami)
-                     targets.forEach(target => { 
-                         if (target.active) { 
-                             const distX = Math.abs(bullet.x - target.x); 
-                             const distY = Math.abs(bullet.y - target.y); 
-                             if (distX < target.radius + bullet.radius && distY < target.radius + bullet.radius) { 
-                                 const dx = bullet.x - target.x; 
-                                 const dy = bullet.y - target.y; 
-                                 if (Math.sqrt(dx*dx + dy*dy) < target.radius + bullet.radius * 1.5) { // Korekcja kolizji dla kwadratowych celów
-                                     
-                                     target.hitsRequired--; 
-                                     score += 10 * currentLevel; 
-                                     if(scoreDisplay) scoreDisplay.textContent = score; 
-                                     playSound(hitSynth, "A3", "8n", 'hit');
-                                     createParticles(target.x, target.y, 10, target.color);
-                                     
-                                     if (!bullet.isPiercing) { 
-                                         // Zmiana kierunku (odbicie)
-                                         const overlapX = (bullet.radius + target.radius) - distX;
-                                         const overlapY = (bullet.radius + target.radius) - distY;
-                                         if (overlapX < overlapY) { bullet.speedX *= -1; } else { bullet.speedY *= -1; }
-                                     }
+                    // ZAWSZE UŻYWAJ AKTUALNEJ PRĘDKOŚCI BAZOWEJ
+                    const currentTotalSpeed = player.currentBaseSpeed * bullet.speedMultiplier;
 
-                                     if (target.hitsRequired <= 0) { 
-                                         target.active = false; 
-                                         hitCount++; 
-                                         if(hitsDisplay) hitsDisplay.textContent = hitCount; 
-                                         createParticles(target.x, target.y, 20, target.color); 
-                                         dropBonus(target.x, target.y); 
-                                         if(targetCountDisplay) targetCountDisplay.textContent = targets.filter(t => t.active).length;
-                                     } 
-                                     
-                                     if (targets.every(t => !t.active)) { startNextLevel(); return; } 
-                                 } 
-                             } 
-                         } 
-                     }); 
-                     
-                     // Kolizja z Przeszkodami
-                     obstacles.forEach(obs => { 
-                        if (bullet.x + bullet.radius > obs.x && bullet.x - bullet.radius < obs.x + obs.width && bullet.y + bullet.radius > obs.y && bullet.y - bullet.radius < obs.y + obs.height) { 
-                             if(obs.isInvisible && obs.fadeTimer > 0) return; 
-                             playSound(bounceSynth, "E4", "16n", 'bounce'); 
-                             
-                             if (obs.type === 'rect') { 
+                    const currentSpeedX = bullet.speedX * bullet.speedMultiplier;
+                    const currentSpeedY = bullet.speedY * bullet.speedMultiplier;
+
+                    bullet.x += currentSpeedX; bullet.y += currentSpeedY;
+
+                    // Kolizja z górną/dolną ścianą
+                    if (bullet.y - bullet.radius < 0 || bullet.y + bullet.radius > CANVAS_HEIGHT) {
+                        bullet.y = bullet.y - bullet.radius < 0 ? bullet.radius : CANVAS_HEIGHT - bullet.radius;
+                        bullet.speedY *= -1;
+                        playSound(bounceSynth, "G4", "16n", 'bounce');
+                    }
+
+                    // Kolizja z prawą ścianą
+                    if (bullet.x + bullet.radius > CANVAS_WIDTH) {
+                        bullet.x = CANVAS_WIDTH - bullet.radius;
+                        bullet.speedX *= -1;
+                        playSound(bounceSynth, "G4", "16n", 'bounce');
+                    }
+
+                    // POPRAWIONA LOGIKA ODBICIA OD PALETKI (Fix 2)
+                    if (bullet.x - bullet.radius < player.x + player.width &&
+                        bullet.x + bullet.radius > player.x &&
+                        bullet.y > player.y &&
+                        bullet.y < player.y + player.height &&
+                        bullet.speedX < 0) {
+                        // 1. Pozycja względna na paletce: [-1 (góra) do 1 (dół)]
+                        const relativeIntersectY = (player.y + player.height / 2) - bullet.y;
+                        const normalizedRelativeIntersectionY = relativeIntersectY / (player.height / 2);
+
+                        // 2. Wpływ prędkości paletki na kąt
+                        const playerInfluence = player.velocityY * PLAYER_INFLUENCE_FACTOR;
+
+                        // 3. Nowa docelowa prędkość Y (kąt)
+                        // Użyj negatywnej normalizacji, by góra paletki (ujemna względna Y) odbijała w górę (ujemna SpeedY)
+                        let newSpeedY = (-normalizedRelativeIntersectionY * currentTotalSpeed * 0.8) + playerInfluence;
+
+                        // 4. Ograniczenie prędkości Y (maksymalny kąt)
+                        const maxSpeedY = currentTotalSpeed * 0.9;
+                        newSpeedY = Math.max(-maxSpeedY, Math.min(maxSpeedY, newSpeedY));
+
+                        // 5. Obliczenie SpeedX, aby całkowita prędkość (currentTotalSpeed) była stała (NORMALIZACJA)
+                        const newSpeedX = Math.sqrt(currentTotalSpeed * currentTotalSpeed - newSpeedY * newSpeedY);
+
+                        // 6. Zastosowanie nowych prędkości (speedX musi być dodatnie po odbiciu)
+                        bullet.speedX = newSpeedX;
+                        bullet.speedY = newSpeedY;
+
+                        bullet.x = player.x + player.width + bullet.radius; // Repozycjonowanie
+                        playSound(bounceSynth, "C5", "16n", 'bounce');
+                    }
+
+                    // Piłka poza planszą
+                    if (bullet.x + bullet.radius < 0) {
+                        bullet.active = false;
+                        if (balls.filter(b => b.active).length === 0) {
+                            score = Math.max(0, score - 20);
+                            if (scoreDisplay) scoreDisplay.textContent = score;
+                            playSound(endSynth, "C3", "8n");
+                            showGameMessage("-20 Punktów! Kliknij, aby rzucić ponownie.", 'red');
+                        }
+                    }
+
+                    // Kolizja z Celami (Detalami)
+                    targets.forEach(target => {
+                        if (target.active) {
+                            const distX = Math.abs(bullet.x - target.x);
+                            const distY = Math.abs(bullet.y - target.y);
+                            if (distX < target.radius + bullet.radius && distY < target.radius + bullet.radius) {
+                                const dx = bullet.x - target.x;
+                                const dy = bullet.y - target.y;
+                                if (Math.sqrt(dx * dx + dy * dy) < target.radius + bullet.radius * 1.5) { // Korekcja kolizji dla kwadratowych celów
+
+                                    target.hitsRequired--;
+                                    score += 10 * currentLevel;
+                                    if (scoreDisplay) scoreDisplay.textContent = score;
+                                    playSound(hitSynth, "A3", "8n", 'hit');
+                                    createParticles(target.x, target.y, 10, target.color);
+
+                                    if (!bullet.isPiercing) {
+                                        // Zmiana kierunku (odbicie)
+                                        const overlapX = (bullet.radius + target.radius) - distX;
+                                        const overlapY = (bullet.radius + target.radius) - distY;
+                                        if (overlapX < overlapY) { bullet.speedX *= -1; } else { bullet.speedY *= -1; }
+                                    }
+
+                                    if (target.hitsRequired <= 0) {
+                                        target.active = false;
+                                        hitCount++;
+                                        if (hitsDisplay) hitsDisplay.textContent = hitCount;
+                                        createParticles(target.x, target.y, 20, target.color);
+                                        dropBonus(target.x, target.y);
+                                        if (targetCountDisplay) targetCountDisplay.textContent = targets.filter(t => t.active).length;
+                                    }
+
+                                    if (targets.every(t => !t.active)) { startNextLevel(); return; }
+                                }
+                            }
+                        }
+                    });
+
+                    // Kolizja z Przeszkodami
+                    obstacles.forEach(obs => {
+                        if (bullet.x + bullet.radius > obs.x && bullet.x - bullet.radius < obs.x + obs.width && bullet.y + bullet.radius > obs.y && bullet.y - bullet.radius < obs.y + obs.height) {
+                            if (obs.isInvisible && obs.fadeTimer > 0) return;
+                            playSound(bounceSynth, "E4", "16n", 'bounce');
+
+                            if (obs.type === 'rect') {
                                 // Uproszczona obsługa kolizji prostokątnej przeszkody
                                 const closestX = Math.max(obs.x, Math.min(bullet.x, obs.x + obs.width));
                                 const closestY = Math.max(obs.y, Math.min(bullet.y, obs.y + obs.height));
@@ -740,122 +1245,122 @@
                                     bullet.y += bullet.speedY > 0 ? 1 : -1;
                                 }
 
-                             } 
-                             else if (obs.type === 'angled') { 
-                                 // Odbicie od kątowej przeszkody (wymaga bardziej złożonej fizyki, ale użyjemy prostej transformacji)
-                                 const tempSpeedX = bullet.speedX; 
-                                 const tempSpeedY = bullet.speedY; 
-                                 if (obs.angle === 45) { 
-                                    bullet.speedX = -tempSpeedY; 
-                                    bullet.speedY = -tempSpeedX; 
-                                 } else { 
-                                    bullet.speedX = tempSpeedY; 
-                                    bullet.speedY = tempSpeedX; 
-                                 } 
-                                 bullet.x += Math.sign(bullet.speedX) * 2; 
-                                 bullet.y += Math.sign(bullet.speedY) * 2; 
-                             } 
-                             // Zawsze normalizuj prędkość po kolizji z przeszkodą, aby utrzymać stałą prędkość (ważne!)
-                             const speedMagnitude = Math.sqrt(bullet.speedX * bullet.speedX + bullet.speedY * bullet.speedY);
-                             if (speedMagnitude !== 0 && Math.abs(speedMagnitude - currentTotalSpeed) > 0.01) {
-                                 const factor = currentTotalSpeed / speedMagnitude;
-                                 bullet.speedX *= factor;
-                                 bullet.speedY *= factor;
-                             }
-                        } 
-                    }); 
-                 } 
-             });
-             
-             balls = balls.filter(b => b.active); 
+                            }
+                            else if (obs.type === 'angled') {
+                                // Odbicie od kątowej przeszkody (wymaga bardziej złożonej fizyki, ale użyjemy prostej transformacji)
+                                const tempSpeedX = bullet.speedX;
+                                const tempSpeedY = bullet.speedY;
+                                if (obs.angle === 45) {
+                                    bullet.speedX = -tempSpeedY;
+                                    bullet.speedY = -tempSpeedX;
+                                } else {
+                                    bullet.speedX = tempSpeedY;
+                                    bullet.speedY = tempSpeedX;
+                                }
+                                bullet.x += Math.sign(bullet.speedX) * 2;
+                                bullet.y += Math.sign(bullet.speedY) * 2;
+                            }
+                            // Zawsze normalizuj prędkość po kolizji z przeszkodą, aby utrzymać stałą prędkość (ważne!)
+                            const speedMagnitude = Math.sqrt(bullet.speedX * bullet.speedX + bullet.speedY * bullet.speedY);
+                            if (speedMagnitude !== 0 && Math.abs(speedMagnitude - currentTotalSpeed) > 0.01) {
+                                const factor = currentTotalSpeed / speedMagnitude;
+                                bullet.speedX *= factor;
+                                bullet.speedY *= factor;
+                            }
+                        }
+                    });
+                }
+            });
 
-             bonuses = bonuses.filter(bonus => bonus.active); 
-             bonuses.forEach(bonus => { 
-                bonus.y += bonus.speedY; 
-                if (player.x < bonus.x + bonus.width && player.x + player.width > bonus.x && player.y < bonus.y + bonus.height && player.y + player.height > bonus.y) { 
-                     playSound(bonusSynth, "E5");
-                     if (bonus.type === 'time') { gameTime += 5; if(timeDisplay) timeDisplay.textContent = gameTime; if (gameTime > 10 && timeDisplay) timeDisplay.classList.remove('timer-warning'); showGameMessage("BONUS: +5 sekund!", 'blue'); } 
-                     else if (bonus.type === 'slow') { balls.forEach(b => {b.speedMultiplier = 0.5; b.effectTimer = 5; }); showGameMessage("EFEKT: Spowolnienie na 5s!", 'blue'); } // Dodanie timera efektu
-                     else if (bonus.type === 'enlarge') { player.height = player.baseHeight * 1.5; player.y = Math.max(0, player.y - player.baseHeight * 0.25); player.effectTimer = 8; showGameMessage("EFEKT: Większa paletka na 8s!", 'blue'); } 
-                     else if (bonus.type === 'shrink') { player.height = player.baseHeight * 0.6; player.y = Math.min(CANVAS_HEIGHT - player.height, player.y + player.baseHeight * 0.2); player.effectTimer = 8; showGameMessage("MALUS: Mniejsza paletka na 8s!", 'red'); } 
-                     else if (bonus.type === 'piercing') { balls.forEach(b => { b.isPiercing = true; b.effectTimer = 6; }); showGameMessage("BONUS: Piłka przenikająca na 6s!", 'blue'); }
-                     else if (bonus.type === 'multi-ball') {
-                         if (balls.length < 5) { 
-                             const ballY = player.y + player.height / 2;
-                             const baseSpeed = player.currentBaseSpeed;
-                             const speedY_new = baseSpeed * 0.5;
-                             const speedX_new = Math.sqrt(baseSpeed * baseSpeed - speedY_new * speedY_new);
-                             createBall(false, player.x + player.width + 5, ballY, speedX_new, -speedY_new);
-                             createBall(false, player.x + player.width + 5, ballY, speedX_new, speedY_new);
-                             playSound(multiBallSynth, ["C4", "E4", "G4"], "4n");
-                             showGameMessage("BONUS: Multi-piłka!", 'blue');
-                         }
-                     }
-                     bonus.active = false; 
-                } 
-                if (bonus.y > CANVAS_HEIGHT) { bonus.active = false; } 
-             }); 
-             
-             targets.forEach(target => {
-                 if (target.isMoving) {
-                     target.y += target.moveSpeed;
-                     if ((target.y - target.radius < 0 && target.moveSpeed < 0) || (target.y + target.radius > CANVAS_HEIGHT && target.moveSpeed > 0)) {
-                         target.moveSpeed *= -1; 
-                     }
-                 }
-             });
+            balls = balls.filter(b => b.active);
 
-             updateParticles(); 
-             draw(); 
-             animationFrameId = requestAnimationFrame(updateGame); 
+            bonuses = bonuses.filter(bonus => bonus.active);
+            bonuses.forEach(bonus => {
+                bonus.y += bonus.speedY;
+                if (player.x < bonus.x + bonus.width && player.x + player.width > bonus.x && player.y < bonus.y + bonus.height && player.y + player.height > bonus.y) {
+                    playSound(bonusSynth, "E5");
+                    if (bonus.type === 'time') { gameTime += 5; if (timeDisplay) timeDisplay.textContent = gameTime; if (gameTime > 10 && timeDisplay) timeDisplay.classList.remove('timer-warning'); showGameMessage("BONUS: +5 sekund!", 'blue'); }
+                    else if (bonus.type === 'slow') { balls.forEach(b => { b.speedMultiplier = 0.5; b.effectTimer = 5; }); showGameMessage("EFEKT: Spowolnienie na 5s!", 'blue'); } // Dodanie timera efektu
+                    else if (bonus.type === 'enlarge') { player.height = player.baseHeight * 1.5; player.y = Math.max(0, player.y - player.baseHeight * 0.25); player.effectTimer = 8; showGameMessage("EFEKT: Większa paletka na 8s!", 'blue'); }
+                    else if (bonus.type === 'shrink') { player.height = player.baseHeight * 0.6; player.y = Math.min(CANVAS_HEIGHT - player.height, player.y + player.baseHeight * 0.2); player.effectTimer = 8; showGameMessage("MALUS: Mniejsza paletka na 8s!", 'red'); }
+                    else if (bonus.type === 'piercing') { balls.forEach(b => { b.isPiercing = true; b.effectTimer = 6; }); showGameMessage("BONUS: Piłka przenikająca na 6s!", 'blue'); }
+                    else if (bonus.type === 'multi-ball') {
+                        if (balls.length < 5) {
+                            const ballY = player.y + player.height / 2;
+                            const baseSpeed = player.currentBaseSpeed;
+                            const speedY_new = baseSpeed * 0.5;
+                            const speedX_new = Math.sqrt(baseSpeed * baseSpeed - speedY_new * speedY_new);
+                            createBall(false, player.x + player.width + 5, ballY, speedX_new, -speedY_new);
+                            createBall(false, player.x + player.width + 5, ballY, speedX_new, speedY_new);
+                            playSound(multiBallSynth, ["C4", "E4", "G4"], "4n");
+                            showGameMessage("BONUS: Multi-piłka!", 'blue');
+                        }
+                    }
+                    bonus.active = false;
+                }
+                if (bonus.y > CANVAS_HEIGHT) { bonus.active = false; }
+            });
+
+            targets.forEach(target => {
+                if (target.isMoving) {
+                    target.y += target.moveSpeed;
+                    if ((target.y - target.radius < 0 && target.moveSpeed < 0) || (target.y + target.radius > CANVAS_HEIGHT && target.moveSpeed > 0)) {
+                        target.moveSpeed *= -1;
+                    }
+                }
+            });
+
+            updateParticles();
+            draw();
+            animationFrameId = requestAnimationFrame(updateGame);
         }
-        function showGameMessage(text, type = 'gray') { if (!gameMessage) return; gameMessage.textContent = text; gameMessage.className = gameMessage.className.replace(/bg-(red|green|blue|gray)-[0-9\/]+ text-(red|green|blue|gray)-[0-9]+/g, ''); let colorClass = 'bg-gray-700 text-gray-100'; if(type === 'green') colorClass = 'bg-green-900/50 text-green-300'; else if(type === 'red') colorClass = 'bg-red-900/50 text-red-300'; else if(type === 'blue') colorClass = 'bg-blue-900/50 text-blue-300'; gameMessage.classList.add(...colorClass.split(' ')); gameMessage.classList.remove('hidden'); if (type === 'blue' || type === 'red') { setTimeout(() => { if (!isGameOver && gameMessage && (gameMessage.textContent.includes("EFEKT") || gameMessage.textContent.includes("MALUS") || gameMessage.textContent.includes("Punktów"))) { gameMessage.classList.add('hidden'); } }, 2000); } }
+        function showGameMessage(text, type = 'gray') { if (!gameMessage) return; gameMessage.textContent = text; gameMessage.className = gameMessage.className.replace(/bg-(red|green|blue|gray)-[0-9\/]+ text-(red|green|blue|gray)-[0-9]+/g, ''); let colorClass = 'bg-gray-700 text-gray-100'; if (type === 'green') colorClass = 'bg-green-900/50 text-green-300'; else if (type === 'red') colorClass = 'bg-red-900/50 text-red-300'; else if (type === 'blue') colorClass = 'bg-blue-900/50 text-blue-300'; gameMessage.classList.add(...colorClass.split(' ')); gameMessage.classList.remove('hidden'); if (type === 'blue' || type === 'red') { setTimeout(() => { if (!isGameOver && gameMessage && (gameMessage.textContent.includes("EFEKT") || gameMessage.textContent.includes("MALUS") || gameMessage.textContent.includes("Punktów"))) { gameMessage.classList.add('hidden'); } }, 2000); } }
         function startNextLevel() { if (currentLevel >= MAX_LEVEL) { endGame(`Gratulacje! Ukończyłeś wszystkie ${currentLevel} poziomy! Wynik: ${score}`); return; } currentLevel++; showGameMessage(`POZIOM ${currentLevel - 1} UKOŃCZONY! Przygotuj się na poziom ${currentLevel}.`, 'green'); cancelAnimationFrame(animationFrameId); if (gameLoopInterval) clearInterval(gameLoopInterval); setTimeout(() => { initGame(false); startTimer(); animationFrameId = requestAnimationFrame(updateGame); }, 3000); }
         function startTimer() { if (!timeDisplay) return; gameLoopInterval = setInterval(() => { gameTime--; timeDisplay.textContent = gameTime; if (gameTime <= 10 && !isGameOver) { timeDisplay.classList.add('timer-warning'); } else { timeDisplay.classList.remove('timer-warning'); } if (gameTime <= 0) { clearInterval(gameLoopInterval); endGame(`Czas minął! Osiągnięty poziom: ${currentLevel}. Wynik: ${score}`); } }, 1000); }
-        
-        let soundInitialized = false; 
-        function startGame() { 
-             if (!soundsReady && !soundInitialized) { 
-                 soundInitialized = true; 
-                 setupSounds().then(() => {
-                      _continueStartGame();
-                 }).catch(err => { 
-                      console.error("Audio setup failed, continuing without sound:", err);
-                      _continueStartGame();
-                 });
-             } else {
-                 if (soundsReady && Tone.context.state !== 'running') {
-                      Tone.start().catch(err => console.error("Tone.start failed:", err)); 
-                 }
-                 _continueStartGame();
-             }
-        }
-        
-        function _continueStartGame() {
-             if (gameLoopInterval) clearInterval(gameLoopInterval); 
-             if (animationFrameId) cancelAnimationFrame(animationFrameId); 
-             initGame(true); 
-             startTimer(); 
-             animationFrameId = requestAnimationFrame(updateGame); 
+
+        let soundInitialized = false;
+        function startGame() {
+            if (!soundsReady && !soundInitialized) {
+                soundInitialized = true;
+                setupSounds().then(() => {
+                    _continueStartGame();
+                }).catch(err => {
+                    console.error("Audio setup failed, continuing without sound:", err);
+                    _continueStartGame();
+                });
+            } else {
+                if (soundsReady && Tone.context.state !== 'running') {
+                    Tone.start().catch(err => console.error("Tone.start failed:", err));
+                }
+                _continueStartGame();
+            }
         }
 
-        function endGame(message) { isGameOver = true; if (score > highScore) { highScore = score; localStorage.setItem('cncHighScore', highScore); if(highScoreDisplay) highScoreDisplay.textContent = highScore; message += " NOWY REKORD!"; } showGameMessage(message, message.includes("Gratulacje") ? 'green' : 'red'); playSound(endSynth, "C4"); if(startButton) startButton.textContent = "Zagraj Ponownie"; if (gameLoopInterval) clearInterval(gameLoopInterval); }
-        
-        
+        function _continueStartGame() {
+            if (gameLoopInterval) clearInterval(gameLoopInterval);
+            if (animationFrameId) cancelAnimationFrame(animationFrameId);
+            initGame(true);
+            startTimer();
+            animationFrameId = requestAnimationFrame(updateGame);
+        }
+
+        function endGame(message) { isGameOver = true; if (score > highScore) { highScore = score; localStorage.setItem('cncHighScore', highScore); if (highScoreDisplay) highScoreDisplay.textContent = highScore; message += " NOWY REKORD!"; } showGameMessage(message, message.includes("Gratulacje") ? 'green' : 'red'); playSound(endSynth, "C4"); if (startButton) startButton.textContent = "Zagraj Ponownie"; if (gameLoopInterval) clearInterval(gameLoopInterval); }
+
+
         // NOWA LOGIKA DLA UKRYWANIA NAGŁÓWKA PRZY PRZEWIJANIU
         let lastScrollY = 0;
         const headerElement = document.getElementById('main-header');
-        
+
         function handleScroll() {
-            if (!headerElement || mobileMenu && !mobileMenu.classList.contains('hidden')) return; 
+            if (!headerElement || mobileMenu && !mobileMenu.classList.contains('hidden')) return;
 
             const currentScrollY = window.scrollY;
 
             // Dodaje klasę 'scrolled' po lekkim przewinięciu w dół (dla lekkiego efektu blur/ciemnienia)
             if (currentScrollY > 50) {
-                 headerElement.classList.add('scrolled');
+                headerElement.classList.add('scrolled');
             } else {
-                 headerElement.classList.remove('scrolled');
+                headerElement.classList.remove('scrolled');
             }
 
             // Logika ukrywania/pokazywania
@@ -877,56 +1382,56 @@
 
 
         document.addEventListener('DOMContentLoaded', () => {
-            
+
             AOS.init({ duration: 800, once: true });
-            
+
             // Poprawka dla AOS i overflow
-            document.body.style.overflowX = 'visible'; 
+            document.body.style.overflowX = 'visible';
 
-            
-            mobileMenuButton = document.getElementById('mobile-menu-button'); 
-            mobileMenu = document.getElementById('mobile-menu'); 
+
+            mobileMenuButton = document.getElementById('mobile-menu-button');
+            mobileMenu = document.getElementById('mobile-menu');
             // Zmieniono na odniesienie do zaktualizowanego ID
-            header = document.getElementById('main-header'); 
-            
-            
-            function toggleMobileMenu() { 
-                 if (mobileMenu) mobileMenu.classList.toggle('hidden'); 
-                 if (mobileMenuButton) mobileMenuButton.classList.toggle('active'); 
-                 // Upewnienie się, że nagłówek jest zawsze widoczny, gdy menu mobilne jest otwarte
-                 if (header && !mobileMenu.classList.contains('hidden')) {
+            header = document.getElementById('main-header');
+
+
+            function toggleMobileMenu() {
+                if (mobileMenu) mobileMenu.classList.toggle('hidden');
+                if (mobileMenuButton) mobileMenuButton.classList.toggle('active');
+                // Upewnienie się, że nagłówek jest zawsze widoczny, gdy menu mobilne jest otwarte
+                if (header && !mobileMenu.classList.contains('hidden')) {
                     header.classList.remove('hidden-header');
-                 }
+                }
             }
 
-            if (mobileMenu) { 
-                 mobileMenuLinks = mobileMenu.querySelectorAll('.mobile-menu-link');
-                 mobileMenuLinks.forEach(link => { 
-                     link.addEventListener('click', () => { 
-                         if (mobileMenu && !mobileMenu.classList.contains('hidden')) { 
-                             toggleMobileMenu(); 
-                         } 
-                     }); 
-                 }); 
+            if (mobileMenu) {
+                mobileMenuLinks = mobileMenu.querySelectorAll('.mobile-menu-link');
+                mobileMenuLinks.forEach(link => {
+                    link.addEventListener('click', () => {
+                        if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                            toggleMobileMenu();
+                        }
+                    });
+                });
             }
-            if (mobileMenuButton) mobileMenuButton.addEventListener('click', toggleMobileMenu); 
-            
+            if (mobileMenuButton) mobileMenuButton.addEventListener('click', toggleMobileMenu);
+
             // Dodanie listenera scrolla dla ukrywania nagłówka
             window.addEventListener('scroll', handleScroll);
 
-            
-            canvas = document.getElementById('gameCanvas'); 
+
+            canvas = document.getElementById('gameCanvas');
             if (canvas) {
                 ctx = canvas.getContext('2d');
-                if(!ctx) { console.error("Nie udało się uzyskać kontekstu 2D canvas!"); } 
-                
+                if (!ctx) { console.error("Nie udało się uzyskać kontekstu 2D canvas!"); }
+
                 if (ctx) {
                     canvas.addEventListener('mousemove', (e) => { if (isGameOver) return; const rect = canvas.getBoundingClientRect(); const scaleY = CANVAS_HEIGHT / rect.height; mousePosition.y = (e.clientY - rect.top) * scaleY; });
                     canvas.addEventListener('touchmove', (e) => { if (isGameOver) return; e.preventDefault(); const rect = canvas.getBoundingClientRect(); const scaleY = CANVAS_HEIGHT / rect.height; mousePosition.y = (e.touches[0].clientY - rect.top) * scaleY; }, { passive: false });
-                    canvas.addEventListener('click', shoot); 
-                    canvas.addEventListener('touchstart', (e) => { if (!isGameOver && e.target === canvas) { e.preventDefault(); shoot(); } }); 
+                    canvas.addEventListener('click', shoot);
+                    canvas.addEventListener('touchstart', (e) => { if (!isGameOver && e.target === canvas) { e.preventDefault(); shoot(); } });
                 }
-            } else { 
+            } else {
                 console.error("Nie znaleziono elementu canvas!");
             }
             timeDisplay = document.getElementById('timeDisplay');
@@ -938,109 +1443,110 @@
             scoreDisplay = document.getElementById('scoreDisplay');
             highScoreDisplay = document.getElementById('highScoreDisplay');
 
-            
-            resizeCanvas(); 
-            highScore = localStorage.getItem('cncHighScore') || 0; 
-            if(highScoreDisplay) highScoreDisplay.textContent = highScore; 
-            if(startButton) startButton.textContent = "Start Gry"; 
-            showGameMessage("Kliknij START, aby zagrać!"); 
-            if(targetCountDisplay) targetCountDisplay.textContent = 0; 
-            if(hitsDisplay) hitsDisplay.textContent = 0; 
-            if(levelDisplay) levelDisplay.textContent = 1; 
-            if(scoreDisplay) scoreDisplay.textContent = 0; 
-            mousePosition.y = CANVAS_HEIGHT / 2; 
 
-             document.addEventListener('keydown', (e) => { if (!isGameOver && (e.code === 'Space' || e.code === 'Enter')) { e.preventDefault(); shoot(); } });
-             if (startButton) startButton.addEventListener('click', startGame);
+            resizeCanvas();
+            highScore = localStorage.getItem('cncHighScore') || 0;
+            if (highScoreDisplay) highScoreDisplay.textContent = highScore;
+            if (startButton) startButton.textContent = "Start Gry";
+            showGameMessage("Kliknij START, aby zagrać!");
+            if (targetCountDisplay) targetCountDisplay.textContent = 0;
+            if (hitsDisplay) hitsDisplay.textContent = 0;
+            if (levelDisplay) levelDisplay.textContent = 1;
+            if (scoreDisplay) scoreDisplay.textContent = 0;
+            mousePosition.y = CANVAS_HEIGHT / 2;
 
-             
-             themeToggle = document.getElementById('theme-toggle');
-             mobileThemeToggle = document.getElementById('mobile-theme-toggle');
-             
-             function applyTheme(theme) {
-                 
-                 if (theme === 'light') {
-                     document.documentElement.classList.add('light');
-                 } else {
-                     document.documentElement.classList.remove('light');
-                 }
-                 if(!isGameOver && ctx) draw(); 
-
-                 
-                 const heroCanvas = document.getElementById('heroCanvas');
-                 if (heroCanvas) {
-                     const heroCtx = heroCanvas.getContext('2d');
-                     if (heroCtx) {
-                         heroCtx.clearRect(0, 0, heroCanvas.width, heroCanvas.height); 
-                     }
-                 }
-             }
-
-             function toggleTheme() {
-                 const newTheme = document.documentElement.classList.contains('light') ? 'dark' : 'light';
-                 localStorage.theme = newTheme;
-                 applyTheme(newTheme);
-             }
-
-             if (localStorage.theme === 'light' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: light)').matches)) {
-                 applyTheme('light');
-             } else {
-                 applyTheme('dark');
-             }
-             
-             if (themeToggle) themeToggle.addEventListener('click', toggleTheme);
-             if (mobileThemeToggle) mobileThemeToggle.addEventListener('click', toggleTheme);
+            document.addEventListener('keydown', (e) => { if (!isGameOver && (e.code === 'Space' || e.code === 'Enter')) { e.preventDefault(); shoot(); } });
+            if (startButton) startButton.addEventListener('click', startGame);
 
 
-             
-             const heroCanvas = document.getElementById('heroCanvas');
-             if (heroCanvas) {
-                 const heroCtx = heroCanvas.getContext('2d');
-                 if (heroCtx) { 
-                     let heroWidth = heroCanvas.clientWidth;
-                     let heroHeight = heroCanvas.clientHeight;
-                     heroCanvas.width = heroWidth;
-                     heroCanvas.height = heroHeight;
-                     const gcodeChars = "G0 G1 X Y Z F S T M".split(" ");
-                     const columns = Math.floor(heroWidth / 20);
-                     const drops = [];
-                     for(let i=0; i < columns; i++) drops[i] = 1;
+            themeToggle = document.getElementById('theme-toggle');
+            mobileThemeToggle = document.getElementById('mobile-theme-toggle');
 
-                     function drawHeroCanvas() {
-                         if(!heroCtx) return;
-                         
-                         
-                         const isLight = document.documentElement.classList.contains('light');
-                         heroCtx.fillStyle = isLight ? "rgba(249, 250, 251, 0.05)" : "rgba(13, 17, 23, 0.05)"; 
-                         
-                         heroCtx.fillRect(0, 0, heroWidth, heroHeight);
-                         const accentColor = getComputedStyle(document.documentElement).getPropertyValue('--color-accent').trim();
-                         heroCtx.fillStyle = accentColor || '#06b6d4'; 
-                         heroCtx.font = "14px monospace";
-                         for(let i = 0; i < drops.length; i++) {
-                             const text = gcodeChars[Math.floor(Math.random() * gcodeChars.length)];
-                             heroCtx.fillText(text, i * 20, drops[i] * 20);
-                             if(drops[i] * 20 > heroHeight && Math.random() > 0.975) drops[i] = 0;
-                             drops[i]++;
-                         }
-                     }
-                     setInterval(drawHeroCanvas, 100); 
+            function applyTheme(theme) {
 
-                     window.addEventListener('resize', () => {
-                         if (!heroCanvas) return; 
-                         heroWidth = heroCanvas.clientWidth;
-                         heroHeight = heroCanvas.clientHeight;
-                         heroCanvas.width = heroWidth;
-                         heroCanvas.height = heroHeight;
-                         for(let i=0; i < columns; i++) drops[i] = 1; 
-                     });
-                 }
-             }
+                if (theme === 'light') {
+                    document.documentElement.classList.add('light');
+                } else {
+                    document.documentElement.classList.remove('light');
+                }
+                if (!isGameOver && ctx) draw();
 
-             
-             
+
+                const heroCanvas = document.getElementById('heroCanvas');
+                if (heroCanvas) {
+                    const heroCtx = heroCanvas.getContext('2d');
+                    if (heroCtx) {
+                        heroCtx.clearRect(0, 0, heroCanvas.width, heroCanvas.height);
+                    }
+                }
+            }
+
+            function toggleTheme() {
+                const newTheme = document.documentElement.classList.contains('light') ? 'dark' : 'light';
+                localStorage.theme = newTheme;
+                applyTheme(newTheme);
+            }
+
+            if (localStorage.theme === 'light' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: light)').matches)) {
+                applyTheme('light');
+            } else {
+                applyTheme('dark');
+            }
+
+            if (themeToggle) themeToggle.addEventListener('click', toggleTheme);
+            if (mobileThemeToggle) mobileThemeToggle.addEventListener('click', toggleTheme);
+
+
+
+            const heroCanvas = document.getElementById('heroCanvas');
+            if (heroCanvas) {
+                const heroCtx = heroCanvas.getContext('2d');
+                if (heroCtx) {
+                    let heroWidth = heroCanvas.clientWidth;
+                    let heroHeight = heroCanvas.clientHeight;
+                    heroCanvas.width = heroWidth;
+                    heroCanvas.height = heroHeight;
+                    const gcodeChars = "G0 G1 X Y Z F S T M".split(" ");
+                    const columns = Math.floor(heroWidth / 20);
+                    const drops = [];
+                    for (let i = 0; i < columns; i++) drops[i] = 1;
+
+                    function drawHeroCanvas() {
+                        if (!heroCtx) return;
+
+
+                        const isLight = document.documentElement.classList.contains('light');
+                        heroCtx.fillStyle = isLight ? "rgba(249, 250, 251, 0.05)" : "rgba(13, 17, 23, 0.05)";
+
+                        heroCtx.fillRect(0, 0, heroWidth, heroHeight);
+                        const accentColor = getComputedStyle(document.documentElement).getPropertyValue('--color-accent').trim();
+                        heroCtx.fillStyle = accentColor || '#06b6d4';
+                        heroCtx.font = "14px monospace";
+                        for (let i = 0; i < drops.length; i++) {
+                            const text = gcodeChars[Math.floor(Math.random() * gcodeChars.length)];
+                            heroCtx.fillText(text, i * 20, drops[i] * 20);
+                            if (drops[i] * 20 > heroHeight && Math.random() > 0.975) drops[i] = 0;
+                            drops[i]++;
+                        }
+                    }
+                    setInterval(drawHeroCanvas, 100);
+
+                    window.addEventListener('resize', () => {
+                        if (!heroCanvas) return;
+                        heroWidth = heroCanvas.clientWidth;
+                        heroHeight = heroCanvas.clientHeight;
+                        heroCanvas.width = heroWidth;
+                        heroCanvas.height = heroHeight;
+                        for (let i = 0; i < columns; i++) drops[i] = 1;
+                    });
+                }
+            }
+
+
+
         });
 
     </script>
 </body>
+
 </html>

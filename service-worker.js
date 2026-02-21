@@ -10,10 +10,9 @@ const ASSETS_TO_CACHE = [
     './css/calculator.css',
     './js/theme.js',
     './js/calculator.js',
-    './js/tailwind-config.js',
     './assets/favicon.png',
     './assets/thumbnail.jpg',
-    'https://cdn.tailwindcss.com',
+    './css/tailwind.css',
     'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css'
 ];
 
